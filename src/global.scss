@@ -24,3 +24,42 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "prompt.scss";
+
+@font-face {
+  font-family: AgencyGothic;
+  src: url("./assets/Agency-FB.ttf");
+}
+
+@font-face {
+  font-family: ship-name;
+  src: url("./assets/Inter-Regular.ttf")
+}
+
+:root {
+  --background-blur: 0px;
+  --prompt-height: 500px;
+}
+
+ion-modal {
+  --ion-background-color: #ffffff85;
+  --border-radius: 0px;
+  --height: var(--prompt-height);
+}
+
+ion-router-outlet {
+  // transparent background when modal is open
+  filter: blur(var(--background-blur));
+  --overflow: overlay !important;
+}
+
+ion-content {
+  --overflow: overlay;
+}
+
+ion-input {
+  --padding-top: 0 !important;
+  --padding-bottom: 0 !important;
+  --padding-start: 0 !important;
+  --padding-end: 5px !important;
+}

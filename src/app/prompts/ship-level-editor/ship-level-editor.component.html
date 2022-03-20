@@ -1,0 +1,25 @@
+<div>
+  <div class="prompt-heading exit" (click)="exit()"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
+  
+  <div class="prompt-heading background">
+    <p class="prompt-heading text">EDIT LEVEL</p>
+    <div class="prompt-heading stripes"></div>
+  </div>
+</div>
+
+<div class="prompt-info-background">
+  <p class="prompt-text centered">Enter {{name}}'s' level.</p>
+  <form (ngSubmit)="done()">
+    <ion-input #input class="prompt-input centered" ></ion-input>
+  </form>
+</div>
+
+<div class="prompt-buttons">
+  <div class="prompt-button-container">
+    <div class="prompt-button red" (click)="exit()">
+      <p class="prompt-button-text">Cancel</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+</div>
+

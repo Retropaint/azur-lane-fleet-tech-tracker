@@ -1,0 +1,51 @@
+<div>
+  <div class="prompt-heading exit" (click)="selectedPreset()"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
+  
+  <div class="prompt-heading background">
+    <p class="prompt-heading text">SELECT PRESET</p>
+    <div class="prompt-heading stripes"></div>
+  </div>
+</div>
+
+<div class="prompt-info-background">
+  <p class="prompt-text select-text">
+    Select your preferred preset, or make your own!
+  </p>
+
+  <div class="prompt-button-container button-padding">
+    <div class="prompt-button blue" (click)="selectedPreset('hulls')">
+      <p class="prompt-button-text">Hull</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+  <p class="preset-description">- Sort by hulls (DD, BB, CL, CA, etc).</p>
+  
+  <br>
+
+  <div class="prompt-button-container button-padding">
+    <div class="prompt-button blue" (click)="selectedPreset('stats')">
+      <p class="prompt-button-text">Stat</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+  <p class="preset-description">- Sort by fleet tech stat (FP, AVI, TRP, RLD, etc).</p>
+
+  <br>
+
+  <div class="prompt-button-container button-padding">
+    <div class="prompt-button blue" (click)="selectedPreset('both')">
+      <p class="prompt-button-text">Hull & Stat</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+  <p class="preset-description">- Sort by both (BB FP, CV RLD, DD TRP, etc).</p>
+
+  <div class="prompt-button-container button-padding">
+    <div class="prompt-button blue" (click)="selectedPreset('custom')">
+      <p class="prompt-button-text">Custom</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+  <p class="preset-description">- Make your own categories!</p>
+</div>
+

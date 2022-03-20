@@ -1,0 +1,23 @@
+<div #card class="ship-card-container {{dragStatus}}" [style]="'transform: translate( ' + transformX + 'px, ' + transformY + 'px )'">
+  <div class="ship-hull-and-level-background">
+    <img class="ship-hull-icon" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
+    <div>
+      <img class="ship-hull-icon" name="test" [style]="'width: ' + fleetTechStatIconWidths[ship.maxLevelFleetTechStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.maxLevelFleetTechStat + '.png'"/>
+      <!--
+      <p *ngIf="ship.maxLevelFleetTechBonus == 2" class="double-stats-text">+2</p>
+      -->
+    </div>
+    <div (click)="enterLevel()">
+      <p class="ship-level Lv-text">Lv. {{ship.level}} 
+      </p>
+    </div>
+    <br> <img *ngIf="ship.onlyApplicableHulls.length != 0" class="ship-hull-icon" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
+  </div>
+
+  <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}}" />
+  <img *ngIf="ship.rarity == 'Ultra-Rare' || ship.rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
+  
+  <div class="ship-name">
+    <p class="ship-name-text">{{ship.name}}</p>
+  </div>
+</div>

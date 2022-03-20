@@ -1,0 +1,10 @@
+<div>
+  <div *ngFor="let type of objectKeys(types)" class="options-button unselected" (click)="sort(type)">
+    <div class="options-button-square left"></div>
+    <div class="options-button-square right"></div>
+    <ion-icon *ngIf="!types[type]" name="caret-up-outline" class="sort-options-arrow"></ion-icon>
+    <ion-icon *ngIf="types[type]" name="caret-down-outline" class="sort-options-arrow"></ion-icon>
+    <div class="generic-text options unselected"> {{type}} &nbsp;&nbsp;&nbsp;</div>
+  </div>
+  <app-help-button helpType="sort"></app-help-button>
+</div>

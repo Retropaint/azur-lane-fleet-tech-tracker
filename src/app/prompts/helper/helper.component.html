@@ -1,0 +1,47 @@
+<div>
+  <div class="prompt-heading exit" (click)="exit()"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
+  
+  <div class="prompt-heading background">
+    <p class="prompt-heading text">HELP</p>
+    <div class="prompt-heading stripes"></div>
+  </div>
+</div>
+
+<div class="prompt-info-background">
+  <ng-container *ngIf="type == 'sort'">
+    <p class="prompt-text">- Press any sort button to do so by its own category.</p>
+    <p class="prompt-text">- Pressing will also toggle whether the next press will be ascending or descending.</p>
+    <p class="prompt-text">- Ascending (<ion-icon name="caret-up-outline"></ion-icon>) starts from lowest to highest value.</p>
+    <p class="prompt-text">- Descending (<ion-icon name="caret-down-outline"></ion-icon>) starts from highest to lowest value.</p>
+  </ng-container>
+
+  <ng-container *ngIf="type == 'filter'">
+    <p class="prompt-text">- Press a filter button to toggle its state. Changes are applied immediately.</p>
+    <p class="prompt-text">- Double-click a filter to set others in the same category to the same state.</p>
+    <p class="prompt-text">- Double-clicking an <u>OFF</u> filter will enable all, since its state after the first click was <u>ON</u>, and vice versa.</p>
+  </ng-container>
+
+  <ng-container *ngIf="type == 'icon-ui'">
+    <p class="prompt-text">- Click on the + at the end of the category list to add a new one.</p>
+    <p class="prompt-text">- Click on a ship's level to change it.</p>
+    <p class="prompt-text">- You can drag-and-drop ships to other categories.</p>
+    <p class="prompt-text">- (I'll get around to individually placing ships at some point)</p>
+  </ng-container>
+
+  <ng-container *ngIf="type == 'sheet-ui'">
+    <p class="prompt-text">- Click on the + at the end of the list to add a new category.</p>
+    <p class="prompt-text">- Click on a category's name row to open the editor.</p>
+    <p class="prompt-text">- Click on a ship's level to change it.</p>
+    <p class="prompt-text">- You can drag-and-drop ships anywhere you like.</p>
+  </ng-container>
+</div>
+
+<div class="prompt-buttons">
+  <div class="prompt-button-container">
+    <div class="prompt-button red" (click)="exit()">
+      <p class="prompt-button-text">Close</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+</div>
+

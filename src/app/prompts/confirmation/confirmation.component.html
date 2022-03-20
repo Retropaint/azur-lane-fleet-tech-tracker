@@ -1,0 +1,29 @@
+<div>
+  <div class="prompt-heading exit" (click)="chose(false)"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
+  
+  <div class="prompt-heading background">
+    <p class="prompt-heading text">{{title}}</p>
+    <div class="prompt-heading stripes"></div>
+  </div>
+</div>
+
+<div class="prompt-info-background">
+  <p class="prompt-text body">{{body}}</p>
+</div>
+
+<div class="prompt-buttons">
+  <div class="prompt-button-container">
+    <div class="prompt-button red" (click)="chose(false)">
+      <p class="prompt-button-text">No</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+  
+  <div class="prompt-button-container">
+    <div class="prompt-button blue" (click)="chose(true)">
+      <p class="prompt-button-text">Yes</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+</div>
+

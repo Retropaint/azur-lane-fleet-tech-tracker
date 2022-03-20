@@ -1,0 +1,57 @@
+.filter-category {
+  text-align: center;
+  margin-right: 3px;
+  width: 100px;
+  height: 50px;
+}
+
+.filter-button {
+  background:linear-gradient(180deg, rgba(203, 228, 252, 1) 0%, rgba(203, 228, 252, 1) 2%, rgba(107, 121, 148, 1) 4%, rgba(57, 74, 100, 1) 100%);
+  width: 100px;
+  height: 50px;
+  transform: translateY(-20px);
+  cursor: pointer;
+}
+
+.filter-button.unselected {
+  background:linear-gradient(180deg, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 3%, rgba(66, 89, 115, 1) 6%, rgba(41, 65, 80, 1) 100%);
+  height: 40px;
+  transform: translateY(-10px);
+}
+
+.filter-name {
+  text-shadow: 0px 0px 10px #0081ff;
+  padding-top: 12px;
+  user-select: none;
+  float: right;
+  margin: 0px;
+}
+
+.filter-name.unselected {
+  color: #bac2e3;
+  text-shadow: 0 0 2px #bac2e3;
+}
+
+.filter-icon {
+  float: left;
+  width: 50px;
+  padding-top: 8px;
+  padding-left: 10px;
+  user-select: none;
+  filter: drop-shadow(0px 0px 10px rgba(0, 97, 255, 1));
+}
+
+.filter-icon.unselected {
+  filter: none;
+}
+
+.filter-category-name {
+  display: inline-block;
+  transform: translate(0px, -19px);
+}
+
+.filter-category-container {
+  width: fit-content;
+  display: inline-block;
+  transform: translateY(15px);
+}

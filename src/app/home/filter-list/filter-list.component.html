@@ -1,0 +1,85 @@
+<div>
+  <p class="generic-text filter-category-name">Hulls: </p>
+  <ion-grid class="filter-category-container">
+    <ion-row wrap-reverse >
+      <ion-col class="filter-category" *ngFor="let hullName of hullNames; let i = index">
+        <!-- unselected hull -->
+        <div class="filter-button unselected" *ngIf="!filter.hulls[hullName]" (click)="clickedFilterButton(hullName, filter.hulls)">
+          <img *ngIf="hullName != 'All' && hullName != 'None'" class="filter-icon unselected" [src]="'assets/icons/unselected hull icons/' + hullName + '.png'" [style]="'width: ' + hullIconWidths[i] + 'px'"/>
+          <p class="filter-name unselected" [style]="'margin-right: ' + hullTextRightMargins[i] + 'px'">
+            <b> {{hullName}} </b>
+          </p>
+        </div>
+
+        <!-- selected hull -->
+        <div class="filter-button" *ngIf="filter.hulls[hullName]" (click)="clickedFilterButton(hullName, filter.hulls)">
+          <div style="transform: translateY(5px)">
+            <img *ngIf="hullName != 'All' && hullName != 'None'" class="filter-icon" [src]="'assets/icons/hull icons/' + hullName + '.png'" [style]="'width: ' + hullIconWidths[i] + 'px'"/>
+            <p class="filter-name" [style]="'margin-right: ' + hullTextRightMargins[i] + 'px'">
+              <b> {{hullName}} </b>
+            </p>
+          </div>
+        </div>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>
+  <app-help-button helpType="filter"></app-help-button>
+</div>
+
+<!-- faction filter -->
+<div>
+  <p class="generic-text filter-category-name">Factions: </p>
+  <ion-grid class="filter-category-container">
+    <ion-row>
+      <ion-col class="filter-category" *ngFor="let factionName of factionNames; let i = index">
+        <!-- unselected faction -->
+        <div class="filter-button unselected" *ngIf="!filter.factions[factionName]" (click)="clickedFilterButton(factionName, filter.factions)">
+          <img *ngIf="factionName != 'All' && factionName != 'None'" class="filter-icon unselected" [src]="'assets/icons/unselected faction icons/' + factionName + '.png'" [style]="'width: ' + factionIconWidths[i] + 'px'"/>
+          <p class="filter-name unselected" [style]="'margin-right: ' + factionTextRightMargins[i] + 'px'">
+            <b *ngIf="i != 4"> {{factionName}} </b>
+            <b *ngIf="i == 4"> ROC/PL </b>
+          </p>
+        </div>
+
+        <!-- selected faction -->
+        <div class="filter-button" *ngIf="filter.factions[factionName]" (click)="clickedFilterButton(factionName, filter.factions)">
+          <div style="transform: translateY(5px)">
+            <img *ngIf="factionName != 'All' && factionName != 'None'" class="filter-icon" [src]="'assets/icons/faction icons/' + factionName + '.png'" [style]="'width: ' + factionIconWidths[i] + 'px'"/>
+            <p class="filter-name" [style]="'margin-right: ' + factionTextRightMargins[i] + 'px'">
+              <b *ngIf="i != 4"> {{factionName}} </b>
+              <b *ngIf="i == 4"> ROC/PL </b>
+            </p>
+          </div>
+        </div>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>
+</div>
+
+<!-- stat filter -->
+<div style="margin-bottom: 20px;">
+  <p class="generic-text filter-category-name">Stats: </p>
+  <ion-grid class="filter-category-container">
+    <ion-row>
+      <ion-col class="filter-category" *ngFor="let statName of statNames; let i = index">
+        <!-- unselected stat -->
+        <div class="filter-button unselected" *ngIf="!filter.stats[statName]" (click)="clickedFilterButton(statName, filter.stats)">
+          <img *ngIf="statName != 'All' && statName != 'None'" class="filter-icon unselected" [src]="'assets/icons/unselected stat icons/' + statName + '.png'" [style]="'width: ' + statIconWidths[i] + 'px'"/>
+          <p class="filter-name unselected" [style]="'margin-right: ' + statTextRightMargins[i] + 'px'">
+            <b> {{statName}} </b>
+          </p>
+        </div>
+
+        <!-- selected stat -->
+        <div class="filter-button" *ngIf="filter.stats[statName]" (click)="clickedFilterButton(statName, filter.stats)">
+          <div style="transform: translateY(5px)">
+            <img *ngIf="statName != 'All' && statName != 'None'" class="filter-icon" [src]="'assets/icons/stat icons/' + statName + '.png'" [style]="'width: ' + statIconWidths[i] + 'px'"/>
+            <p class="filter-name" [style]="'margin-right: ' + statTextRightMargins[i] + 'px'">
+              <b> {{statName}} </b>
+            </p>
+          </div>
+        </div>
+      </ion-col> 
+    </ion-row>
+  </ion-grid>
+</div>

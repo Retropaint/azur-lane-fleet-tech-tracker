@@ -1,0 +1,21 @@
+<div class="setting-container">
+  <p class="prompt-text toggle-header">{{name}}: </p>
+  
+  <div class="toggle-container" (click)="setToggle(true)">
+    <div class="toggle-diamond {{toggle}}">
+      <div class="trueBox" *ngIf="toggle">
+        <p class="L">L</p>
+      </div>
+    </div>
+    <p class="toggle-text">{{trueToggle}}</p>
+  </div>
+  
+  <div class="toggle-container" (click)="setToggle(false)">
+    <div class="toggle-diamond {{!toggle}}">
+      <div class="trueBox" *ngIf="!toggle">
+        <p class="L">L</p>
+      </div>
+    </div>
+    <p class="toggle-text last">{{falseToggle}}</p>
+  </div>
+</div>

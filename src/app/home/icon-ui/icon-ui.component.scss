@@ -1,0 +1,42 @@
+
+
+.category {
+  display: inline-block;
+  margin: 10px;
+
+  &.selected {
+    background:linear-gradient(180deg, rgba(74, 105, 148, 1) 0%, rgba(74, 130, 206, 1) 98%, rgba(249, 252, 255, 1) 99%);
+    border-left: 1px solid rgba(74, 105, 148, 1);
+    border-right: 1px solid rgba(74, 105, 148, 1);
+  }
+
+  &.unselected {
+    background: linear-gradient(180deg, rgba(107, 117, 132, 1) 0%, #7b8ea5 95%, rgba(187, 201, 212, 1) 96%);
+    border-left: 1px solid rgba(187, 201, 212, 1);
+    border-right: 1px solid rgba(187, 201, 212, 1);
+    cursor: pointer;
+  }
+}
+
+.category-text {
+  text-align: center;
+  margin: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  user-select: none;
+  display: inline-block;
+  color: white;
+}
+
+.category-container {
+  display: inline-block;
+}
+
+.categories {
+  margin-bottom: 20px;
+}
+
+.sort-options-arrow {
+  transform: translate(-10px, 10px);
+  float: right;
+}

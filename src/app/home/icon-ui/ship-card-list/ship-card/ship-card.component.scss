@@ -1,0 +1,164 @@
+.ship-thumbnail {
+  width: 100px;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 5px;
+  height: 144px;
+  pointer-events: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+
+  &.ship-rarity-Normal {
+    border: 5px solid #A5AAB5; 
+    border-right: 0; 
+    border-left: 0; 
+    background:linear-gradient(0deg, #BDC7CE 44%, #6B697B 99%);
+  }
+  
+  &.ship-rarity-Rare {
+    border: 5px solid #6abff7; 
+    border-right: 0; 
+    border-left: 0; 
+    background:linear-gradient(0deg, #89C3F9 44%, #42617C 99%);
+  }
+  
+  &.ship-rarity-Elite {
+    border: 5px solid #9b8eff; 
+    border-right: 0; 
+    border-left: 0; 
+    background:linear-gradient(0deg, #AD96FF 44%, #53497B 99%);
+  }
+  
+  &.ship-rarity-Super-Rare {
+    border: 5px solid #f7d84b; 
+    border-right: 0; 
+    border-left: 0; 
+    background:linear-gradient(0deg, #f7cf52 44%, #807539 99%);
+  }
+
+  &.UR-or-decisive {
+    background-image: url("UR border.png");
+    border: 5px solid transparent;
+  
+    // I have no idea why I have to apply this again
+    border-right: 0;
+    border-left: 0;
+  }
+}
+
+.ship-hull-and-level-background {
+  background: #0000006e;
+  height: 15px;
+  width: 100px;
+  position: absolute;
+  margin-top: 5px;
+}
+
+.ship-hull-icon {
+  width: 24.5px;
+  z-index: 1;
+  float: left;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.ship-hull-icon.applicable {
+  position: relative;
+  transform: translate(0px, 2px);
+}
+
+.applicable-ship-hull-icon-container {
+  transform: translate(0px, -28px);
+  position: absolute;
+  width: 100px;
+  margin: auto;
+  background: #00000099;
+  height: 19px;
+  width: 100px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.ship-level {
+  font-family: AgencyGothic;
+  text-align: right;
+  float: right;
+  font-size: 17px;
+  margin: 0px;
+  user-select: none;
+  transform: translate(-6px,-1.5px);
+  color: white;
+
+  &.input {
+    height: 20px;
+    width: 25px;
+    margin-right: 5px;
+  }
+}
+
+.ship-name {
+  transform: translateY(-45px);
+  background: #00000099;
+  height: 17px;
+  width: 100px;
+  margin-top: 5px;
+  position: absolute;
+}
+
+.ship-name-text {
+  transform: translate(0, -13px);
+  font-family: ship-name;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 5px;
+  padding-right: 5px;
+  user-select: none;
+  color: white;
+}
+
+.double-stats-text {
+  transform: translate(0, -1px);
+  font-family: ship-name;
+  font-weight: bold;
+  font-size: 10px;
+  margin: 0;
+  float: left;
+  user-select: none;
+  color: white;
+}
+
+.ship-card-container {
+  will-change: transform;
+  margin: 8px;
+  margin-bottom: 4px;
+  display: inline-block;
+  position: relative;
+
+  &.default {
+    z-index: 0;
+    filter: none;
+    transform: none;
+    transition: opacity 0.5s;
+    opacity: 1;
+  }
+
+  &.dragged {
+    z-index: 99;
+    filter: drop-shadow(0px 0px 20px black);
+  }
+
+  &.start {
+    transition: opacity 0s;
+    opacity: 0;
+  }
+}

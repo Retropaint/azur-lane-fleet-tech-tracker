@@ -1,0 +1,145 @@
+.prompt-heading {
+  &.background {
+    background: #2e5da4cc;
+    width: 85%;
+    height: 40px;
+    margin-left: 10px;
+    margin-top: 10px;
+    box-shadow: 2px 2px #738eadd9;
+  }
+
+  &.text {
+    height: 100%;
+    margin: auto;
+    padding-top: 10px;
+    padding-left: 8px;
+    z-index: 1;
+    position: relative;
+    font-weight: bold;
+  }
+
+  &.stripes {
+    background: url(assets/modal-heading-stripes.png);
+    width: 165px;
+    height: 16px;
+    position: absolute;
+    z-index: 0;
+    image-rendering: pixelated;
+    transform: translate(5px, -20px);
+  }
+
+  &.exit {
+    text-align: center; // for centering exit img 
+    height: 40px;
+    width: 10%;
+    background-color: #ff00008a;
+    float: right;
+    margin: 10px;
+    box-shadow: 2px 2px #ff00004d;
+    cursor: pointer;
+  }
+
+  .exit-img {
+    width: 27px;
+    text-align: center;
+    padding-top: 8px;
+  }
+}
+
+.prompt-info-background {
+  height: 25px;
+  background: #646e7dbf;
+  margin: 10px;
+  height: 100%;
+  margin-top: 5px;
+}
+
+.prompt-input {
+  background: #646e7d;
+  margin: 10px;
+  height: 30px;
+  font-weight: bold;
+  --placeholder-font-style: italic;
+  box-sizing: content-box;
+  width: calc(100% - 20px);
+
+  &.centered {
+    text-align: center;
+  }
+}
+
+.prompt-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.prompt-button-container {
+  margin: 10px;
+  margin-top: 20px;
+  filter: drop-shadow(0px 5px 4px #5A6173);
+
+  &.settings {
+    margin-top: 0px;
+  }
+}
+
+.prompt-button {
+  height: 40px;
+  clip-path: polygon(0 0, 70% 0%, 100% 0, 100% 100%, 70% 100%, 10px 100%, 0 30px, 0% 30%);
+  cursor: pointer;
+  width: fit-content;
+
+  &.red {
+    background:linear-gradient(18deg, rgba(198, 83, 76, 1) 14%, rgba(140, 75, 66, 1) 61%, rgba(198, 109, 99, 1) 62%);
+  }
+
+  &.blue {
+    background:linear-gradient(18deg, rgba(74, 142, 214, 1) 14%, rgba(57, 97, 156, 1) 61%, rgba(90, 142, 206, 1) 62%);
+  }
+}
+
+.prompt-button-edge {
+  -webkit-clip-path: polygon(0 86%, 0% 100%, 13% 100%);
+  clip-path: polygon(0 25%, 0% 100%, 75% 100%);
+  height: 10px;
+  color: white;
+  width: 10px;
+  background-color: white;
+  transform: translate(0px, -10px);
+}
+
+.prompt-button-text {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 7px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 0px;
+}
+
+.prompt-nameError {
+  margin: 0px;
+  padding-left: 10px;
+  font-weight: bold;
+  color: #ff7c7c;
+  font-style: italic;
+}
+
+.prompt-text {
+  font-weight: bold;
+  margin: 10px;
+
+  &.centered {
+    text-align: center;
+  }
+
+  &.inline-block {
+    display: inline-block
+  }
+}
+
+ion-backdrop {
+  cursor: default;
+}

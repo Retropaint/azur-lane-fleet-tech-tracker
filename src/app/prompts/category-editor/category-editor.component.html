@@ -1,0 +1,41 @@
+<div>
+  <div class="prompt-heading exit" (click)="exit()"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
+  
+  <div class="prompt-heading background">
+    <p *ngIf="selectedCategory == null" class="prompt-heading text">CREATE NEW CATEGORY</p>
+    <p *ngIf="selectedCategory != null" class="prompt-heading text">EDIT CATEGORY</p>
+    <div class="prompt-heading stripes"></div>
+  </div>
+</div>
+
+<div class="prompt-info-background">
+  <form (ngSubmit)="done()">
+    <ion-input *ngIf="selectedCategory != null" #input placeholder="Enter name here..." class="prompt-input centered " [value]="selectedCategory"></ion-input>
+    <ion-input *ngIf="selectedCategory == null" #input placeholder="Enter name here..." class="vertically-aligned prompt-input centered " [value]="selectedCategory"></ion-input>
+  </form>
+  <p class="prompt-nameError">{{error}}</p>
+  <div class="prompt-button-container" *ngIf="selectedCategory != null">
+    <div class="prompt-button red" (click)="delete()">
+      <p class="prompt-button-text">Delete Category</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+</div>
+
+<div class="prompt-buttons">
+  <div class="prompt-button-container">
+    <div class="prompt-button red" (click)="exit()">
+      <p class="prompt-button-text">Cancel</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+  
+  <div class="prompt-button-container">
+    <div class="prompt-button blue" (click)="done()">
+      <p *ngIf="selectedCategory != null" class="prompt-button-text">Save</p>
+      <p *ngIf="selectedCategory == null" class="prompt-button-text">Create</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+</div>
+

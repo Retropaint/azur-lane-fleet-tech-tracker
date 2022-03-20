@@ -1,20 +1,27 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="main-content {{platformCSS}}" [scrollY]="platformCSS == 'mobile' && dragData.draggedShipComponent == null || platformCSS == 'desktop'">
+  <div class="background"></div>
+  <div style="display: flex">
+    <div class="side-bars {{platformCSS}}">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <div class="header-container">
+        <img class="header-img" src="assets/AL logo.webp"/>
+        <p class="title generic-text no-glow">
+          Fleet Tech Tracker
+        </p>
+        <div class="settings-button" (click)="openSettingsModal()">
+          <img class="image" src="assets/settings.png"/>
+          <p class="generic-text no-glow text">Settings</p>
+        </div>
+      </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <div *ngIf="shipCategoryData.sortedCategoryNames.length != 0" class="categories">
+        <app-icon-ui *ngIf="isIconUI" style="position: relative"></app-icon-ui>
+        <app-sheet-ui *ngIf="!isIconUI" style="position: relative"></app-sheet-ui>
+      </div>
+
+      <div *ngIf="shipCategoryData.sortedCategoryNames.length == 0" class="generic-text centered">
+        Loading...
+      </div>
+    </div>
   </div>
 </ion-content>
