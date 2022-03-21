@@ -60,6 +60,7 @@
   outline: 5px solid white;
 }
 
+// remove number spinner
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none; 
@@ -109,6 +110,7 @@ input[type=number]::-webkit-outer-spin-button {
 
   &.createCategory {
     padding-right: 5px;
+    padding-left: 5px;
     user-select: none;
   }
 }
@@ -125,6 +127,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .adding-from-bottom {
-  border: 1.4px solid #00ff0f; // border is to size row to be the same as others, hence same color
+  border: 1.4px solid #00ff0f; // the border's only purpose is to size the row to be the same as others, hence the same color
   background: #00ff0f;
 }
