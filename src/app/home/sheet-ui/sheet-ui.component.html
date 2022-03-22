@@ -19,6 +19,6 @@
 <app-help-button helpType="sheet-ui"></app-help-button>
 
 <div #container class="container" *ngIf="filter.shipFilterPass != []">
-  <app-sheet-category *ngFor="let category of shipCategoryData.sortedCategoryNames; index as i" class="grid" [id]="category" [category]="category" [index]="i" [isHeaderHighlighted]="sheetDrag.highlightHeaderIndex == i" [belowThisGrid]="sheetDrag.belowGridIndex == i" #categoryContainers></app-sheet-category>
+  <app-sheet-category *ngFor="let category of shipCategoryData.sortedCategoryNames; index as i" class="grid" [id]="category" [category]="category" [index]="i" [isHeaderHighlighted]="sheetDrag.highlightedHeader == i" [belowThisGrid]="sheetDrag.belowGridIndex == i" #categoryContainers></app-sheet-category>
 </div>
 

@@ -2,7 +2,6 @@ import { Component, HostBinding, OnInit, OnDestroy, AfterViewInit, ViewChild, El
 import { IonInput, ModalController } from '@ionic/angular';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { ShipCategory } from 'src/app/interfaces/ship-category';
-import { DragDataService } from 'src/app/services/drag-data.service';
 import { FilterService } from 'src/app/services/filter.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
@@ -22,7 +21,6 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
   constructor(private modalController: ModalController, 
     private shipCategoryData: ShipCategoryDataService, 
     private filter: FilterService, 
-    private dragData: DragDataService,
     private prompt: PromptService) { }
 
   ngAfterViewInit() {

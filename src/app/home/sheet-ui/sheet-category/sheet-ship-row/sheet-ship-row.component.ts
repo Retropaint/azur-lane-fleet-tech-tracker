@@ -21,14 +21,13 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   transformX: number = 0;
   transformY: number = 0;
   mouse: GestureDetail;
+  draggedStatus: string = "default";
   halfWidth: number; 
   halfHeight: number;
   gesture: Gesture;
-  draggedStatus: string = "default";
   greenBorder: string;
   scrollingDir: number;
-  prevLevelInputShipLevel: string;
-  levelInputShipLevel: string;
+  inputShipLevel: string;
   zIndex: number; // used to render row ahead for level focus outline
 
   constructor(
@@ -40,12 +39,13 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     private sheetDrag: SheetDragService) {}
 
   ngOnInit() {
-    this.levelInputShipLevel = this.ship.level.toString();
-    this.prevLevelInputShipLevel = this.levelInputShipLevel;
+    this.inputShipLevel = this.ship.level.toString();
   }
 
   ngAfterViewInit() {
     let isBeingDragged = false;
+    let moveFrame = 0;
+    let lastCollisionFrameMouse: GestureDetail = null;
 
     // add row script and element 
     const addToDragData = (object, toAdd) => {
@@ -65,6 +65,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
       onMove: (mouse) => {
         if(!isBeingDragged) {
           if(Math.abs(mouse.deltaX) > 10 || Math.abs(mouse.deltaY) > 10) {
+            lastCollisionFrameMouse = mouse;
             this.mouse = mouse;
             isBeingDragged = true;
             this.draggedStatus = "dragged";
@@ -78,19 +79,29 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
               this.halfHeight = sizes[1];
             }
             this.updateRowPos();
-            this.checkCollidingShip(false);
+
+            // collision doesn't need to be checked every frame, so reduce the load
+            moveFrame++;
+            if(moveFrame >= 3) {
+              moveFrame = 0;
+              this.checkCollidingShip(false, this.mouse);
+
+              // do not *reference* the mouse, just copy its values in this frame
+              lastCollisionFrameMouse = JSON.parse(JSON.stringify(this.mouse));
+            }
           }
         }
       },
       onEnd: () => {
+        if(!isBeingDragged) {
+          return;
+        }
         document.getElementById(this.category).style.setProperty('z-index', '0');
         isBeingDragged = false;
         this.draggedStatus = "default";
         this.transformX = 0;
         this.transformY = 0;
-        if(this.mouse != null) {
-          this.checkCollidingShip(true);
-        }
+        this.checkCollidingShip(true, lastCollisionFrameMouse);
         this.mouse = null;
         this.sheetDrag.highlightedHeader = null;
         this.shipCategoryData.save();
@@ -104,12 +115,6 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   updateRowPos() {
     const containerRect = this.sheetUI.container.nativeElement.getBoundingClientRect();
     const rect = this.rowElement.nativeElement.getBoundingClientRect();
-    if(this.halfWidth == null) {
-      console.log("width");
-    }
-    if(this.halfHeight == null) {
-      console.log("height");
-    }
 
     const pos = this.dragFuncs.moveElement(this.rowElement, this.transformX, this.transformY, this.halfWidth, this.halfHeight, this.mouse);
     const initialX = this.dragFuncs.getInitialX(this.rowElement, this.transformX);
@@ -143,7 +148,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     }
   }
 
-  checkCollidingShip(hasDropped: boolean) {
+  checkCollidingShip(hasDropped: boolean, mouse) {
     this.sheetDrag.highlightedHeader = null;
     this.sheetDrag.belowGridIndex = null;
     Object.keys(this.sheetDrag.rows).forEach(shipRow => {
@@ -156,11 +161,11 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
       const rect = this.sheetUI.categoryContainers.get(i).nativeElement.getBoundingClientRect();
 
       // instead of checking collision against all ship rows, it only checks the grid it's in
-      if(this.dragFuncs.isColliding(rect, this.mouse)) {
+      if(this.dragFuncs.isColliding(rect, mouse)) {
         let isBelowGrid = true;
         
         // category header
-        if(this.dragFuncs.isColliding(this.sheetDrag.headerRefs[i].nativeElement.getBoundingClientRect(), this.mouse)) {
+        if(this.dragFuncs.isColliding(this.sheetDrag.headerRefs[i].nativeElement.getBoundingClientRect(), mouse)) {
           isBelowGrid = false;
           console.log("header");
           if(hasDropped) {
@@ -169,19 +174,21 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
           } else {
             this.sheetDrag.highlightedHeader = i;
           }
+          break;
         }
 
         // specific ship row
         const categoryName = this.shipCategoryData.sortedCategoryNames[i]
+        const rows = this.sheetDrag.rows[categoryName]['ships'];
+        const rowRefs = this.sheetDrag.rowRefs[categoryName]['ships']
         if(this.shipCategoryData.categories[categoryName].ships.length != 0) {
-          for(let j = 0; j < this.sheetDrag.rowRefs[categoryName]['ships'].length; j++) {
-            const shipRow = this.sheetDrag.rows[categoryName]['ships'][j];
-            const el = this.sheetDrag.rowRefs[categoryName]['ships'][j].nativeElement.getBoundingClientRect();
+          for(let j = 0; j < rows.length; j++) {
+            const shipRow = rows[j];
+            const el = rowRefs[j].nativeElement.getBoundingClientRect();
             if(shipRow == this) {
               continue;
             }
-            if(this.dragFuncs.isColliding(el, this.mouse)) {
-              console.log("ship");
+            if(this.dragFuncs.isColliding(el, mouse)) {
               isBelowGrid = false;
               if(hasDropped) {
                 this.removeFromPreviousCategory();
@@ -203,6 +210,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
             this.sheetDrag.belowGridIndex = i;
           }
         }
+        break;
       }
     }
   }
@@ -223,20 +231,20 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   }
 
   levelInputFocus() {
-    this.levelInputShipLevel = "";
+    this.inputShipLevel = "";
     this.zIndex = 99; // render on top for outline
   }
 
   submitLevel(byBlur: boolean) {
     this.zIndex = 0; 
-    if(this.levelInputShipLevel == "" || this.levelInputShipLevel == null) {
-      this.levelInputShipLevel = this.ship.level.toString();
+    if(this.inputShipLevel == "" || this.inputShipLevel == null) {
+      this.inputShipLevel = this.ship.level.toString();
     } else {
-      if(this.levelInputShipLevel == "0") {
-        this.levelInputShipLevel = "1";
+      if(this.inputShipLevel == "0") {
+        this.inputShipLevel = "1";
       }
-      const num = Math.min(parseInt(this.levelInputShipLevel), 125);
-      this.levelInputShipLevel = num.toString();
+      const num = Math.min(parseInt(this.inputShipLevel), 125);
+      this.inputShipLevel = num.toString();
       this.ship.level = num;
     }
 
@@ -255,5 +263,9 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
 
   focusInput() {
     this.levelInputElement.nativeElement.focus();
+  }
+
+  ngOnDestroy() {
+    this.gesture.destroy();
   }
 }

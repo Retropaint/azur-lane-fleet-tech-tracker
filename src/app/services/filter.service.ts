@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AzurapiService } from './azurapi.service';
 import { ShipCategoryDataService } from './ship-category-data.service';
 import { Ship } from '../interfaces/ship';
-import { ShipCardListComponent } from '../home/icon-ui/ship-card-list/ship-card-list.component';
-import { DragDataService } from './drag-data.service';
 import { Storage } from '@ionic/storage-angular';
-import { IconUIComponent } from '../home/icon-ui/icon-ui.component';
 import { IconDragService } from './icon-drag.service';
 
 @Injectable({
@@ -13,7 +9,7 @@ import { IconDragService } from './icon-drag.service';
 })
 export class FilterService {
 
-  constructor(private shipCategoryData: ShipCategoryDataService, private dragData: DragDataService, private storage: Storage, private iconDrag: IconDragService) { }
+  constructor(private shipCategoryData: ShipCategoryDataService, private storage: Storage, private iconDrag: IconDragService) { }
 
   ships = [];
   loadedShips = [];

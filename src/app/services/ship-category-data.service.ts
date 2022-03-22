@@ -3,7 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { PresetSelectionComponent } from 'src/app/prompts/preset-selection/preset-selection.component';
 import { ShipCategory } from '../interfaces/ship-category';
-import { DragDataService } from './drag-data.service';
 
 @Injectable({
   providedIn: 'root'
