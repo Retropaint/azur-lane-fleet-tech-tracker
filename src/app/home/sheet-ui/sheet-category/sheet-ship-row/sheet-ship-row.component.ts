@@ -107,6 +107,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         this.shipCategoryData.save();
         clearInterval(this.sheetDrag.scrollingInterval);
         this.sheetDrag.scrollingInterval = null;
+        console.log(this.sheetDrag.rows);
       }
     }, true)
     this.gesture.enable();

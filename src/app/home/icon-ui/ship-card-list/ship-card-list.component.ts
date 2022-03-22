@@ -1,6 +1,7 @@
 import { AfterContentChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChildren } from '@angular/core';
 import { Ship } from 'src/app/interfaces/ship';
 import { FilterService } from 'src/app/services/filter.service';
+import { IconDragService } from 'src/app/services/icon-drag.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
 import { ShipCardComponent } from './ship-card/ship-card.component';
@@ -32,12 +33,15 @@ export class ShipCardListComponent implements OnChanges {
 
   constructor(private shipCategoryData: ShipCategoryDataService, 
     public filter: FilterService,
-    public iconLoader: IconLoaderService) {}
+    public iconLoader: IconLoaderService,
+    private iconDrag: IconDragService) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes.category.previousValue == changes.category.currentValue) {
       return;
     }
     this.filter.filter();
+    this.iconDrag.shipCards = [];
+    this.iconDrag.shipCardRefs = [];
   }
 }

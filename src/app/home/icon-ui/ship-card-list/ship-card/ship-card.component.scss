@@ -41,7 +41,7 @@
   }
 
   &.UR-or-decisive {
-    background-image: url("UR border.png");
+    background-image: url("../../../../../assets/UR border.png");
     border: 5px solid transparent;
   
     // I have no idea why I have to apply this again
@@ -153,6 +153,7 @@
   }
 
   &.dragged {
+    position: relative;
     z-index: 99;
     filter: drop-shadow(0px 0px 20px black);
   }
@@ -161,4 +162,11 @@
     transition: opacity 0s;
     opacity: 0;
   }
+}
+
+.invisible-ship-card {
+  width: 116px;
+  height: 144px;
+  display: inline-block;
+  margin-bottom: 8px;
 }

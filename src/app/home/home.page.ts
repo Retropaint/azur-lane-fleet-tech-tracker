@@ -43,17 +43,13 @@ export class HomePage implements AfterViewInit {
       animated: false
     });
     modal.present();
-    modal.onDidDismiss().then(() => {
-      // intentional delay to remove split-second jarring switch
-      setTimeout(async () => {
-        this.isHelpButtons = await this.getToggleState(this.isHelpButtons, "help-buttons");
-
-        const previousState = this.isIconUI;
-        this.isIconUI = await this.getToggleState(this.isIconUI, "icon-ui");
-        if(this.isIconUI != previousState) {
-          this.filter.filter();
-        }
-      })
+    modal.onDidDismiss().then(async () => {
+      this.isHelpButtons = await this.getToggleState(this.isHelpButtons, "help-buttons");
+      const previousState = this.isIconUI;
+      this.isIconUI = await this.getToggleState(this.isIconUI, "icon-ui");
+      if(this.isIconUI != previousState) {
+        this.filter.filter();
+      }
     })
   }
 

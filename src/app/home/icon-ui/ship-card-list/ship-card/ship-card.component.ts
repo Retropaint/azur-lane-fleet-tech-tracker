@@ -8,6 +8,7 @@ import { AzurapiService } from 'src/app/services/azurapi.service';
 import { HomePage } from 'src/app/home/home.page';
 import { IconDragService } from 'src/app/services/icon-drag.service';
 import { DragFuncsService } from 'src/app/services/drag-funcs.service';
+import { IconLoaderService } from 'src/app/services/icon-loader.service';
 
 @Component({
   selector: 'app-ship-card',
@@ -28,6 +29,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   everyOtherFrame: boolean;
   dragStatus: string = "start";
   imageSrc: string = "";
+  droppingDir: number;
 
   @Input() ship = null;
   @Input() currentCategory: string;
@@ -51,7 +53,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     private iconUI: IconUIComponent,
     private home: HomePage,
     private iconDrag: IconDragService,
-    private dragFuncs: DragFuncsService) { }
+    private dragFuncs: DragFuncsService,
+    private iconLoader: IconLoaderService) { }
 
   ngOnInit() {
     this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
@@ -66,6 +69,9 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     if(this.iconDrag.draggedShipComponent != null) {
       this.iconDrag.draggedShipComponent.updateDraggedShipPos();
     }
+
+    this.iconDrag.shipCardRefs.push(this.shipElement);
+    this.iconDrag.shipCards.push(this);
 
     // use setTimeout to delay it, as there is expression check error otherwise
     setTimeout(() => {
@@ -92,6 +98,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         } else {
           this.updateDraggedShipPos();
           this.otherCategoryCheck();
+          this.betweenShipCheck(false);
         }
       },
       onEnd: () => {
@@ -100,6 +107,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         }
         isBeingDragged = false;
         this.iconDrag.draggedShipComponent = null;
+        this.betweenShipCheck(true);
         this.mouse = null;
         this.dragStatus = "default";
         this.transformX = 0;
@@ -123,6 +131,43 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
           this.shipCategoryData.save();
           break;
         }
+      }
+    }
+  }
+
+  betweenShipCheck(dropped: boolean) {
+    for(let i = 0; i < this.iconDrag.shipCardRefs.length; i++) {
+      const el = this.iconDrag.shipCardRefs[i];
+      const rect = el.nativeElement.getBoundingClientRect();
+      if(this.iconDrag.shipCardRefs[i] == this.shipElement) {
+        continue;
+      }
+      if(this.dragFuncs.isColliding(rect, this.mouse)) {
+        if(dropped) {
+          this.removeFromPreviousCategory();
+        }
+
+        const ships = this.shipCategoryData.categories[this.currentCategory].ships
+        const leftHalf = this.dragFuncs.getHalfSizes(el)[0] + rect.x;
+        if(this.mouse.currentX < leftHalf) {
+          if(dropped) {
+            ships.splice(ships.indexOf(this.iconDrag.shipCards[i].ship), 0, this.ship);
+          } else {
+            this.iconDrag.shipCards[i].droppingDir = -1;
+          }
+        } else {
+          if(dropped) {
+            ships.splice(ships.indexOf(this.iconDrag.shipCards[i].ship)+1, 0, this.ship);
+          } else {
+            this.iconDrag.shipCards[i].droppingDir = 1;
+          }
+        }
+
+        if(dropped) {
+          this.iconLoader.loadedShips = ships;
+        }
+      } else {
+        this.iconDrag.shipCards[i].droppingDir = 0;
       }
     }
   }
