@@ -1,8 +1,8 @@
 <app-help-button helpType="icon-ui"></app-help-button>
 
 <div class="ship-grid">
-  <div *ngFor="let ship of filter.loadedShips" style="display: inline-block">
+  <div *ngFor="let ship of iconLoader.loadedShips" style="display: inline-block">
     <app-ship-card #ships *ngIf="ship != null" [ship]="ship" [currentCategory]="category"></app-ship-card>
   </div>
-  <div *ngFor="let i of [].constructor(filter.ships.length - filter.loadedShips.length)" class="invisible-ship-card"></div>
+  <div *ngFor="let i of [].constructor(filter.ships.length - iconLoader.loadedShips.length)" class="invisible-ship-card"></div>
 </div>

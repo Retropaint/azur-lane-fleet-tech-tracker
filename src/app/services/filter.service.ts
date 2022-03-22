@@ -3,18 +3,20 @@ import { ShipCategoryDataService } from './ship-category-data.service';
 import { Ship } from '../interfaces/ship';
 import { Storage } from '@ionic/storage-angular';
 import { IconDragService } from './icon-drag.service';
+import { IconLoaderService } from './icon-loader.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
 
-  constructor(private shipCategoryData: ShipCategoryDataService, private storage: Storage, private iconDrag: IconDragService) { }
+  constructor(private shipCategoryData: ShipCategoryDataService, 
+    private storage: Storage, 
+    private iconDrag: IconDragService,
+    private iconLoader: IconLoaderService) { }
 
   ships = [];
-  loadedShips = [];
   shipFilterPass: boolean[] = [];
-  interval: any;
   delay: number = 30;
 
   stats = {
@@ -52,7 +54,6 @@ export class FilterService {
   }
 
   async filter() {
-    this.loadedShips = [];
     this.ships = [];
     this.shipFilterPass = [];
     
@@ -60,39 +61,10 @@ export class FilterService {
     if(this.shipCategoryData.selectedCategory != null) {
       this.filterCategory();
     }
-    this.load();
+    this.iconLoader.loadShips(this.ships);
 
     // sheet UI
     this.filterShipRows();
-  }
-
-  load() {
-    let index = 0;
-    this.loadedShips = [];
-    let hadDraggedShip = this.iconDrag.draggedShipComponent != null;
-
-    // dragged ship is added instantly to make it render seamlessly across switches
-    if(this.iconDrag.draggedShipComponent != null) {
-      this.loadedShips[this.ships.length - 1] = this.ships[this.ships.length - 1]
-      this.iconDrag.draggedShipComponent.updateDraggedShipPos();
-    }
-    clearInterval(this.interval);
-
-    this.interval = setInterval(() => {
-      const isLoading = index < this.ships.length;
-
-      // place dragged ship in fading queue if dropped while others are still fading
-      if(isLoading && hadDraggedShip && this.iconDrag.draggedShipComponent == null) {
-        this.loadedShips[this.ships.length - 1] = null;
-      }
-      
-      if(isLoading) {
-        this.loadedShips[index] = this.ships[index];
-        index++;
-      } else {
-        clearInterval(this.interval);
-      }
-    }, this.delay)
   }
 
   filterCategory() {
