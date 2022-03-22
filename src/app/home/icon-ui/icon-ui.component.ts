@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { CategoryEditorComponent } from 'src/app/prompts/category-editor/category-editor.component';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
 import { HomePage } from '../home.page';
+import { ShipCardComponent } from './ship-card-list/ship-card/ship-card.component';
 
 @Component({
   selector: 'app-icon-ui',
@@ -20,11 +21,8 @@ export class IconUIComponent {
   isMobile: boolean;
   selectedCategory: string;
 
-  // elements for tutorial anchors
-  @ViewChild('filterElement') filterElement: ElementRef;
-
   constructor(
-    public shipCategoryData: ShipCategoryDataService, // if it shows 'unused', it's not. HTML uses it
+    public shipCategoryData: ShipCategoryDataService,
     private platform: Platform,
     public home: HomePage,
     private categoryEditor: CategoryEditorComponent) {}

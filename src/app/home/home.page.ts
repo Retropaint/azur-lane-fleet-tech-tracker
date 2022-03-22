@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { IonContent, ModalController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { DragDataService } from '../services/drag-data.service';
 import { FilterService } from '../services/filter.service';
 import { ShipCategoryDataService } from '../services/ship-category-data.service';
 import { SettingsComponent } from '../prompts/settings/settings.component';
@@ -18,12 +17,11 @@ export class HomePage implements AfterViewInit {
   isHelpButtons: boolean = true;
   platformCSS: string;
 
-  @ViewChild(IonContent) content: IonContent;
+  @ViewChild(IonContent) ionContent: IonContent;
   
   constructor(
     public shipCategoryData: ShipCategoryDataService, 
     private platform: Platform,
-    public dragData: DragDataService,
     private modalController: ModalController,
     private storage: Storage,
     private filter: FilterService
@@ -35,7 +33,6 @@ export class HomePage implements AfterViewInit {
     } else {
       this.platformCSS = "desktop";
     }
-    this.dragData.homeIonContent = this.content;
     this.isIconUI = await this.getToggleState(this.isIconUI, "icon-ui");
     this.isHelpButtons = await this.getToggleState(this.isHelpButtons, "help-buttons");
   }
@@ -56,7 +53,7 @@ export class HomePage implements AfterViewInit {
         if(this.isIconUI != previousState) {
           this.filter.filter();
         }
-      }, 250)
+      })
     })
   }
 

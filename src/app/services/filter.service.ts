@@ -5,13 +5,15 @@ import { Ship } from '../interfaces/ship';
 import { ShipCardListComponent } from '../home/icon-ui/ship-card-list/ship-card-list.component';
 import { DragDataService } from './drag-data.service';
 import { Storage } from '@ionic/storage-angular';
+import { IconUIComponent } from '../home/icon-ui/icon-ui.component';
+import { IconDragService } from './icon-drag.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
 
-  constructor(private shipCategoryData: ShipCategoryDataService, private dragData: DragDataService, private storage: Storage) { }
+  constructor(private shipCategoryData: ShipCategoryDataService, private dragData: DragDataService, private storage: Storage, private iconDrag: IconDragService) { }
 
   ships = [];
   loadedShips = [];
@@ -71,12 +73,12 @@ export class FilterService {
   load() {
     let index = 0;
     this.loadedShips = [];
-    let hadDraggedShip = this.dragData.draggedShipComponent != null;
+    let hadDraggedShip = this.iconDrag.draggedShipComponent != null;
 
     // dragged ship is added instantly to make it render seamlessly across switches
-    if(this.dragData.draggedShipComponent != null) {
+    if(this.iconDrag.draggedShipComponent != null) {
       this.loadedShips[this.ships.length - 1] = this.ships[this.ships.length - 1]
-      this.dragData.draggedShipComponent.updateDraggedShipPos();
+      this.iconDrag.draggedShipComponent.updateDraggedShipPos();
     }
     clearInterval(this.interval);
 
@@ -84,7 +86,7 @@ export class FilterService {
       const isLoading = index < this.ships.length;
 
       // place dragged ship in fading queue if dropped while others are still fading
-      if(isLoading && hadDraggedShip && this.dragData.draggedShipComponent == null) {
+      if(isLoading && hadDraggedShip && this.iconDrag.draggedShipComponent == null) {
         this.loadedShips[this.ships.length - 1] = null;
       }
       

@@ -14,10 +14,12 @@ import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-leve
 import { IconUIComponent } from './icon-ui/icon-ui.component';
 import { SheetUIComponent } from './sheet-ui/sheet-ui.component';
 import { SettingsComponent } from '../prompts/settings/settings.component';
-import { SheetShipRowComponent } from './sheet-ui/sheet-ship-row/sheet-ship-row.component';
+import { SheetShipRowComponent } from './sheet-ui/sheet-category/sheet-ship-row/sheet-ship-row.component';
 import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelperComponent } from '../prompts/helper/helper.component';
 import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/settings-toggle.component';
+import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
+import { FilterService } from '../services/filter.service';
 
 @NgModule({
   imports: [
@@ -40,7 +42,8 @@ import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/set
     SheetShipRowComponent,
     HelpButtonComponent,
     HelperComponent,
-    SettingsToggleComponent
+    SettingsToggleComponent,
+    SheetCategoryComponent
   ],
   exports: [
     ShipCardListComponent, 
@@ -54,6 +57,6 @@ import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/set
     HelperComponent,
     SettingsToggleComponent
   ],
-  providers: [CategoryEditorComponent]
+  providers: [CategoryEditorComponent, IconUIComponent]
 })
 export class HomePageModule {}

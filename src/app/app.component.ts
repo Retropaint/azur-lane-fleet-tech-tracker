@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { AzurapiService } from './services/azurapi.service';
-import { DragDataService } from './services/drag-data.service';
 import { FilterService } from './services/filter.service';
 import { ShipCategoryDataService } from './services/ship-category-data.service';
 
@@ -14,8 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
     private filter: FilterService, 
-    private shipCategoryData: ShipCategoryDataService,
-    private dragData: DragDataService) {
+    private shipCategoryData: ShipCategoryDataService) {
     this.storage.create();
   }
 

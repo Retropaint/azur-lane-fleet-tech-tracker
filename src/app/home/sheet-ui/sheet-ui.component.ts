@@ -1,11 +1,11 @@
-import { Component, ElementRef, NgZone, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { Ship } from 'src/app/interfaces/ship';
+import { AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { GestureController } from '@ionic/angular';
 import { CategoryEditorComponent } from 'src/app/prompts/category-editor/category-editor.component';
 import { FilterService } from 'src/app/services/filter.service';
+import { SheetDragService } from 'src/app/services/sheet-drag.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
 import { HomePage } from '../home.page';
-import { SheetShipRowComponent } from './sheet-ship-row/sheet-ship-row.component';
+import { SheetShipRowComponent } from './sheet-category/sheet-ship-row/sheet-ship-row.component';
 
 @Component({
   selector: 'app-sheet-ui',
@@ -14,17 +14,14 @@ import { SheetShipRowComponent } from './sheet-ship-row/sheet-ship-row.component
 })
 export class SheetUIComponent {
 
-  @ViewChildren('categories') categoryElements: QueryList<ElementRef>
-  @ViewChildren('categoryHeaders') categoryHeaderElements: QueryList<ElementRef>
+  @ViewChildren('categoryContainers', {read: ElementRef}) categoryContainers: QueryList<ElementRef>;
   @ViewChild('container') container: ElementRef;
-  highlightedHeaderElement: number;
-  belowGridIndex: number;
-  scrollingInterval: any;
-  multiSelectedShipRows: SheetShipRowComponent[] = [];
 
-  constructor(public shipCategoryData: ShipCategoryDataService, public home: HomePage, public filter: FilterService, private categoryEditor: CategoryEditorComponent) {}
+  loadedSheets: number = 0;
 
-  openCategoryEditor(category: string) {
-    this.categoryEditor.open(category);
-  }
+  constructor(public shipCategoryData: ShipCategoryDataService, 
+    public home: HomePage, 
+    public filter: FilterService, 
+    private categoryEditor: CategoryEditorComponent,
+    public sheetDrag: SheetDragService) {}
 }

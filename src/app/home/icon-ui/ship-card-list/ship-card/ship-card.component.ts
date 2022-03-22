@@ -1,11 +1,13 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Gesture, GestureController, GestureDetail, IonInput, ModalController } from '@ionic/angular';
-import { DragDataService } from 'src/app/services/drag-data.service';
 import { FilterService } from 'src/app/services/filter.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { IconUIComponent } from '../../icon-ui.component';
 import { AzurapiService } from 'src/app/services/azurapi.service';
+import { HomePage } from 'src/app/home/home.page';
+import { IconDragService } from 'src/app/services/icon-drag.service';
+import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 
 @Component({
   selector: 'app-ship-card',
@@ -43,11 +45,13 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   };
 
   constructor(private gestureController: GestureController, 
-    private dragData: DragDataService, 
     private shipCategoryData: ShipCategoryDataService,
     private filter: FilterService,
     private modalController: ModalController,
-    private iconUI: IconUIComponent) { }
+    private iconUI: IconUIComponent,
+    private home: HomePage,
+    private iconDrag: IconDragService,
+    private dragFuncs: DragFuncsService) { }
 
   ngOnInit() {
     this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
@@ -59,8 +63,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     // keep dragged ship still
-    if(this.dragData.draggedShipComponent != null) {
-      this.dragData.draggedShipComponent.updateDraggedShipPos();
+    if(this.iconDrag.draggedShipComponent != null) {
+      this.iconDrag.draggedShipComponent.updateDraggedShipPos();
     }
 
     // use setTimeout to delay it, as there is expression check error otherwise
@@ -77,11 +81,11 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
       onMove: mouse => {
         if(!isBeingDragged) {
           if(Math.abs(mouse.deltaX) > 10 || Math.abs(mouse.deltaY) > 10) {
-            this.dragData.draggedShipComponent = this;
+            this.iconDrag.draggedShipComponent = this;
             this.mouse = mouse;
             isBeingDragged = true;
             this.dragStatus = "dragged";
-            const sizes = this.dragData.getHalfSizes(this.shipElement);
+            const sizes = this.dragFuncs.getHalfSizes(this.shipElement);
             this.halfWidth = sizes[0];
             this.halfHeight = sizes[1];
           }
@@ -95,7 +99,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
           return;
         }
         isBeingDragged = false;
-        this.dragData.draggedShipComponent = null;
+        this.iconDrag.draggedShipComponent = null;
         this.mouse = null;
         this.dragStatus = "default";
         this.transformX = 0;
@@ -109,7 +113,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     for(let i = 0; i < this.iconUI.categoryElements.length; i++) {
       const rect = this.iconUI.categoryElements.get(i).nativeElement.getBoundingClientRect();
 
-      if(this.dragData.isColliding(rect, this.mouse)) {
+      if(this.dragFuncs.isColliding(rect, this.mouse)) {
         if(this.shipCategoryData.categories[this.currentCategory].sortId != i) {
           this.addToCategory(i);
           this.removeFromPreviousCategory();
@@ -127,7 +131,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     for(let i = 0; i < this.iconUI.categoryElements.length; i++) {
       const rect = this.iconUI.categoryElements.get(i).nativeElement.getBoundingClientRect();
     
-      if(this.dragData.isColliding(rect, this.mouse)) {
+      if(this.dragFuncs.isColliding(rect, this.mouse)) {
         if(this.shipCategoryData.categories[this.currentCategory].sortId != i) {
           this.addToCategory(i);
           this.removeFromPreviousCategory();
@@ -162,8 +166,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     }
 
     // scroll not needed, but it prevents card from flickering when switching categories
-    this.dragData.homeIonContent.getScrollElement().then(() => {
-      const pos = this.dragData.moveElement(this.shipElement, this.transformX, this.transformY, this.halfWidth, this.halfHeight, this.mouse);
+    this.home.ionContent.getScrollElement().then(() => {
+      const pos = this.dragFuncs.moveElement(this.shipElement, this.transformX, this.transformY, this.halfWidth, this.halfHeight, this.mouse);
       this.transformX = pos[0];
       this.transformY = pos[1];
     });

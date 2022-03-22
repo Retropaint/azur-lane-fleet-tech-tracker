@@ -19,21 +19,6 @@
 <app-help-button helpType="sheet-ui"></app-help-button>
 
 <div #container class="container" *ngIf="filter.shipFilterPass != []">
-  <div *ngFor="let category of shipCategoryData.sortedCategoryNames; index as i" class="grid" [id]="category" #categories>
-    <div class="row highlight-{{highlightedHeaderElement == i}}" (click)="openCategoryEditor(category)" #categoryHeaders>
-      <div class="ship-name border " style="color: white">{{category}}</div>
-      <div class="level header border level">Lv.</div>
-    </div>
-    <ng-container *ngFor="let ship of shipCategoryData.categories[category].ships">
-      <app-sheet-ship-row *ngIf="filter.shipFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
-    </ng-container>
-    <div class="adding-from-bottom" *ngIf="belowGridIndex == i" #categoryHeaders>
-      <div style="color: white">&nbsp;</div>
-    </div>
-  </div>
-  
-  <div (click)="openCategoryEditor(null)" class="grid">
-    <div class="ship-name border createCategory" style="color: white">+</div>
-  </div>
+  <app-sheet-category *ngFor="let category of shipCategoryData.sortedCategoryNames; index as i" class="grid" [id]="category" [category]="category" [index]="i" [isHeaderHighlighted]="sheetDrag.highlightHeaderIndex == i" [belowThisGrid]="sheetDrag.belowGridIndex == i" #categoryContainers></app-sheet-category>
 </div>
 

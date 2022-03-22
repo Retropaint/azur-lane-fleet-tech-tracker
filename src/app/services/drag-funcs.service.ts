@@ -1,24 +1,12 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { GestureDetail, IonContent } from '@ionic/angular';
-import { HomePage } from '../home/home.page';
-import { SheetShipRowComponent } from '../home/sheet-ui/sheet-ship-row/sheet-ship-row.component';
-import { Ship } from '../interfaces/ship';
+import { GestureDetail } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DragDataService {
+export class DragFuncsService {
 
-  homeIonContent: IonContent; // used for scroll info
-  draggedShipComponent: any; // used for communication between home and currently dragged card component (primarily scrolling)
-  categoryElements: ElementRef[];
-  selectedCategory: string;
-  isLoadingShipList: boolean; // used by ship card to know whether to go into .start or .default selector when dropped
-
-  shipRows = {};
-  shipRowElements = {};
-
-  constructor() {}
+  constructor() { }
 
   moveElement(el: ElementRef, transformX: number, transformY: number, halfWidth: number, halfHeight: number, mouse: GestureDetail) {
     const pos = [];

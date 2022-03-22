@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DragDataService } from '../drag-data.service';
+import { IconDragService } from './icon-drag.service';
 
-describe('DragDataBridgeService', () => {
-  let service: DragDataService;
+describe('IconDragService', () => {
+  let service: IconDragService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(DragDataService);
+    service = TestBed.inject(IconDragService);
   });
 
   it('should be created', () => {
