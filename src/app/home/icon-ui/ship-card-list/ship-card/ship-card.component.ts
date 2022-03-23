@@ -9,6 +9,7 @@ import { HomePage } from 'src/app/home/home.page';
 import { IconDragService } from 'src/app/services/icon-drag.service';
 import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
+import { Ship } from 'src/app/interfaces/ship';
 
 @Component({
   selector: 'app-ship-card',
@@ -30,6 +31,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   dragStatus: string = "start";
   imageSrc: string = "";
   droppingDir: number;
+  collidingShip: ShipCardComponent;
 
   @Input() ship = null;
   @Input() currentCategory: string;
@@ -104,7 +106,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         } else {
           this.updateDraggedShipPos();
           this.otherCategoryCheck();
-          this.betweenShipCheck(false);
+          this.shipCollisionCheck();
         }
       },
       onEnd: () => {
@@ -113,7 +115,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         }
         isBeingDragged = false;
         this.iconDrag.draggedShipComponent = null;
-        this.betweenShipCheck(true);
+        this.dropShip();
+        this.iconLoader.refresh();
         this.mouse = null;
         this.dragStatus = "default";
         this.transformX = 0;
@@ -144,7 +147,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  betweenShipCheck(dropped: boolean) {
+  shipCollisionCheck() {
     for(let i = 0; i < this.iconDrag.shipCardRefs.length; i++) {
       const el = this.iconDrag.shipCardRefs[i];
       const rect = el.nativeElement.getBoundingClientRect();
@@ -153,27 +156,27 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
       }
       if(this.dragFuncs.isColliding(rect, this.mouse)) {
         const leftHalf = this.dragFuncs.getHalfSizes(el)[0] + rect.x;
-        const index = this.shipCategoryData.indexOf(this.iconDrag.shipCards[i].ship);
+        if(this.collidingShip != null) {
+          this.collidingShip.droppingDir = 0;
+        }
+        this.collidingShip = this.iconDrag.shipCards[i];
+        const index = this.shipCategoryData.indexOf(this.collidingShip.ship);
         if(this.mouse.currentX < leftHalf) {
-          if(dropped) {
-            this.shipCategoryData.switchPos(this.ship, this.currentCategory, this.currentCategory, index);
-          } else {
-            this.iconDrag.shipCards[i].droppingDir = -1;
-          }
+          this.collidingShip.droppingDir = -1;
         } else {
-          if(dropped) {
-            this.shipCategoryData.switchPos(this.ship, this.currentCategory, this.currentCategory, index+1);
-          } else {
-            this.iconDrag.shipCards[i].droppingDir = 1;
-          }
+          this.collidingShip.droppingDir = 1;
         }
-
-        if(dropped) {
-          this.iconLoader.refresh();
-        }
-      } else {
-        this.iconDrag.shipCards[i].droppingDir = 0;
+        break;
       }
+    }
+  }
+
+  dropShip() {
+    const index = this.shipCategoryData.indexOf(this.collidingShip.ship);
+    if(this.collidingShip.droppingDir == -1) {
+      this.shipCategoryData.switchPos(this.ship, this.currentCategory, this.currentCategory, index);
+    } else {
+      this.shipCategoryData.switchPos(this.ship, this.currentCategory, this.currentCategory, index+1);
     }
   }
 

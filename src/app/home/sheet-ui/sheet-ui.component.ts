@@ -23,8 +23,12 @@ export class SheetUIComponent implements OnInit {
     private categoryEditor: CategoryEditorComponent,
     public sheetDrag: SheetDragService) {}
 
-    ngOnInit() {
-      this.sheetDrag.rows = {};
-      this.sheetDrag.rowRefs = {};
-    }
+  ngOnInit() {
+    this.sheetDrag.rows = {};
+    this.sheetDrag.rowRefs = {};
+  }
+
+  openCategoryEditor(category: string) {
+    this.categoryEditor.open(category);
+  }
 }

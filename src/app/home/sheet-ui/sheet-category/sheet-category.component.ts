@@ -36,8 +36,4 @@ export class SheetCategoryComponent implements AfterViewInit {
       }
     })
   }
-
-  openCategoryEditor(category: string) {
-    this.categoryEditor.open(category);
-  }
 }
