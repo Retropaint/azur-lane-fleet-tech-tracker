@@ -78,7 +78,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
               this.halfWidth = sizes[0];
               this.halfHeight = sizes[1];
             }
-            this.updateRowPos();
+            this.sheetDrag.updateElementPos(this, this.rowElement);
 
             // collision doesn't need to be checked every frame, so reduce the load
             moveFrame++;
@@ -113,38 +113,10 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     this.gesture.enable();
   }
 
-  updateRowPos() {
-    const containerRect = this.sheetUI.container.nativeElement.getBoundingClientRect();
-    const rect = this.rowElement.nativeElement.getBoundingClientRect();
-
-    const pos = this.dragFuncs.moveElement(this.rowElement, this.transformX, this.transformY, this.halfWidth, this.halfHeight, this.mouse);
-    const initialX = this.dragFuncs.getInitialX(this.rowElement, this.transformX);
-    this.transformY = pos[1];
-
-    // scrolling right
-    if(this.mouse.currentX + this.halfWidth > containerRect.x + containerRect.width) {
-      this.transformX = initialX + (containerRect.x + containerRect.width) - rect.width;
-      this.scrollingDir = 1;
-      this.startScrolling(-7);
-    }
-    // scrolling left
-    else if(this.mouse.currentX - this.halfWidth < containerRect.x) {
-      this.transformX = initialX + containerRect.x;
-      this.scrollingDir = -1;
-      this.startScrolling(7);
-    } else {
-      this.transformX = pos[0];
-      this.scrollingDir = 0;
-      clearInterval(this.sheetDrag.scrollingInterval);
-      this.sheetDrag.scrollingInterval = null;
-    }
-  }
-
   startScrolling(speed) {
     if(this.sheetDrag.scrollingInterval == null) {
       this.sheetDrag.scrollingInterval = setInterval(() => {
         this.sheetUI.container.nativeElement.scrollLeft += speed;
-        this.updateRowPos();
       })
     }
   }

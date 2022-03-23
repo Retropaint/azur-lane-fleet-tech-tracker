@@ -1,10 +1,12 @@
-<div class="row highlight-{{isHeaderHighlighted}}" (click)="openCategoryEditor(category)" #header>
-  <div class="ship-name border " style="color: white">{{category}}</div>
-  <div class="level header border level">Lv.</div>
-</div>
-<ng-container *ngFor="let ship of shipCategoryData.categories[category].ships; index as i">
-  <app-sheet-ship-row *ngIf="filter.shipFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
-</ng-container>
-<div class="adding-from-bottom" *ngIf="belowThisGrid" #categoryHeaders>
-  <div style="color: white">&nbsp;</div>
+<div [style]="'transform: translate(' + transformX + 'px, ' + transformY + 'px)'">
+  <div class="row highlight-{{isHeaderHighlighted}}" (click)="openCategoryEditor(category)" #header>
+    <div class="ship-name border " style="color: white">{{category}}</div>
+    <div class="level header border level">Lv.</div>
+  </div>
+  <ng-container *ngFor="let ship of shipCategoryData.categories[category].ships; index as i">
+    <app-sheet-ship-row *ngIf="filter.shipFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
+  </ng-container>
+  <div class="adding-from-bottom" *ngIf="belowThisGrid" #categoryHeaders>
+    <div style="color: white">&nbsp;</div>
+  </div>
 </div>
