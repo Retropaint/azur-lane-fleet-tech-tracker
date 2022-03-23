@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { PresetSelectionComponent } from 'src/app/prompts/preset-selection/preset-selection.component';
+import { Ship } from '../interfaces/ship';
 import { ShipCategory } from '../interfaces/ship-category';
 
 @Injectable({
@@ -159,5 +160,26 @@ export class ShipCategoryDataService {
     this.categories[name] = newCategory;
     this.save();
     this.sortedCategoryNames.push(name);
+  }
+
+  switchPos(ship: Ship, fromCategory: string, toCategory: string, index: number = this.categories[toCategory].ships.length) {
+    this.remove(ship, fromCategory);
+    this.categories[toCategory].ships.splice(index, 0, ship);
+  }
+
+  remove(ship: Ship, fromCategory: string) {
+    const ships = this.categories[fromCategory].ships;
+    ships.splice(ships.indexOf(ship), 1);
+  }
+
+  indexOf(ship): number {
+    for(const category of Object.keys(this.categories)) {
+      for(let i = 0; i < this.categories[category].ships.length; i++) {
+        const checkingShip = this.categories[category].ships[i];
+        if(checkingShip == ship) {
+          return i;
+        }
+      }
+    }
   }
 }

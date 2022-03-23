@@ -94,6 +94,12 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
             const sizes = this.dragFuncs.getHalfSizes(this.shipElement);
             this.halfWidth = sizes[0];
             this.halfHeight = sizes[1];
+
+            // place ship last in list, to make it appear like it's taken out
+            this.removeFromPreviousCategory();
+            this.shipCategoryData.categories[this.currentCategory].ships.push(this.ship);
+            this.iconLoader.refresh();
+            this.updateDraggedShipPos();
           }
         } else {
           this.updateDraggedShipPos();
@@ -112,6 +118,9 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         this.dragStatus = "default";
         this.transformX = 0;
         this.transformY = 0;
+        this.iconDrag.shipCards.forEach(card => {
+          card.droppingDir = 0;
+        })
       }
     }, true);
     this.gesture.enable();
@@ -123,8 +132,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
       if(this.dragFuncs.isColliding(rect, this.mouse)) {
         if(this.shipCategoryData.categories[this.currentCategory].sortId != i) {
-          this.addToCategory(i);
-          this.removeFromPreviousCategory();
+          const category = this.shipCategoryData.sortedCategoryNames[i];
+          this.shipCategoryData.switchPos(this.ship, this.currentCategory, category);
           this.filter.filter();
           
           this.shipCategoryData.selectedCategory = this.shipCategoryData.sortedCategoryNames[i];
@@ -143,28 +152,24 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         continue;
       }
       if(this.dragFuncs.isColliding(rect, this.mouse)) {
-        if(dropped) {
-          this.removeFromPreviousCategory();
-        }
-
-        const ships = this.shipCategoryData.categories[this.currentCategory].ships
         const leftHalf = this.dragFuncs.getHalfSizes(el)[0] + rect.x;
+        const index = this.shipCategoryData.indexOf(this.iconDrag.shipCards[i].ship);
         if(this.mouse.currentX < leftHalf) {
           if(dropped) {
-            ships.splice(ships.indexOf(this.iconDrag.shipCards[i].ship), 0, this.ship);
+            this.shipCategoryData.switchPos(this.ship, this.currentCategory, this.currentCategory, index);
           } else {
             this.iconDrag.shipCards[i].droppingDir = -1;
           }
         } else {
           if(dropped) {
-            ships.splice(ships.indexOf(this.iconDrag.shipCards[i].ship)+1, 0, this.ship);
+            this.shipCategoryData.switchPos(this.ship, this.currentCategory, this.currentCategory, index+1);
           } else {
             this.iconDrag.shipCards[i].droppingDir = 1;
           }
         }
 
         if(dropped) {
-          this.iconLoader.loadedShips = ships;
+          this.iconLoader.refresh();
         }
       } else {
         this.iconDrag.shipCards[i].droppingDir = 0;
@@ -200,7 +205,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
   removeFromPreviousCategory() {
     let ships = this.shipCategoryData.categories[this.currentCategory].ships;
-    
     ships.splice(ships.indexOf(this.ship), 1);
   }
 

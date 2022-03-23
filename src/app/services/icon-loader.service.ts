@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Ship } from '../interfaces/ship';
 import { IconDragService } from './icon-drag.service';
+import { ShipCategoryDataService } from './ship-category-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class IconLoaderService {
   loadedShips = [];
   interval: any;
 
-  constructor(private iconDrag: IconDragService, ) { }
+  constructor(private iconDrag: IconDragService, private shipCategoryData: ShipCategoryDataService) { }
 
   loadShips(ships: Ship[]) {
     let index = 0;
@@ -39,5 +40,9 @@ export class IconLoaderService {
         clearInterval(this.interval);
       }
     })
+  }
+
+  refresh() {
+    this.loadedShips = this.shipCategoryData.categories[this.shipCategoryData.selectedCategory].ships;
   }
 }

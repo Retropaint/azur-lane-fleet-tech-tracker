@@ -170,7 +170,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
           isBelowGrid = false;
           console.log("header");
           if(hasDropped) {
-            this.removeFromPreviousCategory();
+            this.remove();
             this.shipCategoryData.categories[this.shipCategoryData.sortedCategoryNames[i]].ships.unshift(this.ship);
           } else {
             this.sheetDrag.highlightedHeader = i;
@@ -192,8 +192,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
             if(this.dragFuncs.isColliding(el, mouse)) {
               isBelowGrid = false;
               if(hasDropped) {
-                this.removeFromPreviousCategory();
-                shipRow.addToCategory(this.ship);
+                this.shipCategoryData.switchPos(this.ship, this.category, categoryName, this.shipCategoryData.indexOf(shipRow.ship));
               } else {
                 shipRow.displayGreenLine();
               }
@@ -204,8 +203,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
 
         if(isBelowGrid) {
           if(hasDropped) {
-            this.removeFromPreviousCategory();
-            this.shipCategoryData.categories[categoryName].ships.push(this.ship);
+            this.shipCategoryData.switchPos(this.ship, this.category, categoryName);
             this.shipCategoryData.save();
           } else {
             this.sheetDrag.belowGridIndex = i;
@@ -225,10 +223,8 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     ships.splice(ships.indexOf(this.ship), 0, addedShip);
   }
 
-  removeFromPreviousCategory() {
-    let ships = this.shipCategoryData.categories[this.category].ships;
-    
-    ships.splice(ships.indexOf(this.ship), 1);
+  remove() {
+    this.shipCategoryData.remove(this.ship, this.category);
   }
 
   levelInputFocus() {
