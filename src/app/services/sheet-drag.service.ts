@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DragElement } from '../interfaces/drag-element';
 import { DragFuncsService } from './drag-funcs.service';
 
 @Injectable({
@@ -17,41 +18,40 @@ export class SheetDragService {
 
   constructor(private dragFuncs: DragFuncsService) { }
 
-  startScrolling(component, movingElement, speed) {
+  startScrolling(dragElement: DragElement, speed: number) {
     if(this.scrollingInterval == null) {
       this.scrollingInterval = setInterval(() => {
-        component.sheetUI.container.nativeElement.scrollLeft += speed;
-        console.log(component);
-        this.updateElementPos(component, movingElement);
+        dragElement.sheetUI.container.nativeElement.scrollLeft += speed;
+        this.updateElementPos(dragElement);
       })
     }
   }
 
-  updateElementPos(component, movingElement) {
-    const containerRect = component.sheetUI.container.nativeElement.getBoundingClientRect();
-    const rect = movingElement.nativeElement.getBoundingClientRect();
+  updateElementPos(dragElement: DragElement) {
+    const containerRect = dragElement.sheetUI.container.nativeElement.getBoundingClientRect();
+    const rect = dragElement.gestureElement.nativeElement.getBoundingClientRect();
 
-    const pos = this.dragFuncs.moveElement(movingElement, component.transformX, component.transformY, component.halfWidth, component.halfHeight, component.mouse);
-    const initialX = this.dragFuncs.getInitialX(movingElement, component.transformX);
-    component.transformY = pos[1];
+    const pos = this.dragFuncs.moveElement(dragElement.gestureElement, dragElement.transformX, dragElement.transformY, dragElement.halfWidth, dragElement.halfHeight, dragElement.mouse);
+    const initialX = this.dragFuncs.getInitialX(dragElement.gestureElement, dragElement.transformX);
+    dragElement.transformY = pos[1];
 
     // scrolling right
-    if(component.mouse.currentX + component.halfWidth > containerRect.x + containerRect.width) {
-      component.transformX = initialX + (containerRect.x + containerRect.width) - rect.width;
-      component.scrollingDir = 1;
-      this.startScrolling(component, movingElement, -7);
+    if(dragElement.mouse.currentX + dragElement.halfWidth > containerRect.x + containerRect.width) {
+      dragElement.transformX = initialX + (containerRect.x + containerRect.width) - rect.width;
+      dragElement.scrollingDir = 1;
+      this.startScrolling(dragElement, -7);
     }
     // scrolling left
-    else if(component.mouse.currentX - component.halfWidth < containerRect.x) {
-      component.transformX = initialX + containerRect.x;
-      component.scrollingDir = -1;
-      this.startScrolling(component, movingElement, 7);
+    else if(dragElement.mouse.currentX - dragElement.halfWidth < containerRect.x) {
+      dragElement.transformX = initialX + containerRect.x;
+      dragElement.scrollingDir = -1;
+      this.startScrolling(dragElement, 7);
     } else {
       console.log("what");
-      component.transformX = pos[0];
-      component.scrollingDir = 0;
-      clearInterval(component.sheetDrag.scrollingInterval);
-      component.sheetDrag.scrollingInterval = null;
+      dragElement.transformX = pos[0];
+      dragElement.scrollingDir = 0;
+      clearInterval(this.scrollingInterval);
+      this.scrollingInterval = null;
     }
   }
 }

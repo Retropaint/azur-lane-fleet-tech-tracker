@@ -1,4 +1,4 @@
-<div [style]="'transform: translate(' + transformX + 'px, ' + transformY + 'px)'">
+<div [style]="'transform: translate(' + dragElement.transformX + 'px, ' + dragElement.transformY + 'px)'">
   <div class="row highlight-{{isHeaderHighlighted}}" (click)="openCategoryEditor(category)" #header>
     <div class="ship-name border " style="color: white">{{category}}</div>
     <div class="level header border level">Lv.</div>

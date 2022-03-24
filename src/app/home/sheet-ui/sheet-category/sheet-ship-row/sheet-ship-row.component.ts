@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Gesture, GestureController, GestureDetail } from '@ionic/angular';
+import { DragElement } from 'src/app/interfaces/drag-element';
 import { Ship } from 'src/app/interfaces/ship';
 import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 import { FilterService } from 'src/app/services/filter.service';
@@ -18,17 +19,11 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   @ViewChild('levelInput', {read: ElementRef}) levelInputElement: ElementRef;
   @Input() ship: Ship;
   @Input() category: string;
-  transformX: number = 0;
-  transformY: number = 0;
-  mouse: GestureDetail;
   draggedStatus: string = "default";
-  halfWidth: number; 
-  halfHeight: number;
-  gesture: Gesture;
   greenBorder: string;
-  scrollingDir: number;
   inputShipLevel: string;
   zIndex: number; // used to render row ahead for level focus outline
+  dragEl: DragElement;
 
   constructor(
     private gestureController: GestureController, 
@@ -36,13 +31,19 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     private sheetUI: SheetUIComponent,
     public filter: FilterService,
     private dragFuncs: DragFuncsService,
-    private sheetDrag: SheetDragService) {}
+    private sheetDrag: SheetDragService,
+    private selfRef: ElementRef) {}
 
   ngOnInit() {
     this.inputShipLevel = this.ship.level.toString();
+    this.dragEl = {
+      sheetUI: this.sheetUI,
+    }
   }
 
   ngAfterViewInit() {
+    this.dragEl.gestureElement = this.rowElement;
+
     let isBeingDragged = false;
     let moveFrame = 0;
     let lastCollisionFrameMouse: GestureDetail = null;
@@ -58,7 +59,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     addToDragData(this.sheetDrag.rows, this);
     addToDragData(this.sheetDrag.rowRefs, this.rowElement);
 
-    this.gesture = this.gestureController.create({
+    this.dragEl.gesture = this.gestureController.create({
       el: this.rowElement.nativeElement,
       gestureName: 'my-gesture',
       threshold: 0,
@@ -66,28 +67,28 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         if(!isBeingDragged) {
           if(Math.abs(mouse.deltaX) > 10 || Math.abs(mouse.deltaY) > 10) {
             lastCollisionFrameMouse = mouse;
-            this.mouse = mouse;
+            this.dragEl.mouse = mouse;
             isBeingDragged = true;
             this.draggedStatus = "dragged";
-            document.getElementById(this.category).style.setProperty('z-index', '99');
+            this.selfRef.nativeElement.style.zIndex = '99';
           }
         } else {
-          if(this.mouse != null) {
-            if(this.halfWidth == null || this.halfHeight == null) {
+          if(this.dragEl.mouse != null) {
+            if(this.dragEl.halfWidth == null || this.dragEl.halfHeight == null) {
               const sizes = this.dragFuncs.getHalfSizes(this.rowElement);
-              this.halfWidth = sizes[0];
-              this.halfHeight = sizes[1];
+              this.dragEl.halfWidth = sizes[0];
+              this.dragEl.halfHeight = sizes[1];
             }
-            this.sheetDrag.updateElementPos(this, this.rowElement);
+            this.sheetDrag.updateElementPos(this.dragEl);
 
             // collision doesn't need to be checked every frame, so reduce the load
             moveFrame++;
             if(moveFrame >= 3) {
               moveFrame = 0;
-              this.checkCollidingShip(false, this.mouse);
+              this.checkCollidingShip(false, this.dragEl.mouse);
 
               // do not *reference* the mouse, just copy its values in this frame
-              lastCollisionFrameMouse = JSON.parse(JSON.stringify(this.mouse));
+              lastCollisionFrameMouse = JSON.parse(JSON.stringify(this.dragEl.mouse));
             }
           }
         }
@@ -96,13 +97,13 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         if(!isBeingDragged) {
           return;
         }
-        document.getElementById(this.category).style.setProperty('z-index', '0');
+        this.selfRef.nativeElement.style.zIndex = '0';
         isBeingDragged = false;
         this.draggedStatus = "default";
-        this.transformX = 0;
-        this.transformY = 0;
+        this.dragEl.transformX = 0;
+        this.dragEl.transformY = 0;
         this.checkCollidingShip(true, lastCollisionFrameMouse);
-        this.mouse = null;
+        this.dragEl.mouse = null;
         this.sheetDrag.highlightedHeader = null;
         this.shipCategoryData.save();
         clearInterval(this.sheetDrag.scrollingInterval);
@@ -110,7 +111,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         console.log(this.sheetDrag.rows);
       }
     }, true)
-    this.gesture.enable();
+    this.dragEl.gesture.enable();
   }
 
   startScrolling(speed) {
@@ -235,6 +236,6 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   }
 
   ngOnDestroy() {
-    this.gesture.destroy();
+    this.dragEl.gesture.destroy();
   }
 }

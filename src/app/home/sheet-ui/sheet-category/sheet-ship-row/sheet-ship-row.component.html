@@ -1,4 +1,4 @@
-<div #row *ngIf="filter.shipFilterPass[ship.id] == true" class="row {{draggedStatus}} highlight-{{greenBorder}}" [style]="'z-index: ' + zIndex + '; transform: translate( ' + transformX + 'px, ' + transformY + 'px )'">
+<div #row *ngIf="filter.shipFilterPass[ship.id] == true" class="row {{draggedStatus}} highlight-{{greenBorder}}" [style]="'z-index: ' + zIndex + '; transform: translate( ' + dragEl.transformX + 'px, ' + dragEl.transformY + 'px )'">
   <div class="ship-name {{ship.rarity}} border">{{ship.name}}</div>
   <form (ngSubmit)="submitLevel(false)" name="what">
     <input 

@@ -9,6 +9,10 @@ export class DragFuncsService {
   constructor() { }
 
   moveElement(el: ElementRef, transformX: number, transformY: number, halfWidth: number, halfHeight: number, mouse: GestureDetail) {
+    if(transformX == null || transformY == null) {
+      transformX = 0;
+      transformY = 0;
+    }
     const pos = [];
 
     const initialX = el.nativeElement.getBoundingClientRect().x - transformX;
