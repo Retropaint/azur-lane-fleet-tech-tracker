@@ -1,4 +1,6 @@
 <div #categoryRef [style]="'transform: translate(' + dragElement.transformX + 'px, ' + dragElement.transformY + 'px)'">
+  <div *ngIf="dragElement.droppingDir == -1" class="dropping-left"></div>
+  <div *ngIf="dragElement.droppingDir == 1" class="dropping-right"></div>
   <div class="row highlight-{{isHeaderHighlighted}}" (click)="openCategoryEditor(category)" #header>
     <div class="category-header ship-name border " style="color: white">{{category}}</div>
     <div class="category-header level header border level">Lv.</div>

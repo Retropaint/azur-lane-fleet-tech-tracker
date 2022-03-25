@@ -1,0 +1,18 @@
+.dropping-left {
+  width: 15px;
+  height: 100%;
+  background: lime;
+  position: absolute;
+  z-index: 1;
+  transform: translateX(-15px);
+}
+
+.dropping-right {
+  width: 15px;
+  height: 100%;
+  background: lime;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  transform: translateX(15px);
+}

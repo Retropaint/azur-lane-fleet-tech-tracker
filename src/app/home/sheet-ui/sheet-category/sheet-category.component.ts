@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 import { Gesture, GestureController, GestureDetail } from '@ionic/angular';
 import { DragElement } from 'src/app/interfaces/drag-element';
 import { CategoryEditorComponent } from 'src/app/prompts/category-editor/category-editor.component';
@@ -32,7 +32,8 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
     private gestureController: GestureController,
     private selfRef: ElementRef,
     private dragFuncs: DragFuncsService,
-    private sheetUI: SheetUIComponent
+    private sheetUI: SheetUIComponent,
+    private zone: NgZone
     ) {}
 
   ngOnInit() {
@@ -55,20 +56,19 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
       threshold: 0,
       onMove: (mouse) => {
         if(!isBeingDragged) {
-          if(mouse.deltaX > 0.1 || mouse.deltaY > 0.1) {
+          if(Math.abs(mouse.deltaX) > 2 || Math.abs(mouse.deltaY) > 2) {
             if(this.dragElement.halfWidth == null) {
               const sizes = this.dragFuncs.getHalfSizes(this.headerElement);
               this.dragElement.halfWidth = sizes[0];
               this.dragElement.halfHeight = sizes[1];
             }
-            isBeingDragged = true;
             this.dragElement.mouse = mouse;
-            const categories = this.shipCategoryData.categories; 
 
-            // push category to last and decrement Id's accordingly
+            isBeingDragged = true;
+            const categories = this.shipCategoryData.categories; 
             this.shipCategoryData.decrementSortIds(categories[this.category].sortId);
             this.shipCategoryData.categories[this.category].sortId = Object.keys(categories).length - 1;
-            this.shipCategoryData.sort();
+            this.shipCategoryData.sort()
             this.sheetDrag.updateElementPos(this.dragElement);
           }
         } else {
@@ -105,9 +105,14 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
       }
       const rect = categoryRef.nativeElement.getBoundingClientRect();
       if(this.dragFuncs.isColliding(rect, this.dragElement.mouse)) {
-        const sizes = this.dragFuncs.getHalfSizes(categoryRef);
+        // set previous category's dropping dir
+        if(this.collidedCategory != null) {
+          this.collidedCategory.dragElement.droppingDir = 0;
+        }
+
         this.collidedCategory = this.sheetDrag.categories[i];
-        if(this.dragElement.mouse.currentX < rect.x + sizes[0]) {
+
+        if(this.dragElement.mouse.currentX < this.dragFuncs.getHalfSizes(categoryRef)[0] + rect.x) {
           this.collidedCategory.dragElement.droppingDir = -1;
         } else {
           this.collidedCategory.dragElement.droppingDir = 1;
@@ -123,11 +128,11 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
     }
     if(this.collidedCategory.dragElement.droppingDir == -1) {
       this.shipCategoryData.categories[this.category].sortId = this.shipCategoryData.categories[this.collidedCategory.category].sortId;      
-      this.shipCategoryData.incrementSortIds(this.shipCategoryData.categories[this.category].sortId, this.category);
     } else {
       this.shipCategoryData.categories[this.category].sortId = this.shipCategoryData.categories[this.collidedCategory.category].sortId+1;      
-      this.shipCategoryData.incrementSortIds(this.shipCategoryData.categories[this.category].sortId, this.category);
     }
+    this.collidedCategory.dragElement.droppingDir = 0;
+    this.shipCategoryData.incrementSortIds(this.shipCategoryData.categories[this.category].sortId, this.category);
     this.shipCategoryData.sort();
     this.shipCategoryData.save();
   }
