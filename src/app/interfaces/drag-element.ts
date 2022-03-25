@@ -9,6 +9,7 @@ export interface DragElement {
   halfHeight?: number;
   gesture?: Gesture;
   gestureElement?: ElementRef;
+  droppingDir?: number; // the direction (left/right) that this element was being aimed at when dropping
 
   // sheet
   scrollingDir?: number;

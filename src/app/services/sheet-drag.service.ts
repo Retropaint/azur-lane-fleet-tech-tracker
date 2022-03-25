@@ -9,6 +9,7 @@ export class SheetDragService {
 
   rows = {};
   rowRefs = {};
+  categories = [];
   categoryRefs = [];
   headerRefs = [];
   highlightHeaderIndex: number;
@@ -47,7 +48,6 @@ export class SheetDragService {
       dragElement.scrollingDir = -1;
       this.startScrolling(dragElement, 7);
     } else {
-      console.log("what");
       dragElement.transformX = pos[0];
       dragElement.scrollingDir = 0;
       clearInterval(this.scrollingInterval);

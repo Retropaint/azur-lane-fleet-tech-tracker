@@ -33,19 +33,28 @@ export class ShipCategoryDataService {
     let index = 0;
     while(index < Object.keys(this.categories).length) {
       Object.keys(this.categories).forEach(category => {
-          if(this.categories[category].sortId == index) {
-            this.sortedCategoryNames.push(category);
-            index++;
-            return;
-          }
+        if(this.categories[category].sortId == index) {
+          this.sortedCategoryNames.push(category);
+          index++;
+          return;
+        }
       })
     }
   }
 
   decrementSortIds(startingId: number) {
+    console.log("what");
     Object.keys(this.categories).forEach(category => {
       if(this.categories[category].sortId > startingId) {
         this.categories[category].sortId--;
+      }
+    })
+  }
+
+  incrementSortIds(startingId: number, initiatedCategory: string) {
+    Object.keys(this.categories).forEach(category => {
+      if(category != initiatedCategory && this.categories[category].sortId >= startingId) {
+        this.categories[category].sortId++;
       }
     })
   }

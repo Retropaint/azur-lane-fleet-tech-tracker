@@ -51,7 +51,6 @@
   }
 
   &.header {
-    background-color: transparent;
     color: white;
   }
 }
@@ -129,4 +128,8 @@ input[type=number]::-webkit-outer-spin-button {
 .adding-from-bottom {
   border: 1.4px solid #00ff0f; // the border's only purpose is to size the row to be the same as others, hence the same color
   background: #00ff0f;
+}
+
+.category-header {
+  background: #004299;
 }
