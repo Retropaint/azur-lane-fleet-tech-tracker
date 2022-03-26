@@ -70,7 +70,15 @@ export class ShipCategoryDataService {
     })
   }
 
-  selectedPreset(presetName: string) {
+  async selectedPreset(presetName: string) {
+    if(this.allShips.length == 0) {
+      Object.keys(this.categories).forEach(category => {
+        this.categories[category].ships.forEach(ship => {
+          this.allShips.push(ship);
+        })
+      })
+    }
+    this.categories = {};
     switch(presetName) {
       case "hulls":
         this.allShips.forEach(ship => {
@@ -120,6 +128,7 @@ export class ShipCategoryDataService {
       this.sortedCategoryNames.push(category);
     })
     this.selectedCategory = this.sortedCategoryNames[0];
+    this.save();
   }
 
   bothPreset() {

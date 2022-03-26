@@ -29,6 +29,7 @@ export class AzurapiService {
     if(isRetrieving) {
       this.retreiveStatus = "Retreiving...";
     }
+    console.log("what");
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
       JSON.parse(ships).forEach(ship => {
         // only accept ships with a max level fleet tech bonus
@@ -90,6 +91,7 @@ export class AzurapiService {
       })
     }).then(() => {
       if(!isRetrieving) {
+        console.log(this.shipCategoryData.allShips)
         this.shipCategoryData.promptPreset().then(() => {
           this.filter.filter();
         })

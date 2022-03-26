@@ -1,10 +1,10 @@
 import { Component, HostBinding, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { IonInput, ModalController } from '@ionic/angular';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
-import { ShipCategory } from 'src/app/interfaces/ship-category';
 import { FilterService } from 'src/app/services/filter.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
+import { ShipCategory } from 'src/app/interfaces/ship-category';
 
 @Component({
   selector: 'app-category-editor',
@@ -57,6 +57,8 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
       if(value.data == true) {
         // decrement id's past the deleted category's to keep them in line
         const id = this.shipCategoryData.categories[this.selectedCategory].sortId;
+        this.shipCategoryData.newCategory("Binned Ships");
+        this.shipCategoryData.categories["Binned Ships"].ships = this.shipCategoryData.categories[this.selectedCategory].ships;
         this.shipCategoryData.decrementSortIds(id);
 
         delete this.shipCategoryData.categories[this.selectedCategory];

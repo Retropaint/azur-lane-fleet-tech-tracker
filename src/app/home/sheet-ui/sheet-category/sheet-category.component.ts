@@ -22,7 +22,7 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
   @Input() isHeaderHighlighted: boolean;
   @Input() belowThisGrid: boolean;
   dragElement: DragElement;
-  canOpenEditor: boolean;
+  canOpenEditor: boolean = true;
   collidedCategory: SheetCategoryComponent;
 
   constructor(public filter: FilterService, 
@@ -91,7 +91,6 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
         setTimeout(() => {
           this.canOpenEditor = true
         }, 500)
-        console.log(this.sheetDrag.categoryRefs);
       }
     }, true)
     this.dragElement.gesture.enable();

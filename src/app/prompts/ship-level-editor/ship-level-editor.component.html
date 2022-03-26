@@ -8,7 +8,7 @@
 </div>
 
 <div class="prompt-info-background">
-  <p class="prompt-text centered">Enter {{name}}'s' level.</p>
+  <p class="prompt-text centered">Enter {{name}}'s level.</p>
   <form (ngSubmit)="done()">
     <ion-input #input class="prompt-input centered" ></ion-input>
   </form>
@@ -18,6 +18,13 @@
   <div class="prompt-button-container">
     <div class="prompt-button red" (click)="exit()">
       <p class="prompt-button-text">Cancel</p>
+    </div>
+    <div class="prompt-button-edge"></div>
+  </div>
+
+  <div class="prompt-button-container">
+    <div class="prompt-button blue" (click)="done()">
+      <p class="prompt-button-text">Confirm</p>
     </div>
     <div class="prompt-button-edge"></div>
   </div>

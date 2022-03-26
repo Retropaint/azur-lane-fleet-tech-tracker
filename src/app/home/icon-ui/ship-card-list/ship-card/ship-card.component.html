@@ -1,9 +1,9 @@
 <div #card class="ship-card-container {{dragStatus}}" [style]="'transform: translate( ' + transformX + 'px, ' + transformY + 'px )'">
   <div *ngIf="droppingDir == -1" class="dropping left"></div>
   <div class="ship-hull-and-level-background">
-    <img class="ship-hull-icon" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
+    <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     <div>
-      <img class="ship-hull-icon" name="test" [style]="'width: ' + fleetTechStatIconWidths[ship.maxLevelFleetTechStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.maxLevelFleetTechStat + '.png'"/>
+      <img class="ship-hull-icon" [title]="hoverTitles.stats[ship.maxLevelFleetTechStat] + ' (' + ship.maxLevelFleetTechStat + ')'" [style]="'width: ' + fleetTechStatIconWidths[ship.maxLevelFleetTechStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.maxLevelFleetTechStat + '.png'"/>
       <!--
       <p *ngIf="ship.maxLevelFleetTechBonus == 2" class="double-stats-text">+2</p>
       -->

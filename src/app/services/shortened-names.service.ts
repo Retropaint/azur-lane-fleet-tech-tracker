@@ -61,7 +61,6 @@ export class ShortenedNamesService {
     "Large cruiser": "CB",
     "Battlecruiser": "BC",
     "Destroyer": "DD",
-
   }
 
   constructor() { }

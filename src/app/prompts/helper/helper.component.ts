@@ -22,7 +22,7 @@ export class HelperComponent implements OnInit {
       break; case "icon-ui":
         this.prompt.init(300);
       break; case "sheet-ui":
-        this.prompt.init(300);
+        this.prompt.init(325);
       break;
     }
   }

@@ -13,12 +13,17 @@
 
   <div style="display: flex">
     <div class="prompt-button-container settings">
-      <div class="prompt-button blue" (click)="retreiveLostShips()">
-        <p class="prompt-button-text">Retrieve Missing Ships</p>
+      <div class="prompt-button blue" (click)="resetCategories()">
+        <p class="prompt-button-text">Reset Categories</p>
       </div>
       <div class="prompt-button-edge"></div>
     </div>
-    <div class="prompt-text retreive-status">{{azurapi.retreiveStatus}}</div>
+    <div class="prompt-button-container settings">
+      <div class="prompt-button blue" (click)="resetSite()">
+        <p class="prompt-button-text">Reset Site</p>
+      </div>
+      <div class="prompt-button-edge"></div>
+    </div>
   </div>
 </div>
 

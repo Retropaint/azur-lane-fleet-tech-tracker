@@ -18,8 +18,6 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const factionNames = ["USS", "HMS", "IJN", "KMS", "ROC", "SN", "FFNF", "MNF", "RN", "All", "None"];
-    const statNames = ["FP", "TRP", "AVI", "AA", "RLD", "HIT", "ASW", "EVA", "HP", "All", "None"];
     this.azurapi.init().then(() => {
       this.shipCategoryData.init().then(() => {
         this.shipCategoryData.selectedCategory = this.shipCategoryData.sortedCategoryNames[0];

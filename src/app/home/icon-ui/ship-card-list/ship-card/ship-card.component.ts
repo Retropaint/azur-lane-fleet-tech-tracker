@@ -10,6 +10,7 @@ import { IconDragService } from 'src/app/services/icon-drag.service';
 import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
 import { Ship } from 'src/app/interfaces/ship';
+import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 
 @Component({
   selector: 'app-ship-card',
@@ -56,7 +57,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     private home: HomePage,
     private iconDrag: IconDragService,
     private dragFuncs: DragFuncsService,
-    private iconLoader: IconLoaderService) { }
+    private iconLoader: IconLoaderService,
+    public hoverTitles: HoverTitlesService) { }
 
   ngOnInit() {
     this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
