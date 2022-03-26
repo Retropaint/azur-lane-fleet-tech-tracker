@@ -44,11 +44,12 @@
 ion-modal {
   --ion-background-color: #ffffff85;
   --border-radius: 0px;
+  --backdrop-opacity: 0 !important;
   --height: var(--prompt-height);
 }
 
 ion-router-outlet {
-  // transparent background when modal is open
+  // blurry background when modal is open
   filter: blur(var(--background-blur));
   --overflow: overlay !important;
 }

@@ -41,33 +41,22 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
   }
 
   async delete() {
-    document.getElementById('ion-overlay-' + this.modalIndex).setAttribute('style', 'display: none');
-    const modal = await this.modalController.create({
-      component: ConfirmationComponent,
-      animated: false,
-      backdropDismiss: false, // closing from backdrop closes editor as well
-      componentProps: {
-        "title": "DELETE CATEGORY",
-        "body": "Are you sure you want to delete " + this.selectedCategory + "?"
-      }
-    })
-    modal.present();
-    modal.onDidDismiss().then(value => {
-      document.getElementById('ion-overlay-' + this.modalIndex).setAttribute('style', '');
-      if(value.data == true) {
-        // decrement id's past the deleted category's to keep them in line
-        const id = this.shipCategoryData.categories[this.selectedCategory].sortId;
-        this.shipCategoryData.newCategory("Binned Ships");
-        this.shipCategoryData.categories["Binned Ships"].ships = this.shipCategoryData.categories[this.selectedCategory].ships;
-        this.shipCategoryData.decrementSortIds(id);
-
-        delete this.shipCategoryData.categories[this.selectedCategory];
-        this.shipCategoryData.selectedCategory = this.shipCategoryData.sortedCategoryNames[0];
-        this.shipCategoryData.sort();
-        this.shipCategoryData.save();
-        this.modalController.dismiss();
-      }
-    })
+    this.prompt.openConfirmation(this.modalIndex, "DELETE CATEGORY", "Are you sure you want to delete " + this.selectedCategory + "?")
+      .then(isYes => {
+        if(isYes) {
+          // decrement id's past the deleted category's to keep them in line
+          const id = this.shipCategoryData.categories[this.selectedCategory].sortId;
+          this.shipCategoryData.newCategory("Binned Ships");
+          this.shipCategoryData.categories["Binned Ships"].ships = this.shipCategoryData.categories[this.selectedCategory].ships;
+          this.shipCategoryData.decrementSortIds(id);
+        
+          delete this.shipCategoryData.categories[this.selectedCategory];
+          this.shipCategoryData.selectedCategory = this.shipCategoryData.sortedCategoryNames[0];
+          this.shipCategoryData.sort();
+          this.shipCategoryData.save();
+          this.modalController.dismiss();
+        }
+      })
   }
 
   edit() {

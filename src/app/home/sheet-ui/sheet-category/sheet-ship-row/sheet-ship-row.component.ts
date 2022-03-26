@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Gesture, GestureController, GestureDetail } from '@ionic/angular';
+import { Gesture, GestureController, GestureDetail, ModalController } from '@ionic/angular';
 import { DragElement } from 'src/app/interfaces/drag-element';
 import { Ship } from 'src/app/interfaces/ship';
+import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 import { FilterService } from 'src/app/services/filter.service';
 import { SheetDragService } from 'src/app/services/sheet-drag.service';
@@ -24,6 +25,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   inputShipLevel: string;
   zIndex: number; // used to render row ahead for level focus outline
   dragEl: DragElement;
+  isSliderActive: boolean;
 
   constructor(
     private gestureController: GestureController, 
@@ -32,7 +34,8 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     public filter: FilterService,
     private dragFuncs: DragFuncsService,
     private sheetDrag: SheetDragService,
-    private selfRef: ElementRef) {}
+    private selfRef: ElementRef,
+    private modalController: ModalController) {}
 
   ngOnInit() {
     this.inputShipLevel = this.ship.level.toString();
@@ -70,7 +73,8 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
             this.dragEl.mouse = mouse;
             isBeingDragged = true;
             this.draggedStatus = "dragged";
-            this.selfRef.nativeElement.style.zIndex = '99';
+            console.log(document.getElementById(this.category));
+            document.getElementById(this.category).style.zIndex = "99";
           }
         } else {
           if(this.dragEl.mouse != null) {
@@ -97,7 +101,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         if(!isBeingDragged) {
           return;
         }
-        this.selfRef.nativeElement.style.zIndex = '0';
+        document.getElementById(this.category).style.zIndex = "0";
         isBeingDragged = false;
         this.draggedStatus = "default";
         this.dragEl.transformX = 0;
@@ -200,12 +204,38 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     this.shipCategoryData.remove(this.ship, this.category);
   }
 
+  async enterLevel() {
+    const modal = await this.modalController.create({
+      component:ShipLevelEditorComponent,
+      animated: false,
+      componentProps: {
+        "name": this.ship.name,
+        "level": this.ship.level
+      }
+    })
+    modal.present();
+    modal.onDidDismiss().then(value => {
+      if(value.data != null) {
+        this.ship.level = value.data;
+        this.shipCategoryData.save();
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    this.dragEl.gesture.destroy();
+  }
+
+  // functions for level cell in its input version
+
   levelInputFocus() {
     this.inputShipLevel = "";
     this.zIndex = 99; // render on top for outline
+    this.isSliderActive = true;
   }
 
   submitLevel(byBlur: boolean) {
+    this.isSliderActive = false;
     this.zIndex = 0; 
     if(this.inputShipLevel == "" || this.inputShipLevel == null) {
       this.inputShipLevel = this.ship.level.toString();
@@ -233,9 +263,5 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
 
   focusInput() {
     this.levelInputElement.nativeElement.focus();
-  }
-
-  ngOnDestroy() {
-    this.dragEl.gesture.destroy();
   }
 }

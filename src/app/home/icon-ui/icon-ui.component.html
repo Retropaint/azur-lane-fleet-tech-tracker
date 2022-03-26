@@ -19,11 +19,13 @@
   <div class="generic-text options"> Options </div>
 </div>
 
-<div class="options-button {{home.filterCss}}" (click)="home.toggleFilter()">
+<!-- filter
+  <div class="options-button {{home.filterCss}}" (click)="home.toggleFilter()">
   <div class="options-button-square left"></div>
   <div class="options-button-square right"></div>
   <div class="generic-text options {{home.filterCss}}"> Filter </div>
 </div>
+-->
 
 <div class="options-button {{home.sortCss}}" (click)="home.toggleSort()">
   <div class="options-button-square left"></div>
@@ -32,6 +34,8 @@
 </div>
 
 <app-sort-list *ngIf="home.sortCss == 'selected'" style="display: inline-block"></app-sort-list>
+
+<app-help-button helpType="icon-ui"></app-help-button>
 
 <div *ngIf="home.filterCss == 'selected'">
   <app-filter-list></app-filter-list>

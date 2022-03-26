@@ -1,6 +1,7 @@
 <div #row *ngIf="filter.shipFilterPass[ship.id] == true" class="row {{draggedStatus}} highlight-{{greenBorder}}" [style]="'z-index: ' + zIndex + '; transform: translate( ' + dragEl.transformX + 'px, ' + dragEl.transformY + 'px )'">
   <div class="ship-name {{ship.rarity}} border">{{ship.name}}</div>
-  <form (ngSubmit)="submitLevel(false)" name="what">
+  <!--
+    <form (ngSubmit)="submitLevel(false)" name="what">
     <input 
       #levelInput 
       maxlength="3" 
@@ -9,7 +10,9 @@
       [(ngModel)]="inputShipLevel" 
       name="this is for the form" 
       type="number" 
-      class="level over119-{{ship.level > 119}} border level" 
+      class="level over119-{{ship.level > 120}} border level" 
     />
   </form>
+  -->
+  <div class="level over119-{{ship.level > 119}} border level" (click)="enterLevel()">{{ship.level}}</div>
 </div>

@@ -15,6 +15,7 @@ export class SettingsComponent implements OnInit {
 
   isIconUI: boolean = true;
   retreiveStatus: string;
+  modalIndex: number;
 
   constructor(private prompt: PromptService, 
     private storage: Storage, 
@@ -23,7 +24,7 @@ export class SettingsComponent implements OnInit {
     private shipCategoryData: ShipCategoryDataService) { }
 
   async ngOnInit() {
-    this.prompt.init(400);
+    this.modalIndex = this.prompt.init(400);
     const storageIconUI = await this.storage.get("icon-ui");
     if(storageIconUI != null) {
       this.isIconUI = storageIconUI;
@@ -45,18 +46,28 @@ export class SettingsComponent implements OnInit {
   }
 
   resetCategories() {
-    this.modalController.dismiss();
-    this.shipCategoryData.sortedCategoryNames = [];
-    this.shipCategoryData.allShips = [];
-    this.shipCategoryData.promptPreset();
+    this.prompt.openConfirmation(this.modalIndex, "RESET CATEGORIES", "All categories, including custom, will be deleted. Proceed?")
+      .then(isYes => {
+        if(isYes) {
+          this.modalController.dismiss();
+          this.shipCategoryData.sortedCategoryNames = [];
+          this.shipCategoryData.allShips = [];
+          this.shipCategoryData.promptPreset();
+        }
+      })
   }
 
   resetSite() {
-    this.modalController.dismiss();
-    this.shipCategoryData.sortedCategoryNames = [];
-    this.shipCategoryData.allShips = [];
-    this.storage.remove("categories");
-    this.azurapi.init();
+    this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All categories, ship levels, and settings preferences will be deleted. Proceed?")
+      .then(isYes => {
+        if(isYes) {
+          this.modalController.dismiss();
+          this.shipCategoryData.sortedCategoryNames = [];
+          this.shipCategoryData.allShips = [];
+          this.storage.remove("categories");
+          this.azurapi.init();
+        }
+      })
   }
 
   ngOnDestroy() {
