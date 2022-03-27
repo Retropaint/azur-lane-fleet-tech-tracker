@@ -11,7 +11,7 @@ import { SheetUIComponent } from '../sheet-ui.component';
 @Component({
   selector: 'app-sheet-category',
   templateUrl: './sheet-category.component.html',
-  styleUrls: ['./sheet-category.component.scss', '../sheet-ui.component.scss'],
+  styleUrls: ['./sheet-category.component.scss'],
 })
 export class SheetCategoryComponent implements AfterViewInit, OnInit {
 

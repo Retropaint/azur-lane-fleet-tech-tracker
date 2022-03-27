@@ -28,6 +28,10 @@
   -webkit-user-drag: none;
   margin-right: 5px;
   transform: translate(0px, 2px);
+
+  &.FP {
+    transform: none;
+  }
 }
 
 .tech-bonus {
@@ -37,4 +41,16 @@
   color: white;
   -webkit-text-stroke: 0.65px black;
   font-weight: 900;
+
+  &.cell {
+    width: 57px;
+    transform: none;
+  }
+}
+
+.tech-stat {
+  width: 50px;
+  text-align: right;
+  height: 100%;
+  position: relative;
 }

@@ -2,7 +2,10 @@
   <div class="ship-name {{ship.rarity}} border">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     {{ship.name}}
-    <img class="ship-hull-icon" [title]="fleetTechHoverTitle" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+  </div>
+  <div class="tech-stat border tech-stat {{ship.rarity}}">
+    <img *ngIf="ship.techStat != 'FP'" class="ship-hull-icon" [title]="fleetTechHoverTitle" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <img *ngIf="ship.techStat == 'FP'" class="ship-hull-icon FP" [title]="fleetTechHoverTitle" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
     <div class="tech-bonus" [title]="fleetTechHoverTitle">+{{ship.techBonus}}</div>
   </div>
   <!--

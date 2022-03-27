@@ -8,12 +8,13 @@ import { FilterService } from 'src/app/services/filter.service';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 import { SheetDragService } from 'src/app/services/sheet-drag.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
+import { SortService } from 'src/app/services/sort.service';
 import { SheetUIComponent } from '../../sheet-ui.component';
 
 @Component({
   selector: 'app-sheet-ship-row',
   templateUrl: './sheet-ship-row.component.html',
-  styleUrls: ['./sheet-ship-row.component.scss', '../../sheet-ui.component.scss'],
+  styleUrls: ['./sheet-ship-row.component.scss', '../sheet-category.component.scss'],
 })
 export class SheetShipRowComponent implements AfterViewInit, OnInit {
 
@@ -32,9 +33,9 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   fleetTechStatIconWidths = {
     "HP": 16,
     "AA": 17,
-    "ASW": 18,
+    "ASW": 17,
     "TRP": 16,
-    "FP": 27,
+    "FP": 17,
     "EVA": 15,
     "HIT": 16,
     "AVI": 17,
@@ -50,7 +51,8 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     private sheetDrag: SheetDragService,
     private selfRef: ElementRef,
     private modalController: ModalController,
-    public hoverTitles: HoverTitlesService) {}
+    public hoverTitles: HoverTitlesService,
+    private sort: SortService) {}
 
   ngOnInit() {
     this.inputShipLevel = this.ship.level.toString();
@@ -234,6 +236,9 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
       if(value.data != null) {
         this.ship.level = value.data;
         this.shipCategoryData.save();
+        if(this.sort.lastType == "Level") {
+          this.sort.sort("Level", this.category, true)
+        }
       }
     })
   }

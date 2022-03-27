@@ -11,6 +11,7 @@ import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
 import { Ship } from 'src/app/interfaces/ship';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
+import { SortService } from 'src/app/services/sort.service';
 
 @Component({
   selector: 'app-ship-card',
@@ -58,7 +59,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     private iconDrag: IconDragService,
     private dragFuncs: DragFuncsService,
     private iconLoader: IconLoaderService,
-    public hoverTitles: HoverTitlesService) { }
+    public hoverTitles: HoverTitlesService,
+    private sort: SortService) { }
 
   ngOnInit() {
     this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
@@ -241,6 +243,9 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
       if(value.data != null) {
         this.ship.level = value.data;
         this.shipCategoryData.save();
+        if(this.sort.lastType == "Level") {
+          this.sort.sort("Level", this.currentCategory, true);
+        }
       }
     })
   }
