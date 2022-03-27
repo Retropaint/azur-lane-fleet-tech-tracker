@@ -9,13 +9,20 @@ export class PromptService {
 
   constructor(private modalController: ModalController) { }
 
-  init(promptHeight: number) {
+  init(promptHeight: number, addExtraHeight: boolean = false) {
     let modalIndex = 0;
     while(document.getElementById('ion-overlay-' + modalIndex) == null) {
       modalIndex++;
     }
     document.getElementById('ion-overlay-' + modalIndex).shadowRoot.children[0].setAttribute('style', 'cursor: default');
-    this.changeHeight(promptHeight);
+
+    // extra height accounts for the prompt's own top and modal boxes
+    if(addExtraHeight) {
+      this.changeHeight(promptHeight + 60 + 130);
+    } else {
+      this.changeHeight(promptHeight);
+    }
+    
     document.documentElement.style.setProperty('--background-blur', '10px');
     return modalIndex;
   }

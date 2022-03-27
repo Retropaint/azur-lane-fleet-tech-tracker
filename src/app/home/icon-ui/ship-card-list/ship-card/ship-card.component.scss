@@ -65,6 +65,10 @@
   float: left;
   user-select: none;
   -webkit-user-drag: none;
+
+  &.FP {
+    transform: translate(0px, 2px);
+  }
 }
 
 .ship-hull-icon.applicable {
@@ -95,6 +99,7 @@
   user-select: none;
   transform: translate(-6px,-1.5px);
   color: white;
+  cursor: pointer;
 
   &.input {
     height: 20px;
@@ -128,7 +133,7 @@
 }
 
 .double-stats-text {
-  transform: translate(0, -1px);
+  transform: translate(0, 1.5px);
   font-family: ship-name;
   font-weight: bold;
   font-size: 10px;

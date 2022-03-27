@@ -2,12 +2,17 @@
   <div *ngIf="droppingDir == -1" class="dropping left"></div>
   <div class="ship-hull-and-level-background">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
-    <div>
-      <img class="ship-hull-icon" [title]="hoverTitles.stats[ship.maxLevelFleetTechStat] + ' (' + ship.maxLevelFleetTechStat + ')'" [style]="'width: ' + fleetTechStatIconWidths[ship.maxLevelFleetTechStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.maxLevelFleetTechStat + '.png'"/>
-      <!--
-      <p *ngIf="ship.maxLevelFleetTechBonus == 2" class="double-stats-text">+2</p>
-      -->
+    
+    <div *ngIf="ship.techStat != 'FP'">
+      <img class="ship-hull-icon" [title]="hoverTitles.stats[ship.techStat] + ' (' + ship.techStat + ') +' + ship.techBonus" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+      <p *ngIf="ship.techBonus == 2" class="double-stats-text">+2</p>
     </div>
+
+    <div *ngIf="ship.techStat == 'FP'">
+      <img class="ship-hull-icon FP" [title]="hoverTitles.stats[ship.techStat] + ' (' + ship.techStat + ') +' + ship.techBonus" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+      <p *ngIf="ship.techBonus == 2" class="double-stats-text">+2</p>
+    </div>
+
     <div (click)="enterLevel()">
       <p class="ship-level Lv-text">Lv. {{ship.level}} 
       </p>

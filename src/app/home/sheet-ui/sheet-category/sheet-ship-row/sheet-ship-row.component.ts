@@ -5,6 +5,7 @@ import { Ship } from 'src/app/interfaces/ship';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 import { FilterService } from 'src/app/services/filter.service';
+import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 import { SheetDragService } from 'src/app/services/sheet-drag.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
 import { SheetUIComponent } from '../../sheet-ui.component';
@@ -26,6 +27,19 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
   zIndex: number; // used to render row ahead for level focus outline
   dragEl: DragElement;
   isSliderActive: boolean;
+  fleetTechHoverTitle: string;
+
+  fleetTechStatIconWidths = {
+    "HP": 16,
+    "AA": 17,
+    "ASW": 18,
+    "TRP": 16,
+    "FP": 27,
+    "EVA": 15,
+    "HIT": 16,
+    "AVI": 17,
+    "RLD": 15,
+  };
 
   constructor(
     private gestureController: GestureController, 
@@ -35,13 +49,15 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     private dragFuncs: DragFuncsService,
     private sheetDrag: SheetDragService,
     private selfRef: ElementRef,
-    private modalController: ModalController) {}
+    private modalController: ModalController,
+    public hoverTitles: HoverTitlesService) {}
 
   ngOnInit() {
     this.inputShipLevel = this.ship.level.toString();
     this.dragEl = {
       sheetUI: this.sheetUI,
     }
+    this.fleetTechHoverTitle = this.hoverTitles.stats[this.ship.techStat] + ' (' + this.ship.techStat + ') +' + this.ship.techBonus;
   }
 
   ngAfterViewInit() {
@@ -115,7 +131,7 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         console.log(this.sheetDrag.rows);
       }
     }, true)
-    this.dragEl.gesture.enable();
+    //this.dragEl.gesture.enable();
   }
 
   startScrolling(speed) {

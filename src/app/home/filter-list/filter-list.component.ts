@@ -22,30 +22,11 @@ export class FilterListComponent implements OnInit {
   statIconWidths: number[] = [50, 35, 35, 38, 38, 35, 35, 32, 35];
   statTextRightMargins: number[] = [17, 17, 17, 17, 17, 17, 17, 17, 17];
 
-  doubleClickTimeout: any;
-  clickCount: number = 0;
-  previousPressedFilter: string;
+  
 
   constructor(public filter: FilterService) { }
 
   ngOnInit() {}
   
-  clickedFilterButton(name: string, type: any) {
-    if(name != this.previousPressedFilter) {
-      this.clickCount = 0;
-    }
-
-    this.previousPressedFilter = name;
-    this.clickCount++;
-    if(this.clickCount >= 2) {
-      this.filter.pressedFilter(name, type, true);
-      clearTimeout(this.doubleClickTimeout);
-    } else {
-      this.filter.pressedFilter(name, type, false);
-    }
-
-    this.doubleClickTimeout = setTimeout(() => {
-      this.clickCount = 0;
-    }, 250)
-  }
+  
 }

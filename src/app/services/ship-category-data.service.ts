@@ -90,10 +90,10 @@ export class ShipCategoryDataService {
         })
       break; case "stats":
         this.allShips.forEach(ship => {
-          if(this.categories[ship.maxLevelFleetTechStat] == null) {
-            this.newCategoryWithShip(ship.maxLevelFleetTechStat, ship);
+          if(this.categories[ship.techStat] == null) {
+            this.newCategoryWithShip(ship.techStat, ship);
           } else {
-            this.categories[ship.maxLevelFleetTechStat].ships.push(ship);
+            this.categories[ship.techStat].ships.push(ship);
           }
         })
       break; case "both":
@@ -148,10 +148,10 @@ export class ShipCategoryDataService {
         }
       }
       
-      if(this.categories[hull + " " + ship.maxLevelFleetTechStat] == null) {
-        this.newCategoryWithShip(hull + " " + ship.maxLevelFleetTechStat, ship);
+      if(this.categories[hull + " " + ship.techStat] == null) {
+        this.newCategoryWithShip(hull + " " + ship.techStat, ship);
       } else {
-        this.categories[hull + " " + ship.maxLevelFleetTechStat].ships.push(ship);
+        this.categories[hull + " " + ship.techStat].ships.push(ship);
       }
     })
   }

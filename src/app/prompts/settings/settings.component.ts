@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { HomePage } from 'src/app/home/home.page';
@@ -11,8 +11,9 @@ import { ShipCategoryDataService } from 'src/app/services/ship-category-data.ser
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, AfterViewInit {
 
+  @ViewChild('autoResize') autoResize: ElementRef;
   isIconUI: boolean = true;
   retreiveStatus: string;
   modalIndex: number;
@@ -24,12 +25,15 @@ export class SettingsComponent implements OnInit {
     private shipCategoryData: ShipCategoryDataService) { }
 
   async ngOnInit() {
-    this.modalIndex = this.prompt.init(400);
     const storageIconUI = await this.storage.get("icon-ui");
     if(storageIconUI != null) {
       this.isIconUI = storageIconUI;
     }
     this.azurapi.retreiveStatus = "";
+  }
+
+  ngAfterViewInit() {
+    this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
   }
 
   async switchUI(isIconUI: boolean) {

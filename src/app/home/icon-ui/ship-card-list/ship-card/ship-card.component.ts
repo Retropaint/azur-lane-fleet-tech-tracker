@@ -42,7 +42,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     "AA": 17,
     "ASW": 18,
     "TRP": 16,
-    "FP": 27,
+    "FP": 20,
     "EVA": 15,
     "HIT": 16,
     "AVI": 17,
@@ -128,7 +128,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         })
       }
     }, true);
-    this.gesture.enable();
+    //this.gesture.enable();
   }
 
   otherCategoryCheck() {

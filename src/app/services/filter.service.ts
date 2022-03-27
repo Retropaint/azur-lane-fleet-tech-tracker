@@ -129,7 +129,7 @@ export class FilterService {
     // check stat 
     let hasQualifiedStat = false;
     Object.keys(this.stats).forEach(stat => {
-      if(this.stats[stat] && ship.maxLevelFleetTechStat == stat) {
+      if(this.stats[stat] && ship.techStat == stat) {
         hasQualifiedStat = true;
       }
     })

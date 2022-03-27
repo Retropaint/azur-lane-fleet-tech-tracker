@@ -1,5 +1,10 @@
 <div #row *ngIf="filter.shipFilterPass[ship.id] == true" class="row {{draggedStatus}} highlight-{{greenBorder}}" [style]="'z-index: ' + zIndex + '; transform: translate( ' + dragEl.transformX + 'px, ' + dragEl.transformY + 'px )'">
-  <div class="ship-name {{ship.rarity}} border">{{ship.name}}</div>
+  <div class="ship-name {{ship.rarity}} border">
+    <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
+    {{ship.name}}
+    <img class="ship-hull-icon" [title]="fleetTechHoverTitle" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <div class="tech-bonus" [title]="fleetTechHoverTitle">+{{ship.techBonus}}</div>
+  </div>
   <!--
     <form (ngSubmit)="submitLevel(false)" name="what">
     <input 

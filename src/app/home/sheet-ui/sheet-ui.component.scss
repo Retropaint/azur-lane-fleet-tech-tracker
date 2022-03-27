@@ -83,7 +83,7 @@ input[type=number]::-webkit-outer-spin-button {
   }
 
   &.Super-Rare {
-    background: #f7d84b;
+    background: #ffd100;
   }
 
   &.Ultra-Rare {
@@ -94,7 +94,7 @@ input[type=number]::-webkit-outer-spin-button {
 .border {
   border: 1.5px solid white;
   padding: 2px;
-  padding-right: 20px;
+  padding-right: 60px;
 
   &.level {
     padding-right: 5px;

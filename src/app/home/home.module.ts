@@ -20,6 +20,7 @@ import { HelperComponent } from '../prompts/helper/helper.component';
 import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/settings-toggle.component';
 import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
 import { FilterService } from '../services/filter.service';
+import { FilterButtonComponent } from './filter-list/filter-button/filter-button.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { FilterService } from '../services/filter.service';
     HelpButtonComponent,
     HelperComponent,
     SettingsToggleComponent,
-    SheetCategoryComponent
+    SheetCategoryComponent,
+    FilterButtonComponent
   ],
   exports: [
     ShipCardListComponent, 

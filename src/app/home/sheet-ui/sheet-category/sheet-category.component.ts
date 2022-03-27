@@ -93,7 +93,7 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
         }, 500)
       }
     }, true)
-    this.dragElement.gesture.enable();
+    //this.dragElement.gesture.enable();
   }
 
   checkCategoryCollision() {

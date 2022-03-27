@@ -8,21 +8,23 @@
 </div>
 
 <div class="prompt-info-background">
-  <app-settings-toggle name="UI Mode" trueToggle="Icon" falseToggle="Sheet" storageName="icon-ui" [defaultState]="true"></app-settings-toggle>
-  <app-settings-toggle name="Helper Buttons" trueToggle="On" falseToggle="Off" storageName="help-buttons" [defaultState]="true"></app-settings-toggle>
+  <div #autoResize>
+    <app-settings-toggle name="UI Mode" trueToggle="Icon" falseToggle="Sheet" storageName="icon-ui" [defaultState]="true"></app-settings-toggle>
+    <app-settings-toggle name="Helper Buttons" trueToggle="On" falseToggle="Off" storageName="help-buttons" [defaultState]="true"></app-settings-toggle>
 
-  <div style="display: flex">
-    <div class="prompt-button-container no-top">
-      <div class="prompt-button blue" (click)="resetCategories()">
-        <p class="prompt-button-text">Reset Categories</p>
+    <div style="display: flex">
+      <div class="prompt-button-container no-top">
+        <div class="prompt-button blue" (click)="resetCategories()">
+          <p class="prompt-button-text">Reset Categories</p>
+        </div>
+        <div class="prompt-button-edge"></div>
       </div>
-      <div class="prompt-button-edge"></div>
-    </div>
-    <div class="prompt-button-container no-top">
-      <div class="prompt-button blue" (click)="resetSite()">
-        <p class="prompt-button-text">Reset Site</p>
+      <div class="prompt-button-container no-top">
+        <div class="prompt-button blue" (click)="resetSite()">
+          <p class="prompt-button-text">Reset Site</p>
+        </div>
+        <div class="prompt-button-edge"></div>
       </div>
-      <div class="prompt-button-edge"></div>
     </div>
   </div>
 </div>

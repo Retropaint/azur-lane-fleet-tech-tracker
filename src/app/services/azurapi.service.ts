@@ -74,8 +74,8 @@ export class AzurapiService {
             hull: this.shortenedNames.hulls[ship["hullType"]],
             thumbnail: ship["thumbnail"],
             onlyApplicableHulls: fleetTech["onlyApplicable"],
-            maxLevelFleetTechBonus: fleetTech["bonus"],
-            maxLevelFleetTechStat: this.shortenedNames.stats[fleetTech["stat"]],
+            techBonus: fleetTech["bonus"],
+            techStat: this.shortenedNames.stats[fleetTech["stat"]],
           }
 
           if(!isRetrieving) {
