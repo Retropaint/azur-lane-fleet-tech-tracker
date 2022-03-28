@@ -65,6 +65,8 @@ export class AzurapiService {
             break;
           }
 
+          console.log(fleetTech);
+
           const newShip: Ship = {
             name: ship["names"]["en"],
             id: ship["id"],
@@ -76,6 +78,7 @@ export class AzurapiService {
             onlyApplicableHulls: fleetTech["onlyApplicable"],
             techBonus: fleetTech["bonus"],
             techStat: this.shortenedNames.stats[fleetTech["stat"]],
+            appliedHulls: fleetTech["applicable"]
           }
 
           if(!isRetrieving) {

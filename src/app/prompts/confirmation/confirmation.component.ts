@@ -21,6 +21,10 @@ export class ConfirmationComponent implements AfterViewInit {
     this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height + 30, true);
   }
 
+  exit() {
+    this.chose(false);
+  }
+
   async chose(isYes: boolean) {
     this.modalController.dismiss(isYes);
   }

@@ -21,6 +21,10 @@ import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/set
 import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
 import { FilterService } from '../services/filter.service';
 import { FilterButtonComponent } from './filter-list/filter-button/filter-button.component';
+import { PromptButtonComponent } from '../prompts/Components/prompt-button/prompt-button.component';
+import { ConfirmationComponent } from '../prompts/confirmation/confirmation.component';
+import { PresetSelectionComponent } from '../prompts/preset-selection/preset-selection.component';
+import { PromptHeaderComponent } from '../prompts/Components/prompt-header/prompt-header.component';
 
 @NgModule({
   imports: [
@@ -45,7 +49,11 @@ import { FilterButtonComponent } from './filter-list/filter-button/filter-button
     HelperComponent,
     SettingsToggleComponent,
     SheetCategoryComponent,
-    FilterButtonComponent
+    FilterButtonComponent,
+    PromptButtonComponent,
+    ConfirmationComponent,
+    PresetSelectionComponent,
+    PromptHeaderComponent
   ],
   exports: [
     ShipCardListComponent, 
@@ -57,8 +65,17 @@ import { FilterButtonComponent } from './filter-list/filter-button/filter-button
     CategoryEditorComponent,
     HelpButtonComponent,
     HelperComponent,
-    SettingsToggleComponent
+    SettingsToggleComponent,
+    PromptButtonComponent,
+    ConfirmationComponent,
+    PresetSelectionComponent,
+    PromptHeaderComponent
   ],
-  providers: [CategoryEditorComponent, IconUIComponent]
+  providers: [
+    CategoryEditorComponent, 
+    IconUIComponent, 
+    PromptButtonComponent, 
+    ConfirmationComponent
+  ]
 })
 export class HomePageModule {}

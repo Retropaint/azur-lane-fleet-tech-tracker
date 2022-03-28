@@ -5,6 +5,7 @@ import { FilterService } from 'src/app/services/filter.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
 import { ShipCategory } from 'src/app/interfaces/ship-category';
+import { ShipLevelEditorComponent } from '../ship-level-editor/ship-level-editor.component';
 
 @Component({
   selector: 'app-category-editor',
@@ -91,7 +92,6 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
   }
 
   isNameAcceptable(): boolean {
-
     switch(this.input.value) {
       case "+":
         this.setError("Trying to be clever, huh?");
@@ -139,5 +139,27 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
     if(this.selectedCategory != null) {
       this.prompt.changeHeight(350);
     }
+  }
+
+  async massLevel() {
+    const prevHeight = document.documentElement.style.getPropertyValue("--prompt-height");
+    document.getElementById('ion-overlay-' + this.modalIndex).setAttribute('style', 'display: none');
+    const modal = await this.modalController.create({
+      component: ShipLevelEditorComponent,
+      animated: false,
+      backdropDismiss: false, // closing from backdrop closes editor as well
+      componentProps: {
+        "category": this.selectedCategory,
+      }
+    })
+    modal.present();
+    modal.onDidDismiss().then(async value => {
+      if(value.data != null) {
+        this.shipCategoryData.categories[this.selectedCategory].ships.forEach(ship => {
+          ship.level = value.data;
+        })
+      }
+      this.exit();
+    })
   }
 }

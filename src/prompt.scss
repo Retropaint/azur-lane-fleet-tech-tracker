@@ -74,6 +74,10 @@
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
+
+  &.left {
+    justify-content: left;
+  }
 }
 
 .prompt-button-container {
@@ -98,6 +102,10 @@
 
   &.blue {
     background:linear-gradient(18deg, rgba(74, 142, 214, 1) 14%, rgba(57, 97, 156, 1) 61%, rgba(90, 142, 206, 1) 62%);
+  }
+
+  &.grey {
+    background: linear-gradient(18deg, hsl(0deg 0% 59%) 14%, #818080 61%, #b1a9a9 62%);
   }
 }
 

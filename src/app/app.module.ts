@@ -10,6 +10,7 @@ import { AzurapiService } from './services/azurapi.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PromptButtonComponent } from './prompts/Components/prompt-button/prompt-button.component';
 
 @NgModule({
   declarations: [AppComponent],

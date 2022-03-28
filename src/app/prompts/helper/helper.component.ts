@@ -17,6 +17,7 @@ export class HelperComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
+    this.title = this.type.toUpperCase();
   }
 
   exit() {

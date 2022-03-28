@@ -1,12 +1,5 @@
-<div>
-  <div class="prompt-heading exit" (click)="exit()"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
-  
-  <div class="prompt-heading background">
-    <p *ngIf="selectedCategory == null" class="prompt-heading text">CREATE NEW CATEGORY</p>
-    <p *ngIf="selectedCategory != null" class="prompt-heading text">EDIT CATEGORY</p>
-    <div class="prompt-heading stripes"></div>
-  </div>
-</div>
+<app-prompt-header *ngIf="selectedCategory == null"  header="CREATE NEW CATEGORY" [component]="this"></app-prompt-header>
+<app-prompt-header *ngIf="selectedCategory != null" header="EDIT CATEGORY" [component]="this"></app-prompt-header>
 
 <div class="prompt-info-background">
   <div #autoResize>
@@ -15,35 +8,15 @@
       <input *ngIf="selectedCategory == null" #input placeholder="Enter name here..." class="vertically-aligned prompt-input centered " [value]="selectedCategory" />
     </form>
     <p class="prompt-nameError">{{error}}</p>
-    <div class="prompt-button-container no-top" *ngIf="selectedCategory != null">
-      <div class="prompt-button red" (click)="delete()">
-        <p class="prompt-button-text">Delete Category</p>
-      </div>
-      <div class="prompt-button-edge"></div>
-    </div>
-    <div class="prompt-button-container no-top" >
-      <div class="prompt-button blue" (click)="delete()">
-        <p class="prompt-button-text">Mass-Level</p>
-      </div>
-      <div class="prompt-button-edge"></div>
+    <div class="prompt-buttons left">
+      <app-prompt-button (click)="delete()" text="Delete Category" color="red"></app-prompt-button>
+      <app-prompt-button (click)="massLevel()" text="Mass-Level" color="blue"></app-prompt-button>
     </div>
   </div>
 </div>
 
 <div class="prompt-buttons">
-  <div class="prompt-button-container">
-    <div class="prompt-button red" (click)="exit()">
-      <p class="prompt-button-text">Cancel</p>
-    </div>
-    <div class="prompt-button-edge"></div>
-  </div>
-  
-  <div class="prompt-button-container">
-    <div class="prompt-button blue" (click)="done()">
-      <p *ngIf="selectedCategory != null" class="prompt-button-text">Save</p>
-      <p *ngIf="selectedCategory == null" class="prompt-button-text">Create</p>
-    </div>
-    <div class="prompt-button-edge"></div>
-  </div>
+  <app-prompt-button (click)="exit()" text="Cancel" color="red"></app-prompt-button>
+  <app-prompt-button *ngIf="selectedCategory != null" (click)="done()" text="Save" color="blue"></app-prompt-button>
+  <app-prompt-button *ngIf="selectedCategory == null" (click)="done()" text="Create" color="blue"></app-prompt-button>
 </div>
-

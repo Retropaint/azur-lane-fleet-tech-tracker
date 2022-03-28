@@ -1,11 +1,4 @@
-<div>
-  <div class="prompt-heading exit" (click)="exit()"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
-  
-  <div class="prompt-heading background">
-    <p class="prompt-heading text">SETTINGS</p>
-    <div class="prompt-heading stripes"></div>
-  </div>
-</div>
+<app-prompt-header header="SETTINGS" [component]="this"></app-prompt-header>
 
 <div class="prompt-info-background">
   <div #autoResize>
@@ -13,27 +6,12 @@
     <app-settings-toggle name="Helper Buttons" trueToggle="On" falseToggle="Off" storageName="help-buttons" [defaultState]="true"></app-settings-toggle>
 
     <div style="display: flex">
-      <div class="prompt-button-container no-top">
-        <div class="prompt-button blue" (click)="resetCategories()">
-          <p class="prompt-button-text">Reset Categories</p>
-        </div>
-        <div class="prompt-button-edge"></div>
-      </div>
-      <div class="prompt-button-container no-top">
-        <div class="prompt-button blue" (click)="resetSite()">
-          <p class="prompt-button-text">Reset Site</p>
-        </div>
-        <div class="prompt-button-edge"></div>
-      </div>
+      <app-prompt-button (click)="resetCategories()" text="Reset Categories" extraCSS="no-top" color="blue"></app-prompt-button>
+      <app-prompt-button (click)="resetSite()" text="Reset Site" extraCSS="no-top" color="blue"></app-prompt-button>
     </div>
   </div>
 </div>
 
 <div class="prompt-buttons">
-  <div class="prompt-button-container">
-    <div class="prompt-button blue" (click)="exit()">
-      <p class="prompt-button-text">Close</p>
-    </div>
-    <div class="prompt-button-edge"></div>
-  </div>
+  <app-prompt-button (click)="exit()" text="Close" color="grey"></app-prompt-button>
 </div>

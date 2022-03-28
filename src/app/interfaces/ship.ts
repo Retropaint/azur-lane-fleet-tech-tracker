@@ -9,4 +9,5 @@ export interface Ship {
   onlyApplicableHulls: string[]; // for ships whose tech doesn't apply to all hulls of their type, eg Elbe, Weser, Perseus
   techStat: string;
   techBonus: number;
+  appliedHulls: string[];
 }

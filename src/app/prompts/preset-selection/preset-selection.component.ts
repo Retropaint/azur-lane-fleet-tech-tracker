@@ -22,6 +22,10 @@ export class PresetSelectionComponent implements AfterViewInit, OnDestroy {
     this.modalController.dismiss(preset);
   }
 
+  exit() {
+    this.selectedPreset('hulls');
+  }
+
   ngOnDestroy() {
     this.prompt.exit();
   }

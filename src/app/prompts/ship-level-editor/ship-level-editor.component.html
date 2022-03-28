@@ -1,11 +1,4 @@
-<div>
-  <div class="prompt-heading exit" (click)="exit()"><img class="prompt-heading exit-img" src='assets/exit.png'/></div>
-  
-  <div class="prompt-heading background">
-    <p class="prompt-heading text">EDIT LEVEL</p>
-    <div class="prompt-heading stripes"></div>
-  </div>
-</div>
+<app-prompt-header header="EDIT LEVEL" [component]="this"></app-prompt-header>
 
 <div class="prompt-info-background">
   <div #autoResize>
