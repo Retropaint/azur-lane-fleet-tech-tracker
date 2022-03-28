@@ -8,11 +8,18 @@
 </div>
 
 <div class="prompt-info-background">
-  <p class="prompt-text centered">Enter {{name}}'s level.</p>
-  <input type="range" min="1" max="125" [(ngModel)]="level" (ngModelChange)="changeLastInput(true)" class="slider">
-  <form (ngSubmit)="done()">
-    <input #input class="prompt-input centered" (blur)="updateSlider()" [value]="level" [(ngModel)]="textLevel" (ngModelChange)="changeLastInput(false)" name="this is for the form"/>
-  </form>
+  <div #autoResize>
+    <p class="prompt-text centered" *ngIf="category == null">Enter {{name}}'s level.</p>
+    <p class="prompt-text centered" *ngIf="category != null">Enter a level to give all {{category}} ships.</p>
+    <p class="prompt-text inline-block slider-marker" (click)="choseMarker(1)">1</p>
+    <p class="prompt-text inline-block slider-marker l70" (click)="choseMarker(70)">70</p>
+    <p class="prompt-text inline-block slider-marker l100" (click)="choseMarker(100)">100</p>
+    <p class="prompt-text inline-block slider-marker l120" (click)="choseMarker(120)">120</p>
+    <input type="range" min="1" max="125" [(ngModel)]="level" (ngModelChange)="changeLastInput(true)" class="slider">
+    <form (ngSubmit)="done()">
+      <input #input class="prompt-input centered" (blur)="updateSlider()" [value]="level" [(ngModel)]="textLevel" (ngModelChange)="changeLastInput(false)" name="this is for the form"/>
+    </form>
+  </div>  
 </div>
 
 <div class="prompt-buttons">

@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { PromptService } from 'src/app/services/prompt.service';
 
 @Component({
   selector: 'app-confirmation',
@@ -10,13 +11,14 @@ export class ConfirmationComponent implements AfterViewInit {
 
   @Input() title: string;
   @Input() body: string;
+  @ViewChild('autoResize') autoResize: ElementRef;
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private prompt: PromptService) { }
 
   ngOnInit() {}
 
   ngAfterViewInit() {
-    document.documentElement.style.setProperty('--prompt-height', "280px");
+    this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height + 30, true);
   }
 
   async chose(isYes: boolean) {

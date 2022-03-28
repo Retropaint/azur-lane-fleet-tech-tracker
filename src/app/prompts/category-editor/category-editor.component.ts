@@ -15,6 +15,7 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('input') input: IonInput;
   @Input('selectedCategory') selectedCategory: string; 
+  @ViewChild('autoResize') autoResize: ElementRef;
   error: string;
   modalIndex: number = 0;
 
@@ -24,7 +25,7 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
     private prompt: PromptService) { }
 
   ngAfterViewInit() {
-    this.modalIndex = this.prompt.init(300);
+    this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
   }
 
   exit() {

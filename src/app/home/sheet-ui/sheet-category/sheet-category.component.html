@@ -1,10 +1,10 @@
 <div #categoryRef [style]="'transform: translate(' + dragElement.transformX + 'px, ' + dragElement.transformY + 'px)'">
   <div *ngIf="dragElement.droppingDir == -1" class="dropping-left"></div>
   <div *ngIf="dragElement.droppingDir == 1" class="dropping-right"></div>
-  <div class="row highlight-{{isHeaderHighlighted}}" (click)="openCategoryEditor(category)" #header>
-    <div class="category-header ship-name border" style="color: white">{{category}}</div>
-    <div class="category-header stat header border tech-stat">Stat</div>
-    <div class="category-header level header border level">Lv.</div>
+  <div class="row highlight-{{isHeaderHighlighted}}"  #header>
+    <div class="category-header ship-name border" style="color: white" title="Click to edit category" (click)="openCategoryEditor(category)">{{category}}</div>
+    <div class="category-header stat header border tech-stat" title="Ships give these corresponding stats and their count at lv. 120">Stat</div>
+    <div class="category-header level header border level" (click)="openLevelEditor()" title="Click to change every ship's level in this category">Lv.</div>
   </div>
   <ng-container *ngFor="let ship of shipCategoryData.categories[category].ships; index as i">
     <app-sheet-ship-row *ngIf="filter.shipFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>

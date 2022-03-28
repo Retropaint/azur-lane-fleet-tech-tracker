@@ -1,5 +1,5 @@
 <div>
-  <div *ngFor="let type of objectKeys(types)" class="options-button unselected" (click)="sort(type)">
+  <div *ngFor="let type of objectKeys(types)" class="options-button unselected" (click)="sort(type)" [title]="'Sort by ' + type.toLowerCase() + (!types[type] ? ' (ascending)' : ' (descending)')">
     <div class="options-button-square left"></div>
     <div class="options-button-square right"></div>
     <ion-icon *ngIf="!types[type]" name="caret-up-outline" class="sort-options-arrow"></ion-icon>

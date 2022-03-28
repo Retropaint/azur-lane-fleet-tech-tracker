@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Gesture, GestureController, GestureDetail } from '@ionic/angular';
+import { Gesture, GestureController, GestureDetail, ModalController } from '@ionic/angular';
 import { DragElement } from 'src/app/interfaces/drag-element';
 import { CategoryEditorComponent } from 'src/app/prompts/category-editor/category-editor.component';
+import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { DragFuncsService } from 'src/app/services/drag-funcs.service';
 import { FilterService } from 'src/app/services/filter.service';
 import { SheetDragService } from 'src/app/services/sheet-drag.service';
@@ -33,7 +34,8 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
     private selfRef: ElementRef,
     private dragFuncs: DragFuncsService,
     private sheetUI: SheetUIComponent,
-    private zone: NgZone
+    private zone: NgZone,
+    private modalController: ModalController
     ) {}
 
   ngOnInit() {
@@ -136,9 +138,27 @@ export class SheetCategoryComponent implements AfterViewInit, OnInit {
     this.shipCategoryData.save();
   }
 
-  openCategoryEditor(category: string) {
+  openCategoryEditor() {
     if(this.canOpenEditor) {
-      this.categoryEditor.open(category);
+      this.categoryEditor.open(this.category);
     }
+  }
+
+  async openLevelEditor() {
+    const modal = await this.modalController.create({
+      component: ShipLevelEditorComponent,
+      animated: false,
+      componentProps: {
+        "category": this.category
+      }
+    })
+    modal.present();
+    modal.onDidDismiss().then(value => {
+      if(value.data != null) {
+        this.shipCategoryData.categories[this.category].ships.forEach(ship => {
+          ship.level = value.data;
+        })
+      }
+    })
   }
 }

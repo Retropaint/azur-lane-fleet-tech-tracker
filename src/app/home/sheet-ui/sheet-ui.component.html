@@ -1,8 +1,10 @@
+<!--
 <div class="options-button {{home.filterCss}}" (click)="home.toggleFilter()">
   <div class="options-button-square left"></div>
   <div class="options-button-square right"></div>
   <div class="generic-text options {{home.filterCss}}"> Filter </div>
 </div>
+-->
 
 <div class="options-button {{home.sortCss}}" (click)="home.toggleSort()">
   <div class="options-button-square left"></div>
@@ -20,7 +22,9 @@
 
 <div #container class="container" *ngIf="filter.shipFilterPass != []">
   <app-sheet-category *ngFor="let category of shipCategoryData.sortedCategoryNames; index as i" class="grid" [id]="category" [category]="category" [index]="i" [isHeaderHighlighted]="sheetDrag.highlightedHeader == i" [belowThisGrid]="sheetDrag.belowGridIndex == i" #categoryContainers></app-sheet-category>
+  <!--
   <div (click)="openCategoryEditor(null)" class="grid">
     <div class="ship-name border createCategory" style="color: white">+</div>
   </div>
+  -->
 </div>

@@ -50,7 +50,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   }
 
   resetCategories() {
-    this.prompt.openConfirmation(this.modalIndex, "RESET CATEGORIES", "All categories, including custom, will be deleted. Proceed?")
+    this.prompt.openConfirmation(this.modalIndex, "RESET CATEGORIES", "All categories, including custom, will be deleted. Levels and settings preferences will be intact. Proceed?")
       .then(isYes => {
         if(isYes) {
           this.modalController.dismiss();

@@ -10,7 +10,9 @@ import { PromptService } from 'src/app/services/prompt.service';
 export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 
   @Input() name: string;
-  @Input() level: number;
+  @Input() level: number = 1;
+  @Input() category: string;
+  @ViewChild('autoResize') autoResize: ElementRef;
   textLevel: number;
   wasSlider: boolean;
 
@@ -19,12 +21,12 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   constructor(private prompt: PromptService, private modalController: ModalController) { }
 
   ngOnInit() {
-    this.prompt.init(300);
     this.textLevel = this.level;
   }
 
   ngAfterViewInit() {
     this.input.nativeElement.focus();
+    this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
   }
 
   exit() {
@@ -50,6 +52,12 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 
   updateSlider() {
     this.level = this.textLevel;
+  }
+
+  choseMarker(markerLevel: number) {
+    this.wasSlider = true;
+    this.level = markerLevel;
+    this.done();
   }
 
   ngOnDestroy() {

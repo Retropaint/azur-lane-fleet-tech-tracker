@@ -1,0 +1,17 @@
+.slider-marker {
+  position: absolute;
+  margin-top: 0px;
+  cursor: pointer;
+
+  &.l70 {
+    transform: translateX(300px);
+  }
+
+  &.l100 {
+    transform: translateX(427px);
+  }
+
+  &.l120 {
+    transform: translateX(514px);
+  }
+}
