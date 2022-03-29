@@ -3,6 +3,10 @@
   margin-top: 0px;
   cursor: pointer;
 
+  &.l1 {
+    transform: translateX(4px);
+  }
+
   &.l70 {
     transform: translateX(300px);
   }

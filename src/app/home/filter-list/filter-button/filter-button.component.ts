@@ -23,23 +23,7 @@ export class FilterButtonComponent implements OnInit {
 
   ngOnInit() {}
 
-  clickedFilterButton(name: string, type: any) {
-    if(name != this.previousPressedFilter) {
-      this.clickCount = 0;
-    }
-
-    this.previousPressedFilter = name;
-    this.clickCount++;
-    if(this.clickCount >= 2) {
-      this.filter.pressedFilter(name, type, true);
-      clearTimeout(this.doubleClickTimeout);
-    } else {
-      this.filter.pressedFilter(name, type, false);
-    }
-
-    this.doubleClickTimeout = setTimeout(() => {
-      this.clickCount = 0;
-    }, 250)
+  clickedFilterButton() {
+    this.filter.pressedFilter(this.filterName, this.filterType);
   }
-
 }

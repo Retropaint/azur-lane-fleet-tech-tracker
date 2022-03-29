@@ -1,4 +1,3 @@
-<ion-col class="filter-category">
   <!-- unselected toggle -->
   <div class="filter-button unselected" *ngIf="!filterType[filterName]" (click)="clickedFilterButton(filterName, filterType)">
     <img *ngIf="filterName != 'All' && filterName != 'None'" class="filter-icon unselected" [src]="'assets/icons/unselected ' + fileName + ' icons/' + filterName + '.png'" [style]="'width: ' + iconWidth + 'px'"/>
@@ -16,4 +15,3 @@
       </p>
     </div>
   </div>
-</ion-col>

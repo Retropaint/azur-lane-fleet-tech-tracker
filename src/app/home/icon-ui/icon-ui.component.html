@@ -1,4 +1,4 @@
-<div *ngIf="shipCategoryData.sortedCategoryNames" class="categories">
+<div *ngIf="shipCategoryData.sortedCategoryNames && shipCategoryData.sortedCategoryNames.length > 1" class="categories">
   <div *ngFor="let category of shipCategoryData.sortedCategoryNames" #categories (click)="clickedCategory(category)" class="category-container">
     <div *ngIf="category == shipCategoryData.selectedCategory" class="category selected">
       <div class="category-text"> {{category}} </div>
@@ -15,26 +15,11 @@
   --> 
 </div>
 
-<div class="options-button unselected" (click)="openCategoryEditor(shipCategoryData.selectedCategory)">
-  <div class="options-button-square left"></div>
-  <div class="options-button-square right"></div>
-  <div class="generic-text options"> Options </div>
-</div>
+<app-generic-big-button text="Options" toggle="unselected" (click)="openCategoryEditor(shipCategoryData.selectedCategory)"></app-generic-big-button>
 
-<!--
-<div class="options-button {{home.filterCss}}" (click)="home.toggleFilter()">
-  <div class="options-button-square left"></div>
-  <div class="options-button-square right"></div>
-  <div class="generic-text options {{home.filterCss}}"> Filter </div>
-</div>
--->
+<app-generic-big-button text="Filter" [toggle]="home.filterCss" (click)="home.toggleFilter()"></app-generic-big-button>
 
-<div class="options-button {{home.sortCss}}" (click)="home.toggleSort()">
-  <div class="options-button-square left"></div>
-  <div class="options-button-square right"></div>
-  <div class="generic-text options {{home.sortCss}}"> Sort </div>
-</div>
-
+<app-generic-big-button text="Sort" [toggle]="home.sortCss" (click)="home.toggleSort()"></app-generic-big-button>
 <app-sort-list *ngIf="home.sortCss == 'selected'" style="display: inline-block"></app-sort-list>
 
 <app-help-button helpType="icon-ui"></app-help-button>

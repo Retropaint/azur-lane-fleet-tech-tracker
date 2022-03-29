@@ -43,7 +43,6 @@ export class ShipCategoryDataService {
   }
 
   decrementSortIds(startingId: number) {
-    console.log("what");
     Object.keys(this.categories).forEach(category => {
       if(this.categories[category].sortId > startingId) {
         this.categories[category].sortId--;
@@ -59,74 +58,17 @@ export class ShipCategoryDataService {
     })
   }
 
-  async promptPreset() {
-    const modal = await this.modalController.create({
-      component: PresetSelectionComponent,
-      animated: false
+  async createAllCategory() {
+    this.allShips.forEach(ship => {
+      if(this.categories["All"] == null) {
+        this.newCategoryWithShip("All", ship);
+      } else {
+        this.categories["All"].ships.push(ship);
+      }
     })
-    modal.present();
-    await modal.onDidDismiss().then(value => {
-      this.selectedPreset(value.data);
-    })
-  }
-
-  async selectedPreset(presetName: string) {
-    if(this.allShips.length == 0) {
-      Object.keys(this.categories).forEach(category => {
-        this.categories[category].ships.forEach(ship => {
-          this.allShips.push(ship);
-        })
-      })
-    }
-    this.categories = {};
-    switch(presetName) {
-      case "hulls":
-        this.allShips.forEach(ship => {
-          if(this.categories[ship.hull] == null) {
-            this.newCategoryWithShip(ship.hull, ship);
-          } else {
-            this.categories[ship.hull].ships.push(ship);
-          }
-        })
-      break; case "stats":
-        this.allShips.forEach(ship => {
-          if(this.categories[ship.techStat] == null) {
-            this.newCategoryWithShip(ship.techStat, ship);
-          } else {
-            this.categories[ship.techStat].ships.push(ship);
-          }
-        })
-      break; case "both":
-        this.bothPreset();
-      break; default: 
-        this.allShips.forEach(ship => {
-          if(this.categories["Other"] == null) {
-            this.newCategoryWithShip("Other", ship);
-          } else {
-            this.categories["Other"].ships.push(ship);
-          }
-        })
-      break;
-    }
 
     // created the sortedCategoryNames array
-    let categoryArray = [];
-    Object.keys(this.categories).forEach(category => {
-      categoryArray.push(category);        
-    })
-    categoryArray.sort((a, b) => {
-      if(a > b) {
-        return 1;
-      } else {
-        return -1
-      }
-    });
-    for(let i = 0; i < categoryArray.length; i++) {
-      this.categories[categoryArray[i]].sortId = i;
-    }
-    categoryArray.forEach(category => {
-      this.sortedCategoryNames.push(category);
-    })
+    this.sortedCategoryNames.push("All");
     this.selectedCategory = this.sortedCategoryNames[0];
     this.save();
   }

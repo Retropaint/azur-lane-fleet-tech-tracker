@@ -51,7 +51,7 @@ export class ShortenedNamesService {
     "Light aircraft carrier": "CVL",
     "Aircraft carrier": "CV",
     "Monitor": "BM",
-    "Repair": "AR",
+    "Repair ship": "AR",
     "Munition ship": "AE",
     "Aviation battleship": "BBV",
     "Submarine carrier": "SSV",
@@ -61,6 +61,7 @@ export class ShortenedNamesService {
     "Large cruiser": "CB",
     "Battlecruiser": "BC",
     "Destroyer": "DD",
+    "Guided-missile destroyer": "DDG"
   }
 
   constructor() { }

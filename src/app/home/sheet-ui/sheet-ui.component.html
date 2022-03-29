@@ -6,12 +6,7 @@
 </div>
 -->
 
-<div class="options-button {{home.sortCss}}" (click)="home.toggleSort()">
-  <div class="options-button-square left"></div>
-  <div class="options-button-square right"></div>
-  <div class="generic-text options {{home.sortCss}}"> Sort </div>
-</div>
-
+<app-generic-big-button text="Sort" [toggle]="home.sortCss" (click)="home.toggleSort()"></app-generic-big-button>
 <app-sort-list *ngIf="home.sortCss == 'selected'" style="display: inline-block"></app-sort-list>
 
 <div *ngIf="home.filterCss == 'selected'">

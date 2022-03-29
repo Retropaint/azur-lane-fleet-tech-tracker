@@ -48,8 +48,12 @@ export class CategoryEditorComponent implements AfterViewInit, OnDestroy {
         if(isYes) {
           // decrement id's past the deleted category's to keep them in line
           const id = this.shipCategoryData.categories[this.selectedCategory].sortId;
-          this.shipCategoryData.newCategory("Binned Ships");
-          this.shipCategoryData.categories["Binned Ships"].ships = this.shipCategoryData.categories[this.selectedCategory].ships;
+          if(this.shipCategoryData.categories["Binned Ships"] == null) {
+            this.shipCategoryData.newCategory("Binned Ships");
+          }
+          this.shipCategoryData.categories[this.selectedCategory].ships.forEach(ship => {
+            this.shipCategoryData.categories["Binned Ships"].ships.push(ship);
+          })
           this.shipCategoryData.decrementSortIds(id);
         
           delete this.shipCategoryData.categories[this.selectedCategory];

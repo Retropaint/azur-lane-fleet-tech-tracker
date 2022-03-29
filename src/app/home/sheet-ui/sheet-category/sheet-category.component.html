@@ -2,7 +2,7 @@
   <div *ngIf="dragElement.droppingDir == -1" class="dropping-left"></div>
   <div *ngIf="dragElement.droppingDir == 1" class="dropping-right"></div>
   <div class="row highlight-{{isHeaderHighlighted}}"  #header>
-    <div class="category-header ship-name border" style="color: white" title="Click to edit category" (click)="openCategoryEditor(category)">{{category}}</div>
+    <div class="category-header ship-name border" style="color: white" title="Click to edit category" (click)="openCategoryEditor()">{{category}}</div>
     <div class="category-header stat header border tech-stat" title="Ships give these corresponding stats and their count at lv. 120">Stat</div>
     <div class="category-header level header border level" (click)="openLevelEditor()" title="Click to change every ship's level in this category">Lv.</div>
   </div>

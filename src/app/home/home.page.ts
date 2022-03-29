@@ -66,9 +66,6 @@ export class HomePage implements AfterViewInit {
       this.filterCss = "selected";
     } else {
       this.filterCss = "unselected";
-      if(!this.filter.isEverythingOn()) {
-        this.filter.toggleEverythingOn();
-      }
     }
   }
 

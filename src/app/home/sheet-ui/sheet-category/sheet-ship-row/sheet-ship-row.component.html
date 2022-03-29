@@ -1,4 +1,4 @@
-<div #row *ngIf="filter.shipFilterPass[ship.id] == true" class="row {{draggedStatus}} highlight-{{greenBorder}}" [style]="'z-index: ' + zIndex + '; transform: translate( ' + dragEl.transformX + 'px, ' + dragEl.transformY + 'px )'">
+<div #row (click)="enterLevel()" title="Click to edit level" *ngIf="filter.shipFilterPass[ship.id] == true" class="row {{draggedStatus}} highlight-{{greenBorder}}" [style]="'z-index: ' + zIndex + '; transform: translate( ' + dragEl.transformX + 'px, ' + dragEl.transformY + 'px )'">
   <div class="ship-name {{ship.rarity}} border">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     {{ship.name}}
@@ -22,5 +22,5 @@
     />
   </form>
   -->
-  <div class="level over119-{{ship.level > 119}} border level" (click)="enterLevel()" title="Click to edit level">{{ship.level}}</div>
+  <div class="level over119-{{ship.level > 119}} border level" >{{ship.level}}</div>
 </div>

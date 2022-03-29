@@ -12,7 +12,6 @@ import { HttpClient } from '@angular/common/http';
 export class AzurapiService {
 
   filteredOtherShips: any[] = [];
-  retreiveStatus: string = "";
 
   constructor(private shipCategoryData: ShipCategoryDataService, 
     private storage: Storage, 
@@ -21,15 +20,9 @@ export class AzurapiService {
     private http: HttpClient) {}
 
   async init(isRetrieving: boolean = false) {
-    let hasRetreivedAnyone = false;
-
-    if(await this.storage.get("categories") != null && !isRetrieving) {
+    if(!isRetrieving && await this.storage.get("categories") != null) {
       return;
     }
-    if(isRetrieving) {
-      this.retreiveStatus = "Retreiving...";
-    }
-    console.log("what");
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
       JSON.parse(ships).forEach(ship => {
         // only accept ships with a max level fleet tech bonus
@@ -65,8 +58,6 @@ export class AzurapiService {
             break;
           }
 
-          console.log(fleetTech);
-
           const newShip: Ship = {
             name: ship["names"]["en"],
             id: ship["id"],
@@ -81,36 +72,13 @@ export class AzurapiService {
             appliedHulls: fleetTech["applicable"]
           }
 
-          if(!isRetrieving) {
-            this.shipCategoryData.allShips.push(newShip);
-          } else {
-            hasRetreivedAnyone = true;
-            if(this.shipCategoryData.categories['Retreived Ships'] == null) {
-              this.shipCategoryData.newCategory("Retreived Ships");
-            }
-            this.shipCategoryData.categories['Retreived Ships'].ships.push(newShip);
-          }
+          this.shipCategoryData.allShips.push(newShip);
         }
       })
     }).then(() => {
-      if(!isRetrieving) {
-        console.log(this.shipCategoryData.allShips)
-        this.shipCategoryData.promptPreset().then(() => {
-          this.filter.filter();
-        })
-      } else {
+      this.shipCategoryData.createAllCategory().then(() => {
         this.filter.filter();
-        this.shipCategoryData.save();
-
-        // delay the message so that instant retreives don't cause a jarring change in text
-        setTimeout(() => {
-          if(hasRetreivedAnyone) {
-            this.retreiveStatus = "Done";
-          } else {
-            this.retreiveStatus = "Everyone's in the dockyard!";
-          }
-        }, 500)
-      }
+      })
     })
   }
 

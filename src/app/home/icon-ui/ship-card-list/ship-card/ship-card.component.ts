@@ -34,6 +34,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   imageSrc: string = "";
   droppingDir: number;
   collidingShip: ShipCardComponent;
+  hoverTitle: string;
 
   @Input() ship = null;
   @Input() currentCategory: string;
@@ -64,6 +65,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
+    this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
   }
 
   getFallbackThumbnail() {

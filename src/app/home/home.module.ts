@@ -25,6 +25,7 @@ import { PromptButtonComponent } from '../prompts/Components/prompt-button/promp
 import { ConfirmationComponent } from '../prompts/confirmation/confirmation.component';
 import { PresetSelectionComponent } from '../prompts/preset-selection/preset-selection.component';
 import { PromptHeaderComponent } from '../prompts/Components/prompt-header/prompt-header.component';
+import { GenericBigButtonComponent } from './Components/generic-big-button/generic-big-button.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { PromptHeaderComponent } from '../prompts/Components/prompt-header/promp
     PromptButtonComponent,
     ConfirmationComponent,
     PresetSelectionComponent,
-    PromptHeaderComponent
+    PromptHeaderComponent,
+    GenericBigButtonComponent
   ],
   exports: [
     ShipCardListComponent, 
@@ -69,7 +71,7 @@ import { PromptHeaderComponent } from '../prompts/Components/prompt-header/promp
     PromptButtonComponent,
     ConfirmationComponent,
     PresetSelectionComponent,
-    PromptHeaderComponent
+    PromptHeaderComponent,
   ],
   providers: [
     CategoryEditorComponent, 

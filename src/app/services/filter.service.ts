@@ -18,39 +18,43 @@ export class FilterService {
   ships = [];
   shipFilterPass: boolean[] = [];
   delay: number = 30;
+  isAll: boolean; // keep track of if the last category was set to All, to decide whether to use the icon loader
 
   stats = {
-    "FP": true,
-    "TRP": true, 
-    "AVI": true, 
-    "AA": true,
-    "RLD": true, 
-    "HIT": true,
-    "ASW": true,
-    "EVA": true, 
-    "HP": true,
+    "FP": false,
+    "TRP": false, 
+    "AVI": false, 
+    "AA": false,
+    "RLD": false, 
+    "HIT": false,
+    "ASW": false,
+    "EVA": false, 
+    "HP": false,
+    "All": true
   }
 
   factions = {
-    "USS": true, 
-    "HMS": true,
-    "IJN": true,
-    "KMS": true,
-    "ROC": true,
-    "SN": true,
-    "FFNF": true,
-    "MNF": true,
-    "RN": true,
+    "USS": false, 
+    "HMS": false,
+    "IJN": false,
+    "KMS": false,
+    "ROC": false,
+    "SN": false,
+    "FFNF": false,
+    "MNF": false,
+    "RN": false,
+    "All": true
   }
 
   hulls = {
-    "DD": true, 
-    "CL": true,
-    "CA": true,
-    "CV": true, 
-    "BB": true, 
-    "SS": true,
-    "Others": true,
+    "DD": false, 
+    "CL": false,
+    "CA": false,
+    "CV": false, 
+    "BB": false, 
+    "SS": false,
+    "Others": false,
+    "All": true
   }
 
   async filter() {
@@ -61,7 +65,11 @@ export class FilterService {
     if(this.shipCategoryData.selectedCategory != null) {
       this.filterCategory();
     }
-    this.iconLoader.loadShips(this.ships);
+    if(this.isAll) {
+      this.iconLoader.loadShips(this.ships);
+    } else {
+      this.iconLoader.loadedShips = this.ships;
+    }
 
     // sheet UI
     this.filterShipRows();
@@ -89,7 +97,7 @@ export class FilterService {
     let isHullQualified = false;
 
     const checkHullFilter = (hull: string) => {
-      if(this.hulls[hull]) {
+      if(this.hulls[hull] || this.hulls.All == true) {
         isHullQualified = true;
       }
     }
@@ -118,7 +126,7 @@ export class FilterService {
     // check faction
     let hasQualifiedFaction = false;
     Object.keys(this.factions).forEach(faction => {
-      if(this.factions[faction] && ship.faction == faction) {
+      if(this.factions.All || this.factions[faction] && ship.faction == faction) {
         hasQualifiedFaction = true;
       }
     })
@@ -129,7 +137,7 @@ export class FilterService {
     // check stat 
     let hasQualifiedStat = false;
     Object.keys(this.stats).forEach(stat => {
-      if(this.stats[stat] && ship.techStat == stat) {
+      if(this.stats.All || this.stats[stat] && ship.techStat == stat) {
         hasQualifiedStat = true;
       }
     })
@@ -141,39 +149,39 @@ export class FilterService {
   }
 
   // called from Home page filter buttons
-  pressedFilter(name: string, filterType: any, filterAll: boolean) {
-    
-    if(filterAll) {
-      Object.keys(filterType).forEach(filter => {
-        filterType[filter] = filterType[name];
+  pressedFilter(name: string, filterType: any) {
+    if(name == "All") {
+      Object.keys(filterType).forEach(filterName => {
+        filterType[filterName] = false
       })
-    } else {
-      filterType[name] = !filterType[name];
     }
+    filterType[name] = !filterType[name];
+    this.checkAllInType(filterType);
     this.filter();
   }
 
-  toggleEverythingOn() {
-    const types = [this.stats, this.factions, this.hulls];
-    types.forEach(type => {
-      Object.keys(type).forEach(key => {
-        type[key] = true;
+  checkAllInType(type: any) {
+    if(this.isEverything(false, type) || this.isEverything(true, type)) {
+      Object.keys(type).forEach(filterName => {
+        type[filterName] = false;
       })
-    })
-    this.filter();
+      type["All"] = true;
+      this.isAll = true;
+    } else {
+      type["All"] = false;
+      this.isAll = false;
+    }
   }
 
-  isEverythingOn() {
-    const types = [this.stats, this.factions, this.hulls];
-    let isIt = true;
-    types.forEach(type => {
-      Object.keys(type).forEach(key => {
-        if(!type[key]) {
-          isIt = false;
-          return;
+  isEverything(toggle: boolean, type: any) {
+    let isYes = true;
+    Object.keys(type).forEach(filterName => {
+      if(filterName != "All") {
+        if(toggle && !type[filterName] || !toggle && type[filterName]) {
+          isYes = false;
         }
-      })
+      }
     })
-    return isIt;
+    return isYes;
   }
 }

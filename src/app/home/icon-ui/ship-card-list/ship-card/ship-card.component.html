@@ -1,23 +1,22 @@
-<div #card class="ship-card-container {{dragStatus}}" [style]="'transform: translate( ' + transformX + 'px, ' + transformY + 'px )'">
+<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{dragStatus}}" [style]="'transform: translate( ' + transformX + 'px, ' + transformY + 'px )'">
   <div *ngIf="droppingDir == -1" class="dropping left"></div>
   <div class="ship-hull-and-level-background">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     
-    <div *ngIf="ship.techStat != 'FP'">
-      <img class="ship-hull-icon" [title]="hoverTitles.stats[ship.techStat] + ' (' + ship.techStat + ') +' + ship.techBonus" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <div *ngIf="ship.techStat != 'FP'" [title]="hoverTitle">
+      <img class="ship-hull-icon" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
       <p *ngIf="ship.techBonus == 2" class="double-stats-text">+2</p>
     </div>
 
-    <div *ngIf="ship.techStat == 'FP'">
-      <img class="ship-hull-icon FP" [title]="hoverTitles.stats[ship.techStat] + ' (' + ship.techStat + ') +' + ship.techBonus" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <div *ngIf="ship.techStat == 'FP'" [title]="hoverTitle">
+      <img class="ship-hull-icon FP" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
       <p *ngIf="ship.techBonus == 2" class="double-stats-text">+2</p>
     </div>
 
-    <div (click)="enterLevel()" title="Click to edit level">
+    <div>
       <p class="ship-level Lv-text">Lv. {{ship.level}} 
       </p>
     </div>
-    <br> <img *ngIf="ship.onlyApplicableHulls.length != 0" class="ship-hull-icon" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
   </div>
 
   <div style="display: inline-block">

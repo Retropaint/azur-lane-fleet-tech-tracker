@@ -15,7 +15,6 @@ export class SettingsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
   isIconUI: boolean = true;
-  retreiveStatus: string;
   modalIndex: number;
 
   constructor(private prompt: PromptService, 
@@ -29,7 +28,6 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     if(storageIconUI != null) {
       this.isIconUI = storageIconUI;
     }
-    this.azurapi.retreiveStatus = "";
   }
 
   ngAfterViewInit() {
@@ -55,8 +53,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
         if(isYes) {
           this.modalController.dismiss();
           this.shipCategoryData.sortedCategoryNames = [];
-          this.shipCategoryData.allShips = [];
-          this.shipCategoryData.promptPreset();
+          this.azurapi.init(true);
         }
       })
   }

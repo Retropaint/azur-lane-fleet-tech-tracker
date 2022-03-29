@@ -10,6 +10,7 @@ import { SheetDragService } from 'src/app/services/sheet-drag.service';
 import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
 import { SortService } from 'src/app/services/sort.service';
 import { SheetUIComponent } from '../../sheet-ui.component';
+import { ShortenedNamesService } from '../../../../services/shortened-names.service';
 
 @Component({
   selector: 'app-sheet-ship-row',
@@ -52,14 +53,15 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
     private selfRef: ElementRef,
     private modalController: ModalController,
     public hoverTitles: HoverTitlesService,
-    private sort: SortService) {}
+    private sort: SortService,
+    private shortenedNames: ShortenedNamesService) {}
 
   ngOnInit() {
     this.inputShipLevel = this.ship.level.toString();
     this.dragEl = {
       sheetUI: this.sheetUI,
     }
-    this.fleetTechHoverTitle = this.hoverTitles.stats[this.ship.techStat] + ' (' + this.ship.techStat + ') +' + this.ship.techBonus;
+    this.fleetTechHoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
   }
 
   ngAfterViewInit() {
@@ -91,7 +93,6 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
             this.dragEl.mouse = mouse;
             isBeingDragged = true;
             this.draggedStatus = "dragged";
-            console.log(document.getElementById(this.category));
             document.getElementById(this.category).style.zIndex = "99";
           }
         } else {
@@ -130,7 +131,6 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         this.shipCategoryData.save();
         clearInterval(this.sheetDrag.scrollingInterval);
         this.sheetDrag.scrollingInterval = null;
-        console.log(this.sheetDrag.rows);
       }
     }, true)
     //this.dragEl.gesture.enable();
@@ -163,7 +163,6 @@ export class SheetShipRowComponent implements AfterViewInit, OnInit {
         // category header
         if(this.dragFuncs.isColliding(this.sheetDrag.headerRefs[i].nativeElement.getBoundingClientRect(), mouse)) {
           isBelowGrid = false;
-          console.log("header");
           if(hasDropped) {
             this.remove();
             this.shipCategoryData.categories[this.shipCategoryData.sortedCategoryNames[i]].ships.unshift(this.ship);
