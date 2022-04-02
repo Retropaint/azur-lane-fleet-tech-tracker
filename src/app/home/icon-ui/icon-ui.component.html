@@ -1,9 +1,11 @@
 <div class="dead-zone">
   <app-sort-list *ngIf="home.sortCss == 'unselected'" style="display: inline-block"></app-sort-list>
   
-  <div>
-    <app-filter-list></app-filter-list>
-  </div>
+  <app-filter-list></app-filter-list>
   
+  <div>
+    <img src="assets/Cog Chip.png" style="width: 30px;"/> <p class="generic-text inline-block" style="transform: translate(5px, -10px)"> Required: {{shipsService.cogReqs}}</p>
+  </div>
+
   <app-ship-card-list *ngIf="shipsService.ships.length != 0" id="ship-card-list"></app-ship-card-list>
 </div>

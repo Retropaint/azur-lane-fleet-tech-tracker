@@ -44,7 +44,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     private sort: SortService,
     private shipsService: ShipsService,
     private iconLoader: IconLoaderService,
-    private filter: FilterService,
     public app: AppComponent) { }
 
   ngOnInit() {
@@ -76,10 +75,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     modal.present();
     modal.onDidDismiss().then(value => {
       if(value.data != null) {
-        this.ship.level = value.data.level;
-        this.ship.isIgnored = value.data.isIgnored;
-        this.shipsService.save();
-
         if(this.sort.lastType == "Level") {
           this.sort.sort("Level", true);
         }

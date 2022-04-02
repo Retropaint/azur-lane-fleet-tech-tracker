@@ -52,6 +52,10 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     if(!this.wasSlider) {
       newShipInfo.level = Math.min(this.textLevel, 125)
     }
+    this.ship.level = newShipInfo.level;
+    this.ship.isIgnored = newShipInfo.isIgnored;
+    this.shipsService.refreshCogChipReq(this.filter.shipsFilterPass);
+    this.shipsService.save();
     this.modalController.dismiss(newShipInfo);
   }
 

@@ -79,11 +79,13 @@ export class ShipsService {
       // store as value, as it will be incremented when checking
       let level = ship.level;
       
-      if(shipsFilterPass[id] && level <= 115) {
+      if(shipsFilterPass[id] && level <= 115 && !ship.isIgnored) {
         if(level < 100) {
           level = 100;
         } else {
-          level -= level%5;
+          if(level%5 != 0) {
+            level += (5 - (level%5));
+          }
         }
         for(let i = level; i < 120; i += 5) {
           this.cogReqs += this.cogReqList.data[ship.rarity + " " + level];
@@ -91,6 +93,5 @@ export class ShipsService {
         }
       }
     })
-    console.log(this.cogReqs);
   }
 }

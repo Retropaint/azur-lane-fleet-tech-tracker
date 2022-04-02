@@ -5,6 +5,7 @@ import { FilterService } from './filter.service';
 import { ShortenedNamesService } from './shortened-names.service';
 import { HttpClient } from '@angular/common/http';
 import { ShipsService } from './ships.service';
+import { SortService } from './sort.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AzurapiService {
     private storage: Storage, 
     private filter: FilterService, 
     private shortenedNames: ShortenedNamesService,
-    private shipsService: ShipsService) {}
+    private shipsService: ShipsService,
+    private sort: SortService) {}
 
   async init(isRetrieving: boolean = false) {
     console.log(this.shipsService.ships);
@@ -28,12 +30,6 @@ export class AzurapiService {
       JSON.parse(ships).forEach(ship => {
         // only accept ships with a max level fleet tech bonus
         if(ship["fleetTech"]["statsBonus"]["maxLevel"]) {
-
-          if(isRetrieving) {
-            if(!this.isLostShip(ship, ships)) {
-              return;
-            }
-          }
 
           const fleetTech = ship["fleetTech"]["statsBonus"]["maxLevel"]
 
@@ -78,6 +74,7 @@ export class AzurapiService {
       })
     }).then(() => {
       this.shipsService.save();
+      this.sort.sort("Name", true);
     })
   }
 

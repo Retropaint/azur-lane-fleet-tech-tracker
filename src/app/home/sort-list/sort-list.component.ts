@@ -13,11 +13,7 @@ export class SortListComponent {
 
   objectKeys = Object.keys;
 
-  types = {
-    "Rarity": false,
-    "Level": false,
-    "Name": true
-  }
+  types = ["Level", "Rarity", "Name"];
 
   rarityRanks = {
     "Normal": 0,
@@ -28,10 +24,9 @@ export class SortListComponent {
     "Decisive": 4
   }
 
-  constructor(private filter: FilterService, private storage: Storage, private sortService: SortService, public app: AppComponent) { }
+  constructor(private filter: FilterService, private storage: Storage, public sortService: SortService, public app: AppComponent) { }
 
   async sort(type: string) {
-    this.types[type] = !this.types[type];
     this.sortService.sort(type);
   }
 }

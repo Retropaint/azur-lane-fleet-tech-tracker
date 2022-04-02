@@ -1,10 +1,10 @@
 <div>
   <p class="generic-text {{app.isMobile ? 'no-bottom-margin' : 'inline-block'}}">Sort: </p>
-  <div *ngFor="let type of objectKeys(types)" class="options-button unselected isMobile-{{app.isMobile}}" (click)="sort(type)" [title]="'Sort by ' + type.toLowerCase() + (!types[type] ? ' (ascending)' : ' (descending)') + (type=='Level' ? '\n*Future level changes will be instantly sorted until another sort type is used' : '')">
+  <div *ngFor="let type of types; index as i" class="options-button unselected isMobile-{{app.isMobile}}" (click)="sort(type)" [title]="'Sort by ' + type.toLowerCase() + (!sortService.isAscending[type] ? ' (ascending)' : ' (descending)') + (type=='Level' ? '\n*Future level changes will be instantly sorted until another sort type is used' : '')">
     <div class="options-button-square left"></div>
     <div class="options-button-square right"></div>
-    <ion-icon *ngIf="!types[type]" name="caret-up-outline" class="sort-options-arrow"></ion-icon>
-    <ion-icon *ngIf="types[type]" name="caret-down-outline" class="sort-options-arrow"></ion-icon>
+    <ion-icon *ngIf="!sortService.isAscending[type]" name="caret-up-outline" class="sort-options-arrow"></ion-icon>
+    <ion-icon *ngIf="sortService.isAscending[type]" name="caret-down-outline" class="sort-options-arrow"></ion-icon>
     <div class="generic-text options unselected"> {{type}} &nbsp;&nbsp;&nbsp;</div>
   </div>
 </div>

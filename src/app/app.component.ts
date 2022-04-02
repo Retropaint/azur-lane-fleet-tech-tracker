@@ -29,8 +29,12 @@ export class AppComponent implements OnInit {
       document.documentElement.style.setProperty('--dead-zone-margin', "200px");
     }
     await this.ships.init();
-    await this.azurapi.init().then(() => {
+    if(await this.storage.get("ships") == null) {
+      this.azurapi.init().then(() => {
+        this.sort.sort("Name");
+      })
+    } else {
       this.sort.sort("Name");
-    });
+    }
   }
 }

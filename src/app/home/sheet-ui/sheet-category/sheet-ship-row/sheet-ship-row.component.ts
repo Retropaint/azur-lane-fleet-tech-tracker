@@ -60,9 +60,6 @@ export class SheetShipRowComponent implements OnInit {
     modal.present();
     modal.onDidDismiss().then(value => {
       if(value.data != null) {
-        this.ship.level = value.data.level;
-        this.ship.isIgnored = value.data.isIgnored;
-        this.shipsService.save();
         if(this.sort.lastType == "Level") {
           this.sort.sort("Level", true)
         }
