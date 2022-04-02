@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FilterService } from 'src/app/services/filter.service';
+import { ShipsService } from 'src/app/services/ships.service';
 import { HomePage } from '../home.page';
 
 @Component({
@@ -16,7 +17,8 @@ export class SheetUIComponent {
 
   constructor(
     public home: HomePage, 
-    public filter: FilterService) {}
+    public filter: FilterService,
+    private shipsService: ShipsService) {}
 
   openCategoryEditor(category: string) {
   }
