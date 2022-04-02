@@ -1,3 +1,5 @@
-<p>
-  toggle-flag works!
-</p>
+<div class="toggle-diamond {{toggle || 'false'}}">
+  <div class="trueBox" *ngIf="toggle">
+    <p class="L">L</p>
+  </div>
+</div>

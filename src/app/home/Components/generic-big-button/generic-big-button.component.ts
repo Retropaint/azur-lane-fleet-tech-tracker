@@ -8,10 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 export class GenericBigButtonComponent implements OnInit {
 
   @Input() text: string;
-  @Input() toggle: string;
+  @Input() toggle: string = "unselected";
+  @Input() extraCSS: string = "";
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.extraCSS)
+  }
 
 }

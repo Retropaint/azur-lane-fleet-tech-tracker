@@ -1,17 +1,16 @@
 import { AfterContentChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChildren } from '@angular/core';
 import { Ship } from 'src/app/interfaces/ship';
 import { FilterService } from 'src/app/services/filter.service';
-import { IconDragService } from 'src/app/services/icon-drag.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
-import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
+import { ShipsService } from 'src/app/services/ships.service';
 import { ShipCardComponent } from './ship-card/ship-card.component';
 
 @Component({
   selector: 'app-ship-card-list',
   templateUrl: './ship-card-list.component.html',
-  styleUrls: ['./ship-card-list.component.scss'],
+  styleUrls: ['./ship-card-list.component.scss', '../../home.page.scss'],
 })
-export class ShipCardListComponent implements OnChanges {
+export class ShipCardListComponent {
 
   fleetTechStatIconWidths = {
     "HP": 16,
@@ -25,23 +24,13 @@ export class ShipCardListComponent implements OnChanges {
     "RLD": 15,
   };
 
-  @Input() category: string;
   @ViewChildren('ships') shipComponents: ShipCardComponent
   interval: any;
   ships: Ship[] = [];
   delay: number = 30;
 
-  constructor(private shipCategoryData: ShipCategoryDataService, 
+  constructor(
     public filter: FilterService,
     public iconLoader: IconLoaderService,
-    private iconDrag: IconDragService) {}
-
-  ngOnChanges(changes: SimpleChanges) {
-    if(changes.category.previousValue == changes.category.currentValue) {
-      return;
-    }
-    this.filter.filter();
-    this.iconDrag.shipCards = [];
-    this.iconDrag.shipCardRefs = [];
-  }
+    public shipsService: ShipsService) {}
 }

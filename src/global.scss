@@ -39,10 +39,11 @@
 :root {
   --background-blur: 0px;
   --prompt-height: 500px;
+  --dead-zone-margin: 0px;
 }
 
 ion-modal {
-  --ion-background-color: #ffffff85;
+  --ion-background-color: #ffffff85 !important;
   --border-radius: 0px;
   --backdrop-opacity: 0 !important;
   --height: var(--prompt-height);

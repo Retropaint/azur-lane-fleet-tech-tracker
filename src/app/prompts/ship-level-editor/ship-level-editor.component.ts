@@ -1,6 +1,10 @@
 import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { IonInput, ModalController } from '@ionic/angular';
+import { Ship } from 'src/app/interfaces/ship';
+import { FilterService } from 'src/app/services/filter.service';
+import { IconLoaderService } from 'src/app/services/icon-loader.service';
 import { PromptService } from 'src/app/services/prompt.service';
+import { ShipsService } from 'src/app/services/ships.service';
 
 @Component({
   selector: 'app-ship-level-editor',
@@ -10,7 +14,9 @@ import { PromptService } from 'src/app/services/prompt.service';
 export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 
   @Input() name: string;
-  @Input() level: number = 1;
+  @Input() level: number;
+  @Input() isIgnored: boolean;
+  @Input() ship: Ship;
   @Input() category: string;
   @ViewChild('autoResize') autoResize: ElementRef;
   textLevel: number;
@@ -18,7 +24,12 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 
   @ViewChild('input') input: ElementRef;
 
-  constructor(private prompt: PromptService, private modalController: ModalController) { }
+  constructor(
+    private prompt: PromptService, 
+    private modalController: ModalController, 
+    private shipsService: ShipsService, 
+    private iconLoader: IconLoaderService,
+    private filter: FilterService) { }
 
   ngOnInit() {
     this.textLevel = this.level;
@@ -34,11 +45,14 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   done() {
-    if(this.wasSlider) {
-      this.modalController.dismiss(Math.min(this.level, 125));
-    } else {
-      this.modalController.dismiss(Math.min(this.textLevel, 125));
+    const newShipInfo = {
+      "level": Math.min(this.level, 125),
+      "isIgnored": this.isIgnored || false
     }
+    if(!this.wasSlider) {
+      newShipInfo.level = Math.min(this.textLevel, 125)
+    }
+    this.modalController.dismiss(newShipInfo);
   }
 
   // change which input type will be accepted in the end, as text and slider levels are inputted separately
@@ -58,6 +72,10 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     this.wasSlider = true;
     this.level = markerLevel;
     this.done();
+  }
+
+  setIgnored(toggle) {
+    this.isIgnored = toggle;
   }
 
   ngOnDestroy() {

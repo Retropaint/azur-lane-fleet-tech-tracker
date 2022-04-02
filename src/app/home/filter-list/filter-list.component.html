@@ -1,5 +1,5 @@
 <div>
-  <p class="generic-text filter-category-name">Hulls: </p>
+  <p class="generic-text filter-category-name {{app.isMobile}}">Hulls: </p>
   <ion-grid class="filter-category-container">
     <ion-row wrap-reverse >
       <ion-col class="filter-category" *ngFor="let hull of hullNames; let i = index">
@@ -11,7 +11,7 @@
 
 <!-- faction filter -->
 <div *ngIf="">
-  <p class="generic-text filter-category-name">Factions: </p>
+  <p class="generic-text filter-category-name {{app.isMobile}}">Factions: </p>
   <ion-grid class="filter-category-container">
     <ion-row>
       <ion-col class="filter-category" *ngFor="let faction of factionNames; let i = index">
@@ -23,7 +23,7 @@
 
 <!-- stat filter -->
 <div style="margin-bottom: 20px;">
-  <p class="generic-text filter-category-name">Stats: </p>
+  <p class="generic-text filter-category-name {{app.isMobile}}">Stats: </p>
   <ion-grid class="filter-category-container">
     <ion-row>
       <ion-col class="filter-category" *ngFor="let stat of statNames; let i = index">

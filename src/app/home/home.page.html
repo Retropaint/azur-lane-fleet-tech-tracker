@@ -1,30 +1,27 @@
 <ion-content [fullscreen]="true" class="main-content {{platformCSS}}">
   <div class="background"></div>
-  <div style="display: flex">
-    <div class="side-bars {{platformCSS}}">
-
-      <div class="header-container">
-        <!--
-          <app-generic-big-button text="Tech Mode" toggle="unselected" class="tech-mode"></app-generic-big-button>
-        -->
-        <img class="header-img" src="assets/AL logo.webp"/>
-        <p class="title generic-text no-glow">
-          Fleet Tech Tracker
-        </p>
-        <div class="settings-button" (click)="openSettingsModal()">
-          <img class="image" src="assets/settings.png"/>
-          <p class="generic-text no-glow text">Settings</p>
-        </div>
+  <div class="content">
+    <div class="header-container">
+      <!--
+        <app-generic-big-button text="Tech Mode" toggle="unselected" class="tech-mode"></app-generic-big-button>
+      -->
+      <img class="header-img" src="assets/logo.webp"/>
+      <h1 class="title generic-text no-glow">
+        Azur Lane Fleet Tech Tracker
+      </h1>
+      <div class="settings-button isMobile-{{app.isMobile}}" (click)="openSettingsModal()">
+        <img class="image" src="assets/settings.png"/>
+        <p class="generic-text no-glow text">Settings</p>
       </div>
+    </div>
 
-      <div *ngIf="shipCategoryData.sortedCategoryNames.length != 0" class="categories">
-        <app-icon-ui *ngIf="isIconUI" style="position: relative"></app-icon-ui>
-        <app-sheet-ui *ngIf="!isIconUI" style="position: relative"></app-sheet-ui>
-      </div>
+    <div *ngIf="shipsService.ships.length != 0" class="categories">
+      <app-icon-ui *ngIf="isIconUI" style="position: relative;"></app-icon-ui>
+      <app-sheet-ui *ngIf="!isIconUI" style="position: relative;"></app-sheet-ui>
+    </div>
 
-      <div *ngIf="shipCategoryData.sortedCategoryNames.length == 0" class="generic-text centered">
-        Loading...
-      </div>
+    <div *ngIf="shipsService.ships.length == 0" class="generic-text centered">
+      Loading...
     </div>
   </div>
 </ion-content>

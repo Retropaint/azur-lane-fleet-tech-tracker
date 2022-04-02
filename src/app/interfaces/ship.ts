@@ -1,3 +1,5 @@
+import { ShipCategory } from "./ship-category";
+
 export interface Ship {
   name: string;
   id: string;
@@ -10,4 +12,5 @@ export interface Ship {
   techStat: string;
   techBonus: number;
   appliedHulls: string[];
+  isIgnored?: boolean
 }

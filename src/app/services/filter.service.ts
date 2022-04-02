@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ShipCategoryDataService } from './ship-category-data.service';
 import { Ship } from '../interfaces/ship';
 import { Storage } from '@ionic/storage-angular';
-import { IconDragService } from './icon-drag.service';
 import { IconLoaderService } from './icon-loader.service';
+import { ShipsService } from './ships.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
 
-  constructor(private shipCategoryData: ShipCategoryDataService, 
-    private storage: Storage, 
-    private iconDrag: IconDragService,
-    private iconLoader: IconLoaderService) { }
+  constructor(private iconLoader: IconLoaderService, private shipService: ShipsService) { }
 
-  ships = [];
-  shipFilterPass: boolean[] = [];
+  shipsFilterPass = {};
   delay: number = 30;
   isAll: boolean; // keep track of if the last category was set to All, to decide whether to use the icon loader
 
@@ -57,40 +52,27 @@ export class FilterService {
     "All": true
   }
 
-  async filter() {
-    this.ships = [];
-    this.shipFilterPass = [];
-    
-    // icon UI
-    if(this.shipCategoryData.selectedCategory != null) {
-      this.filterCategory();
-    }
-    if(this.isAll) {
-      this.iconLoader.loadShips(this.ships);
-    } else {
-      this.iconLoader.loadedShips = this.ships;
-    }
-
-    // sheet UI
-    this.filterShipRows();
+  async init() {
+    this.shipService.ships.forEach(ship => {
+      this.shipsFilterPass[ship.id] = false;
+    })
+    this.filter(true);
   }
 
-  filterCategory() {
-    this.shipCategoryData.categories[this.shipCategoryData.selectedCategory].ships.forEach(ship => {
+  filter(refresh: boolean = false) {
+    Object.keys(this.shipsFilterPass).forEach(id => {
+      this.shipsFilterPass[id] = false;
+    })
+
+    this.shipService.ships.forEach(ship => {
       if(this.passesCriteria(ship)) {
-        this.ships.push(ship);
+        this.shipsFilterPass[ship.id] = true;
       }
     })
-  }
+    this.shipService.ships = this.shipService.setAllProperShipPos(this.shipService.ships);
+    this.shipService.refreshCogChipReq(this.shipsFilterPass);
 
-  filterShipRows() {
-    Object.keys(this.shipCategoryData.categories).forEach(category => {
-      this.shipCategoryData.categories[category].ships.forEach(ship => {
-        if(this.passesCriteria(ship)) {
-          this.shipFilterPass[ship.id] = true;
-        }        
-      })
-    })
+    this.iconLoader.loadShips(this.shipsFilterPass);
   }
 
   passesCriteria(ship: Ship) {
@@ -157,7 +139,7 @@ export class FilterService {
     }
     filterType[name] = !filterType[name];
     this.checkAllInType(filterType);
-    this.filter();
+    this.filter(filterType["All"]);
   }
 
   checkAllInType(type: any) {

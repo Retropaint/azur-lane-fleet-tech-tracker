@@ -35,9 +35,11 @@ export class PromptService {
     document.documentElement.style.setProperty('--prompt-height', height + "px");
   }
 
-  async openConfirmation(modalIndex: number, title: string, body: string) {
+  async openConfirmation(modalIndex: number, title: string, body: string, wasFromModal: boolean = true) {
     const prevHeight = document.documentElement.style.getPropertyValue("--prompt-height");
-    document.getElementById('ion-overlay-' + modalIndex).setAttribute('style', 'display: none');
+    if(wasFromModal) {
+      document.getElementById('ion-overlay-' + modalIndex).setAttribute('style', 'display: none');
+    }
     const modal = await this.modalController.create({
       component: ConfirmationComponent,
       animated: false,
@@ -50,7 +52,11 @@ export class PromptService {
     await modal.present();
     return await modal.onDidDismiss().then(async value => {
       document.documentElement.style.setProperty('--prompt-height', prevHeight);
-      document.getElementById('ion-overlay-' + modalIndex).setAttribute('style', '');
+      if(wasFromModal) {
+        document.getElementById('ion-overlay-' + modalIndex).setAttribute('style', '');
+      } else {
+        this.exit();
+      }
       return await value.data;
     })
   }

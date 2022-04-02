@@ -34,3 +34,7 @@
   margin-bottom: 20px;
 }
 
+.dead-zone {
+  margin-left: var(--dead-zone-margin);
+  margin-right: var(--dead-zone-margin);
+}

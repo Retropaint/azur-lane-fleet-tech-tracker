@@ -1,5 +1,5 @@
   <!-- unselected toggle -->
-  <div class="filter-button unselected" *ngIf="!filterType[filterName]" (click)="clickedFilterButton(filterName, filterType)">
+  <div class="filter-button unselected" *ngIf="!filterType[filterName]" (click)="clickedFilterButton()">
     <img *ngIf="filterName != 'All' && filterName != 'None'" class="filter-icon unselected" [src]="'assets/icons/unselected ' + fileName + ' icons/' + filterName + '.png'" [style]="'width: ' + iconWidth + 'px'"/>
     <p class="filter-name unselected" [style]="'margin-right: ' + textRightMargin + 'px'">
       <b> {{filterName}} </b>
@@ -7,7 +7,7 @@
   </div>
 
   <!-- selected toggle -->
-  <div class="filter-button" *ngIf="filterType[filterName]" (click)="clickedFilterButton(filterName, filterType)">
+  <div class="filter-button" *ngIf="filterType[filterName]" (click)="clickedFilterButton()">
     <div style="transform: translateY(5px)">
       <img *ngIf="filterName != 'All' && filterName != 'None'" class="filter-icon" [src]="'assets/icons/' + fileName + ' icons/' + filterName + '.png'" [style]="'width: ' + iconWidth + 'px'"/>
       <p class="filter-name" [style]="'margin-right: ' + textRightMargin + 'px'">

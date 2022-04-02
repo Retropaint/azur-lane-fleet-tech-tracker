@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { FilterService } from 'src/app/services/filter.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class FilterListComponent implements OnInit {
   statIconWidths: number[] = [50, 35, 35, 38, 38, 35, 35, 32, 35];
   statTextRightMargins: number[] = [17, 17, 17, 17, 17, 17, 17, 17, 17, 40];
 
-  constructor(public filter: FilterService) { }
+  constructor(public filter: FilterService, public app: AppComponent) { }
 
   ngOnInit() {}
   

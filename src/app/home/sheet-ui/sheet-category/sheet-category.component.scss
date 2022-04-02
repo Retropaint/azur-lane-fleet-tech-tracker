@@ -22,17 +22,7 @@
   grid-template-columns: 1fr 0fr 0fr 0fr;
   position: relative;
   will-change: transform;
-  user-select: none;
   cursor: pointer;
-
-  &.dragged {
-    z-index: 99;
-    position: absolute;
-  }
-
-  &.default {
-    z-index: 0;
-  }
 
   &.highlight-true {
     border-bottom: 5px solid #00ff0f;
@@ -40,6 +30,10 @@
 
   &.highlight-top {
     border-top: 5px solid #00ff0f;
+  }
+
+  &.ignored {
+    filter: brightness(0.65);
   }
 }
 
@@ -73,8 +67,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 .ship-name {
   white-space: nowrap;
-
-  
 }
 
 .border {

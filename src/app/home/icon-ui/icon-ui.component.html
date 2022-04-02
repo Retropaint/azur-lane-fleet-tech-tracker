@@ -1,32 +1,9 @@
-<div *ngIf="shipCategoryData.sortedCategoryNames && shipCategoryData.sortedCategoryNames.length > 1" class="categories">
-  <div *ngFor="let category of shipCategoryData.sortedCategoryNames" #categories (click)="clickedCategory(category)" class="category-container">
-    <div *ngIf="category == shipCategoryData.selectedCategory" class="category selected">
-      <div class="category-text"> {{category}} </div>
-    </div>
-    <div *ngIf="category != shipCategoryData.selectedCategory" class="category unselected">
-      <div class="category-text"> {{category}} </div>
-    </div>
+<div class="dead-zone">
+  <app-sort-list *ngIf="home.sortCss == 'unselected'" style="display: inline-block"></app-sort-list>
+  
+  <div>
+    <app-filter-list></app-filter-list>
   </div>
-
-  <!--
-  <div class="category unselected" (click)="openCategoryEditor()">
-    <div class="category-text"> + </div>
-  </div>
-  --> 
+  
+  <app-ship-card-list *ngIf="shipsService.ships.length != 0" id="ship-card-list"></app-ship-card-list>
 </div>
-
-<app-generic-big-button text="Options" toggle="unselected" (click)="openCategoryEditor(shipCategoryData.selectedCategory)"></app-generic-big-button>
-
-<app-generic-big-button text="Filter" [toggle]="home.filterCss" (click)="home.toggleFilter()"></app-generic-big-button>
-
-<app-generic-big-button text="Sort" [toggle]="home.sortCss" (click)="home.toggleSort()"></app-generic-big-button>
-<app-sort-list *ngIf="home.sortCss == 'selected'" style="display: inline-block"></app-sort-list>
-
-<app-help-button helpType="icon-ui"></app-help-button>
-
-<div *ngIf="home.filterCss == 'selected'">
-  <app-filter-list></app-filter-list>
-</div>
-
-<app-ship-card-list *ngIf="shipCategoryData.selectedCategory != null" [category]="shipCategoryData.selectedCategory" id="ship-card-list"></app-ship-card-list>
-

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Ship } from '../interfaces/ship';
 import { FilterService } from './filter.service';
-import { ShipCategoryDataService } from './ship-category-data.service';
 import { ShortenedNamesService } from './shortened-names.service';
 import { HttpClient } from '@angular/common/http';
+import { ShipsService } from './ships.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +13,15 @@ export class AzurapiService {
 
   filteredOtherShips: any[] = [];
 
-  constructor(private shipCategoryData: ShipCategoryDataService, 
+  constructor(
     private storage: Storage, 
     private filter: FilterService, 
     private shortenedNames: ShortenedNamesService,
-    private http: HttpClient) {}
+    private shipsService: ShipsService) {}
 
   async init(isRetrieving: boolean = false) {
-    if(!isRetrieving && await this.storage.get("categories") != null) {
+    console.log(this.shipsService.ships);
+    if(!isRetrieving && this.shipsService.ships.length != 0) {
       return;
     }
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
@@ -29,7 +30,7 @@ export class AzurapiService {
         if(ship["fleetTech"]["statsBonus"]["maxLevel"]) {
 
           if(isRetrieving) {
-            if(!this.isLostShip(ship)) {
+            if(!this.isLostShip(ship, ships)) {
               return;
             }
           }
@@ -69,16 +70,14 @@ export class AzurapiService {
             onlyApplicableHulls: fleetTech["onlyApplicable"],
             techBonus: fleetTech["bonus"],
             techStat: this.shortenedNames.stats[fleetTech["stat"]],
-            appliedHulls: fleetTech["applicable"]
+            appliedHulls: fleetTech["applicable"],
           }
 
-          this.shipCategoryData.allShips.push(newShip);
+          this.shipsService.ships.push(newShip);
         }
       })
     }).then(() => {
-      this.shipCategoryData.createAllCategory().then(() => {
-        this.filter.filter();
-      })
+      this.shipsService.save();
     })
   }
 
@@ -102,19 +101,10 @@ export class AzurapiService {
     }
   }
 
-  isLostShip(searchingShip): boolean {
-    const categoryKeys = Object.keys(this.shipCategoryData.categories);
-
-    // for-loops are used instead of forEach to immediately return
-    for(let i = 0; i < categoryKeys.length; i++) {
-      const category = this.shipCategoryData.categories[categoryKeys[i]];
-      
-      for(let j = 0; j < category.ships.length; j++) {
-        const ship = category.ships[j];
-        
-        if(ship.id == searchingShip.id) {
-          return false;
-        }
+  isLostShip(searchingShip, ships): boolean {
+    for(const ship of ships) {
+      if(ship == searchingShip) {
+        return false;
       }
     }
     return true;

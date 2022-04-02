@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { IonContent, ModalController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { FilterService } from '../services/filter.service';
-import { ShipCategoryDataService } from '../services/ship-category-data.service';
 import { SettingsComponent } from '../prompts/settings/settings.component';
+import { ShipsService } from '../services/ships.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,12 @@ export class HomePage implements AfterViewInit {
   @ViewChild(IonContent) ionContent: IonContent;
   
   constructor(
-    public shipCategoryData: ShipCategoryDataService, 
     private platform: Platform,
     private modalController: ModalController,
     private storage: Storage,
-    private filter: FilterService
+    private filter: FilterService,
+    public shipsService: ShipsService,
+    public app: AppComponent
     ) {}
 
   async ngAfterViewInit() {

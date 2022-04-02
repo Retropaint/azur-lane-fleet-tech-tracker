@@ -1,25 +1,11 @@
-<!--
-<div class="options-button {{home.filterCss}}" (click)="home.toggleFilter()">
-  <div class="options-button-square left"></div>
-  <div class="options-button-square right"></div>
-  <div class="generic-text options {{home.filterCss}}"> Filter </div>
-</div>
--->
-
-<app-generic-big-button text="Sort" [toggle]="home.sortCss" (click)="home.toggleSort()"></app-generic-big-button>
-<app-sort-list *ngIf="home.sortCss == 'selected'" style="display: inline-block"></app-sort-list>
-
-<div *ngIf="home.filterCss == 'selected'">
-  <app-filter-list></app-filter-list>
-</div>
-
-<app-help-button helpType="sheet-ui"></app-help-button>
-
-<div #container class="container" *ngIf="filter.shipFilterPass != []">
-  <app-sheet-category *ngFor="let category of shipCategoryData.sortedCategoryNames; index as i" class="grid" [id]="category" [category]="category" [index]="i" [isHeaderHighlighted]="sheetDrag.highlightedHeader == i" [belowThisGrid]="sheetDrag.belowGridIndex == i" #categoryContainers></app-sheet-category>
-  <!--
-  <div (click)="openCategoryEditor(null)" class="grid">
-    <div class="ship-name border createCategory" style="color: white">+</div>
+<div style="margin-left: var(--dead-zone-margin); margin-right: var(--dead-zone-margin)">
+  <app-sort-list *ngIf="home.sortCss == 'unselected'" style="display: inline-block"></app-sort-list>
+  
+  <div>
+    <app-filter-list></app-filter-list>
   </div>
-  -->
+
+  <div #container class="container" *ngIf="filter.shipsFilterPass != []">
+    <app-sheet-category class="grid"></app-sheet-category>
+  </div>
 </div>

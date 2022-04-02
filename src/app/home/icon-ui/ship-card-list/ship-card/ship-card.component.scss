@@ -48,6 +48,16 @@
     border-right: 0;
     border-left: 0;
   }
+
+  &.set-outline {
+    transition: outline 0s;
+    outline: 5px solid rgba(0, 255, 0, 1);
+  }
+
+  &.remove-outline {
+    transition: outline 0.5s;
+    outline: 7px solid rgba(0, 255, 0, 0);
+  }
 }
 
 .ship-hull-and-level-background {
@@ -150,14 +160,11 @@
   display: inline-block;
   position: relative;
   cursor: pointer;
-
-  &.default {
-    z-index: 0;
-    filter: none;
-    transform: none;
-    transition: opacity 0.5s;
-    opacity: 1;
-  }
+  z-index: 0;
+  filter: none;
+  transform: none;
+  transition: opacity 0.5s;
+  opacity: 1;
 
   &.dragged {
     position: relative;
@@ -165,9 +172,16 @@
     filter: drop-shadow(0px 0px 20px black);
   }
 
-  &.start {
-    transition: opacity 0s;
+  &.default {
     opacity: 0;
+  }
+
+  &.ignored {
+    filter: brightness(0.65)
+  }
+
+  &.isMobile-true {
+    zoom: 0.8;
   }
 }
 
@@ -195,4 +209,29 @@
   height: 144px;
   display: inline-block;
   margin-bottom: 8px;
+}
+
+.done-checkmark {
+  color: limegreen;
+  --ionicon-stroke-width: 64px;
+  float: right;
+}
+
+.flash {
+  position: absolute;
+  height: 144px;
+  width: 100%;
+  border-radius: 5px;
+  z-index: 1;
+  pointer-events: none;
+
+  &.out {
+    transition: background-color 0.5s;
+    background-color: rgba(0, 200, 0, 0);
+  }
+
+  &.in {
+    transition: background-color 0;
+    background-color: rgba(0, 200, 0, 1);
+  }
 }

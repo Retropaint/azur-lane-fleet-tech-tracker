@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Ship } from '../interfaces/ship';
 import { FilterService } from './filter.service';
-import { ShipCategoryDataService } from './ship-category-data.service';
+import { ShipsService } from './ships.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,15 +25,9 @@ export class SortService {
 
   lastType: string;
 
-  constructor(private shipCategoryData: ShipCategoryDataService, private filter: FilterService) {}
+  constructor(private filter: FilterService, private ships: ShipsService) {}
 
-  allSort(type: string, useCurrentToggle: boolean = false) {
-    Object.keys(this.shipCategoryData.categories).forEach(category => {
-      this.sort(type, category, useCurrentToggle);
-    })
-  }
-
-  sort(type: string, category: string, useCurrentToggle: boolean = false) {
+  sort(type: string, useCurrentToggle: boolean = false) {
     this.lastType = type;
 
     if(useCurrentToggle) {
@@ -43,7 +37,7 @@ export class SortService {
 
     switch(type) {
       case "Level":
-        this.shipCategoryData.categories[category].ships.sort((a: Ship, b: Ship) => {
+        this.ships.ships.sort((a: Ship, b: Ship) => {
           if(!this.isAscending[type] && a.level > b.level || 
             this.isAscending[type] && a.level < b.level) {
             return 1;
@@ -52,7 +46,7 @@ export class SortService {
           }
         })
       break; case "Rarity":
-        this.shipCategoryData.categories[category].ships.sort((a: Ship, b: Ship) => {
+        this.ships.ships.sort((a: Ship, b: Ship) => {
           if(!this.isAscending[type] && this.rarityRanks[a.rarity] > this.rarityRanks[b.rarity] || 
             this.isAscending[type] && this.rarityRanks[a.rarity] < this.rarityRanks[b.rarity]) {
             return 1;
@@ -61,7 +55,7 @@ export class SortService {
           }
         })
       break; case "Name":
-        this.shipCategoryData.categories[category].ships.sort((a: Ship, b: Ship) => {
+        this.ships.ships.sort((a: Ship, b: Ship) => {
           if(!this.isAscending[type] && a.name > b.name || 
             this.isAscending[type] && a.name < b.name) {
             return 1;
@@ -73,7 +67,7 @@ export class SortService {
     }
     this.isAscending[type] = !this.isAscending[type];
 
-    this.shipCategoryData.save();
+    this.ships.save();
     this.filter.filter();
   }
 }

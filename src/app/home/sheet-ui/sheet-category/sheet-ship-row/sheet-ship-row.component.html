@@ -1,26 +1,14 @@
-<div #row (click)="enterLevel()" title="Click to edit level" *ngIf="filter.shipFilterPass[ship.id] == true" class="row {{draggedStatus}} highlight-{{greenBorder}}" [style]="'z-index: ' + zIndex + '; transform: translate( ' + dragEl.transformX + 'px, ' + dragEl.transformY + 'px )'">
+<div #row (click)="enterLevel()"  *ngIf="filter.shipsFilterPass[ship.id] == true" title="Click to edit level" class="row default {{ignoredStatus}}">
+  
   <div class="ship-name {{ship.rarity}} border">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     {{ship.name}}
   </div>
-  <div class="tech-stat border tech-stat {{ship.rarity}}">
-    <img *ngIf="ship.techStat != 'FP'" class="ship-hull-icon" [title]="fleetTechHoverTitle" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
-    <img *ngIf="ship.techStat == 'FP'" class="ship-hull-icon FP" [title]="fleetTechHoverTitle" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
-    <div class="tech-bonus" [title]="fleetTechHoverTitle">+{{ship.techBonus}}</div>
+  <div class="tech-stat border tech-stat {{ship.rarity}}" [title]="fleetTechHoverTitle">
+    <img *ngIf="ship.techStat != 'FP'" class="ship-hull-icon" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <img *ngIf="ship.techStat == 'FP'" class="ship-hull-icon FP" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <div class="tech-bonus" >+{{ship.techBonus}}</div>
   </div>
-  <!--
-    <form (ngSubmit)="submitLevel(false)" name="what">
-    <input 
-      #levelInput 
-      maxlength="3" 
-      (blur)="submitLevel(true)" 
-      (focus)="levelInputFocus()"
-      [(ngModel)]="inputShipLevel" 
-      name="this is for the form" 
-      type="number" 
-      class="level over119-{{ship.level > 120}} border level" 
-    />
-  </form>
-  -->
-  <div class="level over119-{{ship.level > 119}} border level" >{{ship.level}}</div>
+  <div class="level over119-{{ship.level > 119}} border level">{{ship.level}}</div>
+  <div class="flash {{flashStatus}}"></div>
 </div>

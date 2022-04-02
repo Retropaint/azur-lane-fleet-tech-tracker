@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { HomePage } from 'src/app/home/home.page';
 import { AzurapiService } from 'src/app/services/azurapi.service';
 import { PromptService } from 'src/app/services/prompt.service';
-import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
+import { ShipsService } from 'src/app/services/ships.service';
 
 @Component({
   selector: 'app-settings',
@@ -21,7 +20,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     private storage: Storage, 
     private modalController: ModalController, 
     public azurapi: AzurapiService,
-    private shipCategoryData: ShipCategoryDataService) { }
+    private shipsService: ShipsService) { }
 
   async ngOnInit() {
     const storageIconUI = await this.storage.get("icon-ui");
@@ -52,20 +51,17 @@ export class SettingsComponent implements OnInit, AfterViewInit {
       .then(isYes => {
         if(isYes) {
           this.modalController.dismiss();
-          this.shipCategoryData.sortedCategoryNames = [];
           this.azurapi.init(true);
         }
       })
   }
 
   resetSite() {
-    this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All categories, ship levels, and settings preferences will be deleted. Proceed?")
+    this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All ship data and settings preferences will be deleted. Proceed?")
       .then(isYes => {
         if(isYes) {
           this.modalController.dismiss();
-          this.shipCategoryData.sortedCategoryNames = [];
-          this.shipCategoryData.allShips = [];
-          this.storage.remove("categories");
+          this.shipsService.ships = [];
           this.azurapi.init();
         }
       })

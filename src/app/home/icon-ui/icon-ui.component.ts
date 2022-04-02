@@ -1,9 +1,8 @@
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { Platform } from '@ionic/angular';
-import { CategoryEditorComponent } from 'src/app/prompts/category-editor/category-editor.component';
-import { ShipCategoryDataService } from 'src/app/services/ship-category-data.service';
+import { FilterService } from 'src/app/services/filter.service';
+import { ShipsService } from 'src/app/services/ships.service';
 import { HomePage } from '../home.page';
-import { ShipCardComponent } from './ship-card-list/ship-card/ship-card.component';
 
 @Component({
   selector: 'app-icon-ui',
@@ -22,33 +21,17 @@ export class IconUIComponent {
   selectedCategory: string;
 
   constructor(
-    public shipCategoryData: ShipCategoryDataService,
     private platform: Platform,
     public home: HomePage,
-    private categoryEditor: CategoryEditorComponent) {}
+    public shipsService: ShipsService) {}
   
   async ngAfterViewInit() {
     this.isMobile = this.platform.platforms().includes('mobileweb');
-
-    // interval is used so it can keep checking if the user is selecting a preset
-    // this is... not the best way to do it, but it's a 'temporary' solution for now
-    if(this.shipCategoryData.sortedCategoryNames.length != 0) {
-      return;
-    }
-    
-    const interval = setInterval(() => {
-      if(this.shipCategoryData.sortedCategoryNames.length != 0) {
-        this.shipCategoryData.selectedCategory = this.shipCategoryData.sortedCategoryNames[0];
-        clearInterval(interval);
-      }
-    }, 500)
-  }
-
-  clickedCategory(category: string) {
-    this.shipCategoryData.selectedCategory = category;
   }
 
   async openCategoryEditor(selectedCategory: string = null) {
-    this.categoryEditor.open(selectedCategory);
+  }
+
+  split() {
   }
 }

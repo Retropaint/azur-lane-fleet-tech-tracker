@@ -50,7 +50,14 @@
 
 .filter-category-name {
   display: inline-block;
-  transform: translate(0px, -19px);
+
+  // isMobile from app component
+  &.false {
+    transform: translate(0px, -19px);
+  }
+  &.true {
+    margin-bottom: 0px;
+  }
 }
 
 .filter-category-container {

@@ -1,5 +1,4 @@
-<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{dragStatus}}" [style]="'transform: translate( ' + transformX + 'px, ' + transformY + 'px )'">
-  <div *ngIf="droppingDir == -1" class="dropping left"></div>
+<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{fadeStatus}} {{ship.isIgnored ? 'ignored' : ''}} isMobile-{{app.isMobile}}">
   <div class="ship-hull-and-level-background">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     
@@ -14,19 +13,19 @@
     </div>
 
     <div>
-      <p class="ship-level Lv-text">Lv. {{ship.level}} 
-      </p>
+      <p *ngIf="ship.level < 120" class="ship-level Lv-text">Lv. {{ship.level}}</p>
+      <ion-icon *ngIf="ship.level >= 120" name="checkmark-outline" class="done-checkmark"></ion-icon>
     </div>
   </div>
 
+  <div class="flash {{outlineStatus}}"></div>
+
   <div style="display: inline-block">
-    <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}}" />
-    <img *ngIf="ship.rarity == 'Ultra-Rare' || ship.rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
+    <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}} {{outlineStatus}}-outline" />
+    <img *ngIf="ship.rarity == 'Ultra-Rare' || ship.rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive {{outlineStatus}}-outline"/>
     
     <div class="ship-name">
       <p class="ship-name-text">{{ship.name}}</p>
     </div>
   </div>
-  
-  <div *ngIf="droppingDir == 1" class="dropping right"></div>
 </div>

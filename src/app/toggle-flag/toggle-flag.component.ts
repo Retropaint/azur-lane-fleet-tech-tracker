@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-toggle-flag',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toggle-flag.component.scss'],
 })
 export class ToggleFlagComponent implements OnInit {
+
+  @Input() toggle: boolean = false;
 
   constructor() { }
 

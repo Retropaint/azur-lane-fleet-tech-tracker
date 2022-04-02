@@ -8,24 +8,21 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { ShipCardListComponent } from './icon-ui/ship-card-list/ship-card-list.component';
 import { FilterListComponent } from './filter-list/filter-list.component';
 import { ShipCardComponent } from './icon-ui/ship-card-list/ship-card/ship-card.component';
-import { CategoryEditorComponent } from '../prompts/category-editor/category-editor.component';
 import { SortListComponent } from './sort-list/sort-list.component';
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
 import { IconUIComponent } from './icon-ui/icon-ui.component';
 import { SheetUIComponent } from './sheet-ui/sheet-ui.component';
 import { SettingsComponent } from '../prompts/settings/settings.component';
 import { SheetShipRowComponent } from './sheet-ui/sheet-category/sheet-ship-row/sheet-ship-row.component';
-import { HelpButtonComponent } from './help-button/help-button.component';
 import { HelperComponent } from '../prompts/helper/helper.component';
 import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/settings-toggle.component';
 import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
-import { FilterService } from '../services/filter.service';
 import { FilterButtonComponent } from './filter-list/filter-button/filter-button.component';
 import { PromptButtonComponent } from '../prompts/Components/prompt-button/prompt-button.component';
 import { ConfirmationComponent } from '../prompts/confirmation/confirmation.component';
-import { PresetSelectionComponent } from '../prompts/preset-selection/preset-selection.component';
 import { PromptHeaderComponent } from '../prompts/Components/prompt-header/prompt-header.component';
 import { GenericBigButtonComponent } from './Components/generic-big-button/generic-big-button.component';
+import { ToggleFlagComponent } from '../toggle-flag/toggle-flag.component';
 
 @NgModule({
   imports: [
@@ -39,23 +36,21 @@ import { GenericBigButtonComponent } from './Components/generic-big-button/gener
     ShipCardListComponent, 
     FilterListComponent, 
     ShipCardComponent, 
-    CategoryEditorComponent, 
     SortListComponent, 
     ShipLevelEditorComponent, 
     IconUIComponent, 
     SheetUIComponent,
     SettingsComponent,
     SheetShipRowComponent,
-    HelpButtonComponent,
     HelperComponent,
     SettingsToggleComponent,
     SheetCategoryComponent,
     FilterButtonComponent,
     PromptButtonComponent,
     ConfirmationComponent,
-    PresetSelectionComponent,
     PromptHeaderComponent,
-    GenericBigButtonComponent
+    GenericBigButtonComponent,
+    ToggleFlagComponent
   ],
   exports: [
     ShipCardListComponent, 
@@ -64,17 +59,13 @@ import { GenericBigButtonComponent } from './Components/generic-big-button/gener
     SheetUIComponent,
     SettingsComponent,
     SheetShipRowComponent,
-    CategoryEditorComponent,
-    HelpButtonComponent,
     HelperComponent,
     SettingsToggleComponent,
     PromptButtonComponent,
     ConfirmationComponent,
-    PresetSelectionComponent,
     PromptHeaderComponent,
   ],
   providers: [
-    CategoryEditorComponent, 
     IconUIComponent, 
     PromptButtonComponent, 
     ConfirmationComponent
