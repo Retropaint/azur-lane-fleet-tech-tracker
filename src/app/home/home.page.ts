@@ -13,14 +13,10 @@ import { AppComponent } from '../app.component';
 })
 export class HomePage implements AfterViewInit {
   isIconUI: boolean = true;
-  filterCss: string = "unselected";
-  sortCss: string = "unselected";
-  platformCSS: string;
 
   @ViewChild(IonContent) ionContent: IonContent;
   
   constructor(
-    private platform: Platform,
     private modalController: ModalController,
     private storage: Storage,
     private filter: FilterService,
@@ -29,11 +25,6 @@ export class HomePage implements AfterViewInit {
     ) {}
 
   async ngAfterViewInit() {
-    if(this.platform.is('mobileweb')) {
-      this.platformCSS = "mobile";
-    } else {
-      this.platformCSS = "desktop";
-    }
     this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
     this.setCardSize();
   }
@@ -45,12 +36,14 @@ export class HomePage implements AfterViewInit {
     });
     modal.present();
     modal.onDidDismiss().then(async () => {
+      this.setCardSize();
+
+      // only refresh icon UI if it was actually switched
       const previousState = this.isIconUI;
       this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
       if(this.isIconUI != previousState) {
         this.filter.filter();
       }
-      this.setCardSize();
     })
   }
 
@@ -59,32 +52,8 @@ export class HomePage implements AfterViewInit {
       case "Big": default:
         document.documentElement.style.setProperty('--ship-card-zoom', '1');
       break; case "Small":
-        document.documentElement.style.setProperty('--ship-card-zoom', '0.8');
+        document.documentElement.style.setProperty('--ship-card-zoom', '0.85');
       break;
-    }
-  }
-
-  async getToggleState(toggleToChange: any, storageName: string) {
-    const storageToggle = await this.storage.get(storageName);
-    if(storageToggle != null) {
-      toggleToChange = storageToggle;
-    }
-    return toggleToChange;
-  }
-
-  toggleFilter() {
-    if(this.filterCss == "unselected") {
-      this.filterCss = "selected";
-    } else {
-      this.filterCss = "unselected";
-    }
-  }
-
-  toggleSort() {
-    if(this.sortCss == "unselected") {
-      this.sortCss = "selected";
-    } else {
-      this.sortCss = "unselected";
     }
   }
 }

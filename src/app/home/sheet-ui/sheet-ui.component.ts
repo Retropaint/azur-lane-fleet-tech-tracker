@@ -18,7 +18,7 @@ export class SheetUIComponent {
   constructor(
     public home: HomePage, 
     public filter: FilterService,
-    private shipsService: ShipsService) {}
+    public shipsService: ShipsService) {}
 
   openCategoryEditor(category: string) {
   }
