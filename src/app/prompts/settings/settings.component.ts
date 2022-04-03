@@ -14,8 +14,11 @@ import { CreditsComponent } from '../credits/credits.component';
 export class SettingsComponent implements AfterViewInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
-  isIconUI: boolean = true;
   modalIndex: number;
+  inputShipCardSize: number;
+
+  // store original states of settings in-case of cancelling
+  initialStates = {};
 
   constructor(private prompt: PromptService, 
     private storage: Storage, 
@@ -23,27 +26,19 @@ export class SettingsComponent implements AfterViewInit {
     public azurapi: AzurapiService,
     private shipsService: ShipsService) { }
 
-  ngAfterViewInit() {
-    console.log(this.autoResize);
+  async ngAfterViewInit() {
     this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
-  }
+    this.inputShipCardSize = await this.storage.get("ship-card-size") || 100;
 
-  retreiveLostShips() {
-    this.azurapi.init(true);
+    this.initialStates = {
+      uiMode: await this.storage.get("ui-mode"),
+      shipCardSize: await this.storage.get("ship-card-size")
+    }
   }
 
   exit() {
+    this.cancel();
     this.modalController.dismiss();
-  }
-
-  resetCategories() {
-    this.prompt.openConfirmation(this.modalIndex, "RESET CATEGORIES", "All categories, including custom, will be deleted. Levels and settings preferences will be intact. Proceed?")
-      .then(isYes => {
-        if(isYes) {
-          this.modalController.dismiss();
-          this.azurapi.init(true);
-        }
-      })
   }
 
   resetSite() {
@@ -56,6 +51,17 @@ export class SettingsComponent implements AfterViewInit {
           this.azurapi.init();
         }
       })
+  }
+
+  cancel() {
+    this.storage.set("ui-mode", this.initialStates["uiMode"]);
+    this.storage.set("ship-card-size", this.initialStates["shipCardSize"]);
+    this.modalController.dismiss();
+  }
+
+  save() {
+    this.storage.set("ship-card-size", this.inputShipCardSize);
+    this.modalController.dismiss();
   }
 
   openCredits() {

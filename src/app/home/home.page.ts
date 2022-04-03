@@ -13,7 +13,6 @@ import { AppComponent } from '../app.component';
 })
 export class HomePage implements AfterViewInit {
   isIconUI: boolean = true;
-  
 
   @ViewChild(IonContent) ionContent: IonContent;
   
@@ -48,12 +47,7 @@ export class HomePage implements AfterViewInit {
   }
 
   async setCardSize() {
-    switch(await this.storage.get("ship-card-size")) {
-      case "Big": default:
-        document.documentElement.style.setProperty('--ship-card-zoom', '1');
-      break; case "Small":
-        document.documentElement.style.setProperty('--ship-card-zoom', '0.85');
-      break;
-    }
+    const num = await this.storage.get("ship-card-size")/100
+    document.documentElement.style.setProperty('--ship-card-zoom', num.toString() + "");
   }
 }

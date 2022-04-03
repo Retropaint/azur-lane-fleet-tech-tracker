@@ -112,7 +112,8 @@
   }
 
   &.isMobile-true {
-    margin-left: 50px;
+    right: 0;
+    padding-right: 10px;
   }
   &.isMobile-false {
     margin-left: 100px;

@@ -36,7 +36,6 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.input.nativeElement.focus();
     this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
   }
 
