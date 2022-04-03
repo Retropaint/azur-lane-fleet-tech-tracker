@@ -1,0 +1,29 @@
+<app-prompt-header header="CREDITS" [component]="this"></app-prompt-header>
+
+<div class="prompt-info-background">
+  <div #autoResize>
+    <p class="prompt-text"><u>Made by:</u></p>
+    <p class="prompt-text">Retropaint (#5312 on Discord if you want to yell at me)</p>
+
+    <br>
+    <p class="prompt-text"><u>Made using:</u></p>
+    <img src="assets/Capacitor.png" class="framework-img"/>
+    <p class="prompt-text inline-block framework-text">Ionic Capacitor</p>
+    <img src="assets/angular.svg" class="framework-img"/>
+    <p class="prompt-text inline-block framework-text angular">ngular</p>
+
+    <br>
+    <br>
+    <p class="prompt-text"><u>Testers (no order):</u> </p>
+    <p class="prompt-text">Brah, Chiuchiutrain, Fire Paladin, Nerezza, Snub, Thebombzen</p>
+
+    <br>
+    <p class="prompt-text"><u>Special Thanks:</u></p>
+    <p class="prompt-text"><a style="color: white" href="https://azurapi.github.io/#introduction" target="_blank"><u>AzurAPI</u></a> for making my life significantly easier</p>
+    <p class="prompt-text"><a style="color: white"><u title="I can't link it omegalul">The official unofficial wiki</u></a>, both for being the backbone of AzurAPI, and providing hull and stat icons that I shamelessly 'saved images as'</p>
+  </div>
+</div>
+
+<div class="prompt-buttons">
+  <app-prompt-button (click)="exit()" text="Close" color="grey"></app-prompt-button>
+</div>

@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage-angular';
 import { AzurapiService } from 'src/app/services/azurapi.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { ShipsService } from 'src/app/services/ships.service';
+import { CreditsComponent } from '../credits/credits.component';
 
 @Component({
   selector: 'app-settings',
@@ -23,6 +24,7 @@ export class SettingsComponent implements AfterViewInit {
     private shipsService: ShipsService) { }
 
   ngAfterViewInit() {
+    console.log(this.autoResize);
     this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
   }
 
@@ -54,6 +56,10 @@ export class SettingsComponent implements AfterViewInit {
           this.azurapi.init();
         }
       })
+  }
+
+  openCredits() {
+    this.prompt.openAnotherPrompt(this.modalIndex, CreditsComponent);
   }
 
   ngOnDestroy() {

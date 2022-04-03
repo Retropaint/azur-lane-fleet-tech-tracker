@@ -23,6 +23,7 @@ import { ConfirmationComponent } from '../prompts/confirmation/confirmation.comp
 import { PromptHeaderComponent } from '../prompts/Components/prompt-header/prompt-header.component';
 import { GenericBigButtonComponent } from './Components/generic-big-button/generic-big-button.component';
 import { ToggleFlagComponent } from '../toggle-flag/toggle-flag.component';
+import { CreditsComponent } from '../prompts/credits/credits.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { ToggleFlagComponent } from '../toggle-flag/toggle-flag.component';
     ConfirmationComponent,
     PromptHeaderComponent,
     GenericBigButtonComponent,
-    ToggleFlagComponent
+    ToggleFlagComponent,
+    CreditsComponent
   ],
   exports: [
     ShipCardListComponent, 
@@ -64,6 +66,7 @@ import { ToggleFlagComponent } from '../toggle-flag/toggle-flag.component';
     PromptButtonComponent,
     ConfirmationComponent,
     PromptHeaderComponent,
+    CreditsComponent
   ],
   providers: [
     IconUIComponent, 

@@ -1,0 +1,12 @@
+.framework-img {
+  width: 30px;
+  margin-left: 10px;
+}
+
+.framework-text {
+  transform: translateY(-8px);
+
+  &.angular {
+    margin-left: 0px;
+  }
+}
