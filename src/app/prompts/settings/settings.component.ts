@@ -10,7 +10,7 @@ import { ShipsService } from 'src/app/services/ships.service';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements OnInit, AfterViewInit {
+export class SettingsComponent implements AfterViewInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
   isIconUI: boolean = true;
@@ -22,20 +22,8 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     public azurapi: AzurapiService,
     private shipsService: ShipsService) { }
 
-  async ngOnInit() {
-    const storageIconUI = await this.storage.get("icon-ui");
-    if(storageIconUI != null) {
-      this.isIconUI = storageIconUI;
-    }
-  }
-
   ngAfterViewInit() {
     this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
-  }
-
-  async switchUI(isIconUI: boolean) {
-    this.storage.set("icon-ui", isIconUI);
-    this.isIconUI = isIconUI;
   }
 
   retreiveLostShips() {
@@ -62,6 +50,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
         if(isYes) {
           this.modalController.dismiss();
           this.shipsService.ships = [];
+          this.storage.remove("ships");
           this.azurapi.init();
         }
       })

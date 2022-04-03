@@ -15,7 +15,6 @@ export class HomePage implements AfterViewInit {
   isIconUI: boolean = true;
   filterCss: string = "unselected";
   sortCss: string = "unselected";
-  isHelpButtons: boolean = true;
   platformCSS: string;
 
   @ViewChild(IonContent) ionContent: IonContent;
@@ -35,8 +34,8 @@ export class HomePage implements AfterViewInit {
     } else {
       this.platformCSS = "desktop";
     }
-    this.isIconUI = await this.getToggleState(this.isIconUI, "icon-ui");
-    this.isHelpButtons = await this.getToggleState(this.isHelpButtons, "help-buttons");
+    this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
+    this.setCardSize();
   }
 
   async openSettingsModal() {
@@ -46,13 +45,23 @@ export class HomePage implements AfterViewInit {
     });
     modal.present();
     modal.onDidDismiss().then(async () => {
-      this.isHelpButtons = await this.getToggleState(this.isHelpButtons, "help-buttons");
       const previousState = this.isIconUI;
-      this.isIconUI = await this.getToggleState(this.isIconUI, "icon-ui");
+      this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
       if(this.isIconUI != previousState) {
         this.filter.filter();
       }
+      this.setCardSize();
     })
+  }
+
+  async setCardSize() {
+    switch(await this.storage.get("ship-card-size")) {
+      case "Big": default:
+        document.documentElement.style.setProperty('--ship-card-zoom', '1');
+      break; case "Small":
+        document.documentElement.style.setProperty('--ship-card-zoom', '0.8');
+      break;
+    }
   }
 
   async getToggleState(toggleToChange: any, storageName: string) {

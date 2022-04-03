@@ -1,13 +1,8 @@
 <div class="setting-container">
   <p class="prompt-text toggle-header">{{name}}: </p>
   
-  <div class="toggle-container" (click)="setToggle(true)">
-    <app-toggle-flag [toggle]="toggle != null && toggle || false"></app-toggle-flag>
-    <p class="toggle-text">{{trueToggle}}</p>
-  </div>
-  
-  <div class="toggle-container" (click)="setToggle(false)">
-    <app-toggle-flag [toggle]="toggle != null && !toggle || false"></app-toggle-flag>
-    <p class="toggle-text last">{{falseToggle}}</p>
+  <div *ngFor="let cycledToggle of toggles" class="toggle-container" (click)="setToggle(cycledToggle)">
+    <app-toggle-flag [toggle]="currentToggle != null && currentToggle == cycledToggle || false"></app-toggle-flag>
+    <p class="toggle-text">{{cycledToggle}}</p>
   </div>
 </div>

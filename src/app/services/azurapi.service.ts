@@ -22,12 +22,10 @@ export class AzurapiService {
     private sort: SortService) {}
 
   async init(isRetrieving: boolean = false) {
-    console.log(this.shipsService.ships);
-    if(!isRetrieving && this.shipsService.ships.length != 0) {
-      return;
-    }
+    this.shipsService.ships = [];
+    let savedShips = await this.storage.get("ships");
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
-      JSON.parse(ships).forEach(ship => {
+      JSON.parse(ships).forEach(async ship => {
         // only accept ships with a max level fleet tech bonus
         if(ship["fleetTech"]["statsBonus"]["maxLevel"]) {
 
@@ -43,18 +41,6 @@ export class AzurapiService {
             ship["rarity"] = "Ultra-Rare";
           }
 
-          // check whether fleet tech only applies to a certain sub-hull 
-          fleetTech["onlyApplicable"] = []; // make empty array to prevent html complaining
-          switch(ship["hullType"]) {
-            case "Aircraft Carrier": case "Light Carrier":
-              this.checkApplicability(["Aircraft carrier", "Light aircraft carrier"], fleetTech);
-            break; case "Monitor": case "Heavy Cruiser": case "Large Cruiser":
-              this.checkApplicability(['Heavy cruiser', 'Large cruiser', 'Monitor'], fleetTech);
-            break; case "Battleship": case "Battlecruiser": case "Aviation Battleship":
-              this.checkApplicability(['Battleship', 'Battlecruiser', 'Aviation battleship'], fleetTech);
-            break;
-          }
-
           const newShip: Ship = {
             name: ship["names"]["en"],
             id: ship["id"],
@@ -63,10 +49,21 @@ export class AzurapiService {
             rarity: ship["rarity"],
             hull: this.shortenedNames.hulls[ship["hullType"]],
             thumbnail: ship["thumbnail"],
-            onlyApplicableHulls: fleetTech["onlyApplicable"],
             techBonus: fleetTech["bonus"],
             techStat: this.shortenedNames.stats[fleetTech["stat"]],
             appliedHulls: fleetTech["applicable"],
+          }
+          console.log(ship);
+
+          // retain data from previous ship version, if it exists
+          if(savedShips != null && savedShips.length > 0) {
+            for(const savedShip of savedShips) {
+              if(savedShip.id == ship.id) {
+                newShip.level = savedShip.level;
+                newShip.isIgnored = savedShip.isIgnored;
+                break;
+              }
+            }
           }
 
           this.shipsService.ships.push(newShip);
@@ -76,34 +73,5 @@ export class AzurapiService {
       this.shipsService.save();
       this.sort.sort("Name", true);
     })
-  }
-
-  checkApplicability(maxApplicableHulls: string[], fleetTech) {
-    let applicableHulls = [];
-    maxApplicableHulls.forEach(hull => {
-      let isApplicable = false;
-      fleetTech["applicable"].forEach(applicableHull => {
-        if(applicableHull == hull) {
-          isApplicable = true;
-          return;
-        }
-      })
-      if(isApplicable) {
-        applicableHulls.push(this.shortenedNames.onlyApplicable[hull]);
-      }
-    })
-    
-    if(applicableHulls.length != maxApplicableHulls.length) {
-      fleetTech["onlyApplicable"] = applicableHulls;
-    }
-  }
-
-  isLostShip(searchingShip, ships): boolean {
-    for(const ship of ships) {
-      if(ship == searchingShip) {
-        return false;
-      }
-    }
-    return true;
   }
 }

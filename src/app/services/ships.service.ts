@@ -21,7 +21,6 @@ export class ShipsService {
 
   save() {
     this.storage.set("ships", this.ships);
-    
   }
 
   getById(id: string): Ship {

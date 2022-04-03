@@ -9,26 +9,25 @@ import { Storage } from '@ionic/storage-angular';
 export class SettingsToggleComponent implements OnInit {
 
   @Input() name: string;
-  @Input() trueToggle: string;
-  @Input() falseToggle: string;
   @Input() storageName: string;
-  @Input() defaultState: boolean;
+  @Input() defaultState: string;
+  @Input() toggles: string[];
 
-  toggle: boolean;
+  currentToggle: string;
 
   constructor(private storage: Storage) {}
 
   async ngOnInit() {
     const storageToggle = await this.storage.get(this.storageName)
     if(storageToggle != null) {
-      this.toggle = storageToggle;
+      this.currentToggle = storageToggle;
     } else {
-      this.toggle = this.defaultState;
+      this.currentToggle = this.defaultState;
     }
   }
 
-  setToggle(toggle: boolean) {
-    this.toggle = toggle;
+  setToggle(toggle: string) {
+    this.currentToggle = toggle;
     this.storage.set(this.storageName, toggle);
   }
 }

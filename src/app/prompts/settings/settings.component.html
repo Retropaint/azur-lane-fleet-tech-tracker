@@ -2,7 +2,8 @@
 
 <div class="prompt-info-background">
   <div #autoResize>
-    <app-settings-toggle name="UI Mode" trueToggle="Icon" falseToggle="Sheet" storageName="icon-ui" [defaultState]="true"></app-settings-toggle>
+    <app-settings-toggle name="UI Mode" [toggles]="['Icon', 'Sheet']" storageName="ui-mode" defaultState="Icon"></app-settings-toggle>
+    <app-settings-toggle name="Ship Card Size" [toggles]="['Big', 'Small']" storageName="ship-card-size" defaultState="Big"></app-settings-toggle>
 
     <div style="display: flex">
       <app-prompt-button (click)="resetSite()" text="Reset Site" extraCSS="no-top" color="blue"></app-prompt-button>
