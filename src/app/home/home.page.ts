@@ -13,6 +13,7 @@ import { AppComponent } from '../app.component';
 })
 export class HomePage implements AfterViewInit {
   isIconUI: boolean = true;
+  
 
   @ViewChild(IonContent) ionContent: IonContent;
   
@@ -36,14 +37,13 @@ export class HomePage implements AfterViewInit {
     });
     modal.present();
     modal.onDidDismiss().then(async () => {
-      this.setCardSize();
-
       // only refresh icon UI if it was actually switched
       const previousState = this.isIconUI;
       this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
       if(this.isIconUI != previousState) {
         this.filter.filter();
       }
+      this.setCardSize();
     })
   }
 

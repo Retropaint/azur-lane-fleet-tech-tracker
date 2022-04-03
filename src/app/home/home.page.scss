@@ -132,7 +132,7 @@
 .main-content {
   --ion-background-color: #002454;
 
-  &.mobile {
+  &.isMobile-true {
     text-align: center;
   }
 }
