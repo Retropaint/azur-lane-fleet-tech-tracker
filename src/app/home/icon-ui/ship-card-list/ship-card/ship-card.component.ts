@@ -20,8 +20,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   @ViewChild('levelInput') levelInput: IonInput;
   imageSrc: string = "";
   hoverTitle: string;
-  fadeStatus: string = "default";
-  outlineStatus: string = "out";
+  fadeCSS: string = "default";
+  flashCSS: string = "out";
 
   @Input() ship = null;
   @Input() currentCategory: string;
@@ -52,8 +52,9 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // fade in
     setTimeout(() => {
-      this.fadeStatus = "";
+      this.fadeCSS = "";
     }, 100)
   }
 
@@ -75,14 +76,16 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     modal.present();
     modal.onDidDismiss().then(value => {
       if(value.data != null) {
+
         if(this.sort.lastType == "Level") {
           this.sort.sort("Level", true);
         }
+
         this.iconLoader.refresh(this.ship);
 
-        this.outlineStatus = "in";
+        this.flashCSS = "in";
         setTimeout(() => {
-          this.outlineStatus = "out";
+          this.flashCSS = "out";
         })
       }
     })

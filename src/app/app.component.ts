@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AzurapiService } from './services/azurapi.service';
-import { FilterService } from './services/filter.service';
 import { ShipsService } from './services/ships.service';
 import { SortService } from './services/sort.service';
-import { SortListComponent } from './home/sort-list/sort-list.component';
 
 @Component({
   selector: 'app-root',

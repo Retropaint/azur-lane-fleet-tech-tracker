@@ -6,12 +6,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AzurapiService } from './services/azurapi.service';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { PromptButtonComponent } from './prompts/Components/prompt-button/prompt-button.component';
-import { SortListComponent } from './home/sort-list/sort-list.component';
 
 @NgModule({
   declarations: [AppComponent, ],

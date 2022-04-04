@@ -1,13 +1,5 @@
-<div style="margin-left: var(--dead-zone-margin); margin-right: var(--dead-zone-margin)">
-  <app-sort-list style="display: inline-block"></app-sort-list>
-  
-  <div>
-    <app-filter-list></app-filter-list>
-  </div>
-
-  <div style="width: 100%; text-align: center;">
-    <img src="assets/Cog Chip.png" style="width: 30px;"/> <p title="Cognitive chips required to awaken everyone until 120" class="generic-text inline-block" style="transform: translate(5px, -10px)"> Required: {{shipsService.cogReqs}}</p>
-  </div>
+<div class="dead-zone">
+  <app-feature-panel uiMode="sheet"></app-feature-panel>
 
   <div #container class="container" *ngIf="filter.shipsFilterPass != []">
     <app-sheet-category class="grid"></app-sheet-category>

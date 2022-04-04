@@ -1,0 +1,62 @@
+<!-- hull filter -->
+<div class="filter-container">
+
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('hulls')">
+    Hulls
+    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['hulls']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['hulls']"></ion-icon>
+  </p>
+  
+  <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['hulls']">
+    <ion-row wrap-reverse >
+      <app-filter-button *ngFor="let hull of hullNames; let i = index" [hasImage]="true" [filterName]="hull" [filterType]="filter.hulls" [index]="i" [iconWidth]="hullIconWidths[i]" [textRightMargin]="hullTextRightMargins[i]" fileName="hull"></app-filter-button>
+    </ion-row>
+  </ion-grid>
+</div>
+
+<!-- stat filter -->
+<div class="filter-container">
+
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('stats')">
+    Stats
+    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['stats']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
+  </p>
+  
+  <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['stats']">
+    <ion-row>
+      <app-filter-button *ngFor="let stat of statNames; let i = index" [hasImage]="true" [filterName]="stat" [filterType]="filter.stats" [index]="i" [iconWidth]="statIconWidths[i]" [textRightMargin]="statTextRightMargins[i]" fileName="stat"></app-filter-button>
+    </ion-row>
+  </ion-grid>
+</div>
+
+<!-- faction filter -->
+<div class="filter-container">
+
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('factions')">
+    Factions
+    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['factions']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['factions']"></ion-icon>
+  </p>
+  
+  <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['factions']">
+    <ion-row>
+      <app-filter-button *ngFor="let faction of factionNames; let i = index" [filterName]="faction" [filterType]="filter.factions" [index]="i" [iconWidth]="factionIconWidths[i]" [textRightMargin]="factionTextRightMargins[i]" fileName="faction"></app-filter-button>
+    </ion-row>
+  </ion-grid>
+</div>
+
+<div class="filter-container">
+  
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('rarities')">
+    Rarities
+    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['rarities']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['rarities']"></ion-icon>
+  </p>
+  
+  <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['rarities']">
+    <ion-row>
+      <app-filter-button *ngFor="let rarity of rarityNames; let i = index" [hasImage]="false" [filterName]="rarity" [filterType]="filter.rarities" [index]="i"></app-filter-button>
+    </ion-row>
+  </ion-grid>
+</div>

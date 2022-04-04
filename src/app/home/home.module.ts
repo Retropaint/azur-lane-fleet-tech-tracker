@@ -6,9 +6,9 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { ShipCardListComponent } from './icon-ui/ship-card-list/ship-card-list.component';
-import { FilterListComponent } from './filter-list/filter-list.component';
+import { FilterListComponent } from './feature-panel/filter-list/filter-list.component';
 import { ShipCardComponent } from './icon-ui/ship-card-list/ship-card/ship-card.component';
-import { SortListComponent } from './sort-list/sort-list.component';
+import { SortListComponent } from './feature-panel/sort-list/sort-list.component';
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
 import { IconUIComponent } from './icon-ui/icon-ui.component';
 import { SheetUIComponent } from './sheet-ui/sheet-ui.component';
@@ -17,13 +17,14 @@ import { SheetShipRowComponent } from './sheet-ui/sheet-category/sheet-ship-row/
 import { HelperComponent } from '../prompts/helper/helper.component';
 import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/settings-toggle.component';
 import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
-import { FilterButtonComponent } from './filter-list/filter-button/filter-button.component';
+import { FilterButtonComponent } from './feature-panel/filter-list/filter-button/filter-button.component';
 import { PromptButtonComponent } from '../prompts/Components/prompt-button/prompt-button.component';
 import { ConfirmationComponent } from '../prompts/confirmation/confirmation.component';
 import { PromptHeaderComponent } from '../prompts/Components/prompt-header/prompt-header.component';
 import { GenericBigButtonComponent } from './Components/generic-big-button/generic-big-button.component';
 import { ToggleFlagComponent } from '../toggle-flag/toggle-flag.component';
 import { CreditsComponent } from '../prompts/credits/credits.component';
+import { FeaturePanelComponent } from './feature-panel/feature-panel.component';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { CreditsComponent } from '../prompts/credits/credits.component';
     PromptHeaderComponent,
     GenericBigButtonComponent,
     ToggleFlagComponent,
-    CreditsComponent
+    CreditsComponent,
+    FeaturePanelComponent
   ],
   exports: [
     ShipCardListComponent, 

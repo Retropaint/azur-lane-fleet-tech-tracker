@@ -1,4 +1,4 @@
-<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{fadeStatus}} {{ship.isIgnored ? 'ignored' : ''}} isMobile-{{app.isMobile}}">
+<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{fadeCSS}} {{ship.isIgnored ? 'ignored' : ''}} isMobile-{{app.isMobile}}">
   <div class="ship-hull-and-level-background">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     
@@ -18,7 +18,7 @@
     </div>
   </div>
 
-  <div class="flash {{outlineStatus}}"></div>
+  <div class="flash {{flashCSS}}"></div>
 
   <div style="display: inline-block">
     <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}} {{outlineStatus}}-outline" />

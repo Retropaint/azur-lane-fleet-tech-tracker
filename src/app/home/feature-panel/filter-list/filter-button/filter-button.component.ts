@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { FilterService } from 'src/app/services/filter.service';
-import { HomePage } from '../../home.page';
+import { HomePage } from '../../../home.page';
 
 @Component({
   selector: 'app-filter-button',
@@ -16,6 +16,7 @@ export class FilterButtonComponent implements OnInit {
   @Input() iconWidth: number;
   @Input() textRightMargin: number;
   @Input() fileName: string;
+  @Input() hasImage: boolean = true;
 
   doubleClickTimeout: any;
   clickCount: number = 0;
@@ -26,6 +27,7 @@ export class FilterButtonComponent implements OnInit {
   ngOnInit() {}
 
   clickedFilterButton() {
+    console.log(this.filterName);
     if(this.app.isMobile) {
       this.home.ionContent.scrollToPoint(0, 100);
     }

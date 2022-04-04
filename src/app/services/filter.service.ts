@@ -52,6 +52,15 @@ export class FilterService {
     "All": true
   }
 
+  rarities = {
+    "Normal": false,
+    "Rare": false,
+    "Elite": false,
+    "Super-Rare": false,
+    "Ultra-Rare": false,
+    "All": true
+  }
+
   async init() {
     this.shipService.ships.forEach(ship => {
       this.shipsFilterPass[ship.id] = false;
@@ -105,29 +114,30 @@ export class FilterService {
       return;
     }
 
-    // check faction
-    let hasQualifiedFaction = false;
-    Object.keys(this.factions).forEach(faction => {
-      if(this.factions.All || this.factions[faction] && ship.faction == faction) {
-        hasQualifiedFaction = true;
-      }
-    })
-    if(!hasQualifiedFaction) {
+    if(!this.genericFilterCheck(ship, this.factions, 'faction')) {
       return;
     }
 
-    // check stat 
-    let hasQualifiedStat = false;
-    Object.keys(this.stats).forEach(stat => {
-      if(this.stats.All || this.stats[stat] && ship.techStat == stat) {
-        hasQualifiedStat = true;
-      }
-    })
-    if(!hasQualifiedStat) {
+    if(!this.genericFilterCheck(ship, this.stats, 'techStat')) {
+      return;
+    }
+
+    if(!this.genericFilterCheck(ship, this.rarities, 'rarity')) {
       return;
     }
 
     return true;
+  }
+
+  genericFilterCheck(ship, filterType, shipProperty): boolean {
+    let hasQualified = false;
+    Object.keys(filterType).forEach(filter => {
+      if(filterType.All || filterType[filter] && ship[shipProperty] == filter) {
+        hasQualified = true;
+        return;
+      }
+    })
+    return hasQualified;
   }
 
   // called from Home page filter buttons

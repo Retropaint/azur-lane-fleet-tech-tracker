@@ -13,3 +13,8 @@
 .grid {
   transform: rotate(180deg) translateX(-10px);
 }
+
+.dead-zone {
+  margin-left: var(--dead-zone-margin);
+  margin-right: var(--dead-zone-margin)
+}

@@ -25,7 +25,14 @@ export class HomePage implements AfterViewInit {
     ) {}
 
   async ngAfterViewInit() {
-    this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
+
+    // get UI mode if it exists, default to icon if it doesn't
+    if(await this.storage.get('ui-mode')) {
+      this.isIconUI = await this.storage.get("ui-mode") == 'Icon';
+    } else {
+      this.storage.set("ui-mode", 'Icon');
+    }
+
     this.setCardSize();
   }
 
@@ -36,18 +43,20 @@ export class HomePage implements AfterViewInit {
     });
     modal.present();
     modal.onDidDismiss().then(async () => {
+
       // only refresh icon UI if it was actually switched
       const previousState = this.isIconUI;
       this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
       if(this.isIconUI != previousState) {
         this.filter.filter();
       }
+      
       this.setCardSize();
     })
   }
 
   async setCardSize() {
     const num = await this.storage.get("ship-card-size")/100
-    document.documentElement.style.setProperty('--ship-card-zoom', num.toString() + "");
+    document.documentElement.style.setProperty('--ship-card-zoom', num.toString());
   }
 }

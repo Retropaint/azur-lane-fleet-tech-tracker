@@ -1,0 +1,28 @@
+.filter-category-name {
+  width: fit-content;
+  cursor: pointer;
+  margin-bottom: 2px;
+
+  // isMobile from app component
+  &.false {
+    transform: translate(0px, -19px);
+  }
+  &.true {
+    margin-bottom: 0px;
+  }
+}
+
+.filter-category-container {
+  width: fit-content;
+  display: inline-block;
+  transform: translateY(-20px);
+  margin-right: 5px;
+  height: 60px;
+  margin-left: 10px;
+}
+
+.filter-category {
+  text-align: center;
+  width: 100px;
+  height: 30px;
+}
