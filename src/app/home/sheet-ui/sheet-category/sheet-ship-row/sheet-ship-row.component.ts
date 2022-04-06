@@ -17,8 +17,8 @@ export class SheetShipRowComponent implements OnInit {
   @Input() ship: Ship;
   @Input() category: string;
   fleetTechHoverTitle: string;
-  flashStatus: string = "out";
-  ignoredStatus: string = "";
+  flashCSS: string = "out";
+  ignoredCSS: string = "";
 
   fleetTechStatIconWidths = {
     "HP": 16,
@@ -42,7 +42,7 @@ export class SheetShipRowComponent implements OnInit {
   ngOnInit() {
     this.fleetTechHoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
     if(this.ship.isIgnored) {
-      this.ignoredStatus = "ignored";
+      this.ignoredCSS = "ignored";
     }
   }
 
@@ -59,18 +59,16 @@ export class SheetShipRowComponent implements OnInit {
     })
     modal.present();
     modal.onDidDismiss().then(value => {
-      if(value.data != null) {
-        if(this.sort.lastType == "Level") {
-          this.sort.sort("Level", true)
-        }
-        this.shipsService.ships = this.shipsService.setAllProperShipPos(this.shipsService.ships);
+      this.sort.sort(this.sort.lastType, true)
 
-        this.flashStatus = "in";
+      this.ship.isIgnored ? this.ignoredCSS = "ignored" : this.ignoredCSS = "";
+
+      // flash the row if pressed Confirm
+      if(value.data == 'done') {
+        this.flashCSS = "in";
         setTimeout(() => {
-          this.flashStatus = "out";
+          this.flashCSS = "out";
         })
-
-        this.ship.isIgnored ? this.ignoredStatus = "ignored" : this.ignoredStatus = "";
       }
     })
   }

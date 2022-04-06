@@ -12,7 +12,7 @@ import { AppComponent } from '../app.component';
   styleUrls: ['home.page.scss', 'filter.scss'],
 })
 export class HomePage implements AfterViewInit {
-  isIconUI: boolean = true;
+  uiMode: string;
 
   @ViewChild(IonContent) ionContent: IonContent;
   
@@ -28,7 +28,7 @@ export class HomePage implements AfterViewInit {
 
     // get UI mode if it exists, default to icon if it doesn't
     if(await this.storage.get('ui-mode')) {
-      this.isIconUI = await this.storage.get("ui-mode") == 'Icon';
+      this.uiMode = await this.storage.get("ui-mode");
     } else {
       this.storage.set("ui-mode", 'Icon');
     }
@@ -45,9 +45,9 @@ export class HomePage implements AfterViewInit {
     modal.onDidDismiss().then(async () => {
 
       // only refresh icon UI if it was actually switched
-      const previousState = this.isIconUI;
-      this.isIconUI = await this.storage.get('ui-mode') == 'Icon';
-      if(this.isIconUI != previousState) {
+      const previousState = this.uiMode;
+      this.uiMode = await this.storage.get('ui-mode');
+      if(this.uiMode != previousState) {
         this.filter.filter();
       }
       

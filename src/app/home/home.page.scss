@@ -27,7 +27,6 @@
 
 .header-container {
   text-align: center;
-  margin-bottom: 30px;
 }
 
 .title {
@@ -100,7 +99,8 @@
 .settings-button {
   display: inline-block;
   position: absolute;
-  margin-top: 20px;
+  margin-top: 7px;
+  margin-left: 30px;
   cursor: pointer;
 
   .image {

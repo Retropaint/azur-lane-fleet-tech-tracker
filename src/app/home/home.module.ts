@@ -14,7 +14,6 @@ import { IconUIComponent } from './icon-ui/icon-ui.component';
 import { SheetUIComponent } from './sheet-ui/sheet-ui.component';
 import { SettingsComponent } from '../prompts/settings/settings.component';
 import { SheetShipRowComponent } from './sheet-ui/sheet-category/sheet-ship-row/sheet-ship-row.component';
-import { HelperComponent } from '../prompts/helper/helper.component';
 import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/settings-toggle.component';
 import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
 import { FilterButtonComponent } from './feature-panel/filter-list/filter-button/filter-button.component';
@@ -44,7 +43,6 @@ import { FeaturePanelComponent } from './feature-panel/feature-panel.component';
     SheetUIComponent,
     SettingsComponent,
     SheetShipRowComponent,
-    HelperComponent,
     SettingsToggleComponent,
     SheetCategoryComponent,
     FilterButtonComponent,
@@ -63,7 +61,6 @@ import { FeaturePanelComponent } from './feature-panel/feature-panel.component';
     SheetUIComponent,
     SettingsComponent,
     SheetShipRowComponent,
-    HelperComponent,
     SettingsToggleComponent,
     PromptButtonComponent,
     ConfirmationComponent,

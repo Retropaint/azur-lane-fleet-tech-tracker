@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core';
 export class CogReqsService {
 
   data = {
-    "Normal 100": 60,
-    "Normal 105": 120,
-    "Normal 110": 180,
-    "Normal 115": 300,
+    "Common 100": 60,
+    "Common 105": 120,
+    "Common 110": 180,
+    "Common 115": 300,
 
     "Rare 100": 80,
     "Rare 105": 160,

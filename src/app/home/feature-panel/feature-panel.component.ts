@@ -6,12 +6,9 @@ import { ShipsService } from 'src/app/services/ships.service';
   templateUrl: './feature-panel.component.html',
   styleUrls: ['./feature-panel.component.scss', '../home.page.scss'],
 })
-export class FeaturePanelComponent implements OnInit {
+export class FeaturePanelComponent {
 
   @Input() uiMode: string;
 
   constructor(public shipsService: ShipsService) { }
-
-  ngOnInit() {}
-
 }

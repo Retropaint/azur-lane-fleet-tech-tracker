@@ -12,8 +12,6 @@ export class FilterService {
   constructor(private iconLoader: IconLoaderService, private shipService: ShipsService) { }
 
   shipsFilterPass = {};
-  delay: number = 30;
-  isAll: boolean; // keep track of if the last category was set to All, to decide whether to use the icon loader
 
   stats = {
     "FP": false,
@@ -53,7 +51,7 @@ export class FilterService {
   }
 
   rarities = {
-    "Normal": false,
+    "Common": false,
     "Rare": false,
     "Elite": false,
     "Super-Rare": false,
@@ -62,23 +60,29 @@ export class FilterService {
   }
 
   async init() {
+    // reset shipsFilterPass
     this.shipService.ships.forEach(ship => {
       this.shipsFilterPass[ship.id] = false;
     })
-    this.filter(true);
+
+    this.filter();
   }
 
-  filter(refresh: boolean = false) {
+  filter() {
+    // reset shipsFilterPass
     Object.keys(this.shipsFilterPass).forEach(id => {
       this.shipsFilterPass[id] = false;
     })
 
+    // assign shipsFilterPass
     this.shipService.ships.forEach(ship => {
       if(this.passesCriteria(ship)) {
         this.shipsFilterPass[ship.id] = true;
       }
     })
+
     this.shipService.ships = this.shipService.setAllProperShipPos(this.shipService.ships);
+
     this.shipService.refreshCogChipReq(this.shipsFilterPass);
 
     this.iconLoader.loadShips(this.shipsFilterPass);
@@ -129,7 +133,7 @@ export class FilterService {
     return true;
   }
 
-  genericFilterCheck(ship, filterType, shipProperty): boolean {
+  genericFilterCheck(ship: Ship, filterType: any, shipProperty: string): boolean {
     let hasQualified = false;
     Object.keys(filterType).forEach(filter => {
       if(filterType.All || filterType[filter] && ship[shipProperty] == filter) {
@@ -148,21 +152,18 @@ export class FilterService {
       })
     }
     filterType[name] = !filterType[name];
-    this.checkAllInType(filterType);
-    this.filter(filterType["All"]);
-  }
 
-  checkAllInType(type: any) {
-    if(this.isEverything(false, type) || this.isEverything(true, type)) {
-      Object.keys(type).forEach(filterName => {
-        type[filterName] = false;
+    // check if all in the category are true/false
+    if(this.isEverything(false, filterType) || this.isEverything(true, filterType)) {
+      Object.keys(filterType).forEach(filterName => {
+        filterType[filterName] = false;
       })
-      type["All"] = true;
-      this.isAll = true;
+      filterType["All"] = true;
     } else {
-      type["All"] = false;
-      this.isAll = false;
+      filterType["All"] = false;
     }
+
+    this.filter();
   }
 
   isEverything(toggle: boolean, type: any) {

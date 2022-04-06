@@ -9,17 +9,8 @@ import { HomePage } from '../home.page';
   styleUrls: ['./sheet-ui.component.scss', '../home.page.scss'],
 })
 export class SheetUIComponent {
-
-  @ViewChildren('categoryContainers', {read: ElementRef}) categoryContainers: QueryList<ElementRef>;
-  @ViewChild('container') container: ElementRef;
-
-  loadedSheets: number = 0;
-
   constructor(
     public home: HomePage, 
     public filter: FilterService,
     public shipsService: ShipsService) {}
-
-  openCategoryEditor(category: string) {
-  }
 }

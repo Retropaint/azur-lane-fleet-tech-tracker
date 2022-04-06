@@ -15,8 +15,6 @@ export class ConfirmationComponent implements AfterViewInit {
 
   constructor(private modalController: ModalController, private prompt: PromptService) { }
 
-  ngOnInit() {}
-
   ngAfterViewInit() {
     this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height + 30, true);
   }

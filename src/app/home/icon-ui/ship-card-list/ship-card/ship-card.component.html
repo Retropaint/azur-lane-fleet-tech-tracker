@@ -1,29 +1,30 @@
 <div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{fadeCSS}} {{ship.isIgnored ? 'ignored' : ''}} isMobile-{{app.isMobile}}">
   <div class="ship-hull-and-level-background">
+    <!-- hull icon -->
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
     
-    <div *ngIf="ship.techStat != 'FP'" [title]="hoverTitle">
-      <img class="ship-hull-icon" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <!-- tech stat and bonus -->
+    <div [title]="hoverTitle">
+      <img class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
       <p *ngIf="ship.techBonus == 2" class="double-stats-text">+2</p>
     </div>
 
-    <div *ngIf="ship.techStat == 'FP'" [title]="hoverTitle">
-      <img class="ship-hull-icon FP" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
-      <p *ngIf="ship.techBonus == 2" class="double-stats-text">+2</p>
-    </div>
-
+    <!-- level -->
     <div>
       <p *ngIf="ship.level < 120" class="ship-level Lv-text">Lv. {{ship.level}}</p>
       <ion-icon *ngIf="ship.level >= 120" name="checkmark-outline" class="done-checkmark"></ion-icon>
     </div>
   </div>
 
+  <!-- flash (appears after level edit)-->
   <div class="flash {{flashCSS}}"></div>
 
+  <!-- image -->
   <div style="display: inline-block">
     <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}} {{outlineStatus}}-outline" />
     <img *ngIf="ship.rarity == 'Ultra-Rare' || ship.rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive {{outlineStatus}}-outline"/>
     
+    <!-- name -->
     <div class="ship-name">
       <p class="ship-name-text">{{ship.name}}</p>
     </div>

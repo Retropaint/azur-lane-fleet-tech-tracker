@@ -23,7 +23,7 @@ export class FilterListComponent implements OnInit {
   factionIconWidths: number[] = [40, 30, 40, 32, 32, 40, 32, 32, 40];
   factionTextRightMargins: number[] = [10, 15, 15, 15, 15, 17, 15, 15, 17, 40];
 
-  rarityNames: string[] = ["Normal", "Rare", "Elite", "Super-Rare", "Ultra-Rare", "All"];
+  rarityNames: string[] = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare", "All"];
 
   unfoldedFilters = {
     "hulls": true,

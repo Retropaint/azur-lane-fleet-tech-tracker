@@ -31,7 +31,9 @@ export class ShipsService {
     }
   }
 
+  // set normal, maxed, and ignored ships in their respective positions
   setAllProperShipPos(shipArray) {
+    
     const shipTypes: Ship[][] = [[], [], []];
     shipArray.forEach(ship => {
       switch(this.getShipStatus(ship)) {
@@ -44,6 +46,8 @@ export class ShipsService {
         break;
       }
     })
+
+    // concatenate all types
     shipArray = [];
     for(let i = 0; i < 3; i++) {
       for(let j = 0; j < shipTypes[i].length; j++) {
@@ -62,14 +66,6 @@ export class ShipsService {
     return "normal";
   }
 
-  getIndex(id: string) {
-    for(let i = 0; i < this.ships.length; i++) {
-      if(this.ships[i].id == id) {
-        return i;
-      }
-    }
-  }
-
   refreshCogChipReq(shipsFilterPass) {
     this.cogReqs = 0;
     Object.keys(shipsFilterPass).forEach(id => {
@@ -82,10 +78,12 @@ export class ShipsService {
         if(level < 100) {
           level = 100;
         } else {
+          // ceil level to every 5th 
           if(level%5 != 0) {
             level += (5 - (level%5));
           }
         }
+        
         for(let i = level; i < 120; i += 5) {
           this.cogReqs += this.cogReqList.data[ship.rarity + " " + level];
           level += 5;

@@ -2,7 +2,10 @@
 
 <div class="prompt-info-background">
   <div #autoResize>
+
     <p class="prompt-text inline-block">Use the markers, slider, or input field to enter the level. </p>
+    
+    <!-- ignore toggle -->
     <div class="setting-container" title="Set this ship to be ignored, and push it down the list">
       <div class="toggle-container" (click)="setIgnored(!isIgnored)">
         <app-toggle-flag [toggle]="isIgnored"></app-toggle-flag>
@@ -11,15 +14,23 @@
     </div>
 
     <div>
+      <!-- markers-->
       <p class="prompt-text inline-block slider-marker l1" (click)="choseMarker(1)" title="Instantly set level to 1">1</p>
       <p class="prompt-text inline-block slider-marker l70" (click)="choseMarker(70)" title="Instantly set level to 70">70</p>
       <p class="prompt-text inline-block slider-marker l100" (click)="choseMarker(100)" title="Instantly set level to 100">100</p>
       <p class="prompt-text inline-block slider-marker l120" (click)="choseMarker(120)" title="Instantly set level to 120&#013;*Will be pushed down the list above ignored ships">120</p>
+      
+      <!-- slider -->
       <input type="range" min="1" max="125" [(ngModel)]="level" (ngModelChange)="changeLastInput(true)" class="slider" title="Set level using this slider">
+      
+      <!-- text field -->
       <form (ngSubmit)="done()">
         <input #input maxlength="3" title="Enter level as an input field" class="prompt-input centered" (blur)="updateSlider()" [value]="level" [(ngModel)]="textLevel" (ngModelChange)="changeLastInput(false)" name="this is for the form"/>
       </form>
+
+      <!-- 120 text-->
       <p class="prompt text maxed-text" *ngIf="level >= 120 || textLevel >= 120">*Marked as Complete and pushed down the list, above ignored ships.</p>
+    
     </div>
   </div>
 </div>

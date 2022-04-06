@@ -1,10 +1,15 @@
 <div>
   <p class="generic-text {{app.isMobile ? 'no-bottom-margin' : 'inline-block'}}">Sort: </p>
+  
   <div *ngFor="let type of types; index as i" class="generic-big-button unselected isMobile-{{app.isMobile}}" (click)="sort(type)" [title]="'Sort by ' + type.toLowerCase() + (!sortService.isAscending[type] ? ' (ascending)' : ' (descending)') + (type=='Level' ? '\n*Future level changes will be instantly sorted until another sort type is used' : '')">
+    <!-- little squares to the top side -->
     <div class="generic-big-button-square left"></div>
     <div class="generic-big-button-square right"></div>
+    
+    <!-- ascending/descending arrows -->
     <ion-icon *ngIf="!sortService.isAscending[type]" name="caret-up-outline" class="sort-options-arrow"></ion-icon>
     <ion-icon *ngIf="sortService.isAscending[type]" name="caret-down-outline" class="sort-options-arrow"></ion-icon>
+    
     <div class="generic-text options unselected"> {{type}} &nbsp;&nbsp;&nbsp;</div>
   </div>
 </div>

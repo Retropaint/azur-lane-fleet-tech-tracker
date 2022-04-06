@@ -9,14 +9,21 @@ export class IconLoaderService {
 
   ships = [];
   interval: any;
-  intervalTick: number = 9999;
+
+  // how many shapes can fade in at once
+  shipsPerTick: number = 999;
+
+  // determines if the 'no ships' text shows up
   hasShips: boolean;
 
   constructor(private shipsService: ShipsService) { }
 
   loadShips(shipsFilterPass) {
-    let index = 0;
+    
+    // reset
+    clearInterval(this.interval);
     this.ships = [];
+
     let toAdd = [];
     this.shipsService.ships.forEach(ship => {
       if(shipsFilterPass[ship.id]) {
@@ -26,17 +33,18 @@ export class IconLoaderService {
     toAdd = this.shipsService.setAllProperShipPos(toAdd);
     this.hasShips = toAdd.length > 0;
 
-    clearInterval(this.interval);
+
+    let index = 0;
     this.interval = setInterval(() => {
       const isLoading = index < toAdd.length;
       if(isLoading) {
-        for(let i = 0; i < this.intervalTick; i++) {
-          if(i > toAdd.length - 1) {
-            break;
-          }
+        for(let i = 0; i < Math.min(this.shipsPerTick, toAdd.length); i++) {
+          
+          // check if ship satisfies the filter
           if(shipsFilterPass[toAdd[index].id]) {
             this.ships.push(toAdd[index]);
           }
+          
           index++;
         }
       } else {
@@ -45,11 +53,9 @@ export class IconLoaderService {
     })
   }
 
-  refresh(ship: Ship) {
+  refresh() {
     clearInterval(this.interval);
-    const lastIndex = this.getIndex(ship.id);
     this.ships = this.shipsService.setAllProperShipPos(this.shipsService.ships);
-    console.log(lastIndex + ", " + this.getIndex(ship.id));
   }
 
   getIndex(id: string) {

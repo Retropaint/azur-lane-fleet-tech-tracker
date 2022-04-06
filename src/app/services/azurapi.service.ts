@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Ship } from '../interfaces/ship';
-import { FilterService } from './filter.service';
-import { ShortenedNamesService } from './shortened-names.service';
-import { HttpClient } from '@angular/common/http';
 import { ShipsService } from './ships.service';
+import { ShortenedNamesService } from './shortened-names.service';
 import { SortService } from './sort.service';
 
 @Injectable({
@@ -16,14 +14,17 @@ export class AzurapiService {
 
   constructor(
     private storage: Storage, 
-    private filter: FilterService, 
     private shortenedNames: ShortenedNamesService,
     private shipsService: ShipsService,
     private sort: SortService) {}
 
-  async init(isRetrieving: boolean = false) {
+  async init() {
+    
+    // reset ships
     this.shipsService.ships = [];
+    
     let savedShips = await this.storage.get("ships");
+    
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
       JSON.parse(ships).forEach(async ship => {
         // only accept ships with a max level fleet tech bonus
@@ -32,6 +33,10 @@ export class AzurapiService {
           const fleetTech = ship["fleetTech"]["statsBonus"]["maxLevel"]
 
           fleetTech["bonus"] = parseInt(fleetTech["bonus"][1]);
+
+          if(ship["rarity"] == "Normal") {
+            ship["rarity"] = "Common";
+          }
 
           // add dash for CSS
           if(ship["rarity"] == "Super Rare" || ship["rarity"] == "Priority") {
@@ -53,7 +58,6 @@ export class AzurapiService {
             techStat: this.shortenedNames.stats[fleetTech["stat"]],
             appliedHulls: fleetTech["applicable"],
           }
-          console.log(ship);
 
           // retain data from previous ship version, if it exists
           if(savedShips != null && savedShips.length > 0) {

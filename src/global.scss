@@ -66,3 +66,8 @@ ion-input {
   --padding-start: 0 !important;
   --padding-end: 5px !important;
 }
+
+.dead-zone {
+  margin-left: var(--dead-zone-margin);
+  margin-right: var(--dead-zone-margin);
+}

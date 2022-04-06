@@ -28,34 +28,30 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     private prompt: PromptService, 
     private modalController: ModalController, 
     private shipsService: ShipsService, 
-    private iconLoader: IconLoaderService,
     private filter: FilterService) { }
 
   ngOnInit() {
     this.textLevel = this.level;
+    console.log(this.level)
   }
 
   ngAfterViewInit() {
     this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
   }
 
-  exit() {
-    this.modalController.dismiss();
-  }
-
   done() {
-    const newShipInfo = {
-      "level": Math.min(this.level, 125),
-      "isIgnored": this.isIgnored || false
-    }
+    let finalLevel = Math.min(this.level, 125)
     if(!this.wasSlider) {
-      newShipInfo.level = Math.min(this.textLevel, 125)
+      finalLevel = Math.min(this.textLevel, 125)
     }
-    this.ship.level = newShipInfo.level;
-    this.ship.isIgnored = newShipInfo.isIgnored;
+
+    this.ship.level = finalLevel || this.level;
+    this.ship.isIgnored = this.isIgnored || false;
+    
     this.shipsService.refreshCogChipReq(this.filter.shipsFilterPass);
     this.shipsService.save();
-    this.modalController.dismiss(newShipInfo);
+    
+    this.modalController.dismiss('done');
   }
 
   // change which input type will be accepted in the end, as text and slider levels are inputted separately
@@ -79,6 +75,10 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 
   setIgnored(toggle) {
     this.isIgnored = toggle;
+  }
+
+  exit() {
+    this.modalController.dismiss();
   }
 
   ngOnDestroy() {

@@ -1,14 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Gesture, GestureController, GestureDetail, IonInput, ModalController } from '@ionic/angular';
-import { FilterService } from 'src/app/services/filter.service';
-import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
-import { IconUIComponent } from '../../icon-ui.component';
-import { HomePage } from 'src/app/home/home.page';
-import { IconLoaderService } from 'src/app/services/icon-loader.service';
-import { HoverTitlesService } from 'src/app/services/hover-titles.service';
-import { SortService } from 'src/app/services/sort.service';
-import { ShipsService } from 'src/app/services/ships.service';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { IonInput, ModalController } from '@ionic/angular';
 import { AppComponent } from 'src/app/app.component';
+import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
+import { HoverTitlesService } from 'src/app/services/hover-titles.service';
+import { IconLoaderService } from 'src/app/services/icon-loader.service';
+import { ShipsService } from 'src/app/services/ships.service';
+import { SortService } from 'src/app/services/sort.service';
 
 @Component({
   selector: 'app-ship-card',
@@ -42,7 +39,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     private modalController: ModalController,
     public hoverTitles: HoverTitlesService,
     private sort: SortService,
-    private shipsService: ShipsService,
     private iconLoader: IconLoaderService,
     public app: AppComponent) { }
 
@@ -75,14 +71,12 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     })
     modal.present();
     modal.onDidDismiss().then(value => {
-      if(value.data != null) {
+      this.sort.sort(this.sort.lastType, true);
 
-        if(this.sort.lastType == "Level") {
-          this.sort.sort("Level", true);
-        }
+      this.iconLoader.refresh();
 
-        this.iconLoader.refresh(this.ship);
-
+      // flash the card if pressed Confirm
+      if(value.data == 'done') {
         this.flashCSS = "in";
         setTimeout(() => {
           this.flashCSS = "out";

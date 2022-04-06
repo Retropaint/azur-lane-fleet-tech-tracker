@@ -1,9 +1,12 @@
 <div style="transform: translateX(20px)">
-  <div class="row"  #header>
+  <!-- header row -->
+  <div class="row">
     <div class="category-header ship-name border" style="color: white" title="Click to edit category" (click)="openCategoryEditor()">Ship</div>
     <div class="category-header stat header border tech-stat" title="Ships give these corresponding stats and their count at lv. 120">Stat</div>
     <div class="category-header level header border level" title="Click to change every ship's level in this category">Lv.</div>
   </div>
+
+  <!-- ships -->
   <ng-container *ngFor="let ship of shipsService.ships; index as i">
     <app-sheet-ship-row *ngIf="filter.shipsFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
   </ng-container>

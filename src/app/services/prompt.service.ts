@@ -10,13 +10,14 @@ export class PromptService {
   constructor(private modalController: ModalController) { }
 
   init(promptHeight: number, addExtraHeight: boolean = false) {
+    // get modal index, and prevent backdrop from setting cursor to pointer
     let modalIndex = 0;
     while(document.getElementById('ion-overlay-' + modalIndex) == null) {
       modalIndex++;
     }
     document.getElementById('ion-overlay-' + modalIndex).shadowRoot.children[0].setAttribute('style', 'cursor: default');
 
-    // extra height accounts for the prompt's own top and modal boxes
+    // extra height accounts for the prompt's own top and bottom 
     if(addExtraHeight) {
       this.changeHeight(promptHeight + 60 + 130);
     } else {
@@ -25,14 +26,6 @@ export class PromptService {
     
     document.documentElement.style.setProperty('--background-blur', '10px');
     return modalIndex;
-  }
-
-  exit() {
-    document.documentElement.style.setProperty('--background-blur', '0px');
-  }
-
-  changeHeight(height: number) {
-    document.documentElement.style.setProperty('--prompt-height', height + "px");
   }
 
   async openConfirmation(modalIndex: number, title: string, body: string, wasFromModal: boolean = true) {
@@ -78,7 +71,7 @@ export class PromptService {
     const modal = await this.modalController.create({
       component: promptComponent,
       animated: false,
-      backdropDismiss: false, // closing from backdrop closes editor as well
+      backdropDismiss: false
     })
     
     await modal.present();
@@ -89,5 +82,13 @@ export class PromptService {
 
       return await value.data;
     })
+  }
+
+  changeHeight(height: number) {
+    document.documentElement.style.setProperty('--prompt-height', height + "px");
+  }
+
+  exit() {
+    document.documentElement.style.setProperty('--background-blur', '0px');
   }
 }

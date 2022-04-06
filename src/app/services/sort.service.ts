@@ -8,6 +8,8 @@ import { ShipsService } from './ships.service';
 })
 export class SortService {
 
+  lastType: string;
+
   isAscending = {
     "Level": false,
     "Rarity": false,
@@ -15,15 +17,12 @@ export class SortService {
   }
 
   rarityRanks = {
-    "Normal": 0,
+    "Common": 0,
     "Rare": 1,
     "Elite": 2,
     "Super-Rare": 3,
     "Ultra-Rare": 4,
-    "Decisive": 4
   }
-
-  lastType: string;
 
   constructor(private filter: FilterService, private ships: ShipsService) {}
 

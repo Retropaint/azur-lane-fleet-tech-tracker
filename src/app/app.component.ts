@@ -12,17 +12,18 @@ import { SortService } from './services/sort.service';
 })
 export class AppComponent implements OnInit {
   isMobile: boolean;
-  latestVersion: string = "1.0";
+  latestVersion: string = "1.1";
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
     private sort: SortService,
     private ships: ShipsService,
     private platform: Platform) {
-    this.storage.create();
   }
 
   async ngOnInit() {
+    this.storage.create();
+
     this.isMobile = this.platform.is('mobileweb');
     if(!this.isMobile) {
       document.documentElement.style.setProperty('--dead-zone-margin', "200px");
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit {
     await this.ships.init();
     
     // replace old ship data with new, if versions changed
-    if(await this.storage.get("ships") == null || await this.storage.get("currentVersion") != this.latestVersion) {
+    if(await this.storage.get("ships") == null || await this.storage.get("version") != this.latestVersion) {
       this.azurapi.init().then(() => {
         this.sort.sort("Name");
       })
@@ -39,6 +40,6 @@ export class AppComponent implements OnInit {
       this.sort.sort("Name");
     }
     
-    this.storage.set("currentVersion", this.latestVersion);
+    this.storage.set("version", this.latestVersion);
   }
 }

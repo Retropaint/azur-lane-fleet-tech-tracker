@@ -11,10 +11,6 @@ export class SheetCategoryComponent {
 
   @Input() category: string;
   @Input() index: number;
-  canOpenEditor: boolean = true;
 
   constructor(public filter: FilterService, public shipsService: ShipsService) {}
-
-  openCategoryEditor() {
-  }
 }
