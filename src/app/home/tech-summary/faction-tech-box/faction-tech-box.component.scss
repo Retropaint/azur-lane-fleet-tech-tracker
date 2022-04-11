@@ -1,0 +1,56 @@
+.box {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  background: #213052bf;
+  border-left: 2px solid #40789d;
+  border-right: 2px solid #40537E;
+  border-bottom: 2px solid #40537E;
+  cursor: pointer;
+}
+
+.faction-img {
+  // transparent down the bottom
+  -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 125px;
+  margin-top: 90px;
+}
+
+.level {
+  font-family: faction-tech;
+  display: inline-block;
+  margin: 0;
+
+  &.number {
+    font-size: 50px;
+  }
+}
+
+.level-container {
+  text-align: center;
+  width: 200px;
+  padding-top: 50px;
+  z-index: 1;
+  position: absolute;
+}
+
+.name {
+  margin: 10px;
+  font-weight: bold;
+  font-style: italic;
+  margin: -2.5px;
+  background:linear-gradient(90deg, rgba(75, 109, 167, 1) 0%, rgba(33, 48, 82, 0.75) 79%);
+  padding-left: 7px;
+  width: 199px; // show right border
+  text-align: left;
+  margin-left: -4px;
+
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right-width: 0;
+  border-image: linear-gradient(to bottom right, #CEEEF7 0%, #38547A 50%) 1 stretch;
+}

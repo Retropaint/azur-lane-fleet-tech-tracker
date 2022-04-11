@@ -1,0 +1,12 @@
+<div class="box" title="Click to view {{fullFactionName}} tech bonuses">
+  <div class="name">{{fullFactionName}}</div>
+  <div class="level-container">
+    <p class="level Lv">Lv.</p>
+    <p class="level number" *ngIf="level != 0">{{level}}</p>
+    <p class="level number" *ngIf="level == 0">?</p>
+  </div>
+  <img class="faction-img" src="assets/icons/unselected faction icons/{{shortenedNames.factions[fullFactionName]}}.png"/>
+  <div class="selected-bulge">
+    
+  </div>
+</div>

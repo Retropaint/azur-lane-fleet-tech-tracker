@@ -26,10 +26,10 @@ export class SortService {
 
   constructor(private filter: FilterService, private ships: ShipsService) {}
 
-  sort(type: string, useCurrentToggle: boolean = false) {
+  sort(type: string, keepState: boolean = false) {
     this.lastType = type;
 
-    if(useCurrentToggle) {
+    if(keepState) {
       // switch toggle now, and then turn it back the other way once the sorting is done
       this.isAscending[type] = !this.isAscending[type];
     }

@@ -13,6 +13,8 @@ import { AppComponent } from '../app.component';
 })
 export class HomePage implements AfterViewInit {
   uiMode: string;
+  techMode: string = "ship";
+  techModeString = "Tech Summary";
 
   @ViewChild(IonContent) ionContent: IonContent;
   
@@ -58,5 +60,15 @@ export class HomePage implements AfterViewInit {
   async setCardSize() {
     const num = await this.storage.get("ship-card-size")/100
     document.documentElement.style.setProperty('--ship-card-zoom', num.toString());
+  }
+
+  async switchTechMode() {
+    if(this.techMode == "ship") {
+      this.techMode = "stat";
+      this.techModeString = "Ship Database"
+    } else {
+      this.techMode = "ship";
+      this.techModeString = "Tech Summary";
+    }
   }
 }

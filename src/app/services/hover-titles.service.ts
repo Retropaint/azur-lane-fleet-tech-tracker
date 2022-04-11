@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Ship } from '../interfaces/ship';
-import { ShortenedNamesService } from './shortened-names.service';
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +35,12 @@ export class HoverTitlesService {
     "SSV": "Submarine Carrier"
   }
 
-  constructor(private shortenedNames: ShortenedNamesService) { }
+  constructor() { }
 
   getTechStatTitle(ship: Ship) {
     let hullString = "";
     ship.appliedHulls.forEach(hull => {
-      hullString += this.shortenedNames.onlyApplicable[hull] + "s, ";
+      hullString += hull + "s, ";
     })
     hullString = hullString.substring(0, hullString.length - 2);
     return ship.techStat + ' (+' + ship.techBonus + ") to " + hullString;

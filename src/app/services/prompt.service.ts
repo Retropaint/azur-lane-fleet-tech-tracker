@@ -9,7 +9,7 @@ export class PromptService {
 
   constructor(private modalController: ModalController) { }
 
-  init(promptHeight: number, addExtraHeight: boolean = false) {
+  init(promptHeight: number, addConstantHeight: boolean = false) {
     // get modal index, and prevent backdrop from setting cursor to pointer
     let modalIndex = 0;
     while(document.getElementById('ion-overlay-' + modalIndex) == null) {
@@ -18,7 +18,7 @@ export class PromptService {
     document.getElementById('ion-overlay-' + modalIndex).shadowRoot.children[0].setAttribute('style', 'cursor: default');
 
     // extra height accounts for the prompt's own top and bottom 
-    if(addExtraHeight) {
+    if(addConstantHeight) {
       this.changeHeight(promptHeight + 60 + 130);
     } else {
       this.changeHeight(promptHeight);
@@ -47,9 +47,9 @@ export class PromptService {
       }
     })
     
-    await modal.present();
+    modal.present();
     
-    return await modal.onDidDismiss().then(async value => {
+    return modal.onDidDismiss().then(async value => {
       // set universal height to now be the prompt that initally opened
       document.documentElement.style.setProperty('--prompt-height', prevHeight);
 
@@ -59,7 +59,7 @@ export class PromptService {
       } else {
         this.exit();
       }
-      return await value.data;
+      return value.data;
     })
   }
 
@@ -74,13 +74,12 @@ export class PromptService {
       backdropDismiss: false
     })
     
-    await modal.present();
+    modal.present();
     
-    return await modal.onDidDismiss().then(async value => {
+    return modal.onDidDismiss().then(async value => {
       document.documentElement.style.setProperty('--prompt-height', prevHeight);
       document.getElementById('ion-overlay-' + modalIndex).setAttribute('style', '');
-
-      return await value.data;
+      return value.data;
     })
   }
 

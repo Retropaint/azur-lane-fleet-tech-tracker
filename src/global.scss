@@ -36,6 +36,11 @@
   src: url("./assets/Inter-Regular.ttf")
 }
 
+@font-face {
+  font-family: faction-tech;
+  src: url("./assets/OPTIIgnite.otf");
+}
+
 :root {
   --background-blur: 0px;
   --prompt-height: 500px;

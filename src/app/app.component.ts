@@ -12,7 +12,7 @@ import { SortService } from './services/sort.service';
 })
 export class AppComponent implements OnInit {
   isMobile: boolean;
-  latestVersion: string = "1.1";
+  latestVersion: string = "1.2";
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     await this.ships.init();
     
     // replace old ship data with new, if versions changed
-    if(await this.storage.get("ships") == null || await this.storage.get("version") != this.latestVersion) {
+    if(await this.storage.get("ships") == null || await this.storage.get("version") != this.latestVersion || await this.storage.get("version") == null) {
       this.azurapi.init().then(() => {
         this.sort.sort("Name");
       })

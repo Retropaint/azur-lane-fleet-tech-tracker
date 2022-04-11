@@ -17,7 +17,7 @@
 <!-- stat filter -->
 <div class="filter-container">
 
-  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['hulls']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['stats']  ? 'fold' : 'unfold'}}">
     Stats
     <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['stats']"></ion-icon>
     <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
@@ -33,7 +33,7 @@
 <!-- faction filter -->
 <div class="filter-container">
 
-  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('factions')" title="Click to {{unfoldedFilters['hulls']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('factions')" title="Click to {{unfoldedFilters['factions']  ? 'fold' : 'unfold'}}">
     Factions
     <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['factions']"></ion-icon>
     <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['factions']"></ion-icon>
@@ -49,7 +49,7 @@
 <!-- rarity filter -->
 <div class="filter-container">
   
-  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('rarities')" title="Click to {{unfoldedFilters['hulls']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('rarities')" title="Click to {{unfoldedFilters['rarities']  ? 'fold' : 'unfold'}}">
     Rarities
     <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['rarities']"></ion-icon>
     <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['rarities']"></ion-icon>

@@ -91,4 +91,14 @@ export class ShipsService {
       }
     })
   }
+
+  getRetroRarity(id: string): string {
+    const rarities = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare"];
+    
+    for(const ship of this.ships) {
+      if(ship.id == id) {
+        return rarities[rarities.indexOf(ship.rarity) + 1];
+      }
+    }
+  }
 }

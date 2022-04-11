@@ -12,4 +12,7 @@ export interface Ship {
   techBonus: number;
   appliedHulls: string[];
   isIgnored?: boolean;
+  hasRetrofit: boolean;
+  obtainStat: string;
+  obtainBonus: number;
 }

@@ -26,7 +26,7 @@ export class SortListComponent {
 
   constructor(private filter: FilterService, private storage: Storage, public sortService: SortService, public app: AppComponent) { }
 
-  async sort(type: string) {
+  sort(type: string) {
     this.sortService.sort(type);
   }
 }

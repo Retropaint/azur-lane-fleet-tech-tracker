@@ -1,0 +1,14 @@
+<div [style]="'text-align:' + anchor" class="{{isLastTech ? 'last-tech' : ''}}">
+  <div *ngFor="let hull of objectKeys(statsObject).reverse()" class="hull-stat-container">
+    
+    <!-- hull icon -->
+    <img src="assets/icons/frame hull icons/{{hull}}.png" class="hull-icon" title='{{hoverTitles.hulls[hull]}} ({{hull}})'/>
+    
+    <!-- stat abbreviation and bonus -->
+    <div *ngFor="let stat of objectKeys(statsObject[hull])" class="child">
+      <p class="generic-text no-glow inline-block stat-text">
+        {{stat}}: {{statsObject[hull][stat]}}
+      </p>
+    </div>
+  </div>
+</div>

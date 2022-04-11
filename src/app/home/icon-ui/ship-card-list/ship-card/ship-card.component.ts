@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonInput, ModalController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 import { AppComponent } from 'src/app/app.component';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
@@ -19,6 +20,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   hoverTitle: string;
   fadeCSS: string = "default";
   flashCSS: string = "out";
+  rarity: string;
 
   @Input() ship = null;
   @Input() currentCategory: string;
@@ -40,9 +42,11 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     public hoverTitles: HoverTitlesService,
     private sort: SortService,
     private iconLoader: IconLoaderService,
-    public app: AppComponent) { }
+    public app: AppComponent,
+    private shipsService: ShipsService,
+    private storage: Storage) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
   }

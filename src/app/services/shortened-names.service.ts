@@ -46,7 +46,7 @@ export class ShortenedNamesService {
     "health": "HP"
   };
 
-  onlyApplicable = {
+  applicableHulls = {
     "Battleship": "BB",
     "Light aircraft carrier": "CVL",
     "Aircraft carrier": "CV",

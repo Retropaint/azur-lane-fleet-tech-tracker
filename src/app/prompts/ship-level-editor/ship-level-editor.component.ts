@@ -9,7 +9,7 @@ import { ShipsService } from 'src/app/services/ships.service';
 @Component({
   selector: 'app-ship-level-editor',
   templateUrl: './ship-level-editor.component.html',
-  styleUrls: ['./ship-level-editor.component.scss', 'level-slider.scss'],
+  styleUrls: ['./ship-level-editor.component.scss', '../../../level-slider.scss'],
 })
 export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 

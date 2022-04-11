@@ -6,7 +6,7 @@
     <!-- tech stat and bonus -->
     <div [title]="hoverTitle">
       <img class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
-      <p *ngIf="ship.techBonus == 2" class="double-stats-text">+2</p>
+      <p class="double-stats-text">+{{ship.techBonus}}</p>
     </div>
 
     <!-- level -->
@@ -21,8 +21,8 @@
 
   <!-- image -->
   <div style="display: inline-block">
-    <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}} {{outlineStatus}}-outline" />
-    <img *ngIf="ship.rarity == 'Ultra-Rare' || ship.rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive {{outlineStatus}}-outline"/>
+    <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}}" />
+    <img *ngIf="ship.rarity == 'Ultra-Rare' || ship.rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
     
     <!-- name -->
     <div class="ship-name">

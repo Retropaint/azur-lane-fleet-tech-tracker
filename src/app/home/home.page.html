@@ -8,7 +8,7 @@
       <h1 class="title generic-text no-glow">Azur Lane Fleet Tech Tracker</h1>
 
       <div style="display: inline-block; transform: translateX(50px)">
-        <app-generic-big-button text="Tech Summary"></app-generic-big-button>
+        <app-generic-big-button text="{{techModeString}}" (click)="switchTechMode()"></app-generic-big-button>
 
         <!-- settings button-->
         <div class="settings-button" (click)="openSettingsModal()">
@@ -20,9 +20,16 @@
 
     <!-- feature panel & UI mode to display-->
     <div *ngIf="shipsService.ships.length != 0" class="categories">
-      <app-feature-panel [uiMode]="uiMode"></app-feature-panel>
-      <app-icon-ui *ngIf="uiMode == 'Icon'" style="position: relative;"></app-icon-ui>
-      <app-sheet-ui *ngIf="uiMode == 'Sheet'" style="position: relative;"></app-sheet-ui>
+
+      <!-- ship database -->
+      <ng-container *ngIf="techMode == 'ship'">
+        <app-feature-panel [uiMode]="uiMode"></app-feature-panel>
+        <app-icon-ui *ngIf="uiMode == 'Icon'" style="position: relative;"></app-icon-ui>
+        <app-sheet-ui *ngIf="uiMode == 'Sheet'" style="position: relative;"></app-sheet-ui>
+      </ng-container>
+
+      <!-- tech summary -->
+      <app-tech-summary *ngIf="techMode == 'stat'" style="text-align: center"></app-tech-summary>
     </div>
 
     <!-- if no ships loaded, show this -->

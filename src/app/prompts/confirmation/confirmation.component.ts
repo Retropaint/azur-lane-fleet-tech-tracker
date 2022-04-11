@@ -23,7 +23,7 @@ export class ConfirmationComponent implements AfterViewInit {
     this.chose(false);
   }
 
-  async chose(isYes: boolean) {
+  chose(isYes: boolean) {
     this.modalController.dismiss(isYes);
   }
 }

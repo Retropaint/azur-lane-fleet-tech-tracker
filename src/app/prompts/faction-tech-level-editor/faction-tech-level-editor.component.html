@@ -1,0 +1,23 @@
+<app-prompt-header header="FACTION LEVEL EDITOR - {{fullFactionName.toUpperCase()}}" [component]="this"></app-prompt-header>
+
+<div class="prompt-info-background">
+  <div #autoResize>
+     <!-- markers-->
+     <p class="prompt-text">Use markers, slider, or input field to enter level.</p>
+     <p class="prompt-text inline-block slider-marker l1" (click)="choseMarker(1)" title="Instantly set level to 1">1</p>
+     <p class="prompt-text inline-block slider-marker max-level" (click)="choseMarker(maxLevel)" title="Instantly set level to {{maxLevel}}">{{maxLevel}}</p>
+     
+     <!-- slider -->
+     <input type="range" min="1" [max]="maxLevel" [(ngModel)]="sliderLevel" (ngModelChange)="changeLastInput(true)" class="slider" title="Set level using this slider">
+     
+     <!-- text field -->
+     <form (ngSubmit)="done()">
+       <input #input maxlength="3" title="Enter level as an input field" class="prompt-input centered" (blur)="updateSlider()" [value]="sliderLevel" [(ngModel)]="textLevel" (ngModelChange)="changeLastInput(false)" name="this is for the form"/>
+     </form>
+  </div>
+</div>
+
+<div class="prompt-buttons">
+  <app-prompt-button (click)="exit()" text="Cancel" color="red"></app-prompt-button>
+  <app-prompt-button (click)="done()" text="Confirm" color="blue"></app-prompt-button>
+</div>

@@ -44,6 +44,7 @@ export class SettingsComponent implements AfterViewInit {
   resetSite() {
     this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All ship data and settings preferences will be deleted. Proceed?")
       .then(isYes => {
+        console.log(isYes);
         if(isYes) {
           this.modalController.dismiss();
           this.shipsService.ships = [];

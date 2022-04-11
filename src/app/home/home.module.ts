@@ -24,6 +24,10 @@ import { GenericBigButtonComponent } from './Components/generic-big-button/gener
 import { ToggleFlagComponent } from '../toggle-flag/toggle-flag.component';
 import { CreditsComponent } from '../prompts/credits/credits.component';
 import { FeaturePanelComponent } from './feature-panel/feature-panel.component';
+import { TechSummaryComponent } from './tech-summary/tech-summary.component';
+import { FactionTechBoxComponent } from './tech-summary/faction-tech-box/faction-tech-box.component';
+import { FactionTechLevelEditorComponent } from '../prompts/faction-tech-level-editor/faction-tech-level-editor.component';
+import { TechHullStatDisplayComponent } from './tech-summary/tech-hull-stat-display/tech-hull-stat-display.component';
 
 @NgModule({
   imports: [
@@ -52,7 +56,11 @@ import { FeaturePanelComponent } from './feature-panel/feature-panel.component';
     GenericBigButtonComponent,
     ToggleFlagComponent,
     CreditsComponent,
-    FeaturePanelComponent
+    FeaturePanelComponent,
+    TechSummaryComponent,
+    FactionTechBoxComponent,
+    FactionTechLevelEditorComponent,
+    TechHullStatDisplayComponent
   ],
   exports: [
     ShipCardListComponent, 
@@ -65,12 +73,12 @@ import { FeaturePanelComponent } from './feature-panel/feature-panel.component';
     PromptButtonComponent,
     ConfirmationComponent,
     PromptHeaderComponent,
-    CreditsComponent
+    CreditsComponent,
   ],
   providers: [
     IconUIComponent, 
     PromptButtonComponent, 
-    ConfirmationComponent
+    ConfirmationComponent,
   ]
 })
 export class HomePageModule {}

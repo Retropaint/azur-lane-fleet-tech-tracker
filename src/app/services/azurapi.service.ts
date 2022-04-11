@@ -23,7 +23,12 @@ export class AzurapiService {
     // reset ships
     this.shipsService.ships = [];
     
-    let savedShips = await this.storage.get("ships");
+    let savedShips: Ship[] = await this.storage.get("ships");
+
+    let names = [];
+    let ids = [];
+
+    let test = [];
     
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
       JSON.parse(ships).forEach(async ship => {
@@ -31,20 +36,37 @@ export class AzurapiService {
         if(ship["fleetTech"]["statsBonus"]["maxLevel"]) {
 
           const fleetTech = ship["fleetTech"]["statsBonus"]["maxLevel"]
+          const obtainFleetTech = ship["fleetTech"]["statsBonus"]["collection"];
 
-          fleetTech["bonus"] = parseInt(fleetTech["bonus"][1]);
+          // there's a ' on Pamiat for some reason
+          if(ship["names"]["en"].includes("Pamiat")) {
+            ship["names"]["en"] = "Pamiat Merkuria";
+          }
 
+          // chitose has CV applicable in her HP collection, remove that
+          if(ship["names"]["en"] == 'Chitose') {
+            obtainFleetTech.splice(obtainFleetTech['applicable'].indexOf('Aircraft carrier'), 1);
+          }
+
+          // Normal LOL
           if(ship["rarity"] == "Normal") {
             ship["rarity"] = "Common";
           }
 
-          // add dash for CSS
+          // replace PR rarities with normal counterparts, and add dash for CSS
           if(ship["rarity"] == "Super Rare" || ship["rarity"] == "Priority") {
             ship["rarity"] = "Super-Rare";
           }
           if(ship["rarity"] == "Ultra Rare" || ship["rarity"] == "Decisive") {
             ship["rarity"] = "Ultra-Rare";
           }
+
+          // abbreviate applicable hulls
+          for(let i = 0; i < fleetTech['applicable'].length; i++) {
+            fleetTech['applicable'][i] = this.shortenedNames.applicableHulls[fleetTech['applicable'][i]]
+          }
+
+          console.log(ship);
 
           const newShip: Ship = {
             name: ship["names"]["en"],
@@ -54,9 +76,19 @@ export class AzurapiService {
             rarity: ship["rarity"],
             hull: this.shortenedNames.hulls[ship["hullType"]],
             thumbnail: ship["thumbnail"],
-            techBonus: fleetTech["bonus"],
+            techBonus: parseInt(fleetTech["bonus"][1]),
             techStat: this.shortenedNames.stats[fleetTech["stat"]],
             appliedHulls: fleetTech["applicable"],
+            hasRetrofit: ship["retrofit"],
+            obtainStat: this.shortenedNames.stats[obtainFleetTech["stat"]],
+            obtainBonus: parseInt(obtainFleetTech["bonus"][1]),
+          }
+
+          if(newShip.obtainStat == "HP" && newShip.hull == 'CV' || newShip.obtainStat == "HP" && newShip.hull == 'CVL') {
+            const test1 = {
+              [newShip.name]: obtainFleetTech['bonus']
+            }
+            test.push(test1);
           }
 
           // retain data from previous ship version, if it exists
@@ -71,11 +103,17 @@ export class AzurapiService {
           }
 
           this.shipsService.ships.push(newShip);
+          //let name = newShip.name.replace(/\s/g, "_");
+          //names.push(name);
+          //ids.push(newShip.id);
         }
       })
     }).then(() => {
+      //console.log(JSON.stringify(names));
+      //console.log(JSON.stringify(ids));
       this.shipsService.save();
       this.sort.sort("Name", true);
+      console.log(JSON.stringify(test));
     })
   }
 }

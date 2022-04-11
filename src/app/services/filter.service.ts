@@ -59,7 +59,7 @@ export class FilterService {
     "All": true
   }
 
-  async init() {
+  init() {
     // reset shipsFilterPass
     this.shipService.ships.forEach(ship => {
       this.shipsFilterPass[ship.id] = false;

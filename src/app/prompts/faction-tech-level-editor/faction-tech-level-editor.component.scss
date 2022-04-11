@@ -1,0 +1,14 @@
+.slider-marker {
+  position: absolute;
+  margin-top: 0px;
+  cursor: pointer;
+  width: calc(100% - 40px);
+
+  &.l1 {
+    transform: translateX(calc(0.8%));
+  }
+
+  &.max-level {
+    transform: translateX(calc(97%));
+  }
+}

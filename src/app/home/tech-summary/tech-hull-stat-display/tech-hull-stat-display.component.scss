@@ -1,0 +1,28 @@
+.hull-stat-container {
+  display: inline-grid;
+  text-align: left;
+  margin: 10px;
+  zoom: 0.95;
+  
+  .child {
+    margin-bottom: 5px;
+  }
+
+  &.faction {
+    float: none;
+  }
+}
+
+.hull-icon {
+  margin-bottom: 10px;
+  width: 52px;
+  height: 32px;
+}
+
+.stat-text {
+  margin: 0px;
+}
+
+.last-tech {
+  margin-bottom: 200px;
+}

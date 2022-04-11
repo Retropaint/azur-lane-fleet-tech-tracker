@@ -1,0 +1,37 @@
+<div class="dead-zone" style="padding-right: 50px">
+  <app-faction-tech-box fullFactionName="Eagle Union" [level]="levels['USS']" (click)="openFactionTech('Eagle Union')"></app-faction-tech-box>
+  <app-faction-tech-box fullFactionName="Royal Navy" [level]="levels['HMS']" (click)="openFactionTech('Royal Navy')"></app-faction-tech-box>
+  <app-faction-tech-box fullFactionName="Sakura Empire" [level]="levels['IJN']" (click)="openFactionTech('Sakura Empire')"></app-faction-tech-box>
+  <app-faction-tech-box fullFactionName="Iron Blood" [level]="levels['KMS']" (click)="openFactionTech('Iron Blood')"></app-faction-tech-box>
+  
+  <div *ngIf="viewingFaction != null" class="faction-tech-container">
+    <app-generic-big-button text="Change Level" extraCSS="inline-block" class="change-level" (click)="changeLevel()"></app-generic-big-button>
+    <p class="generic-text">{{viewingFaction}}</p>
+    <app-tech-hull-stat-display [statsObject]="viewingFactionStats"></app-tech-hull-stat-display>
+  </div>
+
+  <p class="generic-text display-name" (click)="toggleFold('total')">
+    --- Total Tech --- &nbsp;
+    <ion-icon name="caret-up-outline" *ngIf="!folded['total']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="folded['total']"></ion-icon>
+  </p>
+  <app-tech-hull-stat-display *ngIf="!folded['total']" [statsObject]="totalStats"></app-tech-hull-stat-display>
+
+  <p class="generic-text display-name" (click)="toggleFold('max')">
+    --- 120 Tech --- &nbsp;
+    <ion-icon name="caret-up-outline" *ngIf="!folded['max']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="folded['max']"></ion-icon>
+  </p>
+  <app-tech-hull-stat-display *ngIf="!folded['max']" [statsObject]="techStats"></app-tech-hull-stat-display>
+
+  <p class="generic-text display-name {{folded['obtain'] ? 'last-folded-margin' : ''}}" (click)="toggleFold('obtain')">
+    --- Obtain Tech --- &nbsp;
+    <ion-icon name="caret-up-outline" *ngIf="!folded['obtain']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="folded['obtain']"></ion-icon>
+  </p>
+  <app-tech-hull-stat-display *ngIf="!folded['obtain']" [statsObject]="obtainStats" [isLastTech]="true"></app-tech-hull-stat-display>
+</div>
+
+<!--
+<p class="generic-text centered">Work in progress <br><br> (including the button, I should probably make it less boring)</p>
+-->

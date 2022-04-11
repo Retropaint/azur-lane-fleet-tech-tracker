@@ -6,7 +6,7 @@
     <p class="prompt-text inline-block">Use the markers, slider, or input field to enter the level. </p>
     
     <!-- ignore toggle -->
-    <div class="setting-container" title="Set this ship to be ignored, and push it down the list">
+    <div class="setting-container" title="Set this if you don't have the ship. &#013;- Pushed down the list &#013;- Collection bonus will not be counted for tech stat calculation">
       <div class="toggle-container" (click)="setIgnored(!isIgnored)">
         <app-toggle-flag [toggle]="isIgnored"></app-toggle-flag>
         <p class="toggle-text">Ignore</p>
@@ -29,7 +29,7 @@
       </form>
 
       <!-- 120 text-->
-      <p class="prompt text maxed-text" *ngIf="level >= 120 || textLevel >= 120">*Marked as Complete and pushed down the list, above ignored ships.</p>
+      <p class="prompt text maxed-text" *ngIf="wasSlider && level >= 120 || !wasSlider && textLevel >= 120">*Marked as Complete and pushed down the list, above ignored ships.</p>
     
     </div>
   </div>
