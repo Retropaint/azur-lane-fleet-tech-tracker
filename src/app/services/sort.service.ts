@@ -46,8 +46,10 @@ export class SortService {
         })
       break; case "Rarity":
         this.ships.ships.sort((a: Ship, b: Ship) => {
-          if(!this.isAscending[type] && this.rarityRanks[a.rarity] > this.rarityRanks[b.rarity] || 
-            this.isAscending[type] && this.rarityRanks[a.rarity] < this.rarityRanks[b.rarity]) {
+          let aRarity = this.ships.getRetroRarity(a.id);
+          let bRarity = this.ships.getRetroRarity(b.id);
+          if(!this.isAscending[type] && this.rarityRanks[aRarity] > this.rarityRanks[bRarity] || 
+            this.isAscending[type] && this.rarityRanks[aRarity] < this.rarityRanks[bRarity]) {
             return 1;
           } else {
             return -1;

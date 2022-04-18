@@ -15,12 +15,12 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 
   @Input() name: string;
   @Input() level: number;
-  @Input() isIgnored: boolean;
   @Input() ship: Ship;
   @Input() category: string;
   @ViewChild('autoResize') autoResize: ElementRef;
   textLevel: number;
   wasSlider: boolean;
+  isObtained: boolean;
 
   @ViewChild('input') input: ElementRef;
 
@@ -32,7 +32,9 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.textLevel = this.level;
-    console.log(this.level)
+
+    // I have no clue why true on init doesn't work
+    this.isObtained = true;
   }
 
   ngAfterViewInit() {
@@ -40,13 +42,18 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   done() {
-    let finalLevel = Math.min(this.level, 125)
-    if(!this.wasSlider) {
-      finalLevel = Math.min(this.textLevel, 125)
-    }
+    this.ship.isObtained = this.isObtained;
 
-    this.ship.level = finalLevel || this.level;
-    this.ship.isIgnored = this.isIgnored || false;
+    // set level
+    if(!this.isObtained) {
+      this.ship.level = 1;
+    } else {
+      let finalLevel = Math.min(this.level, 125)
+      if(!this.wasSlider) {
+        finalLevel = Math.min(this.textLevel, 125)
+      }
+      this.ship.level = finalLevel || this.level;
+    }
     
     this.shipsService.refreshCogChipReq(this.filter.shipsFilterPass);
     this.shipsService.save();
@@ -73,8 +80,8 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     this.done();
   }
 
-  setIgnored(toggle) {
-    this.isIgnored = toggle;
+  setObtained(toggle) {
+    this.isObtained = toggle;
   }
 
   exit() {

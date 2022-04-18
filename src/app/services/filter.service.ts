@@ -3,15 +3,18 @@ import { Ship } from '../interfaces/ship';
 import { Storage } from '@ionic/storage-angular';
 import { IconLoaderService } from './icon-loader.service';
 import { ShipsService } from './ships.service';
+import { SettingsDataService } from './settings-data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilterService {
 
-  constructor(private iconLoader: IconLoaderService, private shipService: ShipsService) { }
+  constructor(private iconLoader: IconLoaderService, private shipService: ShipsService, private settingsData: SettingsDataService) { }
 
   shipsFilterPass = {};
+  oneSelectedStat: string;
+  oneSelectedHull: string;
 
   stats = {
     "FP": false,
@@ -59,6 +62,13 @@ export class FilterService {
     "All": true
   }
 
+  statuses = {
+    "W.I.P": false,
+    "Maxed": false,
+    "Unobtained": false,
+    "All": true
+  }
+
   init() {
     // reset shipsFilterPass
     this.shipService.ships.forEach(ship => {
@@ -81,8 +91,6 @@ export class FilterService {
       }
     })
 
-    this.shipService.ships = this.shipService.setAllProperShipPos(this.shipService.ships);
-
     this.shipService.refreshCogChipReq(this.shipsFilterPass);
 
     this.iconLoader.loadShips(this.shipsFilterPass);
@@ -98,14 +106,20 @@ export class FilterService {
     }
     
     // check hull
-    switch(ship.hull) {
+    let hull = null;
+    if(this.settingsData.settings['retrofit-form'] == 'Yes' && ship.hasRetrofit) {
+      hull = ship.retroHull
+    } else {
+      hull = ship.hull;
+    }
+    switch(hull) {
       case "DD":
         checkHullFilter("DD");
       break; case "CL": 
         checkHullFilter("CL");
       break; case "CA": case "CB":
         checkHullFilter("CA");
-      break; case "BB": case "BC": case "BBV ":
+      break; case "BB": case "BC": case "BBV":
         checkHullFilter("BB");
       break; case "CV": case "CVL": 
         checkHullFilter("CV");
@@ -118,15 +132,58 @@ export class FilterService {
       return;
     }
 
+    let rarity = null;
+    if(this.settingsData.settings['retrofit-form'] == 'Yes' && ship.hasRetrofit) {
+      rarity = this.shipService.getRetroRarity(ship.id);
+    } else {
+      rarity = ship.rarity;
+    }
+
+    // check rarity
+    let hasQualifiedRarity = false;
+    Object.keys(this.rarities).forEach(filter => {
+      if(this.rarities.All || this.rarities[filter] && rarity == filter) {
+        hasQualifiedRarity = true;
+        return;
+      }
+    })
+    if(!hasQualifiedRarity) {
+      return;
+    }
+
+    // check status
+    let hasQualifiedStatus = this.statuses["All"];
+    Object.keys(this.statuses).forEach(status => {
+      if(this.statuses[status]) {
+        switch(status) {
+          case "W.I.P": 
+            if(ship.isObtained && ship.level < 120) {
+              hasQualifiedStatus = true;
+              return;
+            }
+          break; case "Maxed": 
+            if(ship.isObtained && ship.level >= 120) {
+              hasQualifiedStatus = true;
+              return;
+            }
+          break; case "Unobtained": 
+            if(!ship.isObtained) {
+              hasQualifiedStatus = true;
+              return;
+            }
+          break;
+        }
+      }
+    })
+    if(!hasQualifiedStatus) {
+      return;
+    }
+
     if(!this.genericFilterCheck(ship, this.factions, 'faction')) {
       return;
     }
 
     if(!this.genericFilterCheck(ship, this.stats, 'techStat')) {
-      return;
-    }
-
-    if(!this.genericFilterCheck(ship, this.rarities, 'rarity')) {
       return;
     }
 
@@ -163,6 +220,9 @@ export class FilterService {
       filterType["All"] = false;
     }
 
+    this.oneSelectedHull = this.getTheOnlyOne(this.hulls);
+    console.log(this.oneSelectedHull);
+
     this.filter();
   }
 
@@ -176,5 +236,21 @@ export class FilterService {
       }
     })
     return isYes;
+  }
+
+  getTheOnlyOne(type: any) {
+    let filterCount = 0;
+    let chosenFilter = "";
+    for(const toggle of Object.keys(type)) {
+      if(type[toggle]) {
+        filterCount++;
+        chosenFilter = toggle;
+      }
+    }
+    if(filterCount > 1) {
+      return;
+    }
+
+    return chosenFilter;
   }
 }

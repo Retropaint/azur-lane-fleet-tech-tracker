@@ -1,4 +1,4 @@
-<div style="transform: translateX(20px)">
+<div class="container">
   <!-- header row -->
   <div class="row">
     <div class="category-header ship-name border" style="color: white" title="Click to edit category">Ship</div>
@@ -7,7 +7,7 @@
   </div>
 
   <!-- ships -->
-  <ng-container *ngFor="let ship of shipsService.ships; index as i">
+  <ng-container *ngFor="let ship of shipsService.setAllProperShipPos(shipsService.ships); index as i">
     <app-sheet-ship-row *ngIf="filter.shipsFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
   </ng-container>
 </div>

@@ -1,11 +1,11 @@
-<div #row (click)="enterLevel()"  *ngIf="filter.shipsFilterPass[ship.id] == true" title="Click to edit level" class="row default {{ignoredCSS}}">
+<div #row (click)="enterLevel()"  *ngIf="filter.shipsFilterPass[ship.id] == true" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}}">
   <!-- hull icon and ship name-->
-  <div class="ship-name {{ship.rarity}} border">
-    <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
+  <div class="ship-name {{rarity}} border">
+    <img class="ship-hull-icon" [title]="hoverTitles.hulls[hull] + ' (' + hull + ')'" [src]="'assets/icons/frame hull icons/' + hull + '.png'"/>
     {{ship.name}}
   </div>
 
-  <div class="tech-stat border tech-stat {{ship.rarity}}" [title]="fleetTechHoverTitle">
+  <div class="tech-stat border tech-stat {{rarity}}" [title]="fleetTechHoverTitle">
     <!-- tech stat icon -->
     <img class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
     

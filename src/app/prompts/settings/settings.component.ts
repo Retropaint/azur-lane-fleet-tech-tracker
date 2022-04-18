@@ -2,8 +2,10 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AzurapiService } from 'src/app/services/azurapi.service';
+import { CsvService } from 'src/app/services/csv.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { ShipsService } from 'src/app/services/ships.service';
+import { SortService } from 'src/app/services/sort.service';
 import { CreditsComponent } from '../credits/credits.component';
 
 @Component({
@@ -11,7 +13,7 @@ import { CreditsComponent } from '../credits/credits.component';
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.scss'],
 })
-export class SettingsComponent implements AfterViewInit {
+export class SettingsComponent implements AfterViewInit, OnInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
   modalIndex: number;
@@ -24,7 +26,13 @@ export class SettingsComponent implements AfterViewInit {
     private storage: Storage, 
     private modalController: ModalController, 
     public azurapi: AzurapiService,
-    private shipsService: ShipsService) { }
+    private shipsService: ShipsService,
+    public csv: CsvService,
+    private sort: SortService) { }
+
+  ngOnInit() {
+    this.csv.settingsText = "";
+  }
 
   async ngAfterViewInit() {
     this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
@@ -32,19 +40,14 @@ export class SettingsComponent implements AfterViewInit {
 
     this.initialStates = {
       uiMode: await this.storage.get("ui-mode"),
-      shipCardSize: await this.storage.get("ship-card-size")
+      shipCardSize: await this.storage.get("ship-card-size"),
+      retrofitForms: await this.storage.get("retrofit-forms")
     }
-  }
-
-  exit() {
-    this.cancel();
-    this.modalController.dismiss();
   }
 
   resetSite() {
     this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All ship data and settings preferences will be deleted. Proceed?")
       .then(isYes => {
-        console.log(isYes);
         if(isYes) {
           this.modalController.dismiss();
           this.shipsService.ships = [];
@@ -54,19 +57,30 @@ export class SettingsComponent implements AfterViewInit {
       })
   }
 
+  importCSV(event) {
+    this.csv.import(event.target['files'][0]);
+    this.sort.sort(this.sort.lastType, true);
+  }
+
+  openCredits() {
+    this.prompt.openAnotherPrompt(this.modalIndex, CreditsComponent);
+  }
+
   cancel() {
     this.storage.set("ui-mode", this.initialStates["uiMode"]);
     this.storage.set("ship-card-size", this.initialStates["shipCardSize"]);
+    this.storage.set("retrofit-forms", this.initialStates["retrofitForms"]);
     this.modalController.dismiss();
   }
 
   save() {
     this.storage.set("ship-card-size", this.inputShipCardSize);
-    this.modalController.dismiss();
+    this.modalController.dismiss('confirmed');
   }
 
-  openCredits() {
-    this.prompt.openAnotherPrompt(this.modalIndex, CreditsComponent);
+  exit() {
+    this.cancel();
+    this.modalController.dismiss();
   }
 
   ngOnDestroy() {

@@ -1,4 +1,5 @@
 <ion-content [fullscreen]="true" class="main-content isMobile-{{app.isMobile}}">
+  <app-hull-info-panel *ngIf="uiMode == 'Icon' && techMode == 'ship'" [uiMode]="uiMode"></app-hull-info-panel>
   <div class="background"></div>
 
   <div class="content">

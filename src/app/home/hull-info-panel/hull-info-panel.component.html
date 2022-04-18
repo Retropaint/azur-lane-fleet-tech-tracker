@@ -1,0 +1,117 @@
+<div class="container fold-{{fold}} {{uiMode}}">
+  <div *ngIf="uiMode == 'Icon'">
+    <p class="generic-text inline-block header">HULL INFO PANEL 
+      <ion-icon *ngIf="!fold" name="caret-up-outline"></ion-icon>
+      <ion-icon *ngIf="fold" name="caret-down-outline"></ion-icon>
+    </p>
+    <div class="box header" (click)="fold = !fold"></div>
+  </div>
+  <div class="box visible-{{!fold}} {{uiMode}}">
+    <!-- hull -->
+    <div class="applicable-grid">
+      <p class="generic-text centered applicable-hulls separator left right bottom"> HULL </p>
+      <p class="generic-text centered applicable-hulls separator bottom"> APPLIES TO </p>
+
+      <!-- AE -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="AE"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="AE"></app-hull-icon>
+      </div>
+
+      <!-- AR -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="AR"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="AR"></app-hull-icon>
+      </div>
+      
+      <!-- BB -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="BB"></app-hull-icon>
+        <app-hull-icon hull="BC"></app-hull-icon>
+        <app-hull-icon hull="BBV"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="BB" class="hull-icon"></app-hull-icon>
+        <app-hull-icon hull="BC" class="hull-icon"></app-hull-icon>
+        <app-hull-icon hull="BBV" class="hull-icon"></app-hull-icon>
+      </div>
+
+      <!-- CA -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="BM"></app-hull-icon>
+        <app-hull-icon hull="CA"></app-hull-icon>
+        <app-hull-icon hull="CB" class="hull-icon"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="BM"></app-hull-icon>
+        <app-hull-icon hull="CA" class="hull-icon"></app-hull-icon>
+        <app-hull-icon hull="CB" class="hull-icon"></app-hull-icon>
+      </div>
+
+      <!-- CL -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="CL"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="CL"></app-hull-icon>
+      </div>
+
+      <!-- CV -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="CV"></app-hull-icon>
+        <app-hull-icon hull="CVL" class="hull-icon"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="CV" class="hull-icon"></app-hull-icon>
+        <app-hull-icon hull="CVL" class="hull-icon"></app-hull-icon>
+      </div>
+
+      <!-- DD -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="DD"></app-hull-icon>
+        <app-hull-icon hull="DDG" class="hull-icon"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="DD" class="hull-icon"></app-hull-icon>
+        <app-hull-icon hull="DDG" class="hull-icon"></app-hull-icon>
+      </div>
+
+      <!-- SS -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="SS"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="SS" class="hull-icon"></app-hull-icon>
+        <app-hull-icon hull="SSV" class="hull-icon"></app-hull-icon>
+      </div>
+
+      <!-- SSV -->
+      <div class="hull-icon-container separator left right bottom">
+        <app-hull-icon hull="SSV"></app-hull-icon>
+      </div>
+      <div class="hull-icon-container separator bottom">
+        <app-hull-icon hull="SSV" class="hull-icon"></app-hull-icon>
+      </div>
+      
+    </div>
+
+    <!-- grid display so it fills height for left border-->
+    <!-- the left border can't be from the box itself because the scroll screws it up-->
+    <div class="separator left" style="display: grid">
+      <p class="generic-text centered exception-header" style="font-size: 15px">EXCEPTIONS (120 TECH)</p>
+    </div>
+
+    <div class="exception-header-grid">
+      <p class="generic-text centered applicable-hulls separator top left right">NAME</p>
+      <p class="generic-text centered applicable-hulls separator top">APPLIES TO</p>
+    </div>
+
+    <ng-container *ngFor="let ship of shipsService.getAlphabeticalOrder(); index as i">
+      <app-hull-info-exception *ngIf="ship.appliedHulls.length == 1 && ship.hull != 'AE' && ship.hull != 'AR' && ship.hull != 'CL'" [name]="ship.name" [hull]="ship.appliedHulls[0]" [isLast]="last"></app-hull-info-exception>
+    </ng-container>
+  </div>
+</div>

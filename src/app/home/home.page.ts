@@ -5,6 +5,8 @@ import { FilterService } from '../services/filter.service';
 import { SettingsComponent } from '../prompts/settings/settings.component';
 import { ShipsService } from '../services/ships.service';
 import { AppComponent } from '../app.component';
+import { SettingsDataService } from '../services/settings-data.service';
+import { SortService } from '../services/sort.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,9 @@ export class HomePage implements AfterViewInit {
     private storage: Storage,
     private filter: FilterService,
     public shipsService: ShipsService,
-    public app: AppComponent
+    public app: AppComponent,
+    private settingsData: SettingsDataService,
+    private sort: SortService
     ) {}
 
   async ngAfterViewInit() {
@@ -44,21 +48,20 @@ export class HomePage implements AfterViewInit {
       animated: false
     });
     modal.present();
-    modal.onDidDismiss().then(async () => {
-
-      // only refresh icon UI if it was actually switched
-      const previousState = this.uiMode;
-      this.uiMode = await this.storage.get('ui-mode');
-      if(this.uiMode != previousState) {
-        this.filter.filter();
+    modal.onDidDismiss().then(async value => {
+      if(value.data == null) {
+        return;
       }
-      
+      this.settingsData.refresh().then(() => {
+        this.sort.sort(this.sort.lastType, true);
+        this.uiMode = this.settingsData.settings['ui-mode']
+      })
       this.setCardSize();
     })
   }
 
   async setCardSize() {
-    const num = await this.storage.get("ship-card-size")/100
+    const num = this.settingsData.settings['ship-card-size']/100
     document.documentElement.style.setProperty('--ship-card-zoom', num.toString());
   }
 

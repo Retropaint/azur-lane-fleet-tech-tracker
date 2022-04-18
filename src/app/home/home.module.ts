@@ -28,6 +28,9 @@ import { TechSummaryComponent } from './tech-summary/tech-summary.component';
 import { FactionTechBoxComponent } from './tech-summary/faction-tech-box/faction-tech-box.component';
 import { FactionTechLevelEditorComponent } from '../prompts/faction-tech-level-editor/faction-tech-level-editor.component';
 import { TechHullStatDisplayComponent } from './tech-summary/tech-hull-stat-display/tech-hull-stat-display.component';
+import { HullInfoPanelComponent } from './hull-info-panel/hull-info-panel.component';
+import { HullIconComponent } from './Components/hull-icon/hull-icon.component';
+import { HullInfoExceptionComponent } from './hull-info-panel/hull-info-exception/hull-info-exception.component';
 
 @NgModule({
   imports: [
@@ -60,7 +63,10 @@ import { TechHullStatDisplayComponent } from './tech-summary/tech-hull-stat-disp
     TechSummaryComponent,
     FactionTechBoxComponent,
     FactionTechLevelEditorComponent,
-    TechHullStatDisplayComponent
+    TechHullStatDisplayComponent,
+    HullInfoPanelComponent,
+    HullIconComponent,
+    HullInfoExceptionComponent
   ],
   exports: [
     ShipCardListComponent, 

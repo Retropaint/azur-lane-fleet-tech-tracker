@@ -60,7 +60,7 @@ export class TechSummaryComponent implements OnInit {
     // get obtain and collection stats
     this.shipsService.ships.forEach(ship => {
       // obtain
-      if(!ship.isIgnored) {
+      if(ship.isObtained) {
         ship.appliedHulls.forEach(hull => {
           if(hull == 'DDG') {
             return;
@@ -77,7 +77,7 @@ export class TechSummaryComponent implements OnInit {
       }
 
       // max
-      if(!ship.isIgnored && ship.level >= 120) {
+      if(ship.isObtained && ship.level >= 120) {
         ship.appliedHulls.forEach(hull => {
           if(hull == 'DDG') {
             return;
@@ -185,8 +185,8 @@ export class TechSummaryComponent implements OnInit {
     // reset
     this.totalStats = {};
     
-    const factionStats = [this.ussStats, this.hmsStats, this.ijnStats, this.kmsStats, this.obtainStats, this.techStats];
-    factionStats.forEach(faction => {
+    const stats = [this.ussStats, this.hmsStats, this.ijnStats, this.kmsStats, this.obtainStats, this.techStats];
+    stats.forEach(faction => {
       Object.keys(faction).forEach(hull => {
         if(hull == 'DDG') {
           return;

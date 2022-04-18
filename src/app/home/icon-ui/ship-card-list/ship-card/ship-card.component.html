@@ -1,7 +1,7 @@
-<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{fadeCSS}} {{ship.isIgnored ? 'ignored' : ''}} isMobile-{{app.isMobile}}">
+<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container {{fadeCSS}} {{ship.isObtained ? '' : 'unobtained'}} isMobile-{{app.isMobile}}">
   <div class="ship-hull-and-level-background">
     <!-- hull icon -->
-    <img class="ship-hull-icon" [title]="hoverTitles.hulls[ship.hull] + ' (' + ship.hull + ')'" [src]="'assets/icons/frame hull icons/' + ship.hull + '.png'"/>
+    <img class="ship-hull-icon" [title]="hoverTitles.hulls[hull] + ' (' + hull + ')'" [src]="'assets/icons/frame hull icons/' + hull + '.png'"/>
     
     <!-- tech stat and bonus -->
     <div [title]="hoverTitle">
@@ -21,8 +21,8 @@
 
   <!-- image -->
   <div style="display: inline-block">
-    <img *ngIf="ship.rarity != 'Ultra-Rare' && ship.rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{ship.rarity}}" />
-    <img *ngIf="ship.rarity == 'Ultra-Rare' || ship.rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
+    <img *ngIf="rarity != 'Ultra-Rare' && rarity != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{rarity}}" />
+    <img *ngIf="rarity == 'Ultra-Rare' || rarity == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
     
     <!-- name -->
     <div class="ship-name">

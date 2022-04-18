@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AzurapiService } from './services/azurapi.service';
+import { CsvService } from './services/csv.service';
+import { SettingsDataService } from './services/settings-data.service';
 import { ShipsService } from './services/ships.service';
 import { SortService } from './services/sort.service';
 
@@ -12,17 +14,27 @@ import { SortService } from './services/sort.service';
 })
 export class AppComponent implements OnInit {
   isMobile: boolean;
-  latestVersion: string = "1.2";
+  latestVersion: string = "1.4";
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
     private sort: SortService,
     private ships: ShipsService,
-    private platform: Platform) {
+    private platform: Platform,
+    private settingsData: SettingsDataService,
+    private csv: CsvService) {
   }
 
   async ngOnInit() {
+    const randomLog = ["Uptier Shigure!", "Downtier Drake!", "Liduke pls come back :(", "Arknights is better", "Don't look at the code. It's not for my sake it's for yours, trust me."];
+    const chosenLog = Math.floor(Math.random() * randomLog.length);
+    setTimeout(() => {
+      console.log(randomLog[chosenLog]);
+    }, 500) 
+
     this.storage.create();
+
+    await this.settingsData.refresh();
 
     this.isMobile = this.platform.is('mobileweb');
     if(!this.isMobile) {
@@ -30,7 +42,7 @@ export class AppComponent implements OnInit {
     }
 
     await this.ships.init();
-    
+
     // replace old ship data with new, if versions changed
     if(await this.storage.get("ships") == null || await this.storage.get("version") != this.latestVersion || await this.storage.get("version") == null) {
       this.azurapi.init().then(() => {

@@ -23,7 +23,11 @@ export class ShortenedNamesService {
     "Battlecruiser": "BC",
     "Aviation Battleship": "BBV",
     "Aircraft Carrier": "CV",
+
+    // fool-proof
+    "Light Aircraft Carrier": "CVL",
     "Light Carrier": "CVL",
+    
     "Light Cruiser": "CL",
     "Heavy Cruiser": "CA",
     "Large Cruiser": "CB",

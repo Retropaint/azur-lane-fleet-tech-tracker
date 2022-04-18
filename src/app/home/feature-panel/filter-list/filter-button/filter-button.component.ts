@@ -27,7 +27,7 @@ export class FilterButtonComponent implements OnInit {
   ngOnInit() {}
 
   clickedFilterButton() {
-    console.log(this.filterName);
+    this.home.ionContent.scrollToTop();
     if(this.app.isMobile) {
       this.home.ionContent.scrollToPoint(0, 100);
     }

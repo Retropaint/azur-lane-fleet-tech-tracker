@@ -7,12 +7,13 @@ export interface Ship {
   faction: string;
   rarity: string;
   hull: string;
-  thumbnail: string;
+  fallbackThumbnail: string;
   techStat: string;
   techBonus: number;
   appliedHulls: string[];
-  isIgnored?: boolean;
   hasRetrofit: boolean;
   obtainStat: string;
   obtainBonus: number;
+  retroHull: string;
+  isObtained?: boolean;
 }

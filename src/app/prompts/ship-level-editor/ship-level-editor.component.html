@@ -6,10 +6,10 @@
     <p class="prompt-text inline-block">Use the markers, slider, or input field to enter the level. </p>
     
     <!-- ignore toggle -->
-    <div class="setting-container" title="Set this if you don't have the ship. &#013;- Pushed down the list &#013;- Collection bonus will not be counted for tech stat calculation">
-      <div class="toggle-container" (click)="setIgnored(!isIgnored)">
-        <app-toggle-flag [toggle]="isIgnored"></app-toggle-flag>
-        <p class="toggle-text">Ignore</p>
+    <div class="setting-container" title="Set this if you have the ship. Their collection stat bonus will be included in tech stat calculation">
+      <div class="toggle-container" (click)="setObtained(!isObtained)">
+        <app-toggle-flag [toggle]="isObtained"></app-toggle-flag>
+        <p class="toggle-text">Obtained</p>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
       <p class="prompt-text inline-block slider-marker l1" (click)="choseMarker(1)" title="Instantly set level to 1">1</p>
       <p class="prompt-text inline-block slider-marker l70" (click)="choseMarker(70)" title="Instantly set level to 70">70</p>
       <p class="prompt-text inline-block slider-marker l100" (click)="choseMarker(100)" title="Instantly set level to 100">100</p>
-      <p class="prompt-text inline-block slider-marker l120" (click)="choseMarker(120)" title="Instantly set level to 120&#013;*Will be pushed down the list above ignored ships">120</p>
+      <p class="prompt-text inline-block slider-marker l120" (click)="choseMarker(120)" title="Instantly set level to 120&#013;- Will be displayed after obtained and before unobtained ships">120</p>
       
       <!-- slider -->
       <input type="range" min="1" max="125" [(ngModel)]="level" (ngModelChange)="changeLastInput(true)" class="slider" title="Set level using this slider">

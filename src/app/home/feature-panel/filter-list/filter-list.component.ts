@@ -25,11 +25,14 @@ export class FilterListComponent implements OnInit {
 
   rarityNames: string[] = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare", "All"];
 
+  statusNames: string[] = ["W.I.P", "Maxed", "Unobtained", "All"];
+
   unfoldedFilters = {
     "hulls": true,
     "stats": true,
     "factions": true,
-    "rarities": true
+    "rarities": true,
+    "status": true
   }
 
   constructor(public filter: FilterService, public app: AppComponent) { }

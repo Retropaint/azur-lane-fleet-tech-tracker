@@ -27,8 +27,6 @@ export class AzurapiService {
 
     let names = [];
     let ids = [];
-
-    let test = [];
     
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
       JSON.parse(ships).forEach(async ship => {
@@ -45,7 +43,7 @@ export class AzurapiService {
 
           // chitose has CV applicable in her HP collection, remove that
           if(ship["names"]["en"] == 'Chitose') {
-            obtainFleetTech.splice(obtainFleetTech['applicable'].indexOf('Aircraft carrier'), 1);
+            obtainFleetTech['applicable'].splice(obtainFleetTech['applicable'].indexOf('Aircraft carrier'), 1);
           }
 
           // Normal LOL
@@ -66,8 +64,6 @@ export class AzurapiService {
             fleetTech['applicable'][i] = this.shortenedNames.applicableHulls[fleetTech['applicable'][i]]
           }
 
-          console.log(ship);
-
           const newShip: Ship = {
             name: ship["names"]["en"],
             id: ship["id"],
@@ -75,20 +71,18 @@ export class AzurapiService {
             faction: this.shortenedNames.factions[ship["nationality"]],
             rarity: ship["rarity"],
             hull: this.shortenedNames.hulls[ship["hullType"]],
-            thumbnail: ship["thumbnail"],
+            fallbackThumbnail: ship["thumbnail"],
             techBonus: parseInt(fleetTech["bonus"][1]),
             techStat: this.shortenedNames.stats[fleetTech["stat"]],
             appliedHulls: fleetTech["applicable"],
             hasRetrofit: ship["retrofit"],
             obtainStat: this.shortenedNames.stats[obtainFleetTech["stat"]],
             obtainBonus: parseInt(obtainFleetTech["bonus"][1]),
+            retroHull: this.shortenedNames.hulls[ship['retrofitHullType']]
           }
 
-          if(newShip.obtainStat == "HP" && newShip.hull == 'CV' || newShip.obtainStat == "HP" && newShip.hull == 'CVL') {
-            const test1 = {
-              [newShip.name]: obtainFleetTech['bonus']
-            }
-            test.push(test1);
+          if(newShip.name == 'Bogue') {
+            console.log(ship)
           }
 
           // retain data from previous ship version, if it exists
@@ -96,7 +90,7 @@ export class AzurapiService {
             for(const savedShip of savedShips) {
               if(savedShip.id == ship.id) {
                 newShip.level = savedShip.level;
-                newShip.isIgnored = savedShip.isIgnored;
+                newShip.isObtained = savedShip.isObtained;
                 break;
               }
             }
@@ -113,7 +107,6 @@ export class AzurapiService {
       //console.log(JSON.stringify(ids));
       this.shipsService.save();
       this.sort.sort("Name", true);
-      console.log(JSON.stringify(test));
     })
   }
 }

@@ -3,8 +3,8 @@
 
   <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('hulls')" title="Click to {{unfoldedFilters['hulls']  ? 'fold' : 'unfold'}}">
     Hulls
-    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['hulls']"></ion-icon>
-    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['hulls']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['hulls']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['hulls']"></ion-icon>
   </p>
   
   <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['hulls']">
@@ -19,8 +19,8 @@
 
   <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['stats']  ? 'fold' : 'unfold'}}">
     Stats
-    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['stats']"></ion-icon>
-    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['stats']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
   </p>
   
   <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['stats']">
@@ -35,8 +35,8 @@
 
   <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('factions')" title="Click to {{unfoldedFilters['factions']  ? 'fold' : 'unfold'}}">
     Factions
-    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['factions']"></ion-icon>
-    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['factions']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['factions']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['factions']"></ion-icon>
   </p>
   
   <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['factions']">
@@ -51,13 +51,29 @@
   
   <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('rarities')" title="Click to {{unfoldedFilters['rarities']  ? 'fold' : 'unfold'}}">
     Rarities
-    <ion-icon name="caret-up-outline" *ngIf="unfoldedFilters['rarities']"></ion-icon>
-    <ion-icon name="caret-down-outline" *ngIf="!unfoldedFilters['rarities']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['rarities']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['rarities']"></ion-icon>
   </p>
   
   <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['rarities']">
     <ion-row>
       <app-filter-button *ngFor="let rarity of rarityNames; let i = index" [hasImage]="false" [filterName]="rarity" [filterType]="filter.rarities" [index]="i"></app-filter-button>
+    </ion-row>
+  </ion-grid>
+</div>
+
+<!-- status filter -->
+<div class="filter-container">
+  
+  <p class="generic-text filter-category-name {{app.isMobile}}" (click)="toggleFold('status')" title="Click to {{unfoldedFilters['status']  ? 'fold' : 'unfold'}}">
+    Statuses
+    <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['status']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['status']"></ion-icon>
+  </p>
+  
+  <ion-grid class="filter-category-container" *ngIf="unfoldedFilters['status']">
+    <ion-row>
+      <app-filter-button *ngFor="let status of statusNames; let i = index" [hasImage]="false" [filterName]="status" [filterType]="filter.statuses" [index]="i"></app-filter-button>
     </ion-row>
   </ion-grid>
 </div>

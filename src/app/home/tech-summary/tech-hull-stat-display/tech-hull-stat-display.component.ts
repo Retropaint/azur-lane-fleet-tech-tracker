@@ -13,9 +13,11 @@ export class TechHullStatDisplayComponent implements OnInit {
   @Input() statsObject: any;
   @Input() anchor: string = "center"; // left, center, right
   @Input() isLastTech: boolean = false;
+  @Input() emptyMsg: string;
 
   constructor(public hoverTitles: HoverTitlesService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

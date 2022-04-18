@@ -1,0 +1,113 @@
+.container {
+  position: fixed;
+  z-index: 1;
+  top: 150px;
+  pointer-events: none;
+
+  &.fold-true {
+    right: -150px;
+  }
+
+  &.fold-false {
+    right: 130px;
+  }
+
+  &.sheet {
+    position: relative;
+    top: 0px;
+    right: 0px;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+.header {
+  transform: translateX(-10px) rotate(-90deg);
+  margin-bottom: 0;
+  pointer-events: visible;
+  pointer-events: none;
+}
+
+.box {
+  height: 550px;
+  transform: translate(100px, -100px);
+  background: #213052;
+  border: 2px solid #40537E;
+  border-left: none;
+  width: fit-content;
+  overflow-y: scroll;
+  pointer-events: visible;
+
+  &.visible-false {
+    visibility: hidden;
+  }
+
+  &.header {
+    position: absolute;
+    width: 70px;
+    height: 185px;
+    transform: translate(40px, -100px);
+    z-index: -1;
+    overflow-y: hidden;
+    border-left: 2px solid #40537E;
+    cursor: pointer;
+  }
+
+  &.sheet {
+    height: auto;
+    overflow-y: hidden;
+    transform: none;
+  }
+}
+
+.applicable-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.exception-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.applicable-hulls {
+  padding: 10px;
+  margin: 0px;
+}
+
+.exception-hull {
+  padding: 5px;
+  margin: 0px;
+}
+
+.hull-icon-container {
+  text-align: center;
+  padding-top: 5px;
+}
+
+.hull-icon {
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+}
+
+.separator {
+  &.left {
+    border-left: 2px solid #40537E;
+  }
+
+  &.right {
+    border-right: 2px solid #40537E;
+  }
+
+  &.top {
+    border-top: 2px solid #40537E;
+  }
+
+  &.bottom {
+    border-bottom: 2px solid #40537E;
+  }
+}
+
+.exception-header {
+  margin-bottom: 5px;
+}

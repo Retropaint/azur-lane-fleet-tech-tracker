@@ -20,6 +20,7 @@ export class HoverTitlesService {
 
   hulls = {
     "DD": "Destroyer",
+    "DDG": "Guided-Missile Destroyer",
     "CV": "Aircraft Carrier",
     "CVL": "Light Aircraft Carrier",
     "CA": "Heavy Cruiser",

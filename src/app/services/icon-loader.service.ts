@@ -10,7 +10,7 @@ export class IconLoaderService {
   ships = [];
   interval: any;
 
-  // how many shapes can fade in at once
+  // how many ships can fade in at once
   shipsPerTick: number = 999;
 
   // determines if the 'no ships' text shows up
@@ -30,21 +30,18 @@ export class IconLoaderService {
         toAdd.push(ship);
       }
     })
-    toAdd = this.shipsService.setAllProperShipPos(toAdd);
-    this.hasShips = toAdd.length > 0;
 
+    // although ship list HTML already does this, ship list HTML will load them in non-proper positions if shipsPerTick is less than total ship count
+    toAdd = this.shipsService.setAllProperShipPos(toAdd);
+    
+    this.hasShips = toAdd.length > 0;
 
     let index = 0;
     this.interval = setInterval(() => {
       const isLoading = index < toAdd.length;
       if(isLoading) {
         for(let i = 0; i < Math.min(this.shipsPerTick, toAdd.length); i++) {
-          
-          // check if ship satisfies the filter
-          if(shipsFilterPass[toAdd[index].id]) {
-            this.ships.push(toAdd[index]);
-          }
-          
+          this.ships.push(toAdd[index]);
           index++;
         }
       } else {
@@ -55,7 +52,7 @@ export class IconLoaderService {
 
   refresh() {
     clearInterval(this.interval);
-    this.ships = this.shipsService.setAllProperShipPos(this.shipsService.ships);
+    this.ships = this.shipsService.ships;
   }
 
   getIndex(id: string) {

@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage-angular';
 import { Ship } from '../interfaces/ship';
 import { CogReqsService } from './cog-reqs.service';
 import { IconLoaderService } from './icon-loader.service';
+import { SettingsDataService } from './settings-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ShipsService {
   ships: Ship[] = [];
   cogReqs: number = 0;
 
-  constructor(private storage: Storage, private cogReqList: CogReqsService) {}
+  constructor(private storage: Storage, private cogReqList: CogReqsService, private settingsData: SettingsDataService) {}
 
   async init() {
     this.ships = await this.storage.get("ships") || [];
@@ -32,17 +33,17 @@ export class ShipsService {
   }
 
   // set normal, maxed, and ignored ships in their respective positions
-  setAllProperShipPos(shipArray) {
+  setAllProperShipPos(shipArray): Ship[] {
     
     const shipTypes: Ship[][] = [[], [], []];
     shipArray.forEach(ship => {
       switch(this.getShipStatus(ship)) {
-        case "ignored":
-          shipTypes[2].push(ship);
+        case "obtained":
+          shipTypes[0].push(ship);
         break; case "maxed":
           shipTypes[1].push(ship);
         break; default:
-          shipTypes[0].push(ship);
+          shipTypes[2].push(ship);
         break;
       }
     })
@@ -58,12 +59,13 @@ export class ShipsService {
   }
 
   getShipStatus(ship): string {
-    if(ship.isIgnored) {
+    if(!ship.isObtained) {
       return "ignored";
     } else if(ship.level >= 120) {
       return "maxed";
+    } else if(ship.isObtained) {
+      return "obtained";
     }
-    return "normal";
   }
 
   refreshCogChipReq(shipsFilterPass) {
@@ -74,7 +76,7 @@ export class ShipsService {
       // store as value, as it will be incremented when checking
       let level = ship.level;
       
-      if(shipsFilterPass[id] && level <= 115 && !ship.isIgnored) {
+      if(shipsFilterPass[id] && level <= 115 && ship.isObtained) {
         if(level < 100) {
           level = 100;
         } else {
@@ -92,7 +94,18 @@ export class ShipsService {
     })
   }
 
+  getByName(name: string): Ship {
+    for(const ship of this.ships) {
+      if(ship.name == name) {
+        return ship;
+      }
+    }
+  }
+
   getRetroRarity(id: string): string {
+    if(!this.getById(id).hasRetrofit || this.settingsData.settings['retrofit-form'] == 'No') {
+      return this.getById(id).rarity;
+    }
     const rarities = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare"];
     
     for(const ship of this.ships) {
@@ -100,5 +113,16 @@ export class ShipsService {
         return rarities[rarities.indexOf(ship.rarity) + 1];
       }
     }
+  }
+
+  // called by hull info panel
+  getAlphabeticalOrder() {
+    return this.ships.sort((a: Ship, b: Ship) => {
+      if(a.name > b.name) { 
+        return 1;
+      } else {
+        return -1;
+      }
+    })
   }
 }

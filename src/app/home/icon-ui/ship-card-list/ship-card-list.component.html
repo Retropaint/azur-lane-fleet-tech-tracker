@@ -1,5 +1,5 @@
 <div class="ship-grid">
-  <div *ngFor="let ship of iconLoader.ships" style="display: inline-block">
+  <div *ngFor="let ship of shipsService.setAllProperShipPos(iconLoader.ships)" style="display: inline-block">
     <app-ship-card #ships *ngIf="ship != null && filter.shipsFilterPass[ship.id]" [ship]="ship"></app-ship-card>
   </div>
   <p *ngIf="!iconLoader.hasShips" class="generic-text centered">No ships fit this criteria.</p>

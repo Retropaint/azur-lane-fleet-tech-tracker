@@ -1,6 +1,6 @@
 <ion-col class="filter-category">
   <!-- unselected toggle -->
-  <div class="filter-button unselected" *ngIf="!filterType[filterName]" (click)="clickedFilterButton()">
+  <div class="filter-button unselected" *ngIf="!filterType[filterName]" (click)="clickedFilterButton()" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
     <img *ngIf="hasImage && filterName != 'All'" class="filter-icon unselected" [src]="'assets/icons/unselected ' + fileName + ' icons/' + filterName + '.png'" [style]="'width: ' + iconWidth + 'px'"/>
     <p class="filter-name unselected hasImage-{{hasImage}}" [style]="'margin-right: ' + textRightMargin + 'px'">
       <b> {{filterName}} </b>
@@ -8,7 +8,7 @@
   </div>
 
   <!-- selected toggle -->
-  <div class="filter-button" *ngIf="filterType[filterName]" (click)="clickedFilterButton()">
+  <div class="filter-button" *ngIf="filterType[filterName]" (click)="clickedFilterButton()" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
     <div style="transform: translateY(5px)">
       <img *ngIf="hasImage && filterName != 'All'" class="filter-icon" [src]="'assets/icons/' + fileName + ' icons/' + filterName + '.png'" [style]="'width: ' + iconWidth + 'px'"/>
       <p class="filter-name hasImage-{{hasImage}}" [style]="'margin-right: ' + textRightMargin + 'px'">

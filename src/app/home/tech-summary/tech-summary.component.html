@@ -4,34 +4,34 @@
   <app-faction-tech-box fullFactionName="Sakura Empire" [level]="levels['IJN']" (click)="openFactionTech('Sakura Empire')"></app-faction-tech-box>
   <app-faction-tech-box fullFactionName="Iron Blood" [level]="levels['KMS']" (click)="openFactionTech('Iron Blood')"></app-faction-tech-box>
   
+  <!-- viewing faction tech -->
   <div *ngIf="viewingFaction != null" class="faction-tech-container">
     <app-generic-big-button text="Change Level" extraCSS="inline-block" class="change-level" (click)="changeLevel()"></app-generic-big-button>
     <p class="generic-text">{{viewingFaction}}</p>
     <app-tech-hull-stat-display [statsObject]="viewingFactionStats"></app-tech-hull-stat-display>
   </div>
 
+  <!-- total tech -->
   <p class="generic-text display-name" (click)="toggleFold('total')">
     --- Total Tech --- &nbsp;
-    <ion-icon name="caret-up-outline" *ngIf="!folded['total']"></ion-icon>
-    <ion-icon name="caret-down-outline" *ngIf="folded['total']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="!folded['total']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="folded['total']"></ion-icon>
   </p>
   <app-tech-hull-stat-display *ngIf="!folded['total']" [statsObject]="totalStats"></app-tech-hull-stat-display>
 
+  <!-- 120 tech -->
   <p class="generic-text display-name" (click)="toggleFold('max')">
     --- 120 Tech --- &nbsp;
-    <ion-icon name="caret-up-outline" *ngIf="!folded['max']"></ion-icon>
-    <ion-icon name="caret-down-outline" *ngIf="folded['max']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="!folded['max']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="folded['max']"></ion-icon>
   </p>
-  <app-tech-hull-stat-display *ngIf="!folded['max']" [statsObject]="techStats"></app-tech-hull-stat-display>
+  <app-tech-hull-stat-display *ngIf="!folded['max']" [statsObject]="techStats" emptyMsg="No ships at Lv. 120"></app-tech-hull-stat-display>
 
+  <!-- obtain tech -->
   <p class="generic-text display-name {{folded['obtain'] ? 'last-folded-margin' : ''}}" (click)="toggleFold('obtain')">
     --- Obtain Tech --- &nbsp;
-    <ion-icon name="caret-up-outline" *ngIf="!folded['obtain']"></ion-icon>
-    <ion-icon name="caret-down-outline" *ngIf="folded['obtain']"></ion-icon>
+    <ion-icon name="caret-down-outline" *ngIf="!folded['obtain']"></ion-icon>
+    <ion-icon name="caret-up-outline" *ngIf="folded['obtain']"></ion-icon>
   </p>
-  <app-tech-hull-stat-display *ngIf="!folded['obtain']" [statsObject]="obtainStats" [isLastTech]="true"></app-tech-hull-stat-display>
+  <app-tech-hull-stat-display *ngIf="!folded['obtain']" [statsObject]="obtainStats" [isLastTech]="true" emptyMsg="No ships marked as obtained"></app-tech-hull-stat-display>
 </div>
-
-<!--
-<p class="generic-text centered">Work in progress <br><br> (including the button, I should probably make it less boring)</p>
--->

@@ -2,9 +2,11 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { IonInput, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AppComponent } from 'src/app/app.component';
+import { Ship } from 'src/app/interfaces/ship';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
+import { SettingsDataService } from 'src/app/services/settings-data.service';
 import { ShipsService } from 'src/app/services/ships.service';
 import { SortService } from 'src/app/services/sort.service';
 
@@ -21,8 +23,9 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   fadeCSS: string = "default";
   flashCSS: string = "out";
   rarity: string;
+  hull: string;
 
-  @Input() ship = null;
+  @Input() ship: Ship = null;
   @Input() currentCategory: string;
 
   fleetTechStatIconWidths = {
@@ -44,10 +47,19 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     private iconLoader: IconLoaderService,
     public app: AppComponent,
     private shipsService: ShipsService,
-    private storage: Storage) { }
+    private storage: Storage,
+    private settingsData: SettingsDataService) { }
 
-  async ngOnInit() {
-    this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
+  ngOnInit() {
+    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-form'] == 'Yes') {
+      this.imageSrc = 'assets/ship thumbnails/retrofits/' + this.ship.id + '.webp';
+      this.rarity = this.shipsService.getRetroRarity(this.ship.id);
+      this.hull = this.ship.retroHull;
+    } else {
+      this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
+      this.rarity = this.ship.rarity;
+      this.hull = this.ship.hull;
+    }
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
   }
 
@@ -59,7 +71,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   }
 
   getFallbackThumbnail() {
-    this.imageSrc = this.ship.thumbnail;
+    this.imageSrc = this.ship.fallbackThumbnail;
   }
 
   async enterLevel() {
@@ -70,7 +82,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
         "ship": this.ship,
         "name": this.ship.name,
         "level": this.ship.level,
-        "isIgnored": this.ship.isIgnored
+        "isObtained": this.ship.isObtained
       }
     })
     modal.present();
