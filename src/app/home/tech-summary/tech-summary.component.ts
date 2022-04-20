@@ -54,6 +54,7 @@ export class TechSummaryComponent implements OnInit {
     const factions = ['USS', 'HMS', 'IJN', 'KMS']
     for(const faction of factions) {
       this.levels[faction] = await this.storage.get(faction) || 1;
+      this.factionTechData.getTotalStats(faction, this.levels[faction]);
       this.getFactionTech(faction, this.levels[faction]);
     }
 
@@ -143,41 +144,16 @@ export class TechSummaryComponent implements OnInit {
   }
 
   getFactionTech(shortFaction: string, level: number) {
-    let factionData = null;
-    let factionStats = null;
     switch(shortFaction) {
       case "USS":
-        this.ussStats = {}; // reset faction stat to prevent lingering hulls that shouldn't exist in a level
-        factionData = this.factionTechData.USS;
-        factionStats = this.ussStats;
+        this.ussStats = this.factionTechData.getTotalStats('USS', level);
       break; case "HMS":
-        this.hmsStats = {};
-        factionData = this.factionTechData.HMS;
-        factionStats = this.hmsStats;
+        this.hmsStats = this.factionTechData.getTotalStats('HMS', level);
       break; case "IJN":
-        this.ijnStats = {};
-        factionData = this.factionTechData.IJN;
-        factionStats = this.ijnStats;
+        this.ijnStats = this.factionTechData.getTotalStats('IJN', level);
       break; case "KMS":
-        this.kmsStats = {};
-        factionData = this.factionTechData.KMS;
-        factionStats = this.kmsStats;
+        this.kmsStats = this.factionTechData.getTotalStats('KMS', level);;
       break;
-    }
-
-    for(let i = 1; i < level+1; i++) {
-      // level doesn't exist, stop
-      if(factionData[i] == null) {
-        break;
-      }
-
-      // add or replace hull with its stats
-      for(const hull of Object.keys(factionData[i])) {
-        if(hull == 'DDG') {
-          continue;
-        }
-        factionStats[hull] = factionData[i][hull];
-      }
     }
   }
 

@@ -16,6 +16,7 @@
     z-index: 1;
     position: relative;
     font-weight: bold;
+    color: white;
   }
 
   &.stripes {
@@ -64,6 +65,7 @@
   width: calc(100% - 20px);
   border: none;
   outline: none;
+  color: white;
 
   &.centered {
     text-align: center;
@@ -135,6 +137,7 @@
   margin-left: 15px;
   margin-right: 15px;
   margin-top: 0px;
+  color: white;
 }
 
 .prompt-nameError {
@@ -148,6 +151,7 @@
 .prompt-text {
   font-weight: bold;
   margin: 10px;
+  color: white;
 
   &.centered {
     text-align: center;

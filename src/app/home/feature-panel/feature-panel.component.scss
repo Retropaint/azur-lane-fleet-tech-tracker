@@ -6,9 +6,25 @@
   &.Sheet {
     text-align: center;
   }
+
+  .cog-image {
+    width: 30px;
+    margin-right: 5px;
+    transform: translateY(9px);
+  }
 }
 
 .sort-list {
   display: inline-block; 
   margin-bottom: 10px;
+}
+
+.quick-tech {
+  margin: 10px;
+  margin-top: 0px;
+  display: inline-block;
+
+  .hull-icon {
+    margin-right: 5px;
+  }
 }

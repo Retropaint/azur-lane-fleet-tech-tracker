@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AzurapiService } from './services/azurapi.service';
 import { CsvService } from './services/csv.service';
+import { FactionTechDataService } from './services/faction-tech-data.service';
 import { SettingsDataService } from './services/settings-data.service';
 import { ShipsService } from './services/ships.service';
 import { SortService } from './services/sort.service';
@@ -14,7 +15,7 @@ import { SortService } from './services/sort.service';
 })
 export class AppComponent implements OnInit {
   isMobile: boolean;
-  latestVersion: string = "1.4";
+  latestVersion: string = "1.5";
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
     private ships: ShipsService,
     private platform: Platform,
     private settingsData: SettingsDataService,
-    private csv: CsvService) {
+    private factionTechData: FactionTechDataService) {
   }
 
   async ngOnInit() {
@@ -35,6 +36,8 @@ export class AppComponent implements OnInit {
     this.storage.create();
 
     await this.settingsData.refresh();
+
+    this.factionTechData.init();
 
     this.isMobile = this.platform.is('mobileweb');
     if(!this.isMobile) {

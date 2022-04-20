@@ -113,7 +113,7 @@ export class FilterService {
       hull = ship.hull;
     }
     switch(hull) {
-      case "DD":
+      case "DD": case "DDG":
         checkHullFilter("DD");
       break; case "CL": 
         checkHullFilter("CL");
@@ -221,7 +221,11 @@ export class FilterService {
     }
 
     this.oneSelectedHull = this.getTheOnlyOne(this.hulls);
-    console.log(this.oneSelectedHull);
+    this.oneSelectedStat = this.getTheOnlyOne(this.stats);
+
+    if(this.oneSelectedHull != null && this.oneSelectedStat != null) {
+      this.shipService.quickTechView(this.oneSelectedStat, this.oneSelectedHull);
+    }
 
     this.filter();
   }
@@ -249,6 +253,9 @@ export class FilterService {
     }
     if(filterCount > 1) {
       return;
+    }
+    if(chosenFilter == 'All') {
+      return null;
     }
 
     return chosenFilter;

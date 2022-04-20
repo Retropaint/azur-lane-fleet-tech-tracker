@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { Ship } from '../interfaces/ship';
 import { CogReqsService } from './cog-reqs.service';
-import { IconLoaderService } from './icon-loader.service';
+import { FactionTechDataService } from './faction-tech-data.service';
+import { HullHierarchyService } from './hull-hierarchy.service';
 import { SettingsDataService } from './settings-data.service';
 
 @Injectable({
@@ -12,8 +13,20 @@ export class ShipsService {
 
   ships: Ship[] = [];
   cogReqs: number = 0;
+  quickTechMax = {};
+  quickTechTotal = {};
 
-  constructor(private storage: Storage, private cogReqList: CogReqsService, private settingsData: SettingsDataService) {}
+  // can be used to 'refresh' the tech view
+  lastQuickTechStat: string;
+  lastQuickTechHull: string;
+
+  constructor(
+    private storage: Storage, 
+    private cogReqList: CogReqsService, 
+    private settingsData: SettingsDataService,
+    private factionTechData: FactionTechDataService,
+    private hullHierarchy: HullHierarchyService
+  ) {}
 
   async init() {
     this.ships = await this.storage.get("ships") || [];
@@ -124,5 +137,68 @@ export class ShipsService {
         return -1;
       }
     })
+  }
+
+  quickTechView(stat, hull) {
+    if(stat == null || hull == null) {
+      return;
+    }
+
+    this.lastQuickTechStat = stat;
+    this.lastQuickTechHull = hull;
+
+    this.hullHierarchy.hulls[hull].forEach(hull => {
+      this.quickTechMax[hull] = this.getMaxTechOf(stat, hull);
+    })
+    this.hullHierarchy.hulls[hull].forEach(hull => {
+      this.quickTechTotal[hull] = this.getTotalTechOf(stat, hull);
+    })
+  }
+
+  getMaxTechOf(stat, hull) {
+    return this.getTech(false, this.factionTechData.maxLevels, stat, hull);
+  }
+
+  getTotalTechOf(stat, hull) {
+    return this.getTech(true, this.factionTechData.levels, stat, hull);
+  }
+
+  getTech(checkShipReqs: boolean, factionDataLevelType: any, stat: string, hull: string) {
+    let returnedStat = 0;
+
+    // get tech from faction
+    const factionNames = ['USS', 'HMS', 'IJN', 'KMS'];
+    factionNames.forEach(name => {
+      const stats = this.factionTechData.getTotalStats(name, factionDataLevelType[name]);
+      if(stats[hull] != null) {
+        if(stats[hull][stat] != null) {
+          returnedStat += stats[hull][stat];
+        }
+      }
+    })
+
+    // get tech from ship
+    this.ships.forEach(ship => {
+      if(ship.isObtained || !checkShipReqs) {
+        ship.obtainAppliedHulls.forEach(appliedHull => {
+          if(appliedHull == hull) {
+            if(ship.obtainStat == stat) {
+              returnedStat += ship.obtainBonus
+            }
+          }
+        })
+      }
+      if(ship.level >= 120 || !checkShipReqs) {
+        ship.appliedHulls.forEach(appliedHull => {
+          if(appliedHull == hull) {
+            if(ship.techStat == stat) {
+              returnedStat += ship.techBonus;
+            }
+          }
+        })
+      }
+    })
+
+    return returnedStat;
   }
 }

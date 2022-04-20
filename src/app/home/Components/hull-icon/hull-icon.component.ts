@@ -10,6 +10,8 @@ export class HullIconComponent implements OnInit {
 
   @Input() hull: string;
   @Input() width: number = 35;
+  @Input() moveX: number = 0;
+  @Input() moveY: number = 0;
 
   constructor(public hoverTitle: HoverTitlesService) { }
 

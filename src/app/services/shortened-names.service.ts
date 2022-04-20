@@ -19,6 +19,11 @@ export class ShortenedNamesService {
 
   hulls = {
     "Destroyer": "DD",
+
+    // I have no clue why DDG uses the shorthand version already
+    "DDG": "DDG",
+    "Guided-Missile Destroyer": "DDG",
+    
     "Battleship": "BB",
     "Battlecruiser": "BC",
     "Aviation Battleship": "BBV",

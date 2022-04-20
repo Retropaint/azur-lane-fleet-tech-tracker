@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -562,5 +563,65 @@ export class FactionTechDataService {
     }
   }
 
-  constructor() { }
+  maxLevels = {};
+  levels = {};
+
+  constructor(
+    private storage: Storage
+  ) {}
+  
+  init() {
+    const factions = ['USS', 'HMS', 'IJN', 'KMS'];
+    factions.forEach(async faction => {
+      this.levels[faction] = await this.storage.get(faction) | 1;
+    })
+    this.getMaxLevels();
+  }
+
+  getMaxLevels() {
+    const factions = ['USS', 'HMS', 'IJN', 'KMS'];
+    const objects = [this.USS, this.HMS, this.IJN, this.KMS];
+    for(let i = 0; i < factions.length; i++) {
+      let maxLevel = 1;
+      while(objects[i][maxLevel] != null) {
+        maxLevel++;
+      }
+      this.maxLevels[factions[i]] = maxLevel-1;
+    }
+    console.log(this.maxLevels);
+  }
+
+  getTotalStats(faction: string, level) {
+    let factionData = null;
+    let factionStats = {};
+    switch(faction) {
+      case "USS":
+        factionData = this.USS;
+      break; case "HMS":
+        factionData = this.HMS;
+      break; case "IJN":
+        factionData = this.IJN;
+      break; case "KMS":
+        factionData = this.KMS;
+      break;
+    }
+    
+    for(let i = 1; i < level+1; i++) {
+      // level doesn't exist, stop
+      if(factionData[i] == null) {
+        break;
+      }
+
+      // add or replace hull with its stats
+      for(const hull of Object.keys(factionData[i])) {
+        if(hull == 'DDG') {
+          continue;
+        }
+        factionStats[hull] = factionData[i][hull];
+      }
+    }
+
+    return factionStats;
+  }
+
 }

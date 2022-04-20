@@ -15,10 +15,18 @@
 
     <div>
       <!-- markers-->
-      <p class="prompt-text inline-block slider-marker l1" (click)="choseMarker(1)" title="Instantly set level to 1">1</p>
-      <p class="prompt-text inline-block slider-marker l70" (click)="choseMarker(70)" title="Instantly set level to 70">70</p>
-      <p class="prompt-text inline-block slider-marker l100" (click)="choseMarker(100)" title="Instantly set level to 100">100</p>
-      <p class="prompt-text inline-block slider-marker l120" (click)="choseMarker(120)" title="Instantly set level to 120&#013;- Will be displayed after obtained and before unobtained ships">120</p>
+      <div class="slider-marker l1">
+        <p class="prompt-text inline-block slider-text" (click)="choseMarker(1)" title="Instantly set level to 1">1</p>
+      </div>
+      <div class="slider-marker l70">
+        <p class="prompt-text inline-block slider-text" (click)="choseMarker(70)" title="Instantly set level to 70">70</p>
+      </div>
+      <div class="slider-marker l100">
+        <p class="prompt-text inline-block slider-text" (click)="choseMarker(100)" title="Instantly set level to 100">100</p>
+      </div>
+      <div class="slider-marker l120">
+        <p class="prompt-text inline-block slider-text" (click)="choseMarker(120)" title="Instantly set level to 120&#013;- Will be displayed after obtained and before unobtained ships">120</p>
+      </div>
       
       <!-- slider -->
       <input type="range" min="1" max="125" [(ngModel)]="level" (ngModelChange)="changeLastInput(true)" class="slider" title="Set level using this slider">
@@ -29,7 +37,7 @@
       </form>
 
       <!-- 120 text-->
-      <p class="prompt text maxed-text" *ngIf="wasSlider && level >= 120 || !wasSlider && textLevel >= 120">*Marked as Complete and pushed down the list, above ignored ships.</p>
+      <p class="prompt text maxed-text" *ngIf="wasSlider && level >= 120 || !wasSlider && textLevel >= 120">*Marked as Complete and pushed down the list, above unobtained ships.</p>
     
     </div>
   </div>

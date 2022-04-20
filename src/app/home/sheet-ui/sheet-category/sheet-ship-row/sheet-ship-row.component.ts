@@ -44,7 +44,7 @@ export class SheetShipRowComponent implements OnInit {
 
   ngOnInit() {
     this.fleetTechHoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
-    if(this.settingsData.settings['retrofit-form'] && this.ship.hasRetrofit) {
+    if(this.settingsData.settings['retrofit-form'] == 'Yes' && this.ship.hasRetrofit) {
       this.hull = this.ship.retroHull;
       this.rarity = this.shipsService.getRetroRarity(this.ship.id);
     } else {

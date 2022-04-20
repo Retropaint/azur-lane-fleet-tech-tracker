@@ -16,4 +16,5 @@ export interface Ship {
   obtainBonus: number;
   retroHull: string;
   isObtained?: boolean;
+  obtainAppliedHulls: string[];
 }

@@ -41,11 +41,6 @@ export class AzurapiService {
             ship["names"]["en"] = "Pamiat Merkuria";
           }
 
-          // chitose has CV applicable in her HP collection, remove that
-          if(ship["names"]["en"] == 'Chitose') {
-            obtainFleetTech['applicable'].splice(obtainFleetTech['applicable'].indexOf('Aircraft carrier'), 1);
-          }
-
           // Normal LOL
           if(ship["rarity"] == "Normal") {
             ship["rarity"] = "Common";
@@ -63,6 +58,13 @@ export class AzurapiService {
           for(let i = 0; i < fleetTech['applicable'].length; i++) {
             fleetTech['applicable'][i] = this.shortenedNames.applicableHulls[fleetTech['applicable'][i]]
           }
+          for(let i = 0; i < obtainFleetTech['applicable'].length; i++) {
+            obtainFleetTech['applicable'][i] = this.shortenedNames.applicableHulls[obtainFleetTech['applicable'][i]]
+          }
+
+          if(ship['names']['en'] == 'An Shan') {
+            console.log(ship);
+          }
 
           const newShip: Ship = {
             name: ship["names"]["en"],
@@ -78,14 +80,11 @@ export class AzurapiService {
             hasRetrofit: ship["retrofit"],
             obtainStat: this.shortenedNames.stats[obtainFleetTech["stat"]],
             obtainBonus: parseInt(obtainFleetTech["bonus"][1]),
-            retroHull: this.shortenedNames.hulls[ship['retrofitHullType']]
+            retroHull: this.shortenedNames.hulls[ship['retrofitHullType']],
+            obtainAppliedHulls: obtainFleetTech['applicable']
           }
 
-          if(newShip.name == 'Bogue') {
-            console.log(ship)
-          }
-
-          // retain data from previous ship version, if it exists
+          // if updating to a new version, retain user-generated ship data from previous version
           if(savedShips != null && savedShips.length > 0) {
             for(const savedShip of savedShips) {
               if(savedShip.id == ship.id) {

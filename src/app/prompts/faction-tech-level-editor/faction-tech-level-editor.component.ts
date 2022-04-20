@@ -20,39 +20,18 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
   textLevel: number;
   wasSlider: boolean = true;
 
-  constructor(private modalController: ModalController, 
+  constructor(
+    private modalController: ModalController, 
     private prompt: PromptService, 
     private factionTechData: FactionTechDataService,
-    private storage: Storage) { }
+    private storage: Storage,
+    private shortenedNamesService: ShortenedNamesService  
+  ) { }
 
   async ngOnInit() {
-    // get max level of faction
-    switch(this.fullFactionName) {
-      case "Eagle Union":
-        this.sliderLevel = await this.storage.get("USS") || 1;
-        while(this.factionTechData.USS[this.maxLevel] != null) {
-          this.maxLevel++;
-        }
-      break; case "Royal Navy":
-        this.sliderLevel = await this.storage.get("HMS") || 1;
-        while(this.factionTechData.HMS[this.maxLevel] != null) {
-          this.maxLevel++;
-        }
-      break; case "Sakura Empire":
-        this.sliderLevel = await this.storage.get("IJN") || 1;
-        while(this.factionTechData.IJN[this.maxLevel] != null) {
-          this.maxLevel++;
-        }
-      break; case "Iron Blood":
-        this.sliderLevel = await this.storage.get("KMS") || 1;
-        while(this.factionTechData.KMS[this.maxLevel] != null) {
-          this.maxLevel++;
-        }
-      break;
-    }
-
-    // maxLevel turns out 1 level higher, deduct
-    this.maxLevel--;
+    const shortenedName = this.shortenedNamesService[this.fullFactionName]
+    this.maxLevel = this.factionTechData.maxLevels[shortenedName];
+    this.sliderLevel = await this.storage.get(shortenedName) || 1;
   }
 
   ngAfterViewInit() {
