@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { MenuController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { SettingsComponent } from './prompts/settings/settings.component';
 import { AzurapiService } from './services/azurapi.service';
-import { CsvService } from './services/csv.service';
 import { FactionTechDataService } from './services/faction-tech-data.service';
+import { MiscService } from './services/misc.service';
+import { PromptService } from './services/prompt.service';
 import { SettingsDataService } from './services/settings-data.service';
 import { ShipsService } from './services/ships.service';
 import { SortService } from './services/sort.service';
@@ -14,8 +16,10 @@ import { SortService } from './services/sort.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isMobile: boolean;
   latestVersion: string = "1.5";
+  hullInfoIsOpen: boolean;
+  techMode: string = "ship"
+  techModeString = "Tech Summary";
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
@@ -23,8 +27,11 @@ export class AppComponent implements OnInit {
     private ships: ShipsService,
     private platform: Platform,
     private settingsData: SettingsDataService,
-    private factionTechData: FactionTechDataService) {
-  }
+    private factionTechData: FactionTechDataService,
+    private prompt: PromptService,
+    private menuController: MenuController,
+    public misc: MiscService
+  ) {}
 
   async ngOnInit() {
     const randomLog = ["Uptier Shigure!", "Downtier Drake!", "Liduke pls come back :(", "Arknights is better", "Don't look at the code. It's not for my sake it's for yours, trust me."];
@@ -39,8 +46,8 @@ export class AppComponent implements OnInit {
 
     this.factionTechData.init();
 
-    this.isMobile = this.platform.is('mobileweb');
-    if(!this.isMobile) {
+    this.misc.isMobile = this.platform.is('mobileweb');
+    if(!this.misc.isMobile) {
       document.documentElement.style.setProperty('--dead-zone-margin', "200px");
     }
 
@@ -56,5 +63,20 @@ export class AppComponent implements OnInit {
     }
     
     this.storage.set("version", this.latestVersion);
+  }
+
+  openSettings() {
+    this.prompt.openPrompt(SettingsComponent);
+    this.menuController.close('first');
+  }
+
+  openHullInfo() {
+    this.hullInfoIsOpen = !this.hullInfoIsOpen;
+    this.menuController.close('first');
+  }
+
+  switchTechMode() {
+    this.misc.switchTechMode();
+    this.menuController.close('first');
   }
 }

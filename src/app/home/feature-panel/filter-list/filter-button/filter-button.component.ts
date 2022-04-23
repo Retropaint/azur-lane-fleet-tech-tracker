@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { FilterService } from 'src/app/services/filter.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { HomePage } from '../../../home.page';
 
 @Component({
@@ -22,14 +23,17 @@ export class FilterButtonComponent implements OnInit {
   clickCount: number = 0;
   previousPressedFilter: string;
 
-  constructor(private filter: FilterService, private home: HomePage, private app: AppComponent) { }
+  constructor(
+    private filter: FilterService, 
+    private home: HomePage, 
+    private misc: MiscService
+    ) { }
 
   ngOnInit() {}
 
   clickedFilterButton() {
-    this.home.ionContent.scrollToTop();
-    if(this.app.isMobile) {
-      this.home.ionContent.scrollToPoint(0, 100);
+    if(!this.misc.isMobile) {
+      this.home.ionContent.scrollToTop();
     }
     this.filter.pressedFilter(this.filterName, this.filterType);
   }

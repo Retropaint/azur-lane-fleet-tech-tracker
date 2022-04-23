@@ -1,18 +1,32 @@
-<ion-content [fullscreen]="true" class="main-content isMobile-{{app.isMobile}}">
-  <app-hull-info-panel *ngIf="uiMode == 'Icon' && techMode == 'ship'" [uiMode]="uiMode"></app-hull-info-panel>
+<ion-header *ngIf="misc.isMobile" class="mobile-header">
+  <ion-toolbar color="primary">
+    <div class="title-container">
+      <img class="header-img isMobile-{{misc.isMobile}}" src="assets/logo.webp"/>
+      <h1 class="title isMobile-{{misc.isMobile}} generic-text no-glow">Azur Lane Fleet Tech Tracker</h1>
+    </div>
+    <img (click)="openSideMenu()" class="side-menu-button" src="assets/side-menu.png" slot="end"/>
+    <!--
+    <ion-icon (click)="openSideMenu()" slot="end" name="reorder-three-outline" class="burger-icon"></ion-icon>
+    -->
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content [fullscreen]="true" class="main-content isMobile-{{misc.isMobile}}">
+  <app-hull-info-panel *ngIf="misc.uiMode == 'Icon' && misc.techMode == 'ship' && !misc.isMobile" [mode]="misc.uiMode"></app-hull-info-panel>
   <div class="background"></div>
 
   <div class="content">
-    <div class="header-container">
+    <div class="header-container" *ngIf="!misc.isMobile">
       <!-- site logo & title -->
       <img class="header-img" src="assets/logo.webp"/>
       <h1 class="title generic-text no-glow">Azur Lane Fleet Tech Tracker</h1>
 
       <div style="display: inline-block; transform: translateX(50px)">
-        <app-generic-big-button text="{{techModeString}}" (click)="switchTechMode()"></app-generic-big-button>
+        <app-generic-big-button *ngIf="!misc.isMobile" text="{{misc.techModeString}}" (click)="misc.switchTechMode()"></app-generic-big-button>
 
         <!-- settings button-->
-        <div class="settings-button" (click)="openSettingsModal()">
+        <div *ngIf="!misc.isMobile" class="settings-button" (click)="openSettingsModal()">
           <img class="image" src="assets/settings.png"/>
           <p class="generic-text no-glow text">Settings</p>
         </div>
@@ -20,17 +34,18 @@
     </div>
 
     <!-- feature panel & UI mode to display-->
-    <div *ngIf="shipsService.ships.length != 0" class="categories">
+    <div *ngIf="shipsService.ships.length != 0">
 
       <!-- ship database -->
-      <ng-container *ngIf="techMode == 'ship'">
-        <app-feature-panel [uiMode]="uiMode"></app-feature-panel>
-        <app-icon-ui *ngIf="uiMode == 'Icon'" style="position: relative;"></app-icon-ui>
-        <app-sheet-ui *ngIf="uiMode == 'Sheet'" style="position: relative;"></app-sheet-ui>
+      <ng-container *ngIf="misc.techMode == 'ship'">
+        <app-feature-panel [uiMode]="misc.uiMode"></app-feature-panel>
+        <app-icon-ui *ngIf="misc.uiMode == 'Icon'" style="position: relative;"></app-icon-ui>
+        <app-sheet-ui *ngIf="misc.uiMode == 'Sheet'" style="position: relative;"></app-sheet-ui>
+        <app-generic-big-button *ngIf="misc.isMobile" text="Back to Top" (click)="backToTop()"></app-generic-big-button>
       </ng-container>
 
       <!-- tech summary -->
-      <app-tech-summary *ngIf="techMode == 'stat'" style="text-align: center"></app-tech-summary>
+      <app-tech-summary *ngIf="misc.techMode == 'stat'" style="text-align: center"></app-tech-summary>
     </div>
 
     <!-- if no ships loaded, show this -->

@@ -9,6 +9,12 @@
   &.unselected {
     filter: none;
   }
+
+  &.invisible-all {
+    width: 0px;
+    height: 35px;
+    padding: 0px;
+  }
 }
 
 .filter-name {

@@ -1,4 +1,23 @@
 <ion-app>
-  <ion-router-outlet>
-  </ion-router-outlet>
+  <ion-menu side="end" menuId="first" contentId="main" style="--width: 220px;">
+    <ion-content color="primary" style=" --overflow: hidden !important">
+      <ion-list style="background: #263755">
+        <div class="item" (click)="openSettings()">
+          <img class="item-img" src="assets/settings.png" />
+          <p class="prompt-text inline-block item-text">Settings</p>
+        </div>
+
+        <div class="item" (click)="switchTechMode()">
+          <img *ngIf="misc.techMode == 'ship'" class="item-img" src="assets/tech summary.png" />
+          <img *ngIf="misc.techMode == 'stat'" class="item-img" src="assets/ship database.png"/>
+          <p class="prompt-text inline-block item-text">{{misc.techModeString}}</p>
+        </div>
+      </ion-list>
+      
+      <app-hull-info-panel mode="side"></app-hull-info-panel>
+    
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

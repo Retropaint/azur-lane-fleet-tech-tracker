@@ -1,5 +1,7 @@
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { FilterService } from 'src/app/services/filter.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { ShipsService } from 'src/app/services/ships.service';
 import { HomePage } from '../home.page';
 
@@ -12,5 +14,8 @@ export class SheetUIComponent {
   constructor(
     public home: HomePage, 
     public filter: FilterService,
-    public shipsService: ShipsService) {}
+    public shipsService: ShipsService,
+    public app: AppComponent,
+    public misc: MiscService  
+  ) {}
 }

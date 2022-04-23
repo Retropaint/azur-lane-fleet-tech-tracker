@@ -2,6 +2,10 @@
   margin-bottom: 100px;
   user-select: none;
   text-align: left;
+
+  &.isMobile-true {
+    text-align: center;
+  }
 }
 
 .invisible-ship-card {

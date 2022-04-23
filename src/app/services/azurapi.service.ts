@@ -105,7 +105,6 @@ export class AzurapiService {
       //console.log(JSON.stringify(names));
       //console.log(JSON.stringify(ids));
       this.shipsService.save();
-      this.sort.sort("Name", true);
     })
   }
 }

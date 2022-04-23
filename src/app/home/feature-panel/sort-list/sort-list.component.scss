@@ -4,3 +4,10 @@
   pointer-events: none;
   color: white;
 }
+
+.sort-button {
+  &.isMobile-true {
+    margin-left: 5px; 
+    margin-right: 5px;
+  }
+}

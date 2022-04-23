@@ -8,13 +8,13 @@ import { ShipsService } from 'src/app/services/ships.service';
 })
 export class HullInfoPanelComponent implements OnInit {
 
-  @Input() uiMode: string = "Icon";
+  @Input() mode: string = "Icon";
 
   fold: boolean = true;
 
   constructor(public shipsService: ShipsService) { }
 
   ngOnInit() {
-    this.fold = this.uiMode == 'Icon';
+    this.fold = this.mode == 'Icon';
   }
 }

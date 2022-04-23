@@ -1,3 +1,9 @@
+.container {
+  &.isMobile-false {
+    padding-right: 50px;
+  }
+}
+
 .faction-tech-container {
   background: #213052;
   width: 100%;
@@ -7,7 +13,11 @@
 
 .change-level {
   position: absolute;
-  right: 250px;
+
+  &.isMobile-true {
+    right: 0px;
+    zoom: 0.75;
+  }
 }
 
 .display-name {

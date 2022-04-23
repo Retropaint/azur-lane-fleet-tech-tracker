@@ -1,9 +1,13 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { SheetCategoryComponent } from 'src/app/home/sheet-ui/sheet-category/sheet-category.component';
 import { AzurapiService } from 'src/app/services/azurapi.service';
 import { CsvService } from 'src/app/services/csv.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { PromptService } from 'src/app/services/prompt.service';
+import { SettingsDataService } from 'src/app/services/settings-data.service';
 import { ShipsService } from 'src/app/services/ships.service';
 import { SortService } from 'src/app/services/sort.service';
 import { CreditsComponent } from '../credits/credits.component';
@@ -28,7 +32,9 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     public azurapi: AzurapiService,
     private shipsService: ShipsService,
     public csv: CsvService,
-    private sort: SortService) { }
+    private misc: MiscService,
+    private settingsData: SettingsDataService
+  ) { }
 
   ngOnInit() {
     this.csv.settingsText = "";
@@ -59,7 +65,6 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   importCSV(event) {
     this.csv.import(event.target['files'][0]);
-    this.sort.sort(this.sort.lastType, true);
   }
 
   openCredits() {
@@ -74,8 +79,14 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   }
 
   save() {
-    this.storage.set("ship-card-size", this.inputShipCardSize);
-    this.modalController.dismiss('confirmed');
+    this.storage.set("ship-card-size", this.inputShipCardSize).then(() => {
+      this.settingsData.refresh().then(() => {
+        this.misc.uiMode = this.settingsData.settings['ui-mode'];
+        this.misc.setCardSize();
+      })
+    });
+    
+    this.modalController.dismiss();
   }
 
   exit() {

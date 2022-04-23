@@ -44,17 +44,25 @@ export class SheetShipRowComponent implements OnInit {
 
   ngOnInit() {
     this.fleetTechHoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
+  }
+
+  getHull() {
     if(this.settingsData.settings['retrofit-form'] == 'Yes' && this.ship.hasRetrofit) {
-      this.hull = this.ship.retroHull;
-      this.rarity = this.shipsService.getRetroRarity(this.ship.id);
+      return this.ship.retroHull;
     } else {
-      this.hull = this.ship.hull;
-      this.rarity = this.ship.rarity;
+      return this.ship.hull;
+    }
+  }
+
+  getRarity() {
+    if(this.settingsData.settings['retrofit-form'] == 'Yes' && this.ship.hasRetrofit) {
+      return this.shipsService.getRetroRarity(this.ship.id);
+    } else {
+      return this.ship.rarity;
     }
   }
 
   async enterLevel() {
-    console.log(this.ship.isObtained)
     const modal = await this.modalController.create({
       component:ShipLevelEditorComponent,
       animated: false,
@@ -67,8 +75,6 @@ export class SheetShipRowComponent implements OnInit {
     })
     modal.present();
     modal.onDidDismiss().then(value => {
-      this.sort.sort(this.sort.lastType, true)
-
       // flash the row if pressed Confirm
       if(value.data == 'done') {
         this.flashCSS = "in";

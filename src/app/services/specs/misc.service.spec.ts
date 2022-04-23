@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IconDragService } from './icon-drag.service';
+import { MiscService } from './misc.service';
 
-describe('IconDragService', () => {
-  let service: IconDragService;
+describe('MiscService', () => {
+  let service: MiscService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(IconDragService);
+    service = TestBed.inject(MiscService);
   });
 
   it('should be created', () => {

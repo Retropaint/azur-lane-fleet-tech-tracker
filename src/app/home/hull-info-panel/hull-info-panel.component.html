@@ -1,12 +1,12 @@
-<div class="container fold-{{fold}} {{uiMode}}">
-  <div *ngIf="uiMode == 'Icon'">
+<div class="container fold-{{fold}} {{mode}}">
+  <div *ngIf="mode == 'Icon'">
     <p class="generic-text inline-block header">HULL INFO PANEL 
       <ion-icon *ngIf="!fold" name="caret-up-outline"></ion-icon>
       <ion-icon *ngIf="fold" name="caret-down-outline"></ion-icon>
     </p>
     <div class="box header" (click)="fold = !fold"></div>
   </div>
-  <div class="box visible-{{!fold}} {{uiMode}}">
+  <div class="box visible-{{!fold}} {{mode}}">
     <!-- hull -->
     <div class="applicable-grid">
       <p class="generic-text centered applicable-hulls separator left right bottom"> HULL </p>

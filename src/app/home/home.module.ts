@@ -12,25 +12,20 @@ import { SortListComponent } from './feature-panel/sort-list/sort-list.component
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
 import { IconUIComponent } from './icon-ui/icon-ui.component';
 import { SheetUIComponent } from './sheet-ui/sheet-ui.component';
-import { SettingsComponent } from '../prompts/settings/settings.component';
 import { SheetShipRowComponent } from './sheet-ui/sheet-category/sheet-ship-row/sheet-ship-row.component';
-import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/settings-toggle.component';
 import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
 import { FilterButtonComponent } from './feature-panel/filter-list/filter-button/filter-button.component';
-import { PromptButtonComponent } from '../prompts/Components/prompt-button/prompt-button.component';
 import { ConfirmationComponent } from '../prompts/confirmation/confirmation.component';
-import { PromptHeaderComponent } from '../prompts/Components/prompt-header/prompt-header.component';
 import { GenericBigButtonComponent } from './Components/generic-big-button/generic-big-button.component';
-import { ToggleFlagComponent } from '../toggle-flag/toggle-flag.component';
 import { CreditsComponent } from '../prompts/credits/credits.component';
 import { FeaturePanelComponent } from './feature-panel/feature-panel.component';
 import { TechSummaryComponent } from './tech-summary/tech-summary.component';
 import { FactionTechBoxComponent } from './tech-summary/faction-tech-box/faction-tech-box.component';
 import { FactionTechLevelEditorComponent } from '../prompts/faction-tech-level-editor/faction-tech-level-editor.component';
 import { TechHullStatDisplayComponent } from './tech-summary/tech-hull-stat-display/tech-hull-stat-display.component';
-import { HullInfoPanelComponent } from './hull-info-panel/hull-info-panel.component';
-import { HullIconComponent } from './Components/hull-icon/hull-icon.component';
-import { HullInfoExceptionComponent } from './hull-info-panel/hull-info-exception/hull-info-exception.component';
+import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning.component';
+import { SharedModule } from '../shared/shared.module';
+import { MiscService } from '../services/misc.service';
 
 @NgModule({
   imports: [
@@ -38,6 +33,7 @@ import { HullInfoExceptionComponent } from './hull-info-panel/hull-info-exceptio
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
+    SharedModule,
   ],
   declarations: [
     HomePage, 
@@ -48,43 +44,33 @@ import { HullInfoExceptionComponent } from './hull-info-panel/hull-info-exceptio
     ShipLevelEditorComponent, 
     IconUIComponent, 
     SheetUIComponent,
-    SettingsComponent,
     SheetShipRowComponent,
-    SettingsToggleComponent,
     SheetCategoryComponent,
     FilterButtonComponent,
-    PromptButtonComponent,
     ConfirmationComponent,
-    PromptHeaderComponent,
     GenericBigButtonComponent,
-    ToggleFlagComponent,
     CreditsComponent,
     FeaturePanelComponent,
     TechSummaryComponent,
     FactionTechBoxComponent,
     FactionTechLevelEditorComponent,
     TechHullStatDisplayComponent,
-    HullInfoPanelComponent,
-    HullIconComponent,
-    HullInfoExceptionComponent
+    MobileWarningComponent,
   ],
   exports: [
     ShipCardListComponent, 
     ShipCardComponent, 
     IconUIComponent, 
     SheetUIComponent,
-    SettingsComponent,
     SheetShipRowComponent,
-    SettingsToggleComponent,
-    PromptButtonComponent,
     ConfirmationComponent,
-    PromptHeaderComponent,
     CreditsComponent,
+    SheetCategoryComponent,
   ],
   providers: [
     IconUIComponent, 
-    PromptButtonComponent, 
     ConfirmationComponent,
+    SheetCategoryComponent,
   ]
 })
 export class HomePageModule {}

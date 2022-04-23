@@ -54,7 +54,7 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
       }
       this.ship.level = finalLevel || this.level;
     }
-    
+
     this.shipsService.refreshCogChipReq(this.filter.shipsFilterPass);
     this.shipsService.save();
     this.shipsService.quickTechView(this.shipsService.lastQuickTechStat, this.shipsService.lastQuickTechHull);

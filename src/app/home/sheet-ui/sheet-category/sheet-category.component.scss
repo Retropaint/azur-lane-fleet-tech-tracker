@@ -1,7 +1,10 @@
 .container {
   display: inline-block;
   text-align: left;
-  margin-right: 70px;
+
+  &.isMobile-false {
+    margin-right: 70px;
+  }
 }
 
 .dropping-left {

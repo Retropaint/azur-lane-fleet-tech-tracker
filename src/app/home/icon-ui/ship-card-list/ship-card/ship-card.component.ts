@@ -1,14 +1,12 @@
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonInput, ModalController } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular';
-import { AppComponent } from 'src/app/app.component';
 import { Ship } from 'src/app/interfaces/ship';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { SettingsDataService } from 'src/app/services/settings-data.service';
 import { ShipsService } from 'src/app/services/ships.service';
-import { SortService } from 'src/app/services/sort.service';
 
 @Component({
   selector: 'app-ship-card',
@@ -43,24 +41,37 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   constructor(
     private modalController: ModalController,
     public hoverTitles: HoverTitlesService,
-    private sort: SortService,
     private iconLoader: IconLoaderService,
-    public app: AppComponent,
+    public misc: MiscService,
     private shipsService: ShipsService,
-    private storage: Storage,
     private settingsData: SettingsDataService) { }
 
   ngOnInit() {
-    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-form'] == 'Yes') {
-      this.imageSrc = 'assets/ship thumbnails/retrofits/' + this.ship.id + '.webp';
-      this.rarity = this.shipsService.getRetroRarity(this.ship.id);
-      this.hull = this.ship.retroHull;
-    } else {
-      this.imageSrc = 'assets/ship thumbnails/' + this.ship.id + '.webp';
-      this.rarity = this.ship.rarity;
-      this.hull = this.ship.hull;
-    }
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
+  }
+
+  getHull() {
+    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-form'] == 'Yes') {
+      return this.ship.retroHull;
+    } else {
+      return this.ship.hull;
+    }
+  }
+
+  getRarity() {
+    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-form'] == 'Yes') {
+      return this.shipsService.getRetroRarity(this.ship.id);
+    } else {
+      return this.ship.rarity;
+    }
+  }
+
+  getImageSrc() {
+    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-form'] == 'Yes') {
+      return 'assets/ship thumbnails/retrofits/' + this.ship.id + '.webp';
+    } else {
+      return 'assets/ship thumbnails/' + this.ship.id + '.webp';
+    }
   }
 
   ngAfterViewInit() {
@@ -87,8 +98,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     })
     modal.present();
     modal.onDidDismiss().then(value => {
-      this.sort.sort(this.sort.lastType, true);
-
       this.iconLoader.refresh();
 
       // flash the card if pressed Confirm

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { AppComponent } from 'src/app/app.component';
 import { FilterService } from 'src/app/services/filter.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { SortService } from 'src/app/services/sort.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class SortListComponent {
     "Decisive": 4
   }
 
-  constructor(private filter: FilterService, private storage: Storage, public sortService: SortService, public app: AppComponent) { }
+  constructor(public sortService: SortService, public misc: MiscService) { }
 
   sort(type: string) {
     this.sortService.sort(type);

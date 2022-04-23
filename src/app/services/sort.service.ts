@@ -8,7 +8,7 @@ import { ShipsService } from './ships.service';
 })
 export class SortService {
 
-  lastType: string;
+  lastType: string = "Name";
 
   isAscending = {
     "Level": false,
@@ -24,51 +24,58 @@ export class SortService {
     "Ultra-Rare": 4,
   }
 
-  constructor(private filter: FilterService, private ships: ShipsService) {}
+  constructor(private shipsService: ShipsService, private filter: FilterService) {}
 
   sort(type: string, keepState: boolean = false) {
     this.lastType = type;
 
-    if(keepState) {
-      // switch toggle now, and then turn it back the other way once the sorting is done
+    if(!keepState) {
       this.isAscending[type] = !this.isAscending[type];
     }
 
-    switch(type) {
-      case "Level":
-        this.ships.ships.sort((a: Ship, b: Ship) => {
-          if(!this.isAscending[type] && a.level > b.level || 
-            this.isAscending[type] && a.level < b.level) {
-            return 1;
-          } else {
-            return -1;
-          }
-        })
-      break; case "Rarity":
-        this.ships.ships.sort((a: Ship, b: Ship) => {
-          let aRarity = this.ships.getRetroRarity(a.id);
-          let bRarity = this.ships.getRetroRarity(b.id);
-          if(!this.isAscending[type] && this.rarityRanks[aRarity] > this.rarityRanks[bRarity] || 
-            this.isAscending[type] && this.rarityRanks[aRarity] < this.rarityRanks[bRarity]) {
-            return 1;
-          } else {
-            return -1;
-          }
-        })
-      break; case "Name":
-        this.ships.ships.sort((a: Ship, b: Ship) => {
-          if(!this.isAscending[type] && a.name > b.name || 
-            this.isAscending[type] && a.name < b.name) {
-            return 1;
-          } else {
-            return -1;
-          }
-        })
-      break;
-    }
-    this.isAscending[type] = !this.isAscending[type];
-
-    this.ships.save();
     this.filter.filter();
+  }
+
+  immediateSort(array: Ship[]) {
+    switch(this.lastType) {
+      case "Level":
+        return array.sort((a: Ship, b: Ship) => {
+          if(a.level == b.level) {
+            return 0;
+          }
+          if(!this.isAscending["Level"] && a.level < b.level || 
+              this.isAscending["Level"] && a.level > b.level) {
+            return 1;
+          } else {
+            return -1;
+          }
+        })
+      case "Rarity":
+        return array.sort((a: Ship, b: Ship) => {
+          let aRarity = this.shipsService.getRetroRarity(a.id);
+          let bRarity = this.shipsService.getRetroRarity(b.id);
+          if(this.rarityRanks[aRarity] == this.rarityRanks[bRarity]) {
+            return 0;
+          }
+          if(!this.isAscending["Rarity"] && this.rarityRanks[aRarity] < this.rarityRanks[bRarity] || 
+              this.isAscending["Rarity"] && this.rarityRanks[aRarity] > this.rarityRanks[bRarity]) {
+            return 1;
+          } else {
+            return -1;
+          }
+        })
+      case "Name":
+        return array.sort((a: Ship, b: Ship) => {
+          if(a.name == b.name) {
+            return 0;
+          }
+          if(!this.isAscending["Name"] && a.name < b.name || 
+              this.isAscending["Name"] && a.name > b.name) {
+            return 1;
+          } else {
+            return -1;
+          }
+        })
+    }
   }
 }

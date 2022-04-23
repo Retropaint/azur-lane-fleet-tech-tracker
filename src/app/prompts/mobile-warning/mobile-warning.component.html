@@ -1,0 +1,14 @@
+<app-prompt-header header="WARNING - MOBILE INCOMPATIBILITY" [component]="this"></app-prompt-header>
+
+<div class="prompt-info-background">
+  <div #autoResize>
+    <p class="prompt-text" style="text-align: center">
+      The mobile version is a work-in-progress and includes cramped layouts and cheap UI that makes you wonder if you're looking at a site from 2008.<br> <br> Please proceed with this in mind.
+    </p>
+  </div>
+</div>
+
+<div class="prompt-buttons">
+  <app-prompt-button text="Close" color="grey" (click)="exit()"></app-prompt-button>
+</div>
+

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Ship } from '../interfaces/ship';
-import { Storage } from '@ionic/storage-angular';
 import { IconLoaderService } from './icon-loader.service';
 import { ShipsService } from './ships.service';
 import { SettingsDataService } from './settings-data.service';
@@ -10,7 +9,11 @@ import { SettingsDataService } from './settings-data.service';
 })
 export class FilterService {
 
-  constructor(private iconLoader: IconLoaderService, private shipService: ShipsService, private settingsData: SettingsDataService) { }
+  constructor(
+    private iconLoader: IconLoaderService, 
+    private shipService: ShipsService, 
+    private settingsData: SettingsDataService,
+  ) { }
 
   shipsFilterPass = {};
   oneSelectedStat: string;

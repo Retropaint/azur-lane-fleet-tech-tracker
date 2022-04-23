@@ -1,8 +1,11 @@
 import { AfterContentChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChildren } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { Ship } from 'src/app/interfaces/ship';
 import { FilterService } from 'src/app/services/filter.service';
 import { IconLoaderService } from 'src/app/services/icon-loader.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { ShipsService } from 'src/app/services/ships.service';
+import { SortService } from 'src/app/services/sort.service';
 import { ShipCardComponent } from './ship-card/ship-card.component';
 
 @Component({
@@ -32,5 +35,8 @@ export class ShipCardListComponent {
   constructor(
     public filter: FilterService,
     public iconLoader: IconLoaderService,
-    public shipsService: ShipsService) {}
+    public shipsService: ShipsService,
+    public sort: SortService,
+    public misc: MiscService  
+  ) {}
 }

@@ -1,12 +1,11 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { IonContent, ModalController, Platform } from '@ionic/angular';
+import { IonContent, MenuController, ModalController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { FilterService } from '../services/filter.service';
 import { SettingsComponent } from '../prompts/settings/settings.component';
 import { ShipsService } from '../services/ships.service';
-import { AppComponent } from '../app.component';
 import { SettingsDataService } from '../services/settings-data.service';
-import { SortService } from '../services/sort.service';
+import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning.component';
+import { MiscService } from '../services/misc.service';
 
 @Component({
   selector: 'app-home',
@@ -14,32 +13,30 @@ import { SortService } from '../services/sort.service';
   styleUrls: ['home.page.scss', 'filter.scss'],
 })
 export class HomePage implements AfterViewInit {
-  uiMode: string;
-  techMode: string = "ship";
-  techModeString = "Tech Summary";
-
   @ViewChild(IonContent) ionContent: IonContent;
   
   constructor(
     private modalController: ModalController,
-    private storage: Storage,
-    private filter: FilterService,
     public shipsService: ShipsService,
-    public app: AppComponent,
-    private settingsData: SettingsDataService,
-    private sort: SortService
-    ) {}
+    public misc: MiscService,
+    private menuController: MenuController  
+  ) {}
 
   async ngAfterViewInit() {
 
     // get UI mode if it exists, default to icon if it doesn't
-    if(await this.storage.get('ui-mode')) {
-      this.uiMode = await this.storage.get("ui-mode");
-    } else {
-      this.storage.set("ui-mode", 'Icon');
-    }
+    this.misc.initUiMode();
 
-    this.setCardSize();
+    setTimeout(async () => {
+      if(this.misc.isMobile) {
+        const modal = await this.modalController.create({
+          component: MobileWarningComponent,
+          animated: false
+        })
+        //modal.present();
+      }
+    }, 250)
+    
   }
 
   async openSettingsModal() {
@@ -48,30 +45,14 @@ export class HomePage implements AfterViewInit {
       animated: false
     });
     modal.present();
-    modal.onDidDismiss().then(async value => {
-      if(value.data == null) {
-        return;
-      }
-      this.settingsData.refresh().then(() => {
-        this.sort.sort(this.sort.lastType, true);
-        this.uiMode = this.settingsData.settings['ui-mode']
-      })
-      this.setCardSize();
-    })
   }
 
-  async setCardSize() {
-    const num = this.settingsData.settings['ship-card-size']/100
-    document.documentElement.style.setProperty('--ship-card-zoom', num.toString());
+  openSideMenu() {
+    this.menuController.enable(true, 'first');
+    this.menuController.open('first');
   }
 
-  async switchTechMode() {
-    if(this.techMode == "ship") {
-      this.techMode = "stat";
-      this.techModeString = "Ship Database"
-    } else {
-      this.techMode = "ship";
-      this.techModeString = "Tech Summary";
-    }
+  backToTop() {
+    this.ionContent.scrollToTop();
   }
 }

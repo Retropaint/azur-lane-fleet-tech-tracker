@@ -1,4 +1,6 @@
-<div class="dead-zone" style="padding-right: 50px">
+<div class="dead-zone" class="container isMobile-{{misc.isMobile}}">
+  <div *ngIf="misc.isMobile" style="height: 10px;"></div>
+
   <app-faction-tech-box fullFactionName="Eagle Union" [level]="levels['USS']" (click)="openFactionTech('Eagle Union')"></app-faction-tech-box>
   <app-faction-tech-box fullFactionName="Royal Navy" [level]="levels['HMS']" (click)="openFactionTech('Royal Navy')"></app-faction-tech-box>
   <app-faction-tech-box fullFactionName="Sakura Empire" [level]="levels['IJN']" (click)="openFactionTech('Sakura Empire')"></app-faction-tech-box>
@@ -6,7 +8,7 @@
   
   <!-- viewing faction tech -->
   <div *ngIf="viewingFaction != null" class="faction-tech-container">
-    <app-generic-big-button text="Change Level" extraCSS="inline-block" class="change-level" (click)="changeLevel()"></app-generic-big-button>
+    <app-generic-big-button text="Change Level" extraCSS="inline-block" class="change-level isMobile-{{misc.isMobile}}" (click)="changeLevel()"></app-generic-big-button>
     <p class="generic-text">{{viewingFaction}}</p>
     <app-tech-hull-stat-display [statsObject]="viewingFactionStats"></app-tech-hull-stat-display>
   </div>

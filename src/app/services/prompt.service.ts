@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AppComponent } from '../app.component';
 import { ConfirmationComponent } from '../prompts/confirmation/confirmation.component';
+import { MiscService } from './misc.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PromptService {
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private misc: MiscService) { }
 
-  init(promptHeight: number, addConstantHeight: boolean = false) {
+  init(promptHeight: number, addConstantHeight: boolean = false, forceIndexAtOne: boolean = false) {
     // get modal index, and prevent backdrop from setting cursor to pointer
     let modalIndex = 0;
     while(document.getElementById('ion-overlay-' + modalIndex) == null) {
@@ -65,6 +67,7 @@ export class PromptService {
 
   // works similar to openConfirmation(), but with even less stuff
   async openAnotherPrompt(modalIndex: number, promptComponent: any) {
+    console.log(modalIndex)
     const prevHeight = document.documentElement.style.getPropertyValue("--prompt-height");
     document.getElementById('ion-overlay-' + modalIndex).setAttribute('style', 'display: none');
     
@@ -89,5 +92,13 @@ export class PromptService {
 
   exit() {
     document.documentElement.style.setProperty('--background-blur', '0px');
+  }
+
+  async openPrompt(component: any) {
+    const modal = await this.modalController.create({
+      component: component,
+      animated: false
+    })
+    modal.present();
   }
 }

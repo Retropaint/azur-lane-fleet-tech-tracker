@@ -1,0 +1,17 @@
+.item {
+  margin: 10px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.item-img {
+  width: 30px;
+  image-rendering: pixelated;
+}
+
+.item-text {
+  transform: translateY(-8px);
+  color: #c2e3f4;
+  padding-top: 20px;
+}

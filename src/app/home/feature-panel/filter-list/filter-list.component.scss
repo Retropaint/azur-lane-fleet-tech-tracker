@@ -9,20 +9,29 @@
   }
   &.true {
     margin-bottom: 0px;
+    text-align: center;
+    width: auto
   }
 }
 
 .filter-category-container {
   width: fit-content;
   display: inline-block;
-  transform: translateY(-20px);
   margin-right: 5px;
-  height: 60px;
   margin-left: 10px;
+
+  &.isMobile-false {
+    transform: translateY(-20px);
+  }
 }
 
 .filter-category {
   text-align: center;
   width: 100px;
   height: 30px;
+}
+
+.filter-row-isMobile-true {
+  display: flex;
+  justify-content: center;
 }
