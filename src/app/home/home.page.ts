@@ -1,9 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { IonContent, MenuController, ModalController, Platform } from '@ionic/angular';
-import { Storage } from '@ionic/storage-angular';
 import { SettingsComponent } from '../prompts/settings/settings.component';
 import { ShipsService } from '../services/ships.service';
-import { SettingsDataService } from '../services/settings-data.service';
 import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning.component';
 import { MiscService } from '../services/misc.service';
 

@@ -26,6 +26,7 @@ import { TechHullStatDisplayComponent } from './tech-summary/tech-hull-stat-disp
 import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning.component';
 import { SharedModule } from '../shared/shared.module';
 import { MiscService } from '../services/misc.service';
+import { QuickTechViewComponent } from './quick-tech-view/quick-tech-view.component';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { MiscService } from '../services/misc.service';
     FactionTechLevelEditorComponent,
     TechHullStatDisplayComponent,
     MobileWarningComponent,
+    QuickTechViewComponent
   ],
   exports: [
     ShipCardListComponent, 
