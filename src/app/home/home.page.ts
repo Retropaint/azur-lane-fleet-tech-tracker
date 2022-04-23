@@ -26,7 +26,7 @@ export class HomePage implements AfterViewInit {
 
     // get UI mode if it exists, default to icon if it doesn't
     this.misc.initUiMode();
-
+    
     setTimeout(async () => {
       if(this.misc.isMobile) {
         const modal = await this.modalController.create({

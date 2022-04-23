@@ -34,7 +34,9 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     this.textLevel = this.level;
 
     // I have no clue why true on init doesn't work
-    this.isObtained = true;
+    if(this.level > 1 || this.ship.isObtained) {
+      this.isObtained = true;
+    }
   }
 
   ngAfterViewInit() {
@@ -69,6 +71,11 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     if(!wasSlider) {
       this.textLevel = this.input.nativeElement.value;
     }
+
+    // since this func is called everytime input gets updated I may as well call it here
+    if(this.input.nativeElement.value > 1) {
+      this.isObtained = true;
+    }
   }
 
   updateSlider() {
@@ -76,6 +83,7 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   choseMarker(markerLevel: number) {
+    this.isObtained = true;
     this.wasSlider = true;
     this.level = markerLevel;
     this.done();

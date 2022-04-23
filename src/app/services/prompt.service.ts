@@ -14,6 +14,9 @@ export class PromptService {
   init(promptHeight: number, addConstantHeight: boolean = false, forceIndexAtOne: boolean = false) {
     // get modal index, and prevent backdrop from setting cursor to pointer
     let modalIndex = 0;
+    if(this.misc.isMobile && !forceIndexAtOne) {
+      modalIndex = 2;
+    }
     while(document.getElementById('ion-overlay-' + modalIndex) == null) {
       modalIndex++;
     }

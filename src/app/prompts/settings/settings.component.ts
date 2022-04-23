@@ -78,13 +78,13 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     this.modalController.dismiss();
   }
 
-  save() {
-    this.storage.set("ship-card-size", this.inputShipCardSize).then(() => {
-      this.settingsData.refresh().then(() => {
-        this.misc.uiMode = this.settingsData.settings['ui-mode'];
-        this.misc.setCardSize();
-      })
-    });
+  async save() {
+    await this.storage.set("ship-card-size", this.inputShipCardSize);
+    
+    await this.settingsData.refresh().then(() => {
+      this.misc.uiMode = this.settingsData.settings['ui-mode'];
+      this.misc.setCardSize();
+    })
     
     this.modalController.dismiss();
   }

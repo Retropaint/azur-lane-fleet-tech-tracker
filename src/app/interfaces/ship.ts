@@ -1,5 +1,3 @@
-import { ShipCategory } from "./ship-category";
-
 export interface Ship {
   name: string;
   id: string;

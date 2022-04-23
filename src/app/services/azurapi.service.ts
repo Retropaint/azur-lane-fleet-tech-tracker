@@ -30,6 +30,7 @@ export class AzurapiService {
     
     await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json").then(value => value.text()).then(ships => {
       JSON.parse(ships).forEach(async ship => {
+        
         // only accept ships with a max level fleet tech bonus
         if(ship["fleetTech"]["statsBonus"]["maxLevel"]) {
 
