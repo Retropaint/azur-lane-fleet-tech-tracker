@@ -1,6 +1,4 @@
-<div class="dead-zone" style="text-align: center">
-  <div #container class="container isMobile-{{misc.isMobile}}" *ngIf="filter.shipsFilterPass != []">
-    <app-sheet-category class="grid"></app-sheet-category>
-    <app-hull-info-panel *ngIf="!misc.isMobile" mode="sheet"></app-hull-info-panel>
-  </div>
+<div #container class="container isMobile-{{misc.isMobile}}" *ngIf="filter.shipsFilterPass != []">
+  <app-feature-panel></app-feature-panel>
+  <app-sheet-category class="grid"></app-sheet-category>
 </div>

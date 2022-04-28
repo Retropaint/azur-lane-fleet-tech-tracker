@@ -1,9 +1,16 @@
 .container {
   color: black;
-  text-align: center;
-  margin-bottom: 200px;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 50px;
+  padding-right: 100px;
 
   &.isMobile-true {
     margin-bottom: 50px;
   }
+}
+
+.grid {
+  flex-basis: 60%;
+  padding-left: 50px;
 }

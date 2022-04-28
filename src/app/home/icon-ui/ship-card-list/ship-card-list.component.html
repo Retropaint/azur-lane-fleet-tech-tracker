@@ -1,3 +1,5 @@
+<app-quick-tech-view></app-quick-tech-view>
+
 <div class="ship-grid isMobile-{{misc.isMobile}}">
   <div *ngFor="let ship of shipsService.setAllProperShipPos(sort.immediateSort(iconLoader.ships))" style="display: inline-block">
     <app-ship-card #ships *ngIf="ship != null && filter.shipsFilterPass[ship.id]" [ship]="ship"></app-ship-card>

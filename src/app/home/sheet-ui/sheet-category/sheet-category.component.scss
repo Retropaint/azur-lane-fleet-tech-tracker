@@ -1,10 +1,8 @@
 .container {
   display: inline-block;
   text-align: left;
-
-  &.isMobile-false {
-    margin-right: 70px;
-  }
+  height: 75vh;
+  overflow-y: auto;
 }
 
 .dropping-left {

@@ -38,7 +38,6 @@
 
       <!-- ship database -->
       <ng-container *ngIf="misc.techMode == 'ship'">
-        <app-feature-panel [uiMode]="misc.uiMode"></app-feature-panel>
         <app-icon-ui *ngIf="misc.uiMode == 'Icon'" style="position: relative;"></app-icon-ui>
         <app-sheet-ui *ngIf="misc.uiMode == 'Sheet'" style="position: relative;"></app-sheet-ui>
         <app-generic-big-button *ngIf="misc.isMobile" text="Back to Top" (click)="backToTop()"></app-generic-big-button>

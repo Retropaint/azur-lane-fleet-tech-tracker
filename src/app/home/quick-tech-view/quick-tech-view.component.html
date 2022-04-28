@@ -8,7 +8,7 @@
   <ng-container *ngIf="filter.oneSelectedHull != null && filter.oneSelectedStat != null">
     <div *ngFor="let hull of hullHierarchy.hulls[filter.oneSelectedHull]" class="quick-tech"> 
       <app-hull-icon [hull]="hull" class="hull-icon" [moveY]="5"></app-hull-icon>
-      <p class="generic-text inline-block">{{filter.oneSelectedStat}}: {{shipsService.quickTechTotal[hull]}}/{{shipsService.quickTechMax[hull]}}</p>
+      <p class="generic-text inline-block quick-tech-text">{{filter.oneSelectedStat}}: {{shipsService.quickTechTotal[hull]}}/{{shipsService.quickTechMax[hull]}}</p>
     </div>
   </ng-container>
 </div>
