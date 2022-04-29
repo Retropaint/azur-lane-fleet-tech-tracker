@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="main-content isMobile-{{misc.isMobile}}">
-  <app-hull-info-panel *ngIf="misc.uiMode == 'Icon' && misc.techMode == 'ship' && !misc.isMobile" [mode]="misc.uiMode"></app-hull-info-panel>
+  <app-hull-info-panel *ngIf="misc.techMode == 'ship' && !misc.isMobile"></app-hull-info-panel>
   <div class="background"></div>
 
   <div class="content">
