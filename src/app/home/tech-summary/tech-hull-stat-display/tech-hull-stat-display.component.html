@@ -2,7 +2,7 @@
   <div *ngFor="let hull of objectKeys(statsObject).reverse()" class="hull-stat-container">
     
     <!-- hull icon -->
-    <app-hull-icon [hull]="hull" class="hull-icon" width="52"></app-hull-icon>
+    <app-hull-icon [hull]="hull" class="hull-icon" [width]="52"></app-hull-icon>
     
     <!-- stat abbreviation and bonus -->
     <div *ngFor="let stat of objectKeys(statsObject[hull])" class="child">
