@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
 
     this.factionTechData.init();
 
-    this.misc.isMobile = this.platform.is('mobileweb');
+    this.misc.isMobile = this.platform.width() < 1024;
     if(!this.misc.isMobile) {
       document.documentElement.style.setProperty('--dead-zone-margin', "200px");
     }
@@ -78,5 +78,9 @@ export class AppComponent implements OnInit {
   switchTechMode() {
     this.misc.switchTechMode();
     this.menuController.close('first');
+  }
+
+  onResize(event) {
+    this.misc.isMobile = event.target.innerWidth < 1024;
   }
 }

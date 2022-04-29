@@ -31,7 +31,11 @@
   height: 30px;
 }
 
-.filter-row-isMobile-true {
-  display: flex;
-  justify-content: center;
+$test: 50vw;
+
+.filter-row {
+  &.isMobile-true {
+    display: flex;
+    justify-content: center;
+  } 
 }
