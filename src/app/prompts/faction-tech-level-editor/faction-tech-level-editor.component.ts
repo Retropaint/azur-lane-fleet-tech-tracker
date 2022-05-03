@@ -29,9 +29,13 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
   ) { }
 
   async ngOnInit() {
-    const shortenedName = this.shortenedNamesService[this.fullFactionName]
+    const shortenedName = this.shortenedNamesService.factions[this.fullFactionName]
     this.maxLevel = this.factionTechData.maxLevels[shortenedName];
     this.sliderLevel = await this.storage.get(shortenedName) || 1;
+
+    setTimeout(() => {
+      this.input.nativeElement.focus()
+    }, 250)
   }
 
   ngAfterViewInit() {
@@ -43,6 +47,8 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
     this.wasSlider = wasSlider;
     if(!wasSlider) {
       this.textLevel = this.input.nativeElement.value;
+    } else {
+      this.textLevel = this.sliderLevel;
     }
   }
 
@@ -52,9 +58,9 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
 
   done() {
     if(this.wasSlider) {
-      this.modalController.dismiss(this.sliderLevel);
+      this.modalController.dismiss(Math.min(this.sliderLevel, this.maxLevel));
     } else {
-      this.modalController.dismiss(this.textLevel)
+      this.modalController.dismiss(Math.min(this.textLevel, this.maxLevel));
     }
   }
 

@@ -1,19 +1,23 @@
-import { AfterContentChecked, AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChildren } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { Ship } from 'src/app/interfaces/ship';
 import { FilterService } from 'src/app/services/filter.service';
-import { IconLoaderService } from 'src/app/services/icon-loader.service';
 import { MiscService } from 'src/app/services/misc.service';
+import { SettingsDataService } from 'src/app/services/settings-data.service';
 import { ShipsService } from 'src/app/services/ships.service';
 import { SortService } from 'src/app/services/sort.service';
-import { ShipCardComponent } from './ship-card/ship-card.component';
 
 @Component({
   selector: 'app-ship-card-list',
   templateUrl: './ship-card-list.component.html',
   styleUrls: ['./ship-card-list.component.scss', '../../home.page.scss'],
 })
-export class ShipCardListComponent {
+export class ShipCardListComponent implements AfterViewInit {
+
+  @ViewChild('list') list: ElementRef;
+
+  ships: Ship[] = [];
+  rows: Ship[][] = [];
+  rowHeight: number;
 
   fleetTechStatIconWidths = {
     "HP": 16,
@@ -27,16 +31,60 @@ export class ShipCardListComponent {
     "RLD": 15,
   };
 
-  @ViewChildren('ships') shipComponents: ShipCardComponent
-  interval: any;
-  ships: Ship[] = [];
-  delay: number = 30;
-
   constructor(
     public filter: FilterService,
-    public iconLoader: IconLoaderService,
     public shipsService: ShipsService,
     public sort: SortService,
-    public misc: MiscService  
+    public misc: MiscService,
+    private settingsData: SettingsDataService
   ) {}
+
+  ngAfterViewInit() {
+    this.misc.shipCardList = this;
+    this.refresh();
+  }
+
+  onResize() {
+    this.refresh();
+  }
+
+  refresh() {
+
+    // reset 
+    this.ships = [];
+    this.rows = [];
+
+    // get width of list element to calculate how many ships can fit in a row
+    let listWidth = this.list.nativeElement.getBoundingClientRect().width;
+    const checkInterval = setInterval(() => {
+      if(listWidth == 0) {
+        listWidth = this.list.nativeElement.getBoundingClientRect().width;
+      } else {
+        clearInterval(checkInterval);
+      }
+    }, 500)
+
+    const shipsPerRow = Math.floor(listWidth / (116 * this.settingsData.settings['ship-card-size']/100));
+    
+    const shipCardSize = this.settingsData.settings['ship-card-size']/100;
+    if(!this.misc.isMobile) {
+      this.rowHeight = 158 * shipCardSize;
+    } else {
+      this.rowHeight = 116 * shipCardSize;
+    }
+    
+    // create rows array
+    let rowIndex = 0;
+    this.shipsService.setAllProperShipPos(this.sort.immediateSort(this.shipsService.ships)).forEach(ship => {
+      if(this.misc.shipsFilterPass[ship.id] || Object.keys(this.misc.shipsFilterPass).length == 0) {
+        if(this.rows[rowIndex] == null) {
+          this.rows.push([]);
+        }
+        this.rows[rowIndex].push(ship);
+        if(this.rows[rowIndex].length >= shipsPerRow) {
+          rowIndex++;
+        }
+      }
+    })
+  }
 }

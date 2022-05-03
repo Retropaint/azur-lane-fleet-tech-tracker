@@ -1,10 +1,14 @@
 .ship-grid {
-  margin-bottom: 100px;
-  user-select: none;
   text-align: center;
 
   &.isMobile-true {
     text-align: center;
+    padding-left: 19px;
+    height: 80vh;
+  }
+
+  &.isMobile-false {
+    height: 77vh;
   }
 }
 

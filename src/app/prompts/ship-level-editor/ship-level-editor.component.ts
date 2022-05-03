@@ -2,7 +2,7 @@ import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, Elemen
 import { IonInput, ModalController } from '@ionic/angular';
 import { Ship } from 'src/app/interfaces/ship';
 import { FilterService } from 'src/app/services/filter.service';
-import { IconLoaderService } from 'src/app/services/icon-loader.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { ShipsService } from 'src/app/services/ships.service';
 
@@ -28,15 +28,25 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     private prompt: PromptService, 
     private modalController: ModalController, 
     private shipsService: ShipsService, 
-    private filter: FilterService) { }
+    private filter: FilterService,
+    private misc: MiscService
+  ) { }
 
   ngOnInit() {
-    this.textLevel = this.level;
+    if(this.level != 1) {
+      this.textLevel = this.level;
+    } else {
+      this.textLevel = null;
+    }
 
     // I have no clue why true on init doesn't work
     if(this.level > 1 || this.ship.isObtained) {
       this.isObtained = true;
     }
+
+    setTimeout(() => {
+      this.input.nativeElement.focus()
+    }, 250)
   }
 
   ngAfterViewInit() {
@@ -57,9 +67,10 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
       this.ship.level = finalLevel || this.level;
     }
 
-    this.shipsService.refreshCogChipReq(this.filter.shipsFilterPass);
+    this.shipsService.refreshCogChipReq(this.misc.shipsFilterPass);
     this.shipsService.save();
     this.shipsService.quickTechView(this.shipsService.lastQuickTechStat, this.shipsService.lastQuickTechHull);
+    this.filter.filter();
     
     this.modalController.dismiss('done');
   }
@@ -79,7 +90,9 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   updateSlider() {
-    this.level = this.textLevel;
+    if(this.textLevel != null) {
+      this.level = this.textLevel;
+    }
   }
 
   choseMarker(markerLevel: number) {

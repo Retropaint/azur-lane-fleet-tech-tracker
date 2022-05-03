@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { IonContent } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { ShipCardListComponent } from '../home/icon-ui/ship-card-list/ship-card-list.component';
 import { SettingsDataService } from './settings-data.service';
 
 @Injectable({
@@ -8,13 +10,23 @@ import { SettingsDataService } from './settings-data.service';
 export class MiscService {
 
   isMobile: boolean;
+  
   techMode: string = 'ship'; 
   techModeString: string = "Tech Summary";
   uiMode: string = "Icon";
+  
+  ionContent: IonContent;
+  hasScrollbar: boolean;
+
+  // stored here instead of filter to prevent circular dependencies 
+  shipsFilterPass = {};
+
+  // used to call the refresh function
+  shipCardList: ShipCardListComponent;
 
   constructor(
     private settingsData: SettingsDataService,
-    private storage: Storage
+    private storage: Storage,
   ) { }
 
   async initUiMode() {
@@ -38,5 +50,14 @@ export class MiscService {
   async setCardSize() {
     const num = this.settingsData.settings['ship-card-size']/100
     document.documentElement.style.setProperty('--ship-card-zoom', num.toString());
+  }
+
+  scrollUp() {
+    this.ionContent.scrollToTop();
+  }
+
+  async checkScrollbar() {
+    const scrollElement = await this.ionContent.getScrollElement();
+    this.hasScrollbar = scrollElement.scrollHeight > scrollElement.clientHeight;
   }
 }

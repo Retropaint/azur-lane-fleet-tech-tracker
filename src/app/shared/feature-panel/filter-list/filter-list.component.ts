@@ -6,7 +6,7 @@ import { MiscService } from 'src/app/services/misc.service';
 @Component({
   selector: 'app-filter-list',
   templateUrl: './filter-list.component.html',
-  styleUrls: ['./filter-list.component.scss', '../../home.page.scss'],
+  styleUrls: ['./filter-list.component.scss', '../../../home/home.page.scss'],
 })
 export class FilterListComponent implements OnInit {
 
@@ -20,8 +20,8 @@ export class FilterListComponent implements OnInit {
   statIconWidths: number[] = [50, 35, 35, 38, 38, 35, 35, 32, 35];
   statTextRightMargins: number[] = [17, 17, 17, 17, 17, 17, 17, 17, 17, 40];
 
-  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "SN", "FFNF", "MNF", "RN", "All"];
-  factionIconWidths: number[] = [40, 30, 40, 32, 32, 40, 32, 32, 40];
+  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "RN", "SN", "FFNF", "MNF", "All"];
+  factionIconWidths: number[] = [40, 30, 40, 32, 32, 40, 40, 32, 32];
   factionTextRightMargins: number[] = [10, 15, 15, 15, 15, 17, 15, 15, 17, 40];
 
   rarityNames: string[] = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare", "All"];

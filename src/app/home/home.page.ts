@@ -24,17 +24,7 @@ export class HomePage implements AfterViewInit {
 
     // get UI mode if it exists, default to icon if it doesn't
     this.misc.initUiMode();
-    
-    setTimeout(async () => {
-      if(this.misc.isMobile) {
-        const modal = await this.modalController.create({
-          component: MobileWarningComponent,
-          animated: false
-        })
-        //modal.present();
-      }
-    }, 250)
-    
+    this.misc.ionContent = this.ionContent;
   }
 
   async openSettingsModal() {
@@ -46,8 +36,13 @@ export class HomePage implements AfterViewInit {
   }
 
   openSideMenu() {
-    this.menuController.enable(true, 'first');
-    this.menuController.open('first');
+    this.menuController.enable(true, 'side');
+    this.menuController.open('side');
+  }
+
+  openSortAndFilterMenu() {
+    this.menuController.enable(true, 'filter');
+    this.menuController.open('filter');
   }
 
   backToTop() {

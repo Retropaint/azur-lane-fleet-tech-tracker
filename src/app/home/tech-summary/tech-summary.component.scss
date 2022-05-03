@@ -3,11 +3,6 @@
     padding-right: var(--dead-zone-margin);
     padding-left: var(--dead-zone-margin);
   }
-
-  &.isMobile-true {
-    padding-right: 50px;
-    padding-left: 50px;
-  }
 }
 
 .faction-tech-container {
@@ -26,7 +21,7 @@
   }
 
   &.isMobile-false {
-    right: 100px;
+    right: 200px;
   }
 }
 

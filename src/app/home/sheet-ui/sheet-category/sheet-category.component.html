@@ -11,7 +11,7 @@
 
     <!-- ships -->
     <ng-container *ngFor="let ship of shipsService.setAllProperShipPos(sort.immediateSort(shipsService.ships)); index as i">
-      <app-sheet-ship-row *ngIf="filter.shipsFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
+      <app-sheet-ship-row *ngIf="misc.shipsFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
     </ng-container>
   </div>
 </div>

@@ -5,17 +5,18 @@
       <h1 class="title isMobile-{{misc.isMobile}} generic-text no-glow">Azur Lane Fleet Tech Tracker</h1>
     </div>
     <img (click)="openSideMenu()" class="side-menu-button" src="assets/side-menu.png" slot="end"/>
-    <!--
-    <ion-icon (click)="openSideMenu()" slot="end" name="reorder-three-outline" class="burger-icon"></ion-icon>
-    -->
   </ion-toolbar>
-  
 </ion-header>
 
 <ion-content [fullscreen]="true" class="main-content isMobile-{{misc.isMobile}}">
   <app-hull-info-panel *ngIf="misc.techMode == 'ship' && !misc.isMobile"></app-hull-info-panel>
   <div class="background"></div>
 
+  <!-- sort & filter swipe text (mobile)-->
+  <p class="generic-text sort-and-filter-text" *ngIf="misc.isMobile && misc.techMode == 'ship'" (click)="openSortAndFilterMenu()">
+    SORT & FILTER <ion-icon name="caret-up-outline"></ion-icon>
+  </p>
+  
   <div class="content">
     <div class="header-container" *ngIf="!misc.isMobile">
       <!-- site logo & title -->
@@ -23,10 +24,15 @@
       <h1 class="title generic-text no-glow">Azur Lane Fleet Tech Tracker</h1>
 
       <div style="display: inline-block; transform: translateX(50px)">
-        <app-generic-big-button *ngIf="!misc.isMobile" text="{{misc.techModeString}}" (click)="misc.switchTechMode()"></app-generic-big-button>
+        <!-- tech mdoe button -->
+        <div *ngIf="!misc.isMobile" class="header-button" (click)="misc.switchTechMode()">
+          <img *ngIf="misc.techMode == 'ship'" class="image" src="assets/tech summary.png"/>
+          <img *ngIf="misc.techMode == 'stat'" class="image" src="assets/ship database.png"/>
+          <p class="generic-text no-glow text">{{misc.techModeString}}</p>
+        </div>
 
         <!-- settings button-->
-        <div *ngIf="!misc.isMobile" class="settings-button" (click)="openSettingsModal()">
+        <div *ngIf="!misc.isMobile" class="header-button settings" (click)="openSettingsModal()">
           <img class="image" src="assets/settings.png"/>
           <p class="generic-text no-glow text">Settings</p>
         </div>
@@ -40,7 +46,6 @@
       <ng-container *ngIf="misc.techMode == 'ship'">
         <app-icon-ui *ngIf="misc.uiMode == 'Icon'" style="position: relative;"></app-icon-ui>
         <app-sheet-ui *ngIf="misc.uiMode == 'Sheet'" style="position: relative;"></app-sheet-ui>
-        <app-generic-big-button *ngIf="misc.isMobile" text="Back to Top" (click)="backToTop()"></app-generic-big-button>
       </ng-container>
 
       <!-- tech summary -->

@@ -1,4 +1,4 @@
-<div #row (click)="enterLevel()"  *ngIf="filter.shipsFilterPass[ship.id] == true" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}}">
+<div #row (click)="enterLevel()"  *ngIf="misc.shipsFilterPass[ship.id] == true" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}}">
   <!-- hull icon and ship name-->
   <div class="ship-name {{getRarity()}} border">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>

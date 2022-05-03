@@ -1,8 +1,12 @@
 .container {
   display: inline-block;
   text-align: left;
-  height: 75vh;
   overflow-y: auto;
+  width: max-content;
+
+  &.isMobile-false {
+    height: 75vh;
+  }
 }
 
 .dropping-left {

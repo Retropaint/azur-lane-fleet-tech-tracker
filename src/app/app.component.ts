@@ -44,6 +44,8 @@ export class AppComponent implements OnInit {
 
     await this.settingsData.refresh();
 
+    this.misc.setCardSize();
+
     this.factionTechData.init();
 
     this.misc.isMobile = this.platform.width() < 1024;
@@ -80,7 +82,8 @@ export class AppComponent implements OnInit {
     this.menuController.close('first');
   }
 
-  onResize(event) {
+  async onResize(event) {
     this.misc.isMobile = event.target.innerWidth < 1024;
+    this.misc.checkScrollbar();
   }
 }

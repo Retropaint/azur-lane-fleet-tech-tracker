@@ -8,7 +8,7 @@ import { SortService } from 'src/app/services/sort.service';
 @Component({
   selector: 'app-sort-list',
   templateUrl: './sort-list.component.html',
-  styleUrls: ['./sort-list.component.scss', '../../icon-ui/icon-ui.component.scss', '../../home.page.scss', '../../Components/generic-big-button/generic-big-button.component.scss'],
+  styleUrls: ['./sort-list.component.scss', '../../../home/home.page.scss', '../../generic-big-button/generic-big-button.component.scss'],
 })
 export class SortListComponent {
 

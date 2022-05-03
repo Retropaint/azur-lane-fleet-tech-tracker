@@ -107,11 +107,11 @@
   }
 }
 
-.settings-button {
+.header-button {
   display: inline-block;
-  position: absolute;
   margin-top: 7px;
-  margin-left: 30px;
+  margin-bottom: 25px;
+  transform: translateY(15px);
   cursor: pointer;
 
   .image {
@@ -127,7 +127,11 @@
     padding-right: 10px;
   }
   &.isMobile-false {
-    margin-left: 100px;
+    margin-left: 50px;
+  }
+
+  &.settings {
+    margin-left: 30px;
   }
 }
 
@@ -163,4 +167,13 @@
 .side-menu-button {
   width: 40px;
   padding-right: 5px;
+  cursor: pointer;
+}
+
+.sort-and-filter-text {
+  position: fixed;
+  transform: translate(-55px, 40vh) rotate(90deg);
+  margin: 0;
+  z-index: 99;
+  cursor: pointer;
 }

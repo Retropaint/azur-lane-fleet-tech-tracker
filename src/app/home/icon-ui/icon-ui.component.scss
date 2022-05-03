@@ -35,15 +35,16 @@
 }
 
 .container {
-  display: flex;
-  padding-left: 50px;
-  padding-right: 100px;
-  align-items: stretch;
+  &.isMobile-false {
+    display: flex;
+    padding-left: 50px;
+    padding-right: 100px;
+    align-items: stretch;
+  }
 }
 
 .ship-list {
   height: 85vh;
-  overflow-y: auto;
   flex-basis: 50%;
   flex-shrink: 0;
 }

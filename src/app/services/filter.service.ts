@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Ship } from '../interfaces/ship';
-import { IconLoaderService } from './icon-loader.service';
+
 import { ShipsService } from './ships.service';
 import { SettingsDataService } from './settings-data.service';
+import { MiscService } from './misc.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,11 @@ import { SettingsDataService } from './settings-data.service';
 export class FilterService {
 
   constructor(
-    private iconLoader: IconLoaderService, 
     private shipService: ShipsService, 
     private settingsData: SettingsDataService,
+    private misc: MiscService,
   ) { }
 
-  shipsFilterPass = {};
   oneSelectedStat: string;
   oneSelectedHull: string;
 
@@ -75,7 +75,7 @@ export class FilterService {
   init() {
     // reset shipsFilterPass
     this.shipService.ships.forEach(ship => {
-      this.shipsFilterPass[ship.id] = false;
+      this.misc.shipsFilterPass[ship.id] = false;
     })
 
     this.filter();
@@ -83,20 +83,21 @@ export class FilterService {
 
   filter() {
     // reset shipsFilterPass
-    Object.keys(this.shipsFilterPass).forEach(id => {
-      this.shipsFilterPass[id] = false;
+    Object.keys(this.misc.shipsFilterPass).forEach(id => {
+      this.misc.shipsFilterPass[id] = false;
     })
 
     // assign shipsFilterPass
     this.shipService.ships.forEach(ship => {
       if(this.passesCriteria(ship)) {
-        this.shipsFilterPass[ship.id] = true;
+        this.misc.shipsFilterPass[ship.id] = true;
       }
     })
 
-    this.shipService.refreshCogChipReq(this.shipsFilterPass);
+    this.shipService.refreshCogChipReq(this.misc.shipsFilterPass);
 
-    this.iconLoader.loadShips(this.shipsFilterPass);
+    this.misc.checkScrollbar();
+    this.misc.shipCardList.refresh();
   }
 
   passesCriteria(ship: Ship) {

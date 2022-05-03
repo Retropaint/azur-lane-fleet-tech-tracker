@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Ship } from '../interfaces/ship';
-import { FilterService } from './filter.service';
+import { MiscService } from './misc.service';
 import { ShipsService } from './ships.service';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class SortService {
     "Ultra-Rare": 4,
   }
 
-  constructor(private shipsService: ShipsService, private filter: FilterService) {}
+  constructor(private shipsService: ShipsService, private misc: MiscService) {}
 
   sort(type: string, keepState: boolean = false) {
     this.lastType = type;
@@ -33,7 +33,7 @@ export class SortService {
       this.isAscending[type] = !this.isAscending[type];
     }
 
-    this.filter.filter();
+    this.misc.shipCardList.refresh();
   }
 
   immediateSort(array: Ship[]) {

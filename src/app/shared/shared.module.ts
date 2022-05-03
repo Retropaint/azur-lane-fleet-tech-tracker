@@ -10,7 +10,11 @@ import { HomePageRoutingModule } from '../home/home-routing.module';
 import { SettingsToggleComponent } from '../prompts/settings/settings-toggle/settings-toggle.component';
 import { HullInfoPanelComponent } from '../home/hull-info-panel/hull-info-panel.component';
 import { HullInfoExceptionComponent } from '../home/hull-info-panel/hull-info-exception/hull-info-exception.component';
-import { HullIconComponent } from '../home/Components/hull-icon/hull-icon.component';
+import { HullIconComponent } from '../shared//hull-icon/hull-icon.component';
+import { FeaturePanelComponent } from '../shared/feature-panel/feature-panel.component';
+import { SortListComponent } from '../shared/feature-panel/sort-list/sort-list.component';
+import { FilterListComponent } from '../shared/feature-panel/filter-list/filter-list.component';
+import { FilterButtonComponent } from '../shared/feature-panel/filter-list/filter-button/filter-button.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { HullIconComponent } from '../home/Components/hull-icon/hull-icon.compon
     SettingsToggleComponent,
     HullInfoPanelComponent,
     HullInfoExceptionComponent,
-    HullIconComponent
+    HullIconComponent,
+    FeaturePanelComponent,
+    SortListComponent,
+    FilterListComponent,
+    FilterButtonComponent,
   ],
   exports: [
     CommonModule,
@@ -35,7 +43,12 @@ import { HullIconComponent } from '../home/Components/hull-icon/hull-icon.compon
     PromptHeaderComponent,
     HullInfoPanelComponent,
     HullInfoExceptionComponent,
-    HullIconComponent
+    HullIconComponent,
+    FeaturePanelComponent,
+    SortListComponent,
+    FilterListComponent,
+    FilterButtonComponent,
+    FeaturePanelComponent
   ],
   imports: [
     CommonModule,

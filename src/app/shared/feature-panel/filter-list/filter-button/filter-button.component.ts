@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
 import { FilterService } from 'src/app/services/filter.service';
 import { MiscService } from 'src/app/services/misc.service';
-import { HomePage } from '../../../home.page';
 
 @Component({
   selector: 'app-filter-button',
@@ -25,7 +23,6 @@ export class FilterButtonComponent implements OnInit {
 
   constructor(
     private filter: FilterService, 
-    private home: HomePage, 
     private misc: MiscService
     ) { }
 
@@ -33,7 +30,7 @@ export class FilterButtonComponent implements OnInit {
 
   clickedFilterButton() {
     if(!this.misc.isMobile) {
-      this.home.ionContent.scrollToTop();
+      this.misc.scrollUp();
     }
     this.filter.pressedFilter(this.filterName, this.filterType);
   }

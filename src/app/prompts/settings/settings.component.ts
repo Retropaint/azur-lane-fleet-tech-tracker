@@ -1,15 +1,12 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { SheetCategoryComponent } from 'src/app/home/sheet-ui/sheet-category/sheet-category.component';
 import { AzurapiService } from 'src/app/services/azurapi.service';
 import { CsvService } from 'src/app/services/csv.service';
 import { MiscService } from 'src/app/services/misc.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { SettingsDataService } from 'src/app/services/settings-data.service';
 import { ShipsService } from 'src/app/services/ships.service';
-import { SortService } from 'src/app/services/sort.service';
 import { CreditsComponent } from '../credits/credits.component';
 
 @Component({
@@ -33,7 +30,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     private shipsService: ShipsService,
     public csv: CsvService,
     private misc: MiscService,
-    private settingsData: SettingsDataService
+    private settingsData: SettingsDataService,
   ) { }
 
   ngOnInit() {
@@ -85,6 +82,8 @@ export class SettingsComponent implements AfterViewInit, OnInit {
       this.misc.uiMode = this.settingsData.settings['ui-mode'];
       this.misc.setCardSize();
     })
+
+    this.misc.shipCardList.refresh();
     
     this.modalController.dismiss();
   }

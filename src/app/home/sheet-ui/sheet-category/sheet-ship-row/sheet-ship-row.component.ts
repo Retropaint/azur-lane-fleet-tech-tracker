@@ -7,6 +7,7 @@ import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 import { SortService } from 'src/app/services/sort.service';
 import { ShipsService } from 'src/app/services/ships.service';
 import { SettingsDataService } from 'src/app/services/settings-data.service';
+import { MiscService } from 'src/app/services/misc.service';
 
 @Component({
   selector: 'app-sheet-ship-row',
@@ -40,7 +41,9 @@ export class SheetShipRowComponent implements OnInit {
     public hoverTitles: HoverTitlesService,
     private sort: SortService,
     private settingsData: SettingsDataService,
-    private shipsService: ShipsService) {}
+    private shipsService: ShipsService,
+    public misc: MiscService
+  ) {}
 
   ngOnInit() {
     this.fleetTechHoverTitle = this.hoverTitles.getTechStatTitle(this.ship);

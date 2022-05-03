@@ -3,7 +3,6 @@ import { IonInput, ModalController } from '@ionic/angular';
 import { Ship } from 'src/app/interfaces/ship';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
-import { IconLoaderService } from 'src/app/services/icon-loader.service';
 import { MiscService } from 'src/app/services/misc.service';
 import { SettingsDataService } from 'src/app/services/settings-data.service';
 import { ShipsService } from 'src/app/services/ships.service';
@@ -18,7 +17,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   @ViewChild('levelInput') levelInput: IonInput;
   imageSrc: string = "";
   hoverTitle: string;
-  fadeCSS: string = "default";
+  fadeCSS: string = "";
   flashCSS: string = "out";
   rarity: string;
   hull: string;
@@ -41,7 +40,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   constructor(
     private modalController: ModalController,
     public hoverTitles: HoverTitlesService,
-    private iconLoader: IconLoaderService,
     public misc: MiscService,
     private shipsService: ShipsService,
     private settingsData: SettingsDataService) { }
@@ -98,7 +96,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     })
     modal.present();
     modal.onDidDismiss().then(value => {
-      this.iconLoader.refresh();
 
       // flash the card if pressed Confirm
       if(value.data == 'done') {
