@@ -15,6 +15,7 @@ import { FeaturePanelComponent } from '../shared/feature-panel/feature-panel.com
 import { SortListComponent } from '../shared/feature-panel/sort-list/sort-list.component';
 import { FilterListComponent } from '../shared/feature-panel/filter-list/filter-list.component';
 import { FilterButtonComponent } from '../shared/feature-panel/filter-list/filter-button/filter-button.component';
+import { GenericBigButtonComponent } from './generic-big-button/generic-big-button.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FilterButtonComponent } from '../shared/feature-panel/filter-list/filte
     SortListComponent,
     FilterListComponent,
     FilterButtonComponent,
+    GenericBigButtonComponent
   ],
   exports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { FilterButtonComponent } from '../shared/feature-panel/filter-list/filte
     SortListComponent,
     FilterListComponent,
     FilterButtonComponent,
-    FeaturePanelComponent
+    FeaturePanelComponent,
+    GenericBigButtonComponent
   ],
   imports: [
     CommonModule,

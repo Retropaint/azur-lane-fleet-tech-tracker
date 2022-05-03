@@ -17,7 +17,6 @@ export class MobileWarningComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    console.log("what")
     this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true, true);
   }
 

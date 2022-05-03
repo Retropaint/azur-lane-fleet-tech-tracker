@@ -73,7 +73,6 @@ export class PromptService {
 
   // works similar to openConfirmation(), but with even less stuff
   async openAnotherPrompt(modalIndex: number, promptComponent: any) {
-    console.log(modalIndex)
     const prevHeight = document.documentElement.style.getPropertyValue("--prompt-height");
     document.getElementById('ion-overlay-' + modalIndex).setAttribute('style', 'display: none');
     

@@ -96,8 +96,7 @@ export class FilterService {
 
     this.shipService.refreshCogChipReq(this.misc.shipsFilterPass);
 
-    this.misc.checkScrollbar();
-    this.misc.shipCardList.refresh();
+    this.misc.refreshIconList();
   }
 
   passesCriteria(ship: Ship) {

@@ -588,7 +588,6 @@ export class FactionTechDataService {
       }
       this.maxLevels[factions[i]] = maxLevel-1;
     }
-    console.log(this.maxLevels);
   }
 
   getTotalStats(faction: string, level) {

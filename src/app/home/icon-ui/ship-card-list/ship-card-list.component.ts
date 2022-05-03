@@ -41,36 +41,26 @@ export class ShipCardListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.misc.shipCardList = this;
-    this.refresh();
-  }
-
-  onResize() {
-    this.refresh();
+    setTimeout(() => {
+      this.refresh();
+    })
   }
 
   refresh() {
-
     // reset 
     this.ships = [];
     this.rows = [];
 
     // get width of list element to calculate how many ships can fit in a row
     let listWidth = this.list.nativeElement.getBoundingClientRect().width;
-    const checkInterval = setInterval(() => {
-      if(listWidth == 0) {
-        listWidth = this.list.nativeElement.getBoundingClientRect().width;
-      } else {
-        clearInterval(checkInterval);
-      }
-    }, 500)
 
     const shipsPerRow = Math.floor(listWidth / (116 * this.settingsData.settings['ship-card-size']/100));
-    
+
     const shipCardSize = this.settingsData.settings['ship-card-size']/100;
     if(!this.misc.isMobile) {
       this.rowHeight = 158 * shipCardSize;
     } else {
-      this.rowHeight = 116 * shipCardSize;
+      this.rowHeight = 128 * shipCardSize;
     }
     
     // create rows array

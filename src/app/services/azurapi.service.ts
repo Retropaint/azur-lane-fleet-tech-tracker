@@ -63,10 +63,6 @@ export class AzurapiService {
             obtainFleetTech['applicable'][i] = this.shortenedNames.applicableHulls[obtainFleetTech['applicable'][i]]
           }
 
-          if(ship['names']['en'] == 'An Shan') {
-            console.log(ship);
-          }
-
           const newShip: Ship = {
             name: ship["names"]["en"],
             id: ship["id"],

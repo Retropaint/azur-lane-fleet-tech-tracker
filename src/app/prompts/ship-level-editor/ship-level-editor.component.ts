@@ -45,7 +45,9 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     }
 
     setTimeout(() => {
-      this.input.nativeElement.focus()
+      if(!this.misc.isMobile) {
+        this.input.nativeElement.focus()
+      }
     }, 250)
   }
 

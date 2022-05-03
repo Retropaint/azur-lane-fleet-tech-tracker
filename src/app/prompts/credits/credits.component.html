@@ -3,7 +3,10 @@
 <div class="prompt-info-background">
   <div #autoResize>
     <p class="prompt-text"><u>Made by:</u></p>
-    <p class="prompt-text">Retropaint (#5312 on Discord if you want to yell at me)</p>
+    <div (click)="shitpostMode = !shitpostMode">
+      <p class="prompt-text" *ngIf="!shitpostMode">Retropaint (#5312 on Discord if you want to yell at me)</p>
+      <p class="prompt-text" *ngIf="shitpostMode">Turkmen twink</p>
+    </div>
 
     <br>
     <p class="prompt-text"><u>Made using:</u></p>
@@ -15,7 +18,10 @@
     <br>
     <br>
     <p class="prompt-text"><u>Testers:</u> </p>
-    <p class="prompt-text">Brah, Chiuchiutrain, Fire Paladin, Nerezza, Snub, Thebombzen, Dragutaku</p>
+    <div (click)="shitpostMode = !shitpostMode">
+      <p class="prompt-text" *ngIf="!shitpostMode">Brah, Chiuchiutrain, Fire Paladin, Nerezza, Snub, Thebombzen, Dragutaku, Kirito</p>
+      <p class="prompt-text" *ngIf="shitpostMode">raging homosexual, good friend of Magu, loli connoisseur, (desperate to be turned into a loli foxgirl), nazi sheep fucker, muslim giraffe, dumbass pidgeon, Russian loli</p>
+    </div>
 
     <br>
     <p class="prompt-text"><u>Special Thanks:</u></p>

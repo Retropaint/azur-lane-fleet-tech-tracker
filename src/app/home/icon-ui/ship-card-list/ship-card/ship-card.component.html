@@ -21,8 +21,8 @@
 
   <!-- image -->
   <div style="display: inline-block">
-    <ion-img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="getImageSrc()" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{getRarity()}}"></ion-img>
-    <ion-img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="getImageSrc()" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"></ion-img>
+    <img ion-img-cache *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="getImageSrc()" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{getRarity()}}"/>
+    <img ion-img-cache *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="getImageSrc()" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
     
     <!-- name -->
     <div class="ship-name">

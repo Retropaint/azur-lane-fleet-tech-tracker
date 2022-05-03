@@ -16,7 +16,6 @@ export class MiscService {
   uiMode: string = "Icon";
   
   ionContent: IonContent;
-  hasScrollbar: boolean;
 
   // stored here instead of filter to prevent circular dependencies 
   shipsFilterPass = {};
@@ -56,8 +55,9 @@ export class MiscService {
     this.ionContent.scrollToTop();
   }
 
-  async checkScrollbar() {
-    const scrollElement = await this.ionContent.getScrollElement();
-    this.hasScrollbar = scrollElement.scrollHeight > scrollElement.clientHeight;
+  refreshIconList() {
+    if(this.shipCardList != null) {
+      this.shipCardList.refresh();
+    }
   }
 }

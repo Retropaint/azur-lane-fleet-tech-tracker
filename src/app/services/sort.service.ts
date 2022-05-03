@@ -33,7 +33,7 @@ export class SortService {
       this.isAscending[type] = !this.isAscending[type];
     }
 
-    this.misc.shipCardList.refresh();
+    this.misc.refreshIconList();
   }
 
   immediateSort(array: Ship[]) {

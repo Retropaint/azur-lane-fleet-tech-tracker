@@ -12,6 +12,8 @@ export class CreditsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
 
+  shitpostMode: boolean;
+
   constructor(private prompt: PromptService, private modalController: ModalController) { }
 
   ngOnInit() {}

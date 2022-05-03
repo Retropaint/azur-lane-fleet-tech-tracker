@@ -83,7 +83,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
       this.misc.setCardSize();
     })
 
-    this.misc.shipCardList.refresh();
+    this.misc.refreshIconList();
     
     this.modalController.dismiss();
   }
