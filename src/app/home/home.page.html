@@ -37,6 +37,8 @@
           <p class="generic-text no-glow text">Settings</p>
         </div>
       </div>
+
+      <app-generic-big-button text="Bulk Select" extraCSS="bulk-select" (click)="misc.toggleBulkSelect()"></app-generic-big-button>
     </div>
 
     <!-- feature panel & UI mode to display-->
@@ -50,11 +52,6 @@
 
       <!-- tech summary -->
       <app-tech-summary *ngIf="misc.techMode == 'stat'" style="text-align: center"></app-tech-summary>
-    </div>
-
-    <!-- if no ships loaded, show this -->
-    <div *ngIf="shipsService.ships.length == 0" class="generic-text centered">
-      Loading...
     </div>
   </div>
 </ion-content>

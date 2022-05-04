@@ -238,3 +238,16 @@
     background-color: rgba(0, 200, 0, 1);
   }
 }
+
+.bulk-select {
+  position: absolute;
+  height: 144px;
+  width: 100%;
+  border-radius: 5px;
+  z-index: 1;
+  pointer-events: none;
+  
+  &.true {
+    outline: 5px solid lime;
+  }
+}

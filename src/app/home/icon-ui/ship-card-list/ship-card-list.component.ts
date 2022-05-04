@@ -13,11 +13,12 @@ import { SortService } from 'src/app/services/sort.service';
 })
 export class ShipCardListComponent implements AfterViewInit {
 
-  @ViewChild('list') list: ElementRef;
+  //@ViewChild('list') list: ElementRef;
 
   ships: Ship[] = [];
   rows: Ship[][] = [];
   rowHeight: number;
+  refreshCount: number;
 
   fleetTechStatIconWidths = {
     "HP": 16,
@@ -36,14 +37,19 @@ export class ShipCardListComponent implements AfterViewInit {
     public shipsService: ShipsService,
     public sort: SortService,
     public misc: MiscService,
-    private settingsData: SettingsDataService
+    private settingsData: SettingsDataService,
+    private list: ElementRef
   ) {}
+
+  onResize() {
+    this.refresh();
+  }
 
   ngAfterViewInit() {
     this.misc.shipCardList = this;
     setTimeout(() => {
       this.refresh();
-    })
+    }, 250)
   }
 
   refresh() {
@@ -53,6 +59,7 @@ export class ShipCardListComponent implements AfterViewInit {
 
     // get width of list element to calculate how many ships can fit in a row
     let listWidth = this.list.nativeElement.getBoundingClientRect().width;
+
 
     const shipsPerRow = Math.floor(listWidth / (116 * this.settingsData.settings['ship-card-size']/100));
 
@@ -76,5 +83,6 @@ export class ShipCardListComponent implements AfterViewInit {
         }
       }
     })
+    console.log(this.rowHeight)
   }
 }

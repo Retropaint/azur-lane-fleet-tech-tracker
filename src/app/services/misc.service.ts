@@ -23,6 +23,8 @@ export class MiscService {
   // used to call the refresh function
   shipCardList: ShipCardListComponent;
 
+  isBulkSelect: boolean;
+
   constructor(
     private settingsData: SettingsDataService,
     private storage: Storage,
@@ -55,9 +57,20 @@ export class MiscService {
     this.ionContent.scrollToTop();
   }
 
-  refreshIconList() {
+  refreshIconList(delay: boolean = false) {
     if(this.shipCardList != null) {
-      this.shipCardList.refresh();
+      if(delay) {
+        this.shipCardList.rows = [];
+        setTimeout(() => {
+          this.shipCardList.refresh();
+        }, 250)
+      } else {
+        this.shipCardList.refresh();
+      }
     }
+  }
+
+  toggleBulkSelect() {
+    this.isBulkSelect = !this.isBulkSelect;
   }
 }

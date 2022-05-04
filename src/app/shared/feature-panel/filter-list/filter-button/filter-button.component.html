@@ -1,7 +1,7 @@
-<ion-col class="filter-category">
+<ion-col class="filter-column" (click)="clickedFilterButton()" >
   <!-- unselected toggle -->
   <div style="height: 0px;">
-    <div class="filter-button unselected hasImage-{{hasImage}}" *ngIf="!filterType[filterName]" (click)="clickedFilterButton()" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
+    <div class="filter-button unselected hasImage-{{hasImage}}" *ngIf="!filterType[filterName]" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
       <img *ngIf="hasImage && filterName != 'All'" class="filter-icon unselected" [src]="'assets/icons/unselected ' + fileName + ' icons/' + filterName + '.png'" [style]="'width: ' + iconWidth + 'px'"/>
       <img *ngIf="!hasImage" class="filter-icon invisible-all" src="assets/AllButton.png" [style]="'width: ' + iconWidth + 'px'"/>
       
@@ -14,7 +14,7 @@
 
   <!-- selected toggle -->
   <div style="height: 0px;">
-    <div class="filter-button hasImage-{{hasImage}}" *ngIf="filterType[filterName]" (click)="clickedFilterButton()" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
+    <div class="filter-button hasImage-{{hasImage}}" *ngIf="filterType[filterName]" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
       <div style="transform: translateY(5px)">
         <img *ngIf="hasImage && filterName != 'All'" class="filter-icon" [src]="'assets/icons/' + fileName + ' icons/' + filterName + '.png'" [style]="'width: ' + iconWidth + 'px'"/>
         <img *ngIf="!hasImage" class="filter-icon invisible-all" src="assets/AllButton.png" [style]="'width: ' + iconWidth + 'px'"/>

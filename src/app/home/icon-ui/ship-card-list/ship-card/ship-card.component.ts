@@ -21,6 +21,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   flashCSS: string = "out";
   rarity: string;
   hull: string;
+  isBulkSelected: boolean;
 
   @Input() ship: Ship = null;
   @Input() currentCategory: string;
@@ -42,7 +43,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     public hoverTitles: HoverTitlesService,
     public misc: MiscService,
     private shipsService: ShipsService,
-    private settingsData: SettingsDataService) { }
+    private settingsData: SettingsDataService
+  ) { }
 
   ngOnInit() {
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
@@ -84,6 +86,11 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   }
 
   async enterLevel() {
+    if(this.misc.isBulkSelect) {
+      this.isBulkSelected = !this.isBulkSelected;
+      return;
+    }
+
     const modal = await this.modalController.create({
       component: ShipLevelEditorComponent,
       animated: false,

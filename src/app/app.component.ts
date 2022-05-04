@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   hullInfoIsOpen: boolean;
   techMode: string = "ship"
   techModeString = "Tech Summary";
+  iconListRefreshCount: number = 2;
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
@@ -95,6 +96,10 @@ export class AppComponent implements OnInit {
   }
 
   onTabFocus() {
-    this.misc.refreshIconList();    
+    if(this.iconListRefreshCount < 1) {
+      this.misc.refreshIconList(true);    
+    }
+    this.iconListRefreshCount++;
+    console.log(this.iconListRefreshCount)
   }
 }

@@ -38,6 +38,10 @@
   &.float-right {
     float: right;
   }
+
+  &.bulk-select {
+    transform: translateX(80px);
+  }
 }
 
 .generic-big-button-square {
