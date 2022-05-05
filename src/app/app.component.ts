@@ -94,12 +94,16 @@ export class AppComponent implements OnInit {
   async onResize(event) {
     this.misc.isMobile = event.target.innerWidth < 1024;
   }
-
+  
+  /*
+    the icon list refresh is handled here because focusing on the tab is app-wide rather than in the icon list, 
+    where it can be activated by just focusing on the component itself
+  */
   onTabFocus() {
+    // only one refresh is needed at a time, as it's jarring when it keeps doing it during the site's lifespan
     if(this.iconListRefreshCount < 1) {
       this.misc.refreshIconList(true);    
     }
     this.iconListRefreshCount++;
-    console.log(this.iconListRefreshCount)
   }
 }

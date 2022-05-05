@@ -1,4 +1,7 @@
 <div class="container isMobile-{{misc.isMobile}}">
+  <app-generic-big-button text="{{misc.isBulkSelect ? 'End Bulk Select' : 'Bulk Select'}}" extraCSS="no-left-margin" (click)="toggleBulkSelect()"></app-generic-big-button>
+  <app-generic-big-button text="Select All Ships" (click)="selectAllShips()"></app-generic-big-button>
+  <br>
   <app-sort-list class="sort-list"></app-sort-list>
   <app-filter-list></app-filter-list>
 </div>

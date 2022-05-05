@@ -66,6 +66,12 @@ export class SheetShipRowComponent implements OnInit {
   }
 
   async enterLevel() {
+    if(this.misc.isBulkSelect) {
+      this.ship.isBulkSelected = true;
+      this.misc.bulkSelected.push(this.ship);
+      return;
+    }
+
     const modal = await this.modalController.create({
       component:ShipLevelEditorComponent,
       animated: false,

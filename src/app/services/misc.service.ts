@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { ShipCardListComponent } from '../home/icon-ui/ship-card-list/ship-card-list.component';
+import { Ship } from '../interfaces/ship';
 import { SettingsDataService } from './settings-data.service';
 
 @Injectable({
@@ -23,7 +24,9 @@ export class MiscService {
   // used to call the refresh function
   shipCardList: ShipCardListComponent;
 
+  // var stored here to allow other components to use it, but home page handles other logic
   isBulkSelect: boolean;
+  bulkSelected: Ship[] = [];
 
   constructor(
     private settingsData: SettingsDataService,
@@ -68,9 +71,5 @@ export class MiscService {
         this.shipCardList.refresh();
       }
     }
-  }
-
-  toggleBulkSelect() {
-    this.isBulkSelect = !this.isBulkSelect;
   }
 }

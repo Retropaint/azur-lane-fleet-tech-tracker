@@ -17,6 +17,7 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   @Input() level: number;
   @Input() ship: Ship;
   @Input() category: string;
+  @Input() isBulk: boolean;
   @ViewChild('autoResize') autoResize: ElementRef;
   textLevel: number;
   wasSlider: boolean;
@@ -33,15 +34,22 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    if(this.level != 1) {
-      this.textLevel = this.level;
+    if(!this.isBulk) {
+      if(this.level != 1) {
+        this.textLevel = this.level;
+      } else {
+        this.textLevel = null;
+      }
+  
+      // I have no clue why true on init doesn't work
+      if(this.level > 1 || this.ship.isObtained) {
+        this.isObtained = true;
+      }
     } else {
-      this.textLevel = null;
-    }
-
-    // I have no clue why true on init doesn't work
-    if(this.level > 1 || this.ship.isObtained) {
-      this.isObtained = true;
+      this.textLevel = 1;
+      this.level = 1;
+      this.isObtained = false;
+      this.name = 'bulk select'
     }
 
     setTimeout(() => {
@@ -56,17 +64,22 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   done() {
-    this.ship.isObtained = this.isObtained;
-
-    // set level
-    if(!this.isObtained) {
-      this.ship.level = 1;
+    if(this.isBulk) {
+      this.misc.bulkSelected.forEach(ship => {
+        ship.level = this.getFinalLevel() || this.level;
+        ship.isObtained = this.isObtained;
+        ship.isBulkSelected = false;
+      })
+      this.misc.bulkSelected = [];
     } else {
-      let finalLevel = Math.min(this.level, 125)
-      if(!this.wasSlider) {
-        finalLevel = Math.min(this.textLevel, 125)
+      this.ship.isObtained = this.isObtained;
+
+      // set level
+      if(!this.isObtained) {
+        this.ship.level = 1;
+      } else {
+        this.ship.level = this.getFinalLevel() || this.level;
       }
-      this.ship.level = finalLevel || this.level;
     }
 
     this.shipsService.refreshCogChipReq(this.misc.shipsFilterPass);
@@ -75,6 +88,14 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     this.filter.filter();
     
     this.modalController.dismiss('done');
+  }
+
+  getFinalLevel(): number {
+    let finalLevel = Math.min(this.level, 125)
+    if(!this.wasSlider) {
+      finalLevel = Math.min(this.textLevel, 125)
+    }
+    return finalLevel;
   }
 
   // change which input type will be accepted in the end, as text and slider levels are inputted separately
@@ -109,6 +130,12 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   exit() {
+    if(this.isBulk) {
+      this.misc.bulkSelected.forEach(ship => {
+        ship.isBulkSelected = false;
+      })
+      this.misc.bulkSelected = [];
+    }
     this.modalController.dismiss();
   }
 

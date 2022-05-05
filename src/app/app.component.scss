@@ -16,3 +16,7 @@
   color: #c2e3f4;
   padding-top: 20px;
 }
+
+ion-menu {
+  filter: blur(var(--background-blur));
+}

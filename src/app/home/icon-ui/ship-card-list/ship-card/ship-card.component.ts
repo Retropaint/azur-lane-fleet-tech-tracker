@@ -21,7 +21,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   flashCSS: string = "out";
   rarity: string;
   hull: string;
-  isBulkSelected: boolean;
 
   @Input() ship: Ship = null;
   @Input() currentCategory: string;
@@ -87,7 +86,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
   async enterLevel() {
     if(this.misc.isBulkSelect) {
-      this.isBulkSelected = !this.isBulkSelected;
+      this.ship.isBulkSelected = !this.ship.isBulkSelected;
+      this.misc.bulkSelected.push(this.ship)
       return;
     }
 

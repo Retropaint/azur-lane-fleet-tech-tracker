@@ -15,4 +15,6 @@ export interface Ship {
   retroHull: string;
   isObtained?: boolean;
   obtainAppliedHulls: string[];
+
+  isBulkSelected?: boolean
 }

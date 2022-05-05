@@ -22,11 +22,6 @@
     background: linear-gradient(0deg, #D7F3F8 4%, #2d4370 1%, #375188 99%);
   }
 
-  &.invisible {
-    cursor: default;
-    visibility: hidden;
-  }
-
   &.no-top-margin {
     margin-top: 0px;
   }
@@ -41,6 +36,10 @@
 
   &.bulk-select {
     transform: translateX(80px);
+  }
+
+  &.no-left-margin {
+    margin-left: 0px;
   }
 }
 

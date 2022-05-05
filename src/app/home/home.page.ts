@@ -4,6 +4,7 @@ import { SettingsComponent } from '../prompts/settings/settings.component';
 import { ShipsService } from '../services/ships.service';
 import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning.component';
 import { MiscService } from '../services/misc.service';
+import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
 
 @Component({
   selector: 'app-home',
@@ -47,5 +48,19 @@ export class HomePage implements AfterViewInit {
 
   backToTop() {
     this.ionContent.scrollToTop();
+  }
+
+  async toggleBulkSelect() {
+    this.misc.isBulkSelect = !this.misc.isBulkSelect;
+    if(!this.misc.isBulkSelect && this.misc.bulkSelected.length > 0) {
+      const modal = await this.modalController.create({
+        component: ShipLevelEditorComponent,
+        animated: false,
+        componentProps: {
+          'isBulk': true
+        }
+      })
+      modal.present();
+    }
   }
 }
