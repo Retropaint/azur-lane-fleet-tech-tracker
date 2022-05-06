@@ -23,6 +23,11 @@
   width: fit-content;
   padding-top: 1px;
   padding-bottom: 1px;
+
+  &.ship-card-size {
+    display: inline-block;
+    margin-top: 0px;
+  }
 }
 
 .toggle-diamond {

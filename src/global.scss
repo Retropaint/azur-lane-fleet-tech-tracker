@@ -46,6 +46,15 @@
   --prompt-height: 500px;
   --dead-zone-margin: 0px;
   --ship-card-zoom: 1;
+  --selected-ship-glow-opacity: 0.5;
+  animation: ship-glow 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes ship-glow {
+  0% {--selected-ship-glow-opacity: 0}
+  50% {--selected-ship-glow-opacity: 0.5}
+  100% {--selected-ship-glow-opacity: 0}
 }
 
 ion-modal {

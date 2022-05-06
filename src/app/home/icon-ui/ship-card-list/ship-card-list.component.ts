@@ -49,7 +49,7 @@ export class ShipCardListComponent implements AfterViewInit {
     this.misc.shipCardList = this;
     setTimeout(() => {
       this.refresh();
-    }, 250)
+    }, 1000)
   }
 
   refresh() {
@@ -59,7 +59,6 @@ export class ShipCardListComponent implements AfterViewInit {
 
     // get width of list element to calculate how many ships can fit in a row
     let listWidth = this.list.nativeElement.getBoundingClientRect().width;
-
 
     const shipsPerRow = Math.floor(listWidth / (116 * this.settingsData.settings['ship-card-size']/100));
 

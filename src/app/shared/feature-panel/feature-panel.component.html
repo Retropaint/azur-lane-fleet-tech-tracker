@@ -1,6 +1,8 @@
 <div class="container isMobile-{{misc.isMobile}}">
-  <app-generic-big-button text="{{misc.isBulkSelect ? 'End Bulk Select' : 'Bulk Select'}}" extraCSS="no-left-margin" (click)="toggleBulkSelect()"></app-generic-big-button>
-  <app-generic-big-button text="Select All Ships" (click)="selectAllShips()"></app-generic-big-button>
+  <app-generic-big-button *ngIf="!misc.isBulkSelect" text="Bulk Select" (click)="toggleBulkSelect()" extraCSS="no-left-margin"></app-generic-big-button>
+  <app-generic-big-button *ngIf="misc.isBulkSelect" text="Cancel Bulk Select" (click)="cancelBulkSelect()" extraCSS="red no-left-margin"></app-generic-big-button>
+  <app-generic-big-button *ngIf="misc.isBulkSelect" text="Select All" (click)="selectAllShips()"></app-generic-big-button>
+  <app-generic-big-button *ngIf="misc.bulkSelected.length > 0 && !misc.usedBulkSelectEditAll" text="Edit Ships" (click)="toggleBulkSelect()"></app-generic-big-button>
   <br>
   <app-sort-list class="sort-list"></app-sort-list>
   <app-filter-list></app-filter-list>

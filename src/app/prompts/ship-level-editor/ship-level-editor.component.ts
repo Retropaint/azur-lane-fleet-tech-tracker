@@ -46,7 +46,7 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
         this.isObtained = true;
       }
     } else {
-      this.textLevel = 1;
+      this.textLevel = null;
       this.level = 1;
       this.isObtained = false;
       this.name = 'bulk select'

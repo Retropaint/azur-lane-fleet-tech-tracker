@@ -30,14 +30,10 @@
 
 .row {
   display: grid;
-  grid-template-columns: 1fr 0fr 0fr 0fr;
+  grid-template-columns: 6fr 0fr 0fr 0fr;
   position: relative;
   will-change: transform;
   cursor: pointer;
-
-  &.bulk-selected {
-    border-left: 5px solid lime;
-  }
 
   &.unobtained {
     filter: brightness(0.65);

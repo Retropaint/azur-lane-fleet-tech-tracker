@@ -5,11 +5,12 @@
     <app-settings-toggle name="UI mode" [toggles]="['Icon', 'Sheet']" storageName="ui-mode" defaultState="Icon"></app-settings-toggle>
     <app-settings-toggle name="Use Retrofit Forms" [toggles]="['Yes', 'No']" storageName="retrofit-form" defaultState="No"></app-settings-toggle>
     
-    <div class="setting-container">
+    <div class="setting-container ship-card-size">
       <p class="prompt-text inline-block">Ship Card Size:</p>
       <input class="prompt-input inline-block centered ship-card-size-input" type="number" [(ngModel)]="inputShipCardSize" style="width: 50px; margin-right: 0px; margin-left: 0px" />
       <p class="prompt-text inline-block">%</p>
     </div>
+    <p class="prompt-text inline-block no-margin-left">(does not work in Firefox)</p>
     
     <app-prompt-button (click)="csv.export()" text="Export CSV" extraCSS="no-top inline-block" color="blue"></app-prompt-button>
 

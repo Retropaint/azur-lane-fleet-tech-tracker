@@ -90,6 +90,10 @@
   &.no-bottom-margin {
     margin-bottom: 0px;
   }
+
+  &.red {
+    text-shadow: 0px 0px 10px #ff0000;
+  }
 }
 
 .content {

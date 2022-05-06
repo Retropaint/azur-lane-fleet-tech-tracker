@@ -54,9 +54,9 @@ export class ShipsService {
         case "obtained":
           shipTypes[0].push(ship);
         break; case "maxed":
-          shipTypes[1].push(ship);
-        break; default:
           shipTypes[2].push(ship);
+        break; default:
+          shipTypes[1].push(ship);
         break;
       }
     })

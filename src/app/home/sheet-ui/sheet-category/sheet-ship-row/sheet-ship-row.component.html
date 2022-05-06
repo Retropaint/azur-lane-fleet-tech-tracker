@@ -1,4 +1,4 @@
-<div #row (click)="enterLevel()" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}} {{ship.isBulkSelected ? 'bulk-selected' : ''}}">
+<div #row (click)="enterLevel()" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}}">
   <!-- hull icon and ship name-->
   <div class="ship-name {{getRarity()}} border">
     <img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
@@ -18,4 +18,6 @@
   
   <!-- flash (appears after level edit)-->
   <div class="flash {{flashCSS}}"></div>
+  
+  <div *ngIf="ship.isBulkSelected" class="bulk-select"></div>
 </div>

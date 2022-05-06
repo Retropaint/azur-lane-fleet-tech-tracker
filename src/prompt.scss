@@ -160,6 +160,10 @@
   &.inline-block {
     display: inline-block
   }
+  
+  &.no-margin-left {
+    margin-left: 0px;
+  }
 }
 
 ion-backdrop {

@@ -87,7 +87,16 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   async enterLevel() {
     if(this.misc.isBulkSelect) {
       this.ship.isBulkSelected = !this.ship.isBulkSelected;
-      this.misc.bulkSelected.push(this.ship)
+      
+      if(this.ship.isBulkSelected) {
+        this.misc.bulkSelected.push(this.ship)
+      } else {
+        this.misc.bulkSelected.splice(this.misc.bulkSelected.indexOf(this.ship), 1);
+      }
+
+      if(this.misc.bulkSelected.length == 0) {
+        this.misc.isBulkSelect = false;
+      }
       return;
     }
 

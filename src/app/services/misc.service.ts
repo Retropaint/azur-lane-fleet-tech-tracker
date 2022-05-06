@@ -28,6 +28,9 @@ export class MiscService {
   isBulkSelect: boolean;
   bulkSelected: Ship[] = [];
 
+  // used to know if the Edit Ships should appear
+  usedBulkSelectEditAll: boolean;
+
   constructor(
     private settingsData: SettingsDataService,
     private storage: Storage,

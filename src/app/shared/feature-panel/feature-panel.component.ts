@@ -21,19 +21,38 @@ export class FeaturePanelComponent {
   ) { }
 
   toggleBulkSelect() {
+    this.misc.usedBulkSelectEditAll = false;
     this.misc.isBulkSelect = !this.misc.isBulkSelect;
     if(!this.misc.isBulkSelect && this.misc.bulkSelected.length > 0) {
       this.openLevelEditor();
     }
   }
 
-  selectAllShips() {
+  editAllShips() {
+    this.misc.usedBulkSelectEditAll = true;
     this.shipsService.ships.forEach(ship => {
       if(this.misc.shipsFilterPass[ship.id]) {
         this.misc.bulkSelected.push(ship);
       }
     })
     this.openLevelEditor();
+  }
+
+  selectAllShips() {
+    this.shipsService.ships.forEach(ship => {
+      if(this.misc.shipsFilterPass[ship.id]) {
+        ship.isBulkSelected = true;
+        this.misc.bulkSelected.push(ship);
+      }
+    })
+  }
+
+  cancelBulkSelect() {
+    this.misc.isBulkSelect = false;
+    this.misc.bulkSelected.forEach(ship => {
+      ship.isBulkSelected = false;
+    })
+    this.misc.bulkSelected = [];
   }
 
   async openLevelEditor() {
