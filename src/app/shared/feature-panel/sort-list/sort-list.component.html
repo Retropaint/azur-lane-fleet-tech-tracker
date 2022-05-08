@@ -12,4 +12,9 @@
     
     <div class="generic-text options unselected"> {{type}} &nbsp;&nbsp;&nbsp;</div>
   </div>
+
+  <div class="consider-status" (click)="refreshConsiderStatus()">
+    <app-toggle-flag [toggle]="misc.considerStatusSorting"></app-toggle-flag>
+    <p class="generic-text inline-block">Consider status</p>
+  </div>
 </div>

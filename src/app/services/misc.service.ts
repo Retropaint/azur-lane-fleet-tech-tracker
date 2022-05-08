@@ -31,6 +31,8 @@ export class MiscService {
   // used to know if the Edit Ships should appear
   usedBulkSelectEditAll: boolean;
 
+  considerStatusSorting: boolean = true;
+
   constructor(
     private settingsData: SettingsDataService,
     private storage: Storage,

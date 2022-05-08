@@ -4,6 +4,7 @@ import { Ship } from '../interfaces/ship';
 import { CogReqsService } from './cog-reqs.service';
 import { FactionTechDataService } from './faction-tech-data.service';
 import { HullHierarchyService } from './hull-hierarchy.service';
+import { MiscService } from './misc.service';
 import { SettingsDataService } from './settings-data.service';
 
 @Injectable({
@@ -25,11 +26,15 @@ export class ShipsService {
     private cogReqList: CogReqsService, 
     private settingsData: SettingsDataService,
     private factionTechData: FactionTechDataService,
-    private hullHierarchy: HullHierarchyService
+    private hullHierarchy: HullHierarchyService,
+    private misc: MiscService
   ) {}
 
   async init() {
     this.ships = await this.storage.get("ships") || [];
+    this.ships.forEach(ship => {
+      ship.isEdited = false;
+    })
     this.setAllProperShipPos(this.ships);
   }
 
@@ -47,6 +52,9 @@ export class ShipsService {
 
   // set normal, maxed, and ignored ships in their respective positions
   setAllProperShipPos(shipArray): Ship[] {
+    if(!this.misc.considerStatusSorting) {
+      return shipArray;
+    }
     
     const shipTypes: Ship[][] = [[], [], []];
     shipArray.forEach(ship => {

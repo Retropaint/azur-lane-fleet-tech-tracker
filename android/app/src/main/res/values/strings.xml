@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">azur-lane-fleet-tech-tracker</string>
+    <string name="title_activity_main">azur-lane-fleet-tech-tracker</string>
+    <string name="package_name">com.azurlanefleettechtracker.retropaint</string>
+    <string name="custom_url_scheme">com.azurlanefleettechtracker.retropaint</string>
+</resources>

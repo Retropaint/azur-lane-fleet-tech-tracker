@@ -16,8 +16,10 @@
   <!-- level -->
   <div class="level over119-{{ship.level > 119}} border level">{{ship.level}}</div>
   
-  <!-- flash (appears after level edit)-->
+  <!-- flash (appears after level edit)
+       - this works perfectly fine with no virtual scroll implementation but for consistency since the icon's flash is disabled, this is too
   <div class="flash {{flashCSS}}"></div>
+  -->
   
   <div *ngIf="ship.isBulkSelected" class="bulk-select"></div>
 </div>

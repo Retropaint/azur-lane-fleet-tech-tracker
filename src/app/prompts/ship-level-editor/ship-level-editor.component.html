@@ -25,7 +25,7 @@
         <p class="prompt-text inline-block slider-text" (click)="choseMarker(100)" title="Instantly set level to 100">100</p>
       </div>
       <div class="slider-marker l120">
-        <p class="prompt-text inline-block slider-text" (click)="choseMarker(120)" title="Instantly set level to 120&#013;- Will be displayed after obtained and before unobtained ships">120</p>
+        <p class="prompt-text inline-block slider-text" (click)="choseMarker(120)" title="Instantly set level to 120&#013;- Ship will be pushed down the list">120</p>
       </div>
       
       <!-- slider -->
@@ -37,7 +37,7 @@
       </form>
 
       <!-- 120 text-->
-      <p class="prompt text maxed-text" *ngIf="wasSlider && level >= 120 || !wasSlider && textLevel >= 120">*Marked as Complete and pushed down the list, above unobtained ships.</p>
+      <p class="prompt text maxed-text" *ngIf="wasSlider && level >= 120 || !wasSlider && textLevel >= 120">*Marked as Complete and pushed down the list.</p>
     
     </div>
   </div>

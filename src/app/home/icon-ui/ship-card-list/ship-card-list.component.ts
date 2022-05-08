@@ -82,6 +82,5 @@ export class ShipCardListComponent implements AfterViewInit {
         }
       }
     })
-    console.log(this.rowHeight)
   }
 }

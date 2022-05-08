@@ -228,15 +228,14 @@
   z-index: 1;
   pointer-events: none;
 
-  &.out {
-    transition: background-color 0.5s;
-    background-color: rgba(0, 200, 0, 0);
-  }
-
   &.in {
-    transition: background-color 0;
-    background-color: rgba(0, 200, 0, 1);
+    animation: flash 2s;
   }
+}
+
+@keyframes flash {
+  0% {background-color: rgba(0, 200, 0, 1)}
+  100% {background-color: rgba(0, 200, 0, 0)}
 }
 
 .bulk-select {

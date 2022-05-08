@@ -16,16 +16,18 @@
     </div>
   </div>
 
-  <!-- flash (appears after level edit)-->
-  <div class="flash {{flashCSS}}"></div>
+  <!-- flash (appears after level edit)
+       - doesn't work due to how the list is refreshed
+  <div class="flash {{ship.isEdited}}"></div>
+  -->
 
   <div class="bulk-select {{ship.isBulkSelected}}"></div>
   <p *ngIf="ship.isBulkSelected" class="selected-text">- SELECTED -</p>
 
   <!-- image -->
   <div style="display: inline-block">
-    <img ion-img-cache *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="getImageSrc()" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{getRarity()}}"/>
-    <img ion-img-cache *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="getImageSrc()" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
+    <img ion-img-cache *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{getRarity()}}"/>
+    <img ion-img-cache *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
     
     <!-- name -->
     <div class="ship-name">

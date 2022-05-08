@@ -26,7 +26,7 @@ export class FilterListComponent implements OnInit {
 
   rarityNames: string[] = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare", "All"];
 
-  statusNames: string[] = ["W.I.P", "Maxed", "Unobtained", "All"];
+  statusNames: string[] = ["W.I.P", "Unobtained", "Maxed", "All"];
 
   unfoldedFilters = {
     "hulls": true,

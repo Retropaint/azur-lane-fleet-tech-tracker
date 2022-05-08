@@ -16,6 +16,8 @@ export class SortListComponent {
 
   types = ["Level", "Rarity", "Name"];
 
+  considerStatus: boolean;
+
   rarityRanks = {
     "Normal": 0,
     "Rare": 1,
@@ -29,5 +31,10 @@ export class SortListComponent {
 
   sort(type: string) {
     this.sortService.sort(type);
+  }
+
+  refreshConsiderStatus() {
+    this.misc.considerStatusSorting = !this.misc.considerStatusSorting;
+    this.sortService.sort(this.sortService.lastType, true);
   }
 }
