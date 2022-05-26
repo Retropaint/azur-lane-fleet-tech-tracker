@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1653069657359,
+  "timestamp": 1653527258847,
   "index": "/azur-lane-fleet-tech-tracker/index.html",
   "assetGroups": [
     {
@@ -1555,7 +1555,7 @@
     "/azur-lane-fleet-tech-tracker/assets/tech summary.png": "bade3f283fb672e93499e4aab88cb1605a7aad9d",
     "/azur-lane-fleet-tech-tracker/blueprint_bg.5c5f2ad60108b038.png": "945412dcd236513a00af2995ea4a47f9cd3b7341",
     "/azur-lane-fleet-tech-tracker/common.b2547de771c37ce1.js": "1dc9bd375b9218aec728286f28c8d6f16c8ed9f4",
-    "/azur-lane-fleet-tech-tracker/index.html": "3e71321a5c91c33e241a6fce8661d22614ff224a",
+    "/azur-lane-fleet-tech-tracker/index.html": "3cac2ca5fd2b497a8a32c6b618fa9fed2ae9dff2",
     "/azur-lane-fleet-tech-tracker/main.1d89182a4011837c.js": "417a19907e88b2fda0c7485477df86a7f36b6ec8",
     "/azur-lane-fleet-tech-tracker/manifest.webmanifest": "9a088b7c4339228d1082e666ce105dc889bc180c",
     "/azur-lane-fleet-tech-tracker/modal-heading-stripes.e337441cbea178b0.png": "84a2c3a83f3092839f71034f75c90d48e127d61c",
