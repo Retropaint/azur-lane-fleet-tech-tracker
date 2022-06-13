@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1655101964717,
+  "timestamp": 1655102358712,
   "index": "/azur-lane-fleet-tech-tracker/index.html",
   "assetGroups": [
     {
@@ -789,6 +789,7 @@
         "/azur-lane-fleet-tech-tracker/assets/ship thumbnails/retrofits/434.webp",
         "/azur-lane-fleet-tech-tracker/assets/ship thumbnails/retrofits/azur-lane-retrofit-thumbnail-downloader.py",
         "/azur-lane-fleet-tech-tracker/assets/side-menu.png",
+        "/azur-lane-fleet-tech-tracker/assets/sitemap.xml",
         "/azur-lane-fleet-tech-tracker/assets/tech summary.png",
         "/azur-lane-fleet-tech-tracker/blueprint_bg.5c5f2ad60108b038.webp",
         "/azur-lane-fleet-tech-tracker/blueprint_bg_mobile.66b992c8c680e51e.webp",
@@ -1557,6 +1558,7 @@
     "/azur-lane-fleet-tech-tracker/assets/ship thumbnails/retrofits/434.webp": "d277ceaf5baabeeb54d31df7b79e0be4d191c07d",
     "/azur-lane-fleet-tech-tracker/assets/ship thumbnails/retrofits/azur-lane-retrofit-thumbnail-downloader.py": "fe656736829f3164c6da86b4a6dcebc48461012b",
     "/azur-lane-fleet-tech-tracker/assets/side-menu.png": "ae6d8edef0f2012f013fdc05a9b9c47c837548f1",
+    "/azur-lane-fleet-tech-tracker/assets/sitemap.xml": "78523b387283a1cd1ca61ca3a44b48a63cf1916e",
     "/azur-lane-fleet-tech-tracker/assets/tech summary.png": "bade3f283fb672e93499e4aab88cb1605a7aad9d",
     "/azur-lane-fleet-tech-tracker/blueprint_bg.5c5f2ad60108b038.webp": "945412dcd236513a00af2995ea4a47f9cd3b7341",
     "/azur-lane-fleet-tech-tracker/blueprint_bg_mobile.66b992c8c680e51e.webp": "0179d0391b78b3bae20bc9c0bc49c7ce3879e28d",
