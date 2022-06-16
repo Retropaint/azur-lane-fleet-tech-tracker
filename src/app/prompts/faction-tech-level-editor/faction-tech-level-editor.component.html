@@ -4,8 +4,12 @@
   <div #autoResize>
      <!-- markers-->
      <p class="prompt-text">Use markers, slider, or input field to enter level.</p>
-     <p class="prompt-text inline-block slider-marker l1" (click)="choseMarker(1)" title="Instantly set level to 1">1</p>
-     <p class="prompt-text inline-block slider-marker max-level" (click)="choseMarker(maxLevel)" title="Instantly set level to {{maxLevel}}">{{maxLevel}}</p>
+     <div class="slider-marker l1">
+      <p class="prompt-text inline-block slider-text" (click)="choseMarker(1)" title="Instantly set level to 1">1</p>
+     </div>
+     <div class="slider-marker max-level">
+      <p class="prompt-text inline-block slider-text" (click)="choseMarker(maxLevel)" title="Instantly set level to {{maxLevel}}">{{maxLevel}}</p>
+     </div>
      
      <!-- slider -->
      <input type="range" min="1" [max]="maxLevel" [(ngModel)]="sliderLevel" (ngModelChange)="changeLastInput(true)" class="slider" title="Set level using this slider">

@@ -4,11 +4,26 @@
   &.isMobile-true {
     text-align: center;
     padding-left: 19px;
-    height: 80vh;
+    height: 75vh;
   }
 
   &.isMobile-false {
-    height: 77vh;
+    height: 80vh;
+    background: #213052;
+    border: 2px solid #3c4f79;
+    margin-left: 20px;
+  }
+}
+
+.no-ships-text {
+  padding-left: 20px;
+
+  &.isMobile-true {
+    text-align: center;
+  }
+
+  &.isMobile-false {
+    text-align: left;
   }
 }
 
@@ -17,4 +32,27 @@
   height: 144px;
   display: inline-block;
   margin-bottom: 8px;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: inset 0 0 100px #0000008c;
+  border-radius: 10px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #5f7ea2, #324865);
+  border-radius: 5px;
+}
+
+.ship-card-component-container {
+  display: inline-block;
+  width: calc(100px * var(--ship-card-zoom));
+  margin: 8px;
 }

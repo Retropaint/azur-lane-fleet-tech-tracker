@@ -53,7 +53,9 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   updateSlider() {
-    this.sliderLevel = this.textLevel;
+    if(this.textLevel != null) {
+      this.sliderLevel = this.textLevel;
+    }
   }
 
   done() {

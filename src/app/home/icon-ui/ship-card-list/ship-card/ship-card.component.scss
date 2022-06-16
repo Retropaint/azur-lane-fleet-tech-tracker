@@ -1,40 +1,34 @@
 .ship-thumbnail {
   width: 100px;
+  height: calc(144px * var(--ship-card-zoom));
   border-right: 0;
   border-left: 0;
-  border-radius: 5px;
-  height: 144px;
+  border-radius: calc(5px * var(--ship-card-zoom));
   pointer-events: none;
-  -khtml-user-select: none;
-  -o-user-select: none;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
 
   &.ship-rarity-Common {
-    border: 5px solid #A5AAB5; 
+    border: calc(5px * var(--ship-card-zoom)) solid #A5AAB5; 
     border-right: 0; 
     border-left: 0; 
     background:linear-gradient(0deg, #BDC7CE 44%, #6B697B 99%);
   }
   
   &.ship-rarity-Rare {
-    border: 5px solid #6abff7; 
+    border: calc(5px * var(--ship-card-zoom)) solid #6abff7; 
     border-right: 0; 
     border-left: 0; 
     background:linear-gradient(0deg, #89C3F9 44%, #42617C 99%);
   }
   
   &.ship-rarity-Elite {
-    border: 5px solid #9b8eff; 
+    border: calc(5px * var(--ship-card-zoom)) solid #9b8eff; 
     border-right: 0; 
     border-left: 0; 
     background:linear-gradient(0deg, #AD96FF 44%, #53497B 99%);
   }
   
   &.ship-rarity-Super-Rare {
-    border: 5px solid #f7d84b; 
+    border: calc(5px * var(--ship-card-zoom)) solid #f7d84b; 
     border-right: 0; 
     border-left: 0; 
     background:linear-gradient(0deg, #f7cf52 44%, #807539 99%);
@@ -42,7 +36,7 @@
 
   &.UR-or-decisive {
     background-image: url("../../../../../assets/UR border.png");
-    border: 5px solid transparent;
+    border: calc(5px * var(--ship-card-zoom)) solid transparent;
   
     // I have no idea why I have to apply this again
     border-right: 0;
@@ -58,15 +52,6 @@
     transition: outline 0.5s;
     outline: 7px solid rgba(0, 255, 0, 0);
   }
-}
-
-.ship-hull-and-level-background {
-  background: #0000006e;
-  height: 15px;
-  width: 100px;
-  position: absolute;
-  margin-top: 5px;
-  display: inline-block
 }
 
 .ship-hull-icon {
@@ -118,18 +103,8 @@
   }
 }
 
-.ship-name {
-  transform: translateY(-45px);
-  background: #00000099;
-  height: 17px;
-  width: 100px;
-  margin-top: 5px;
-  position: absolute;
-  color: white;
-}
-
 .ship-name-text {
-  transform: translate(0, -13px);
+  transform-origin: bottom left;
   font-family: ship-name;
   text-align: center;
   font-size: 13px;
@@ -139,8 +114,15 @@
   text-overflow: ellipsis;
   padding-left: 5px;
   padding-right: 5px;
+  -webkit-user-select: none;
   user-select: none;
   color: white;
+  position: absolute;
+  background: rgb(0 0 0 / 43%);
+  width: calc(100% / var(--ship-card-zoom));
+  bottom: calc(25px * var(--ship-card-zoom));
+  transform: scale(var(--ship-card-zoom));
+  margin: 0
 }
 
 .double-stats-text {
@@ -157,7 +139,6 @@
 
 .ship-card-container {
   will-change: transform;
-  margin: 8px;
   margin-bottom: 4px;
   display: inline-block;
   position: relative;
@@ -166,8 +147,7 @@
   filter: none;
   transform: none;
   transition: opacity 0.5s;
-  opacity: 1;
-  zoom: var(--ship-card-zoom);
+  opacity: 0;
 
   &.dragged {
     position: relative;
@@ -175,35 +155,17 @@
     filter: drop-shadow(0px 0px 20px black);
   }
 
-  &.default {
-    opacity: 0;
+  &.fade-in {
+    opacity: 1;
   }
 
   &.unobtained {
     filter: brightness(0.65)
   }
 
-  &.isMobile-true {
-    zoom: calc(var(--ship-card-zoom) - 0.2);
-  }
-}
-
-.dropping {
-  position: absolute;
-  height: 144px;
-  width: 20px;
-  display: inline-block;
-  background: lime;
-  border-radius: 5px;
-  z-index: 99;
-
-  &.right {
-    margin-left: 5px;
-    transform: translateX(-20px);
-  }
-
-  &.left {
-    margin-right: 5px;
+  &.invisible {
+    pointer-events: none;
+    opacity: 0;
   }
 }
 
@@ -240,7 +202,7 @@
 
 .bulk-select {
   position: absolute;
-  height: 144px;
+  height: calc(144px * var(--ship-card-zoom));
   width: 100%;
   border-radius: 5px;
   z-index: 1;
@@ -257,11 +219,33 @@
   font-family: 'AgencyGothic';
   font-size: 15px;
   text-align: center;
-  width: 100%;
+  width: calc(100% / var(--ship-card-zoom));
+  transform: scale(var(--ship-card-zoom));
   padding-top: 45px;
   font-weight: bold;
   color: white;
   letter-spacing: 2px;
   text-shadow: 0 1px 2px #000000, 0 -1px 3px #000000;
   z-index: 1;
+  transform-origin: top left;
+}
+
+.ship-info-overlay {
+  background: #0000006e;
+  height: 15px;
+  width: 100px;
+  position: absolute;
+  display: inline-block;
+  transform: scale(var(--ship-card-zoom));
+
+  &.name {
+    transform-origin: bottom left;
+    bottom: calc(25px * var(--ship-card-zoom));
+    height: 17px;
+  }
+
+  &.hull {
+    transform-origin: top left;
+    top: calc(5px * var(--ship-card-zoom));
+  }
 }

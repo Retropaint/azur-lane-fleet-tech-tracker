@@ -20,6 +20,7 @@ export class CsvService {
 
       delete csvShip.fallbackThumbnail;
       delete csvShip.hasRetrofit;
+      delete csvShip.isBulkSelected;
       csvShips.push(csvShip);
     }
 

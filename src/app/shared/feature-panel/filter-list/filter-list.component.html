@@ -1,5 +1,5 @@
 <!-- hull filter -->
-<div class="filter-container">
+<div>
 
   <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('hulls')" title="Click to {{unfoldedFilters['hulls']  ? 'fold' : 'unfold'}}">
     Hull
@@ -15,7 +15,7 @@
 </div>
 
 <!-- stat filter -->
-<div class="filter-container">
+<div>
 
   <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['stats']  ? 'fold' : 'unfold'}}">
     Stat
@@ -31,7 +31,7 @@
 </div>
 
 <!-- faction filter -->
-<div class="filter-container">
+<div>
 
   <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('factions')" title="Click to {{unfoldedFilters['factions']  ? 'fold' : 'unfold'}}">
     Faction
@@ -47,7 +47,7 @@
 </div>
 
 <!-- rarity filter -->
-<div class="filter-container">
+<div>
   
   <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('rarities')" title="Click to {{unfoldedFilters['rarities']  ? 'fold' : 'unfold'}}">
     Rarity
@@ -63,7 +63,7 @@
 </div>
 
 <!-- status filter -->
-<div class="filter-container">
+<div class="filter-container isMobile-{{misc.isMobile}}">
   
   <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('status')" title="Click to {{unfoldedFilters['status']  ? 'fold' : 'unfold'}}">
     Status

@@ -48,14 +48,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.imageSrc = this.getImageSrc();
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
-    this.ship.isVisible = true;
-    if(this.ship.isEdited) {
-      this.flashCSS = 'in';
-    }
-    this.ship.isEdited = false;
-    if(this.ship.name == "Independence") {
-      console.log('test')
-    }
   }
 
   getHull() {
@@ -85,7 +77,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     // fade in
     setTimeout(() => {
-      this.fadeCSS = "out";
+      this.fadeCSS = "in";
     }, 100)
   }
 
@@ -120,11 +112,5 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
       }
     })
     modal.present();
-    modal.onDidDismiss().then(value => {
-    })
-  }
-
-  ngOnDestroy() {
-    this.ship.isVisible = false;
   }
 }

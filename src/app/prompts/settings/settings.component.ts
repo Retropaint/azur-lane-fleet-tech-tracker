@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { AzurapiService } from 'src/app/services/azurapi.service';
 import { CsvService } from 'src/app/services/csv.service';
+import { FilterService } from 'src/app/services/filter.service';
 import { MiscService } from 'src/app/services/misc.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { SettingsDataService } from 'src/app/services/settings-data.service';
@@ -31,6 +32,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     public csv: CsvService,
     private misc: MiscService,
     private settingsData: SettingsDataService,
+    private filter: FilterService
   ) { }
 
   ngOnInit() {
@@ -84,6 +86,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     })
 
     this.misc.refreshIconList();
+    this.filter.filter();
     
     this.modalController.dismiss();
   }

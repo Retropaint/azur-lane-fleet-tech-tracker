@@ -330,6 +330,19 @@ export class FactionTechDataService {
       CB: {
         FP: 7
       }
+    },
+
+    9: {
+      BC: {
+        FP: 10,
+        EVA: 10
+      },
+      BB: {
+        FP: 7
+      },
+      BBV: {
+        FP: 7
+      }
     }
   }
 
@@ -560,7 +573,106 @@ export class FactionTechDataService {
         HIT: 7,
         EVA: 7
       }
-    }
+    },
+
+    5: {
+      DD: {
+        HP: 10,
+        FP: 9,
+        TRP: 5
+      },
+      DDG: {
+        HP: 10,
+        FP: 9,
+        TRP: 5
+      },
+      CA: {
+        HP: 10,
+        FP: 3,
+        TRP: 4
+      },
+      BM: {
+        HP: 5,
+        FP: 3,
+        HIT: 2
+      },
+      CB: {
+        HP: 5,
+        FP: 3,
+        TRP: 4
+      }
+    },
+
+    6: {
+      BC: {
+        HP: 20,
+        HIT: 3
+      },
+      BB: {
+        HP: 20,
+        HIT: 3
+      },
+      BBV: {
+        HP: 15,
+        HIT: 3
+      }
+    },
+
+    7: {
+      SS: {
+        TRP: 13,
+        HIT: 13,
+        EVA: 13
+      },
+      SSV: {
+        TRP: 13,
+        HIT: 13,
+        EVA: 13
+      }
+    },
+
+    8: {
+      DD: {
+        HP: 35,
+        FP: 9,
+        TRP: 12
+      },
+      DDG: {
+        HP: 35,
+        FP: 9,
+        TRP: 5
+      },
+      CA: {
+        HP: 35,
+        FP: 3,
+        TRP: 10
+      },
+      BM: {
+        HP: 25,
+        FP: 3,
+        HIT: 6
+      },
+      CB: {
+        HP: 25,
+        FP: 3,
+        TRP: 10
+      }
+    },
+
+    9: {
+      BC: {
+        HP: 55,
+        HIT: 3
+      },
+      BB: {
+        HP: 55,
+        HIT: 3
+      },
+      BBV: {
+        HP: 45,
+        HIT: 3
+      }
+    },
   }
 
   maxLevels = {};

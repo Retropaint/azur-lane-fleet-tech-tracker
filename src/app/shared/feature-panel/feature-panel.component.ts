@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { FilterService } from 'src/app/services/filter.service';
 import { MiscService } from 'src/app/services/misc.service';
@@ -17,7 +17,8 @@ export class FeaturePanelComponent {
   constructor(
     public misc: MiscService,
     private modalController: ModalController,
-    private shipsService: ShipsService
+    private shipsService: ShipsService,
+    private menuController: MenuController
   ) { }
 
   toggleBulkSelect() {
@@ -64,5 +65,9 @@ export class FeaturePanelComponent {
       }
     })
     modal.present();
+  }
+
+  closeMenu() {
+    this.menuController.close('filter')
   }
 }

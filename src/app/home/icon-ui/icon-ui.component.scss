@@ -39,12 +39,12 @@
     display: flex;
     padding-left: 50px;
     padding-right: 100px;
-    align-items: stretch;
+    align-items: flex-end;
+    justify-content: center;
   }
 }
 
 .ship-list {
-  height: 85vh;
   flex-basis: 50%;
   flex-shrink: 0;
 }

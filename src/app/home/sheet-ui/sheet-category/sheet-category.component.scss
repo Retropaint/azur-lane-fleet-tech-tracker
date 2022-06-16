@@ -38,6 +38,10 @@
   &.unobtained {
     filter: brightness(0.65);
   }
+
+  &.isMobile-true {
+    grid-template-columns: 1fr 0fr 0fr 0fr;
+  }
 }
 
 .level {

@@ -17,11 +17,11 @@ import { SortService } from './services/sort.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  latestVersion: string = "1.5";
-  hullInfoIsOpen: boolean;
   techMode: string = "ship"
   techModeString = "Tech Summary";
   iconListRefreshCount: number = 2;
+  menuIsOpen: boolean;
+  filterIsOpen: boolean;
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
@@ -58,32 +58,24 @@ export class AppComponent implements OnInit {
       document.documentElement.style.setProperty('--dead-zone-margin', "200px");
     }
 
-    // replace old ship data with new, if versions changed
-    if(await this.storage.get("ships") == null || await this.storage.get("version") != this.latestVersion || await this.storage.get("version") == null) {
-      this.azurapi.init().then(() => {
-        this.sort.sort("Name");
-        this.filter.filter();
-      })
-    } else {
+    this.azurapi.init(true).then(() => {
       this.sort.sort("Name");
       this.filter.filter();
-    }
+    })
     
-    this.storage.set("version", this.latestVersion);
-
     window.addEventListener('focus', () => {
       this.onTabFocus();
     })
+
+    setTimeout(() => {
+      console.log(document.getElementsByTagName('*').length)
+
+    }, 5000)
   }
 
   openSettings() {
     this.prompt.openPrompt(SettingsComponent);
-    this.menuController.close('first');
-  }
-
-  openHullInfo() {
-    this.hullInfoIsOpen = !this.hullInfoIsOpen;
-    this.menuController.close('first');
+    this.menuController.close('side');
   }
 
   switchTechMode() {
@@ -101,9 +93,13 @@ export class AppComponent implements OnInit {
   */
   onTabFocus() {
     // only one refresh is needed at a time, as it's jarring when it keeps doing it during the site's lifespan
-    if(this.iconListRefreshCount < 1) {
+    if(this.iconListRefreshCount < 3) {
       this.misc.refreshIconList(true);    
     }
     this.iconListRefreshCount++;
+  }
+
+  openedMenu() {
+    console.log('opened')
   }
 }

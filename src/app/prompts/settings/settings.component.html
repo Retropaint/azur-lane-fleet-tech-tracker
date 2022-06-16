@@ -10,8 +10,8 @@
       <input class="prompt-input inline-block centered ship-card-size-input" type="number" [(ngModel)]="inputShipCardSize" style="width: 50px; margin-right: 0px; margin-left: 0px" />
       <p class="prompt-text inline-block">%</p>
     </div>
-    <p class="prompt-text inline-block no-margin-left">(does not work in Firefox)</p>
     
+    <br> 
     <app-prompt-button (click)="csv.export()" text="Export CSV" extraCSS="no-top inline-block" color="blue"></app-prompt-button>
 
     <!-- hidden file type input attached to import CSV button -->

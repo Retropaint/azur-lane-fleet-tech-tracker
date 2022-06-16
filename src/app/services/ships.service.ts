@@ -32,9 +32,6 @@ export class ShipsService {
 
   async init() {
     this.ships = await this.storage.get("ships") || [];
-    this.ships.forEach(ship => {
-      ship.isEdited = false;
-    })
     this.setAllProperShipPos(this.ships);
   }
 

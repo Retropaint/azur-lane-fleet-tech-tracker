@@ -5,7 +5,7 @@
     <p class="level number" *ngIf="level != 0">{{level}}</p>
     <p class="level number" *ngIf="level == 0">?</p>
   </div>
-  <img class="faction-img" src="assets/icons/unselected faction icons/{{shortenedNames.factions[fullFactionName]}}.png"/>
+  <img [alt]="fullFactionName" class="faction-img" src="assets/icons/unselected faction icons/{{shortenedNames.factions[fullFactionName]}}.png"/>
   <div class="selected-bulge">
     
   </div>

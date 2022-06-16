@@ -40,3 +40,9 @@ $test: 50vw;
     justify-content: center;
   } 
 }
+
+.filter-container {
+  &.isMobile-true {
+    margin-bottom: 50px;
+  }
+}

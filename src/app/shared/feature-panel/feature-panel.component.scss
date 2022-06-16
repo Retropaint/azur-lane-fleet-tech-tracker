@@ -18,10 +18,20 @@
 
   &.isMobile-true {
     text-align: center;
-    height: 95vh;
+    height: 100vh;
   }
 
   &.isMobile-false {
     height: 85vh;
+    background: #213052;
+    border: 2px solid #3c4f79;
+    padding: 15px;
   }
+}
+
+.back-button {
+  float: left;
+  height: 100vh;
+  font-size: 25px;
+  color: #c9e9ff;
 }

@@ -69,12 +69,10 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
         ship.level = this.getFinalLevel() || this.level;
         ship.isObtained = this.isObtained;
         ship.isBulkSelected = false;
-        ship.isEdited = ship.isVisible;
       })
       this.misc.bulkSelected = [];
     } else {
       this.ship.isObtained = this.isObtained;
-      this.ship.isEdited = true;
 
       // set level
       if(!this.isObtained) {

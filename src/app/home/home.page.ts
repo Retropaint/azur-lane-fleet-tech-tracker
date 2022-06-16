@@ -12,6 +12,9 @@ import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-leve
   styleUrls: ['home.page.scss', 'filter.scss'],
 })
 export class HomePage implements AfterViewInit {
+
+  shouldBackgroundFadeIn: boolean;
+
   @ViewChild(IonContent) ionContent: IonContent;
   
   constructor(
@@ -22,10 +25,13 @@ export class HomePage implements AfterViewInit {
   ) {}
 
   async ngAfterViewInit() {
-
     // get UI mode if it exists, default to icon if it doesn't
     this.misc.initUiMode();
     this.misc.ionContent = this.ionContent;
+
+    setTimeout(() => {
+      this.shouldBackgroundFadeIn = true;
+    }, 500)
   }
 
   async openSettingsModal() {

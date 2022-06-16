@@ -15,10 +15,10 @@ export class ShipCardListComponent implements AfterViewInit {
 
   //@ViewChild('list') list: ElementRef;
 
-  ships: Ship[] = [];
   rows: Ship[][] = [];
   rowHeight: number;
   refreshCount: number;
+  isLoading: boolean = true;
 
   fleetTechStatIconWidths = {
     "HP": 16,
@@ -53,21 +53,16 @@ export class ShipCardListComponent implements AfterViewInit {
   }
 
   refresh() {
-    // reset 
-    this.ships = [];
+    this.isLoading = true;
     this.rows = [];
 
     // get width of list element to calculate how many ships can fit in a row
     let listWidth = this.list.nativeElement.getBoundingClientRect().width;
 
-    const shipsPerRow = Math.floor(listWidth / (116 * this.settingsData.settings['ship-card-size']/100));
+    const shipsPerRow = Math.ceil(listWidth / (150 * this.settingsData.settings['ship-card-size']/100 + 16));
 
     const shipCardSize = this.settingsData.settings['ship-card-size']/100;
-    if(!this.misc.isMobile) {
-      this.rowHeight = 158 * shipCardSize;
-    } else {
-      this.rowHeight = 128 * shipCardSize;
-    }
+    this.rowHeight = 158 * shipCardSize;
     
     // create rows array
     let rowIndex = 0;
@@ -82,5 +77,20 @@ export class ShipCardListComponent implements AfterViewInit {
         }
       }
     })
+
+    // add invisible ship cards for the last row, to anchor visible ships to the left
+    while(this.rows[this.rows.length - 1].length < shipsPerRow) {
+      // quick and dirty way to create a new ship. Parse and stringify used to prevent referencing
+      const invisibleShip: Ship = JSON.parse(JSON.stringify(this.shipsService.ships[0]));
+      
+      invisibleShip.id = "-1";
+      this.rows[this.rows.length - 1].push(invisibleShip);
+    }
+
+    // delay allows all ship cards to destroy themselves, so they can restart fade
+    setTimeout(() => {
+      this.isLoading = false;
+    })
+    
   }
 }

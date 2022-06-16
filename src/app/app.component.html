@@ -1,15 +1,15 @@
 <ion-app>
-  <ion-menu side="end" menuId="side" contentId="main" style="--width: 220px;" *ngIf="misc.isMobile">
-    <ion-content color="primary" style=" --overflow: hidden !important">
+  <ion-menu (ionDidOpen)="menuIsOpen = true" (ionWillOpen)="menuIsOpen = true" side="end" menuId="side" contentId="main" style="--width: 220px;" *ngIf="misc.isMobile">
+    <ion-content *ngIf="menuIsOpen" color="primary" style=" --overflow: hidden !important">
       <ion-list style="background: #263755">
         <div class="item" (click)="openSettings()">
-          <img class="item-img" src="assets/settings.png" />
+          <img alt="open settings prompt" class="item-img" src="assets/settings.png" />
           <p class="prompt-text inline-block item-text">Settings</p>
         </div>
 
         <div class="item" (click)="switchTechMode()">
-          <img *ngIf="misc.techMode == 'ship'" class="item-img" src="assets/tech summary.png" />
-          <img *ngIf="misc.techMode == 'stat'" class="item-img" src="assets/ship database.png"/>
+          <img alt="display tech summary" *ngIf="misc.techMode == 'ship'" class="item-img" src="assets/tech summary.png" />
+          <img alt="display ship database" *ngIf="misc.techMode == 'stat'" class="item-img" src="assets/ship database.png"/>
           <p class="prompt-text inline-block item-text">{{misc.techModeString}}</p>
         </div>
       </ion-list>
@@ -19,8 +19,8 @@
     </ion-content>
   </ion-menu>
 
-  <ion-menu side="start" menuId="filter" contentId="main" style="--width: 100%;" *ngIf="misc.isMobile">
-    <ion-content color="primary" style="--overflow: hidden !important">
+  <ion-menu (ionDidOpen)="filterIsOpen = true" (ionWillOpen)="filterIsOpen = true" side="start" menuId="filter" contentId="main" style="--width: 100%;" *ngIf="misc.isMobile">
+    <ion-content *ngIf="filterIsOpen" color="primary" style="--overflow: hidden !important">
       <app-feature-panel></app-feature-panel>
     </ion-content>
   </ion-menu>

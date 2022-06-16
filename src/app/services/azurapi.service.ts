@@ -18,8 +18,7 @@ export class AzurapiService {
     private shipsService: ShipsService,
     private sort: SortService) {}
 
-  async init() {
-    
+  async init(isRetrieving: boolean = false) {
     // reset ships
     this.shipsService.ships = [];
     
@@ -81,7 +80,7 @@ export class AzurapiService {
             obtainAppliedHulls: obtainFleetTech['applicable']
           }
 
-          // if updating to a new version, retain user-generated ship data from previous version
+          // retain dynamic data of existing ships
           if(savedShips != null && savedShips.length > 0) {
             for(const savedShip of savedShips) {
               if(savedShip.id == ship.id) {
@@ -103,5 +102,16 @@ export class AzurapiService {
       //console.log(JSON.stringify(ids));
       this.shipsService.save();
     })
+  }
+
+  isExistingShip(id: string, ships): boolean {
+    for(const ship of ships) {
+      for(const existingShip of this.shipsService.ships) {
+        if(ship.id == existingShip.id) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

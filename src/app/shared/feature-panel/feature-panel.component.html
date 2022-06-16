@@ -1,3 +1,4 @@
+<ion-icon name="caret-back-outline" side="end" class="back-button" *ngIf="misc.isMobile" (click)="closeMenu()"></ion-icon>
 <div class="container isMobile-{{misc.isMobile}}">
   <app-generic-big-button *ngIf="!misc.isBulkSelect" text="Bulk Select" (click)="toggleBulkSelect()" extraCSS="no-left-margin"></app-generic-big-button>
   <app-generic-big-button *ngIf="misc.isBulkSelect" text="Cancel Bulk Select" (click)="cancelBulkSelect()" extraCSS="red no-left-margin"></app-generic-big-button>

@@ -1,8 +1,7 @@
 .cog-and-tech {
   display: inline-block;
   width: 100%;
-  margin-top: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
 
   &.Sheet {
     text-align: center;
@@ -10,6 +9,7 @@
 
   .cog-image {
     width: 30px;
+    height: 30px;
     margin-right: 5px;
     transform: translateY(9px);
   }
