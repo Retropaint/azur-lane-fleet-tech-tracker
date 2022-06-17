@@ -3,7 +3,7 @@
 <div class="prompt-info-background">
   <div #autoResize>
     <app-settings-toggle name="UI mode" [toggles]="['Icon', 'Sheet']" storageName="ui-mode" defaultState="Icon"></app-settings-toggle>
-    <app-settings-toggle name="Use Retrofit Forms" [toggles]="['Yes', 'No']" storageName="retrofit-form" defaultState="No"></app-settings-toggle>
+    <app-settings-toggle name="Use Retrofit Forms" [toggles]="['Yes', 'No']" storageName="retrofit-forms" defaultState="No"></app-settings-toggle>
     
     <div class="setting-container ship-card-size">
       <p class="prompt-text inline-block">Ship Card Size:</p>
@@ -18,7 +18,7 @@
     <input type="file" id="import" accept=".csv" (change)="importCSV($event)" style="display: none"/> 
     <label for="import" (click)="csv.settingsText = ''"><app-prompt-button for="import" text="Import CSV" extraCSS="no-top inline-block" color="blue"></app-prompt-button></label>
 
-    <p class="prompt-text inline-block">{{csv.settingsText}}</p>
+    <p *ngIf="isInvalidImport" class="prompt-text inline-block">invalid CSV</p>
     
     <div style="display: flex">
       <app-prompt-button (click)="resetSite()" text="Reset Site" extraCSS="no-top" color="red"></app-prompt-button>
@@ -29,6 +29,6 @@
 </div>
 
 <div class="prompt-buttons">
-  <app-prompt-button (click)="cancel()" text="Cancel" color="red"></app-prompt-button>
+  <app-prompt-button (click)="exit()" text="Cancel" color="red"></app-prompt-button>
   <app-prompt-button (click)="save()" text="Confirm" color="blue"></app-prompt-button>
 </div>

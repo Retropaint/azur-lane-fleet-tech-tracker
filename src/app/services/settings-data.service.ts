@@ -8,7 +8,7 @@ export class SettingsDataService {
 
   settings = {
     'ui-mode': "UI",
-    'retrofit-form': "No",
+    'retrofit-forms': "No",
     'ship-card-size': 100
   }
 

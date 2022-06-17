@@ -121,7 +121,7 @@ export class ShipsService {
   }
 
   getRetroRarity(id: string): string {
-    if(!this.getById(id).hasRetrofit || this.settingsData.settings['retrofit-form'] == 'No') {
+    if(!this.getById(id).hasRetrofit || this.settingsData.settings['retrofit-forms'] == 'No') {
       return this.getById(id).rarity;
     }
     const rarities = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare"];

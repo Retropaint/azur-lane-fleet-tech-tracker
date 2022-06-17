@@ -110,7 +110,7 @@ export class FilterService {
     
     // check hull
     let hull = null;
-    if(this.settingsData.settings['retrofit-form'] == 'Yes' && ship.hasRetrofit) {
+    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && ship.hasRetrofit) {
       hull = ship.retroHull
     } else {
       hull = ship.hull;
@@ -136,7 +136,7 @@ export class FilterService {
     }
 
     let rarity = null;
-    if(this.settingsData.settings['retrofit-form'] == 'Yes' && ship.hasRetrofit) {
+    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && ship.hasRetrofit) {
       rarity = this.shipService.getRetroRarity(ship.id);
     } else {
       rarity = ship.rarity;

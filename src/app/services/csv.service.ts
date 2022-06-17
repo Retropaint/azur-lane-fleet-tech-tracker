@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as papa from 'papaparse';
+import { Subject } from 'rxjs';
 import { ShipsService } from './ships.service';
 
 @Injectable({
@@ -8,6 +9,9 @@ import { ShipsService } from './ships.service';
 export class CsvService {
 
   settingsText: string;
+
+  importStatusSubject = new Subject<boolean>();
+  importStatus = this.importStatusSubject.asObservable(); 
 
   constructor(private shipsService: ShipsService) { }
 
@@ -75,14 +79,13 @@ export class CsvService {
           }
           
           if(isInvalid) {
-            script.settingsText = "Invalid CSV"
+            script.importStatusSubject.next(false);
           } else {
-            script.settingsText = "Imported";
+            script.importStatusSubject.next(true);
             script.shipsService.save();
           }
 			  }
-		  }
-    )
+		  })
   }
 
   getColumnByName(name: string, row: any): number {

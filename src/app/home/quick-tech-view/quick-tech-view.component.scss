@@ -13,6 +13,12 @@
     margin-right: 5px;
     transform: translateY(9px);
   }
+
+  &.isMobile-false-Icon {
+    position: absolute;
+    transform: translateY(-45px);
+    z-index: 1;
+  }
 }
 
 .quick-tech {

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { Subscription } from 'rxjs';
 import { AzurapiService } from 'src/app/services/azurapi.service';
 import { CsvService } from 'src/app/services/csv.service';
 import { FilterService } from 'src/app/services/filter.service';
@@ -20,9 +21,13 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   @ViewChild('autoResize') autoResize: ElementRef;
   modalIndex: number;
   inputShipCardSize: number;
+  confirmedChanges: boolean;
+  isInvalidImport: boolean;
 
   // store original states of settings in-case of cancelling
   initialStates = {};
+
+  importedCsvSubscription = new Subscription();
 
   constructor(private prompt: PromptService, 
     private storage: Storage, 
@@ -37,6 +42,14 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.csv.settingsText = "";
+
+    this.csv.importStatus.subscribe(wasSuccessful => {
+      if(wasSuccessful) {
+        this.save();
+      } else {
+        this.isInvalidImport = true;
+      }
+    })
   }
 
   async ngAfterViewInit() {
@@ -70,14 +83,9 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     this.prompt.openAnotherPrompt(this.modalIndex, CreditsComponent);
   }
 
-  cancel() {
-    this.storage.set("ui-mode", this.initialStates["uiMode"]);
-    this.storage.set("ship-card-size", this.initialStates["shipCardSize"]);
-    this.storage.set("retrofit-forms", this.initialStates["retrofitForms"]);
-    this.modalController.dismiss();
-  }
-
   async save() {
+    this.confirmedChanges = true;
+
     await this.storage.set("ship-card-size", this.inputShipCardSize);
     
     await this.settingsData.refresh().then(() => {
@@ -92,11 +100,16 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   }
 
   exit() {
-    this.cancel();
     this.modalController.dismiss();
   }
 
   ngOnDestroy() {
+    this.importedCsvSubscription.unsubscribe();
     this.prompt.exit();
+    if(!this.confirmedChanges) {
+      this.storage.set("ui-mode", this.initialStates["uiMode"]);
+      this.storage.set("ship-card-size", this.initialStates["shipCardSize"]);
+      this.storage.set("retrofit-forms", this.initialStates["retrofitForms"]);
+    }
   }
 }

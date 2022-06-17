@@ -31,7 +31,7 @@ export class AzurapiService {
       JSON.parse(ships).forEach(async ship => {
         
         // only accept ships with a max level fleet tech bonus
-        if(ship["fleetTech"]["statsBonus"]["maxLevel"]) {
+        if(ship["fleetTech"]["statsBonus"]["collection"]) {
 
           const fleetTech = ship["fleetTech"]["statsBonus"]["maxLevel"]
           const obtainFleetTech = ship["fleetTech"]["statsBonus"]["collection"];
@@ -66,6 +66,7 @@ export class AzurapiService {
             name: ship["names"]["en"],
             id: ship["id"],
             level: 1,
+            isObtained: false,
             faction: this.shortenedNames.factions[ship["nationality"]],
             rarity: ship["rarity"],
             hull: this.shortenedNames.hulls[ship["hullType"]],
@@ -77,7 +78,7 @@ export class AzurapiService {
             obtainStat: this.shortenedNames.stats[obtainFleetTech["stat"]],
             obtainBonus: parseInt(obtainFleetTech["bonus"][1]),
             retroHull: this.shortenedNames.hulls[ship['retrofitHullType']],
-            obtainAppliedHulls: obtainFleetTech['applicable']
+            obtainAppliedHulls: obtainFleetTech['applicable'],
           }
 
           // retain dynamic data of existing ships
@@ -85,7 +86,11 @@ export class AzurapiService {
             for(const savedShip of savedShips) {
               if(savedShip.id == ship.id) {
                 newShip.level = savedShip.level;
-                newShip.isObtained = savedShip.isObtained;
+
+                // isObtained wasn't explicitly assigned before, so it may cause errors for older users without this check
+                if(newShip.isObtained != null) {
+                  newShip.isObtained = savedShip.isObtained;
+                }
                 break;
               }
             }

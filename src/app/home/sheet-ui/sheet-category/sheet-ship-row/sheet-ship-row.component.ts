@@ -50,7 +50,7 @@ export class SheetShipRowComponent implements OnInit {
   }
 
   getHull() {
-    if(this.settingsData.settings['retrofit-form'] == 'Yes' && this.ship.hasRetrofit) {
+    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && this.ship.hasRetrofit) {
       return this.ship.retroHull;
     } else {
       return this.ship.hull;
@@ -58,7 +58,7 @@ export class SheetShipRowComponent implements OnInit {
   }
 
   getRarity() {
-    if(this.settingsData.settings['retrofit-form'] == 'Yes' && this.ship.hasRetrofit) {
+    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && this.ship.hasRetrofit) {
       return this.shipsService.getRetroRarity(this.ship.id);
     } else {
       return this.ship.rarity;

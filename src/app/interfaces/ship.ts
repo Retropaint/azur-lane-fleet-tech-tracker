@@ -13,7 +13,7 @@ export interface Ship {
   obtainStat: string;
   obtainBonus: number;
   retroHull: string;
-  isObtained?: boolean;
+  isObtained: boolean;
   obtainAppliedHulls: string[];
 
   // all vars below are used for code purposes and are not actual properties

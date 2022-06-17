@@ -66,11 +66,6 @@ export class AppComponent implements OnInit {
     window.addEventListener('focus', () => {
       this.onTabFocus();
     })
-
-    setTimeout(() => {
-      console.log(document.getElementsByTagName('*').length)
-
-    }, 5000)
   }
 
   openSettings() {
@@ -97,9 +92,5 @@ export class AppComponent implements OnInit {
       this.misc.refreshIconList(true);    
     }
     this.iconListRefreshCount++;
-  }
-
-  openedMenu() {
-    console.log('opened')
   }
 }

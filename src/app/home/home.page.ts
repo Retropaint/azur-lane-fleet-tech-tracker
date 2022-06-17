@@ -5,6 +5,7 @@ import { ShipsService } from '../services/ships.service';
 import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning.component';
 import { MiscService } from '../services/misc.service';
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
+import { PromptService } from '../services/prompt.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomePage implements AfterViewInit {
     private modalController: ModalController,
     public shipsService: ShipsService,
     public misc: MiscService,
-    private menuController: MenuController  
+    private menuController: MenuController,
+    private prompt: PromptService
   ) {}
 
   async ngAfterViewInit() {
@@ -35,11 +37,7 @@ export class HomePage implements AfterViewInit {
   }
 
   async openSettingsModal() {
-    const modal = await this.modalController.create({
-      component: SettingsComponent,
-      animated: false
-    });
-    modal.present();
+    this.prompt.openPrompt(SettingsComponent);
   }
 
   openSideMenu() {
