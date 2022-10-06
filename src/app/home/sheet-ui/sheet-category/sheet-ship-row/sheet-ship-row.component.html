@@ -1,4 +1,4 @@
-<div #row (click)="enterLevel()" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}} isMobile-{{misc.isMobile}}">
+<div #row (click)="enterLevel()" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}}">
   <!-- hull icon and ship name-->
   <div class="ship-name {{getRarity()}} border">
     <img [alt]="ship.hull" class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
@@ -7,10 +7,12 @@
 
   <div class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle">
     <!-- tech stat icon -->
-    <img [alt]="ship.techStat" class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <img *ngIf="ship.techStat" [alt]="ship.techStat" class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
     
     <!-- tech stat bonus -->
-    <div class="tech-bonus" >+{{ship.techBonus}}</div>
+    <div *ngIf="ship.techStat" class="tech-bonus" >+{{ship.techBonus}}</div>
+    
+    <div *ngIf="!ship.techStat" class="tech-bonus none">-</div>
   </div>
 
   <!-- level -->

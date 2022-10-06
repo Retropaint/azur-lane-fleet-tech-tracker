@@ -1,29 +1,25 @@
 .ship-grid {
   text-align: center;
+  height: 81vh;
+  background: #213052;
+  border: 2px solid #3c4f79;
+  margin-left: 20px;
 
-  &.isMobile-true {
+  &.mobile {
     text-align: center;
     padding-left: 19px;
     height: 75vh;
-  }
-
-  &.isMobile-false {
-    height: 80vh;
-    background: #213052;
-    border: 2px solid #3c4f79;
-    margin-left: 20px;
+    background: none;
+    border: none;
   }
 }
 
 .no-ships-text {
   padding-left: 20px;
+  text-align: left;
 
-  &.isMobile-true {
+  &.mobile {
     text-align: center;
-  }
-
-  &.isMobile-false {
-    text-align: left;
   }
 }
 

@@ -1,4 +1,4 @@
-<div class="container isMobile-{{misc.isMobile}}">
+<div class="container" [ngClass]="{'desktop' : !misc.isMobile}">
   <app-feature-panel *ngIf="!misc.isMobile"></app-feature-panel>
   <app-ship-card-list class="ship-list"></app-ship-card-list>
 </div>

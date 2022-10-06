@@ -1,5 +1,5 @@
 .container {
-  &.isMobile-false {
+  &.desktop {
     padding-right: var(--dead-zone-margin);
     padding-left: var(--dead-zone-margin);
   }
@@ -14,14 +14,11 @@
 
 .change-level {
   position: absolute;
+  right: 200px;
 
-  &.isMobile-true {
+  &.mobile {
     right: 70px;
     zoom: 0.75;
-  }
-
-  &.isMobile-false {
-    right: 200px;
   }
 }
 

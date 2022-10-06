@@ -6,15 +6,15 @@ export interface Ship {
   rarity: string;
   hull: string;
   fallbackThumbnail: string;
-  techStat: string;
-  techBonus: number;
-  appliedHulls: string[];
+  techStat?: string;
+  techBonus?: number;
+  appliedHulls?: string[];
   hasRetrofit: boolean;
-  obtainStat: string;
-  obtainBonus: number;
+  obtainStat?: string;
+  obtainBonus?: number;
   retroHull: string;
   isObtained: boolean;
-  obtainAppliedHulls: string[];
+  obtainAppliedHulls?: string[];
 
   // all vars below are used for code purposes and are not actual properties
 

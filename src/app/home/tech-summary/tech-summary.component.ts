@@ -64,6 +64,10 @@ export class TechSummaryComponent implements OnInit {
 
     // get obtain and collection stats
     this.shipsService.ships.forEach(ship => {
+      if(ship.techStat == null) {
+        return;
+      }
+
       // obtain
       if(ship.isObtained) {
         ship.appliedHulls.forEach(hull => {

@@ -20,4 +20,9 @@ export class QuickTechViewComponent implements OnInit {
 
   ngOnInit() {}
 
+  toggleNonTechShips() {
+    this.misc.includeNonTechShips = !this.misc.includeNonTechShips;
+    this.filter.filter();
+  }
+
 }

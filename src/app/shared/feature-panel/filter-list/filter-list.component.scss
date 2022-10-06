@@ -2,12 +2,10 @@
   width: fit-content;
   cursor: pointer;
   margin-bottom: 2px;
+  transform: translate(0px, -19px);
 
-  // isMobile from app component
-  &.false {
-    transform: translate(0px, -19px);
-  }
-  &.true {
+  &.mobile {
+    transform: translate(0px, 0px);
     margin-bottom: 0px;
     text-align: center;
     width: auto
@@ -20,7 +18,7 @@
   margin-right: 5px;
   margin-left: 10px;
 
-  &.isMobile-false {
+  &.desktop {
     transform: translateY(-20px);
   }
 }
@@ -35,14 +33,10 @@
 $test: 50vw;
 
 .filter-row {
-  &.isMobile-true {
-    display: flex;
-    justify-content: center;
-  } 
+  display: flex;
+  justify-content: center;
 }
 
 .filter-container {
-  &.isMobile-true {
-    margin-bottom: 50px;
-  }
+  margin-bottom: 50px;
 }

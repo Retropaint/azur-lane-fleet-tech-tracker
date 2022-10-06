@@ -39,6 +39,9 @@ export class HoverTitlesService {
   constructor() { }
 
   getTechStatTitle(ship: Ship) {
+    if(!ship.appliedHulls) {
+      return;
+    }
     let hullString = "";
     ship.appliedHulls.forEach(hull => {
       hullString += hull + "s, ";

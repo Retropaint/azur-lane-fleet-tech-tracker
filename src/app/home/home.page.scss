@@ -37,7 +37,7 @@
   margin-bottom: 10px;
   display: inline;
 
-  &.isMobile-true {
+  &.mobile {
     font-size: 20px;
     transform: translateY();
     padding-left: 10px;
@@ -50,7 +50,7 @@
   transform: translateY(20px);
   display: inline;
 
-  &.isMobile-true {
+  &.mobile {
     width: 40px;
     height: 40px;
     transform: translateY(15px);
@@ -129,14 +129,6 @@
     margin: 0px;
   }
 
-  &.isMobile-true {
-    right: 0;
-    padding-right: 10px;
-  }
-  &.isMobile-false {
-    margin-left: 50px;
-  }
-
   &.settings {
     margin-left: 30px;
   }
@@ -150,18 +142,15 @@
   transition: opacity 1s;
   user-select: none;
   pointer-events: none; // makes scrollbar responsive
-
-  &.isMobile-false {
-    background: url(../../assets/blueprint_bg.webp);
-    background-size: cover;
-  }
-
-  &.isMobile-true {
+  background: url(../../assets/blueprint_bg.webp);
+  background-size: cover;
+  
+  &.mobile {
     background: url(../../assets/blueprint_bg_mobile.webp);
     background-size: cover;
   }
 
-  &.fade-in-true {
+  &.fade-in{
     opacity: 0.5;
   }
 }
@@ -170,7 +159,7 @@
   --ion-background-color: #002454;
   --overflow: overlay;
 
-  &.isMobile-true {
+  &.mobile {
     text-align: center;
   }
 }

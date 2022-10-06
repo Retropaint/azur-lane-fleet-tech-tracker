@@ -111,7 +111,7 @@
     </div>
 
     <ng-container *ngFor="let ship of shipsService.getAlphabeticalOrder(); index as i">
-      <app-hull-info-exception *ngIf="ship.appliedHulls.length == 1 && ship.hull != 'AE' && ship.hull != 'AR' && ship.hull != 'CL'" [name]="ship.name" [hull]="ship.appliedHulls[0]"></app-hull-info-exception>
+      <app-hull-info-exception *ngIf="ship.appliedHulls != null && ship.appliedHulls.length == 1 && ship.hull != 'AE' && ship.hull != 'AR' && ship.hull != 'CL'" [name]="ship.name" [hull]="ship.appliedHulls[0]"></app-hull-info-exception>
     </ng-container>
   </div>
 </div>

@@ -4,8 +4,8 @@
   overflow-y: auto;
   width: max-content;
 
-  &.isMobile-false {
-    height: 78vh;
+  &.desktop {
+    height: 80vh;
   }
 }
 
@@ -39,7 +39,7 @@
     filter: brightness(0.65);
   }
 
-  &.isMobile-true {
+  &.mobile {
     grid-template-columns: 1fr 0fr 0fr 0fr;
   }
 }

@@ -16,7 +16,7 @@ export class FilterListComponent implements OnInit {
   hullIconWidths: number[] = [40, 40, 40, 40, 50, 40, 35];
   hullTextRightMargins: number[] = [15, 15, 15, 15, 15, 15, 5, 40];
 
-  statNames: string[] = ["FP", "TRP", "AVI", "AA", "RLD", "HIT", "ASW", "EVA", "HP", "All"];
+  statNames: string[] = ["FP", "TRP", "AVI", "AA", "RLD", "HIT", "ASW", "EVA", "HP", "No Tech", "All"];
   statIconWidths: number[] = [50, 35, 35, 38, 38, 35, 35, 32, 35];
   statTextRightMargins: number[] = [17, 17, 17, 17, 17, 17, 17, 17, 17, 40];
 

@@ -113,11 +113,7 @@ export class ShipsService {
   }
 
   getByName(name: string): Ship {
-    for(const ship of this.ships) {
-      if(ship.name == name) {
-        return ship;
-      }
-    }
+    return this.ships.find(ship => ship.name == name)
   }
 
   getRetroRarity(id: string): string {
@@ -126,11 +122,8 @@ export class ShipsService {
     }
     const rarities = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare"];
     
-    for(const ship of this.ships) {
-      if(ship.id == id) {
-        return rarities[rarities.indexOf(ship.rarity) + 1];
-      }
-    }
+    const ship = this.ships.find(ship => ship.id == id)
+    return rarities[rarities.indexOf(ship.rarity) + 1];
   }
 
   // called by hull info panel
@@ -184,6 +177,9 @@ export class ShipsService {
 
     // get tech from ship
     this.ships.forEach(ship => {
+      if(ship.techStat == null) {
+        return;
+      }
       if(ship.isObtained || !checkShipReqs) {
         ship.obtainAppliedHulls.forEach(appliedHull => {
           if(appliedHull == hull) {

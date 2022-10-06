@@ -15,17 +15,14 @@
 
 .container {
   overflow-y: auto;
+  height: 85vh;
+  background: #213052;
+  border: 2px solid #3c4f79;
+  padding: 15px;
 
-  &.isMobile-true {
+  &.mobile {
     text-align: center;
     height: 100vh;
-  }
-
-  &.isMobile-false {
-    height: 85vh;
-    background: #213052;
-    border: 2px solid #3c4f79;
-    padding: 15px;
   }
 }
 

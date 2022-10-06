@@ -1,16 +1,13 @@
 .container {
   color: black;
-  
-  &.isMobile-true {
-    margin-bottom: 50px;
-  }
+  display: flex;
+  align-items: flex-end;
+  padding-left: 50px;
+  padding-right: 100px;
+  justify-content: center;
 
-  &.isMobile-false {
-    display: flex;
-    align-items: flex-end;
-    padding-left: 50px;
-    padding-right: 100px;
-    justify-content: center;
+  &.mobile {
+    margin-bottom: 50px;
   }
 }
 

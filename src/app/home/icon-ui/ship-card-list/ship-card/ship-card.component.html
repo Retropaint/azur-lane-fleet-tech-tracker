@@ -1,5 +1,5 @@
-<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container fade-{{fadeCSS}} {{ship.id == '-1' ? 'invisible' : ''}} {{ship.isObtained ? '' : 'unobtained'}} isMobile-{{misc.isMobile}}">
-  <div class="bulk-select {{ship.isBulkSelected}}"></div>
+<div #card (click)="enterLevel()" title="Click to edit level" class="ship-card-container fade-{{fadeCSS}} {{ship.id == '-1' ? 'invisible' : ''}} {{ship.isObtained ? '' : 'unobtained'}}">
+  <div [ngClass]="{'bulk-select' : ship.isBulkSelected}"></div>
   <p *ngIf="ship.isBulkSelected" class="selected-text">- SELECTED -</p>
   
   <div class="ship-info-overlay hull">
@@ -7,7 +7,7 @@
     <ion-img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"></ion-img>
     
     <!-- tech stat and bonus -->
-    <div [title]="hoverTitle">
+    <div [title]="hoverTitle" *ngIf="ship.techStat != null">
       <ion-img class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"></ion-img>
       <p class="double-stats-text">+{{ship.techBonus}}</p>
     </div>

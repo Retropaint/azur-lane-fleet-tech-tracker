@@ -207,11 +207,8 @@
   border-radius: 5px;
   z-index: 1;
   pointer-events: none;
-  
-  &.true {
-    background: rgb(255, 255, 255, var(--selected-ship-glow-opacity));
-    transition: background-color 2s;
-  }
+  background: rgb(255, 255, 255, var(--selected-ship-glow-opacity));
+  transition: background-color 2s;
 }
 
 .selected-text {

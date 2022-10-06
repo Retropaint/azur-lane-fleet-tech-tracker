@@ -1,14 +1,14 @@
 <!-- hull filter -->
 <div>
 
-  <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('hulls')" title="Click to {{unfoldedFilters['hulls']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name" [ngClass]="{'mobile' : misc.isMobile}" (click)="toggleFold('hulls')" title="Click to {{unfoldedFilters['hulls']  ? 'fold' : 'unfold'}}">
     Hull
     <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['hulls']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['hulls']"></ion-icon>
   </p>
   
-  <ion-grid class="filter-category-container isMobile-{{misc.isMobile}}" *ngIf="unfoldedFilters['hulls']">
-    <ion-row class="filter-row isMobile-{{misc.isMobile}}">
+  <ion-grid class="filter-category-container" [ngClass]="{'desktop' : !misc.isMobile}" *ngIf="unfoldedFilters['hulls']">
+    <ion-row [ngClass]="{'filter-row' : misc.isMobile}">
       <app-filter-button *ngFor="let hull of hullNames; let i = index" [hasImage]="true" [filterName]="hull" [filterType]="filter.hulls" [index]="i" [iconWidth]="hullIconWidths[i]" [textRightMargin]="hullTextRightMargins[i]" fileName="hull"></app-filter-button>
     </ion-row>
   </ion-grid>
@@ -17,14 +17,14 @@
 <!-- stat filter -->
 <div>
 
-  <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['stats']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name" [ngClass]="{'mobile' : misc.isMobile}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['stats']  ? 'fold' : 'unfold'}}">
     Stat
     <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['stats']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
   </p>
   
-  <ion-grid class="filter-category-container isMobile-{{misc.isMobile}}" *ngIf="unfoldedFilters['stats']">
-    <ion-row class="filter-row isMobile-{{misc.isMobile}}">
+  <ion-grid class="filter-category-container" [ngClass]="{'desktop' : !misc.isMobile}" *ngIf="unfoldedFilters['stats']">
+    <ion-row [ngClass]="{'filter-row' : misc.isMobile}">
       <app-filter-button *ngFor="let stat of statNames; let i = index" [hasImage]="true" [filterName]="stat" [filterType]="filter.stats" [index]="i" [iconWidth]="statIconWidths[i]" [textRightMargin]="statTextRightMargins[i]" fileName="stat"></app-filter-button>
     </ion-row>
   </ion-grid>
@@ -33,14 +33,14 @@
 <!-- faction filter -->
 <div>
 
-  <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('factions')" title="Click to {{unfoldedFilters['factions']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name" [ngClass]="{'mobile' : misc.isMobile}" (click)="toggleFold('factions')" title="Click to {{unfoldedFilters['factions']  ? 'fold' : 'unfold'}}">
     Faction
     <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['factions']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['factions']"></ion-icon>
   </p>
   
-  <ion-grid class="filter-category-container isMobile-{{misc.isMobile}}" *ngIf="unfoldedFilters['factions']">
-    <ion-row class="filter-row isMobile-{{misc.isMobile}}">
+  <ion-grid class="filter-category-container" [ngClass]="{'desktop' : !misc.isMobile}" *ngIf="unfoldedFilters['factions']">
+    <ion-row [ngClass]="{'filter-row' : misc.isMobile}">
       <app-filter-button *ngFor="let faction of factionNames; let i = index" [filterName]="faction" [filterType]="filter.factions" [index]="i" [iconWidth]="factionIconWidths[i]" [textRightMargin]="factionTextRightMargins[i]" fileName="faction"></app-filter-button>
     </ion-row>
   </ion-grid>
@@ -49,30 +49,30 @@
 <!-- rarity filter -->
 <div>
   
-  <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('rarities')" title="Click to {{unfoldedFilters['rarities']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name" [ngClass]="{'mobile' : misc.isMobile}" (click)="toggleFold('rarities')" title="Click to {{unfoldedFilters['rarities']  ? 'fold' : 'unfold'}}">
     Rarity
     <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['rarities']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['rarities']"></ion-icon>
   </p>
   
-  <ion-grid class="filter-category-container isMobile-{{misc.isMobile}}" *ngIf="unfoldedFilters['rarities']">
-    <ion-row class="filter-row isMobile-{{misc.isMobile}}">
+  <ion-grid class="filter-category-container" [ngClass]="{'desktop' : !misc.isMobile}" *ngIf="unfoldedFilters['rarities']">
+    <ion-row [ngClass]="{'filter-row' : misc.isMobile}">
       <app-filter-button *ngFor="let rarity of rarityNames; let i = index" [hasImage]="false" [filterName]="rarity" [filterType]="filter.rarities" [index]="i"></app-filter-button>
     </ion-row>
   </ion-grid>
 </div>
 
 <!-- status filter -->
-<div class="filter-container isMobile-{{misc.isMobile}}">
+<div [ngClass]="{'filter-container' : misc.isMobile}">
   
-  <p class="generic-text filter-category-name {{misc.isMobile}}" (click)="toggleFold('status')" title="Click to {{unfoldedFilters['status']  ? 'fold' : 'unfold'}}">
+  <p class="generic-text filter-category-name" [ngClass]="{'mobile' : misc.isMobile}" (click)="toggleFold('status')" title="Click to {{unfoldedFilters['status']  ? 'fold' : 'unfold'}}">
     Status
     <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['status']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['status']"></ion-icon>
   </p>
   
-  <ion-grid class="filter-category-container isMobile-{{misc.isMobile}}" *ngIf="unfoldedFilters['status']">
-    <ion-row class="filter-row isMobile-{{misc.isMobile}}">
+  <ion-grid class="filter-category-container" [ngClass]="{'desktop' : !misc.isMobile}" *ngIf="unfoldedFilters['status']">
+    <ion-row [ngClass]="{'filter-row' : misc.isMobile}">
       <app-filter-button *ngFor="let status of statusNames; let i = index" [hasImage]="false" [filterName]="status" [filterType]="filter.statuses" [index]="i"></app-filter-button>
     </ion-row>
   </ion-grid>

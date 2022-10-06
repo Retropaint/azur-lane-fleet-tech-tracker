@@ -1,17 +1,17 @@
 <ion-header *ngIf="misc.isMobile" class="mobile-header">
   <ion-toolbar color="primary">
     <div class="title-container">
-      <img alt="Azur Lane logo" class="header-img isMobile-{{misc.isMobile}}" src="assets/logo.webp"/>
+      <img alt="Azur Lane logo" class="header-img" [ngClass]="{'mobile' : misc.isMobile}" src="assets/logo.webp"/>
       
-      <h1 class="title isMobile-{{misc.isMobile}} generic-text no-glow">Azur Lane Fleet Tech Tracker</h1>
+      <h1 class="title generic-text no-glow" [ngClass]="{'mobile' : misc.isMobile}">Azur Lane Fleet Tech Tracker</h1>
     </div>
     <ion-icon (click)="openSideMenu()" name="reorder-three-outline" class="side-menu-burger-icon" slot="end"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="main-content isMobile-{{misc.isMobile}}">
+<ion-content [fullscreen]="true" class="main-content" [ngClass]="{'mobile' : misc.isMobile}">
   <app-hull-info-panel *ngIf="misc.techMode == 'ship' && !misc.isMobile"></app-hull-info-panel>
-  <div class="background isMobile-{{misc.isMobile}} fade-in-{{shouldBackgroundFadeIn}}"></div>
+  <div class="background" [ngClass]="{'mobile' : misc.isMobile, 'fade-in' : shouldBackgroundFadeIn}"></div>
 
   <!-- sort & filter swipe text (mobile)-->
   <p class="generic-text sort-and-filter-text" *ngIf="misc.isMobile && misc.techMode == 'ship'" (click)="openSortAndFilterMenu()">
@@ -51,6 +51,10 @@
 
       <!-- tech summary -->
       <app-tech-summary *ngIf="misc.techMode == 'stat'" style="text-align: center"></app-tech-summary>
+    </ng-container>
+
+    <ng-container *ngIf="shipsService.ships.length == 0">
+      <p class="generic-text centered">Loading...</p>
     </ng-container>
   </div>
 </ion-content>

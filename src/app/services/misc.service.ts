@@ -14,7 +14,7 @@ export class MiscService {
   
   techMode: string = 'ship'; 
   techModeString: string = "Tech Summary";
-  uiMode: string = "Icon";
+  uiMode: 'Icon' | 'Sheet' = "Icon";
   
   ionContent: IonContent;
 
@@ -32,6 +32,8 @@ export class MiscService {
   usedBulkSelectEditAll: boolean;
 
   considerStatusSorting: boolean = true;
+
+  includeNonTechShips: boolean = false;
 
   constructor(
     private settingsData: SettingsDataService,

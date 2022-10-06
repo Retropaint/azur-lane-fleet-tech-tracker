@@ -1,9 +1,9 @@
 <div style="text-align: center; transform: translateY(4px);">
   <app-quick-tech-view></app-quick-tech-view>
 
-  <div class="container isMobile-{{misc.isMobile}}">
+  <div class="container" [ngClass]="{'desktop' : !misc.isMobile}">
     <!-- header row -->
-    <div class="row isMobile-{{misc.isMobile}}">
+    <div class="row" [ngClass]="{'mobile' : misc.isMobile}">
       <div class="category-header ship-name border" style="color: white" title="Click to edit category">Ship</div>
       <div class="category-header stat header border tech-stat" title="Ships give these corresponding stats and their count at lv. 120">Stat</div>
       <div class="category-header level header border level" title="Click to change every ship's level in this category">Lv.</div>

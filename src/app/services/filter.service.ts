@@ -29,6 +29,7 @@ export class FilterService {
     "ASW": false,
     "EVA": false, 
     "HP": false,
+    "No Tech": false,
     "All": true
   }
 
@@ -194,9 +195,17 @@ export class FilterService {
   }
 
   genericFilterCheck(ship: Ship, filterType: any, shipProperty: string): boolean {
+    if(shipProperty == 'techStat' && ship.techStat == null) {
+      if(filterType.All || filterType['No Tech']) {
+        return true;
+      } else {
+        return false;
+      }
+    } 
+
     let hasQualified = false;
     Object.keys(filterType).forEach(filter => {
-      if(filterType.All || filterType[filter] && ship[shipProperty] == filter) {
+      if(filterType.All || filterType['Has Tech'] || filterType[filter] && ship[shipProperty] == filter) {
         hasQualified = true;
         return;
       }
@@ -228,6 +237,27 @@ export class FilterService {
 
     if(this.oneSelectedHull != null && this.oneSelectedStat != null) {
       this.shipService.quickTechView(this.oneSelectedStat, this.oneSelectedHull);
+    }
+
+    if(filterType == this.stats) {
+      if(this.stats['Has Tech'] && this.stats['No Tech']) {
+        Object.keys(this.stats).forEach(stat => {
+          this.stats[stat] = false;
+        })
+        this.stats['All'] = true;
+        this.filter();
+        return;
+      }
+
+      if(name != 'Has Tech' && name != 'No Tech') {
+        this.stats['Has Tech'] = false;
+      } else if(name == 'Has Tech') {
+        Object.keys(this.stats).forEach(stat => {
+          if(stat != 'Has Tech' && stat != 'No Tech') {
+            this.stats[stat] = false;
+          }
+        })
+      }
     }
 
     this.filter();

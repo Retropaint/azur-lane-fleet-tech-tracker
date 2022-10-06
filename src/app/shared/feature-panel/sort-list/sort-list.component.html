@@ -1,7 +1,7 @@
 <div class="container">
   <p class="generic-text {{misc.isMobile ? 'no-bottom-margin' : 'inline-block'}}">Sort: </p>
   
-  <div *ngFor="let type of types; index as i" class="generic-big-button unselected sort-button isMobile-{{misc.isMobile}}" (click)="sort(type)" [title]="'Sort by ' + type.toLowerCase() + (!sortService.isAscending[type] ? ' (ascending)' : ' (descending)') + (type=='Level' ? '\n*Future level changes will be instantly sorted until another sort type is used' : '')">
+  <div *ngFor="let type of types; index as i" class="generic-big-button unselected sort-button" [ngClass]="{'mobile' : misc.isMobile}" (click)="sort(type)" [title]="'Sort by ' + type.toLowerCase() + (!sortService.isAscending[type] ? ' (ascending)' : ' (descending)') + (type=='Level' ? '\n*Future level changes will be instantly sorted until another sort type is used' : '')">
     <!-- little squares to the top side -->
     <div class="generic-big-button-square left"></div>
     <div class="generic-big-button-square right"></div>

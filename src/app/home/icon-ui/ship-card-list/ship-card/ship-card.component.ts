@@ -35,6 +35,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     "HIT": 16,
     "AVI": 17,
     "RLD": 15,
+    null: 0
   };
 
   constructor(

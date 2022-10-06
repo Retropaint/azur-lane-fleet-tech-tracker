@@ -89,7 +89,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     await this.storage.set("ship-card-size", this.inputShipCardSize);
     
     await this.settingsData.refresh().then(() => {
-      this.misc.uiMode = this.settingsData.settings['ui-mode'];
+      this.misc.uiMode = <"Icon" | 'Sheet'>this.settingsData.settings['ui-mode'];
       this.misc.setCardSize();
     })
 

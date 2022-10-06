@@ -1,6 +1,6 @@
-<div class="cog-and-tech isMobile-{{misc.isMobile}}-{{misc.uiMode}}">
+<div class="cog-and-tech" [ngClass]="{'mobile' : misc.isMobile && misc.uiMode == 'Icon', 'sheet' : misc.uiMode == 'Sheet'}">
   <!-- cog chip text -->
-  <img alt="Cog chips" src="assets/Cog Chip.png" class="cog-image"/> <p title="Cognitive chips required to awaken all WIP (Work in progress) ships to 120" class="generic-text inline-block"> Required: {{shipsService.cogReqs}}</p>
+  <img alt="Cog chips" src="assets/Cog Chip.png" class="cog-image"/> <p title="Cognitive chips required to awaken all WIP (Work in progress) ships to 120" class="generic-text inline-block cog-text"> Required: {{shipsService.cogReqs}}</p>
   
   <!-- separator -->
   <div style="display: inline-block; margin-right: 20px"></div>
