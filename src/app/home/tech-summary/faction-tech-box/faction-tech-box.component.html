@@ -2,8 +2,7 @@
   <div class="name">{{fullFactionName}}</div>
   <div class="level-container">
     <p class="level Lv">Lv.</p>
-    <p class="level number" *ngIf="level != 0">{{level}}</p>
-    <p class="level number" *ngIf="level == 0">?</p>
+    <p class="level number">{{level}}</p>
   </div>
   <img [alt]="fullFactionName" class="faction-img" src="assets/icons/unselected faction icons/{{shortenedNames.factions[fullFactionName]}}.png"/>
   <div class="selected-bulge">

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { Subscription } from 'rxjs';
 import { ShipCardListComponent } from '../home/icon-ui/ship-card-list/ship-card-list.component';
 import { Ship } from '../interfaces/ship';
 import { SettingsDataService } from './settings-data.service';

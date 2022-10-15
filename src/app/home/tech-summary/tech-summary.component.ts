@@ -22,6 +22,7 @@ export class TechSummaryComponent implements OnInit {
   viewingFaction: string;
 
   viewingFactionStats: any;
+  viewingFactionLevel: number;
   ussStats = {};
   hmsStats = {};
   ijnStats = {};
@@ -57,7 +58,7 @@ export class TechSummaryComponent implements OnInit {
     // load levels and respective faction stats
     const factions = ['USS', 'HMS', 'IJN', 'KMS']
     for(const faction of factions) {
-      this.levels[faction] = await this.storage.get(faction) || 1;
+      this.levels[faction] = await this.storage.get(faction) || 0;
       this.factionTechData.getTotalStats(faction, this.levels[faction]);
       this.getFactionTech(faction, this.levels[faction]);
     }
@@ -106,7 +107,17 @@ export class TechSummaryComponent implements OnInit {
     this.getTotalStats();
   }
 
-  openFactionTech(fullFaction: string) {
+  async openFactionTech(fullFaction: string) {
+    // open level editor if faction level is 0
+    const level = await this.storage.get(this.shortenedNames.factions[fullFaction])
+    this.viewingFactionLevel = level;
+    if(!level || level == 0) {
+      this.viewingFaction = fullFaction;
+      this.setViewingFactionStats();
+      this.changeLevel();
+      return;
+    }
+
     if(this.viewingFaction == fullFaction) {
       this.viewingFaction = null;
     } else {
@@ -129,6 +140,7 @@ export class TechSummaryComponent implements OnInit {
         const shortFaction = this.shortenedNames.factions[this.viewingFaction]
 
         this.levels[shortFaction] = value.data;
+        this.viewingFactionLevel = value.data;
         this.storage.set(shortFaction, value.data);
         this.getFactionTech(shortFaction, this.levels[shortFaction]);
         this.setViewingFactionStats();
@@ -170,21 +182,22 @@ export class TechSummaryComponent implements OnInit {
     this.totalStats = {};
     
     const stats = [this.ussStats, this.hmsStats, this.ijnStats, this.kmsStats, this.obtainStats, this.techStats];
-    stats.forEach(faction => {
-      Object.keys(faction).forEach(hull => {
+    stats.forEach(statSet => {
+      if(Object.keys(statSet).length == 0) {
+        return;
+      }
+      Object.keys(statSet).forEach(hull => {
         if(hull == 'DDG') {
           return;
         }
         if(this.totalStats[hull] == null) {
-          if(this.totalStats[hull] == null) {
-            this.totalStats[hull] = {};
-          }
+          this.totalStats[hull] = {};
         }
-        Object.keys(faction[hull]).forEach(stat => {
+        Object.keys(statSet[hull]).forEach(stat => {
           if(this.totalStats[hull][stat] == null) {
-            this.totalStats[hull][stat] = faction[hull][stat]
+            this.totalStats[hull][stat] = statSet[hull][stat]
           } else {
-            this.totalStats[hull][stat] += faction[hull][stat]
+            this.totalStats[hull][stat] += statSet[hull][stat]
           }
         })
       })

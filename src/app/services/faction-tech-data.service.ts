@@ -703,6 +703,9 @@ export class FactionTechDataService {
   }
 
   getTotalStats(faction: string, level) {
+    if(level == 0) {
+      return {};
+    }
     let factionData = null;
     let factionStats = {};
     switch(faction) {

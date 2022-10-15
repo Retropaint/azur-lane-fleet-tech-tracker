@@ -22,6 +22,7 @@ import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning
 import { SharedModule } from '../shared/shared.module';
 import { QuickTechViewComponent } from './quick-tech-view/quick-tech-view.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     HomePageRoutingModule,
     SharedModule,
     ScrollingModule,
+    LoadingBarHttpClientModule
   ],
   declarations: [
     HomePage, 

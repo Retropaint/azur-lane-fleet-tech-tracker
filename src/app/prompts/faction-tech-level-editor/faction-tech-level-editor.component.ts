@@ -31,7 +31,7 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     const shortenedName = this.shortenedNamesService.factions[this.fullFactionName]
     this.maxLevel = this.factionTechData.maxLevels[shortenedName];
-    this.sliderLevel = await this.storage.get(shortenedName) || 1;
+    this.sliderLevel = await this.storage.get(shortenedName) || 0;
 
     setTimeout(() => {
       this.input.nativeElement.focus()
