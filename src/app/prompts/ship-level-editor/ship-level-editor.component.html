@@ -38,6 +38,11 @@
 
       <!-- 120 text-->
       <p class="prompt text maxed-text" *ngIf="wasSlider && level >= 120 || !wasSlider && textLevel >= 120">*Marked as Complete and pushed down the list.</p>
+
+      <!-- 100 text-->
+      <ng-container *ngIf="isMainFaction">
+        <p class="prompt text maxed-text" *ngIf="wasSlider && level >= 70 || !wasSlider && textLevel >= 70">*Considered max limit-broken for {{ship.faction}} tech points.</p>
+      </ng-container>
     
     </div>
   </div>

@@ -15,6 +15,11 @@ export interface Ship {
   retroHull: string;
   isObtained: boolean;
   obtainAppliedHulls?: string[];
+  techPoints?: {
+    obtain: number;
+    maxLimitBreak: number;
+    maxLevel: number;
+  }
 
   // all vars below are used for code purposes and are not actual properties
 

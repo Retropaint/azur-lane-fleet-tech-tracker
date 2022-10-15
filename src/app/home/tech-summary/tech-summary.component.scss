@@ -12,6 +12,11 @@
   margin-bottom: 10px;
 }
 
+.faction-box-container {
+  display: flex;
+  justify-content: center;
+}
+
 .change-level {
   position: absolute;
   right: 200px;

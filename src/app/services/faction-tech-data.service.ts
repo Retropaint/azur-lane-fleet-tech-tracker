@@ -675,6 +675,45 @@ export class FactionTechDataService {
     },
   }
 
+  requiredFactionTechPoints = { 
+    1: {
+      all: 300,
+      kms: 450
+    },
+    2: {
+      all: 600,
+      kms: 900
+    },
+    3: {
+      all: 900,
+      kms: 1350
+    },
+    4: {
+      all: 1200,
+      kms: 1800
+    },
+    5: {
+      all: 1500,
+      kms: 2250
+    },
+    6: {
+      all: 1800,
+      kms: 2700
+    },
+    7: {
+      all: 2100,
+      kms: 3150
+    },
+    8: {
+      all: 2400,
+      kms: 3600
+    },
+    9: {
+      all: 2700,
+      kms: 4050
+    }
+  }
+
   maxLevels = {};
   levels = {};
 

@@ -60,3 +60,18 @@
   border-right-width: 0;
   border-image: linear-gradient(to bottom right, #CEEEF7 0%, #38547A 50%) 1 stretch;
 }
+
+.tech-points-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+
+  .img {
+    width: 30px;
+  }
+
+  p {
+    margin: 0px;
+  }
+}

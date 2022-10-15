@@ -99,6 +99,11 @@ export class AzurapiService {
                 obtainBonus: parseInt(obtainFleetTech["bonus"][1]),
                 retroHull: this.shortenedNames.hulls[ship['retrofitHullType']],
                 obtainAppliedHulls: obtainFleetTech['applicable'],
+                techPoints: {
+                  obtain: ship['fleetTech']['techPoints']['collection'],
+                  maxLevel: ship['fleetTech']['techPoints']['maxLevel'],
+                  maxLimitBreak: ship['fleetTech']['techPoints']['maxLimitBreak']
+                }
               }
             } else {
               newShip = {
@@ -136,6 +141,7 @@ export class AzurapiService {
             //ids.push(newShip.id);
           }
         })
+        console.log(this.shipsService.ships)
         this.shipsService.save();
       })
   }

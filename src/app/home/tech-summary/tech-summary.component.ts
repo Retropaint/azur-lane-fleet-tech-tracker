@@ -39,6 +39,13 @@ export class TechSummaryComponent implements OnInit {
     "KMS": 0
   }
 
+  techPoints = {
+    "USS": 0,
+    "HMS": 0,
+    "IJN": 0,
+    "KMS": 0
+  }
+
   folded = {
     "total": false,
     "max": false,
@@ -71,6 +78,10 @@ export class TechSummaryComponent implements OnInit {
 
       // obtain
       if(ship.isObtained) {
+        if(this.techPoints[ship.faction] != null) {
+          this.techPoints[ship.faction] += ship.techPoints.obtain;
+        }
+
         ship.appliedHulls.forEach(hull => {
           if(hull == 'DDG') {
             return;
@@ -86,8 +97,18 @@ export class TechSummaryComponent implements OnInit {
         })
       }
 
+      if(ship.level >= 70) {
+        if(this.techPoints[ship.faction] != null) {
+          this.techPoints[ship.faction] += ship.techPoints.maxLimitBreak;
+        }
+      }
+
       // max
       if(ship.isObtained && ship.level >= 120) {
+        if(this.techPoints[ship.faction] != null) {
+          this.techPoints[ship.faction] += ship.techPoints.maxLevel;
+        }
+
         ship.appliedHulls.forEach(hull => {
           if(hull == 'DDG') {
             return;
@@ -103,6 +124,8 @@ export class TechSummaryComponent implements OnInit {
         })
       }
     })
+
+    console.log(this.techPoints)
 
     this.getTotalStats();
   }
@@ -132,6 +155,7 @@ export class TechSummaryComponent implements OnInit {
       animated: false,
       componentProps: {
         "fullFactionName": this.viewingFaction,
+        "techPoints": this.techPoints[this.shortenedNames.factions[this.viewingFaction]]
       }
     })
     modal.present();

@@ -1,10 +1,12 @@
 <div class="container" [ngClass]="{'desktop' : !misc.isMobile}">
   <div *ngIf="misc.isMobile" style="height: 10px;"></div>
 
-  <app-faction-tech-box fullFactionName="Eagle Union" [level]="levels['USS']" (click)="openFactionTech('Eagle Union')"></app-faction-tech-box>
-  <app-faction-tech-box fullFactionName="Royal Navy" [level]="levels['HMS']" (click)="openFactionTech('Royal Navy')"></app-faction-tech-box>
-  <app-faction-tech-box fullFactionName="Sakura Empire" [level]="levels['IJN']" (click)="openFactionTech('Sakura Empire')"></app-faction-tech-box>
-  <app-faction-tech-box fullFactionName="Iron Blood" [level]="levels['KMS']" (click)="openFactionTech('Iron Blood')"></app-faction-tech-box>
+  <div class="faction-box-container">
+    <app-faction-tech-box fullFactionName="Eagle Union" [level]="levels['USS']" [techPoints]="techPoints['USS']" (click)="openFactionTech('Eagle Union')"></app-faction-tech-box>
+    <app-faction-tech-box fullFactionName="Royal Navy" [level]="levels['HMS']" [techPoints]="techPoints['HMS']" (click)="openFactionTech('Royal Navy')"></app-faction-tech-box>
+    <app-faction-tech-box fullFactionName="Sakura Empire" [level]="levels['IJN']" [techPoints]="techPoints['IJN']" (click)="openFactionTech('Sakura Empire')"></app-faction-tech-box>
+    <app-faction-tech-box fullFactionName="Iron Blood" [level]="levels['KMS']" [techPoints]="techPoints['KMS']" (click)="openFactionTech('Iron Blood')"></app-faction-tech-box>
+  </div>
   
   <!-- viewing faction tech -->
   <div *ngIf="viewingFaction != null && viewingFactionLevel > 0" class="faction-tech-container">

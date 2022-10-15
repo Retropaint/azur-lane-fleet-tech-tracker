@@ -7,12 +7,13 @@ import { ShortenedNamesService } from 'src/app/services/shortened-names.service'
 @Component({
   selector: 'app-faction-tech-box',
   templateUrl: './faction-tech-box.component.html',
-  styleUrls: ['./faction-tech-box.component.scss'],
+  styleUrls: ['./faction-tech-box.component.scss', '../../home.page.scss'],
 })
 export class FactionTechBoxComponent implements OnInit {
 
   @Input() fullFactionName: string;
   @Input() level: number
+  @Input() techPoints: number
 
   constructor(
     public shortenedNames: ShortenedNamesService,

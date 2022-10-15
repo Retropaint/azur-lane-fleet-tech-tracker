@@ -18,6 +18,9 @@
      <form (ngSubmit)="done()">
        <input #input maxlength="3" title="Enter level as an input field" class="prompt-input centered" (blur)="updateSlider()" [value]="sliderLevel" [(ngModel)]="textLevel" (ngModelChange)="changeLastInput(false)" name="this is for the form"/>
      </form>
+
+     <p class="prompt text tech-point-warning"> {{missingTechPoints == 0 ? ' ' : 'You need ' + missingTechPoints + ' more tech points to unlock it in-game!'}} </p>
+
   </div>
 </div>
 

@@ -22,6 +22,7 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   textLevel: number;
   wasSlider: boolean;
   isObtained: boolean;
+  isMainFaction: boolean = false;
 
   @ViewChild('input') input: ElementRef;
 
@@ -50,6 +51,11 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
       this.level = 1;
       this.isObtained = false;
       this.name = 'bulk select'
+    }
+
+    switch(this.ship.faction) {
+      case 'USS': case 'HMS': case 'KMS': case 'IJN':
+        this.isMainFaction = true;
     }
 
     setTimeout(() => {
