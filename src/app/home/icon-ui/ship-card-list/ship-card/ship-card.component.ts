@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonInput, ModalController } from '@ionic/angular';
 import { Ship } from 'src/app/interfaces/ship';
@@ -43,11 +44,12 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     public hoverTitles: HoverTitlesService,
     public misc: MiscService,
     private shipsService: ShipsService,
-    private settingsData: SettingsDataService
+    private settingsData: SettingsDataService,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
-    this.imageSrc = this.getImageSrc();
+    this.getFallbackThumbnail();
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
   }
 
