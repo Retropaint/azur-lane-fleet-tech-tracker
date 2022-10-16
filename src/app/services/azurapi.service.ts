@@ -31,7 +31,6 @@ export class AzurapiService {
 
     this.httpClient.get("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json", {reportProgress: true})
       .subscribe((ships: any) => {
-        console.log(ships)
         ships.forEach(async ship => {
         
           // only accept ships with a max level fleet tech bonus
@@ -141,7 +140,6 @@ export class AzurapiService {
             //ids.push(newShip.id);
           }
         })
-        console.log(this.shipsService.ships)
         this.shipsService.save();
       })
   }
