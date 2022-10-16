@@ -88,16 +88,16 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
           console.log(i)
           this.missingTechPoints += this.factionTechData.requiredFactionTechPoints[i]['all'];
         }
+        this.missingTechPoints -= this.techPoints;
       }
-      this.missingTechPoints -= this.techPoints;
     } else {
       const requiredPoints = this.factionTechData.requiredFactionTechPoints[level]['kms']
       if(this.techPoints < requiredPoints) {
         for(let i = 1; i < level+1; i++) {
           this.missingTechPoints += this.factionTechData.requiredFactionTechPoints[i]['kms'];
         }
+        this.missingTechPoints -= this.techPoints;
       }
-      this.missingTechPoints -= this.techPoints;
     }
 
   }

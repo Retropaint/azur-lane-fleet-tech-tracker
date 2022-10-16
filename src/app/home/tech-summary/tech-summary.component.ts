@@ -72,7 +72,7 @@ export class TechSummaryComponent implements OnInit {
 
     // get obtain and collection stats
     this.shipsService.ships.forEach(ship => {
-      if(ship.techStat == null) {
+      if(ship.obtainStat == null) {
         return;
       }
 
@@ -82,7 +82,7 @@ export class TechSummaryComponent implements OnInit {
           this.techPoints[ship.faction] += ship.techPoints.obtain;
         }
 
-        ship.appliedHulls.forEach(hull => {
+        ship.obtainAppliedHulls.forEach(hull => {
           if(hull == 'DDG') {
             return;
           }
@@ -124,8 +124,6 @@ export class TechSummaryComponent implements OnInit {
         })
       }
     })
-
-    console.log(this.techPoints)
 
     this.getTotalStats();
   }

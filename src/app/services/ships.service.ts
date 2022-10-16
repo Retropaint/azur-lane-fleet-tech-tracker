@@ -181,6 +181,7 @@ export class ShipsService {
         return;
       }
       if(ship.isObtained || !checkShipReqs) {
+        
         ship.obtainAppliedHulls.forEach(appliedHull => {
           if(appliedHull == hull) {
             if(ship.obtainStat == stat) {

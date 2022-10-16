@@ -40,8 +40,16 @@ export class FeaturePanelComponent {
   }
 
   selectAllShips() {
+    let allShips = true;
+    for(let toggle of Object.keys(this.misc.shipsFilterPass)) {
+      if(this.misc.shipsFilterPass[toggle]) {
+        allShips = false;
+        break;
+      }
+    }
+
     this.shipsService.ships.forEach(ship => {
-      if(this.misc.shipsFilterPass[ship.id]) {
+      if(this.misc.shipsFilterPass[ship.id] || allShips) {
         ship.isBulkSelected = true;
         this.misc.bulkSelected.push(ship);
       }

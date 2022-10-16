@@ -53,9 +53,11 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
       this.name = 'bulk select'
     }
 
-    switch(this.ship.faction) {
-      case 'USS': case 'HMS': case 'KMS': case 'IJN':
-        this.isMainFaction = true;
+    if(!this.isBulk) {
+      switch(this.ship.faction) {
+        case 'USS': case 'HMS': case 'KMS': case 'IJN':
+          this.isMainFaction = true;
+      }
     }
 
     setTimeout(() => {
