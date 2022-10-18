@@ -22,6 +22,6 @@ export class SheetCategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+    this.filter.filter();
   }
 }

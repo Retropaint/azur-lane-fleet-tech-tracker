@@ -22,6 +22,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   flashCSS: 'in' | 'out' = 'out';
   rarity: string;
   hull: string;
+  loadedImage: boolean = false;
 
   @Input() ship: Ship = null;
   @Input() currentCategory: string;
@@ -49,7 +50,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.getFallbackThumbnail();
+    this.imageSrc = this.getImageSrc();
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
   }
 
@@ -71,7 +72,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
   getImageSrc() {
     if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-forms'] == 'Yes') {
-      return 'assets/ship thumbnails/retrofits/' + this.ship.id + '.webp';
+      return 'assets/ship thumbnails/' + (parseInt(this.ship.id) + 3000) + '.webp';
     } else {
       return 'assets/ship thumbnails/' + this.ship.id + '.webp';
     }

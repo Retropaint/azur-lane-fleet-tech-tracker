@@ -17,15 +17,21 @@
     <ion-icon *ngIf="ship.level >= 120" name="checkmark-outline" class="done-checkmark"></ion-icon>
   </div>
 
-  <!-- flash (appears after level edit)
-       - doesn't work due to how the list is refreshed
-  <div class="flash {{ship.isEdited}}"></div>
-  -->
-
   <!-- name -->
   <p class="ship-name-text">{{ship.name}}</p>
 
-  <!-- image -->
-  <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail ship-rarity-{{getRarity()}}"/>
-  <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="imageSrc" (error)="getFallbackThumbnail()" class="ship-thumbnail UR-or-decisive"/>
+  <!-- invisible image to check if ship image exists locally and gets fallback if required -->
+  <img *ngIf="!loadedImage" [src]="imageSrc" (error)="getFallbackThumbnail()" (load)="loadedImage = true" style="display: none"/>
+  
+  <!-- placeholder image while invis image processes -->
+  <ng-container *ngIf="!loadedImage">
+    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" class="ship-thumbnail ship-rarity-{{getRarity()}}" src="assets/noship.png"/>
+    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" class="ship-thumbnail UR-or-decisive" src="assets/noship.png"/>
+  </ng-container>
+
+  <!-- actual image -->
+  <ng-container *ngIf="loadedImage">
+    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="imageSrc" class="ship-thumbnail ship-rarity-{{getRarity()}}"/>
+    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="imageSrc" class="ship-thumbnail UR-or-decisive"/>
+  </ng-container>
 </div>

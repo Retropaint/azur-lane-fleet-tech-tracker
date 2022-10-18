@@ -33,6 +33,7 @@
   grid-template-columns: 6fr 0fr 0fr 0fr;
   position: relative;
   will-change: transform;
+  border-right: 1px solid white;
   cursor: pointer;
 
   &.unobtained {

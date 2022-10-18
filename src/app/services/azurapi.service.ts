@@ -135,9 +135,17 @@ export class AzurapiService {
             }
   
             this.shipsService.ships.push(newShip);
-            //let name = newShip.name.replace(/\s/g, "_");
-            //names.push(name);
-            //ids.push(newShip.id);
+            /*
+            let name = encodeURI(newShip.name).replace(/%20/g, '_');
+            names.push(name);
+            ids.push(newShip.id);
+            
+            if(newShip.hasRetrofit) {
+              names.push(name + 'Kai')
+              const retroId = parseInt(newShip.id) + 3000
+              ids.push(retroId.toString());
+            }
+            */
           }
         })
         this.shipsService.save();

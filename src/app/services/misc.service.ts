@@ -15,7 +15,7 @@ export class MiscService {
   
   techMode: string = 'ship'; 
   techModeString: string = "Tech Summary";
-  uiMode: 'Icon' | 'Sheet' = "Icon";
+  uiMode: 'Icon' | 'Sheet' = null;
   
   ionContent: IonContent;
 
