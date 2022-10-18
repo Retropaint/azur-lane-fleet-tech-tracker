@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FilterService } from 'src/app/services/filter.service';
 import { MiscService } from 'src/app/services/misc.service';
 
@@ -24,7 +24,7 @@ export class FilterButtonComponent implements OnInit {
   constructor(
     private filter: FilterService, 
     private misc: MiscService
-    ) { }
+  ) { }
 
   ngOnInit() {
     if(this.filterName == 'No Tech' || this.filterName == 'Has Tech' || this.filterName == 'All') {
@@ -33,10 +33,17 @@ export class FilterButtonComponent implements OnInit {
     }
   }
 
+  ionViewWillEnter() {
+    console.log('l')
+  }
+
   clickedFilterButton() {
     if(!this.misc.isMobile) {
       this.misc.scrollUp();
     }
     this.filter.pressedFilter(this.filterName, this.filterType);
+  }
+
+  test() {
   }
 }

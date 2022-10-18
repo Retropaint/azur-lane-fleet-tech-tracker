@@ -16,6 +16,6 @@ export class SheetUIComponent {
     public filter: FilterService,
     public shipsService: ShipsService,
     public app: AppComponent,
-    public misc: MiscService  
+    public misc: MiscService
   ) {}
 }

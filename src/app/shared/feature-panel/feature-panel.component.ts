@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, NgZone, OnInit } from '@angular/core';
 import { MenuController, ModalController } from '@ionic/angular';
 import { ShipLevelEditorComponent } from 'src/app/prompts/ship-level-editor/ship-level-editor.component';
 import { FilterService } from 'src/app/services/filter.service';
@@ -14,11 +14,14 @@ export class FeaturePanelComponent {
 
   @Input() uiMode: string;
 
+  timeout: any;
+
   constructor(
     public misc: MiscService,
     private modalController: ModalController,
     private shipsService: ShipsService,
-    private menuController: MenuController
+    private menuController: MenuController,
+    private ngZone: NgZone
   ) { }
 
   toggleBulkSelect() {

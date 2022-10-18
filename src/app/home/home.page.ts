@@ -6,6 +6,7 @@ import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning
 import { MiscService } from '../services/misc.service';
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
 import { PromptService } from '../services/prompt.service';
+import { AzurapiService } from '../services/azurapi.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements AfterViewInit {
     public shipsService: ShipsService,
     public misc: MiscService,
     private menuController: MenuController,
-    private prompt: PromptService
+    private prompt: PromptService,
+    public azurapi: AzurapiService
   ) {}
 
   async ngAfterViewInit() {

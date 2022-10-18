@@ -12,6 +12,7 @@ import { SortService } from './sort.service';
 export class AzurapiService {
 
   filteredOtherShips: any[] = [];
+  hasLoaded: boolean = false;
 
   constructor(
     private storage: Storage, 
@@ -148,6 +149,9 @@ export class AzurapiService {
             */
           }
         })
+        setTimeout(() => {
+          this.hasLoaded = true;
+        }, 0);
         this.shipsService.save();
       })
   }

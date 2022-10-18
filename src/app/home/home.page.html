@@ -42,7 +42,7 @@
     </div>
 
     <!-- feature panel & UI mode to display-->
-    <ng-container *ngIf="shipsService.ships.length != 0">
+    <div [ngClass]="{'not-loaded' : !azurapi.hasLoaded}">
 
       <!-- ship database -->
       <ng-container *ngIf="misc.techMode == 'ship'">
@@ -52,10 +52,8 @@
 
       <!-- tech summary -->
       <app-tech-summary *ngIf="misc.techMode == 'stat'" style="text-align: center"></app-tech-summary>
-    </ng-container>
+    </div>
 
-    <ng-container *ngIf="shipsService.ships.length == 0">
-      <p class="generic-text centered">Loading...</p>
-    </ng-container>
+    <p class="generic-text centered" *ngIf="!azurapi.hasLoaded">Loading...</p>
   </div>
 </ion-content>

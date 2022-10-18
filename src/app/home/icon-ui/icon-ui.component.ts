@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MiscService } from 'src/app/services/misc.service';
+import { ShipsService } from 'src/app/services/ships.service';
 
 @Component({
   selector: 'app-icon-ui',
@@ -7,5 +8,8 @@ import { MiscService } from 'src/app/services/misc.service';
   styleUrls: ['./icon-ui.component.scss', '../home.page.scss'],
 })
 export class IconUIComponent {
-  constructor(public misc: MiscService) {}
+  constructor(
+    public misc: MiscService,
+    public shipsService: ShipsService
+  ) {}
 }

@@ -22,7 +22,7 @@
 }
 
 .header {
-  transform: translateX(-10px) rotate(-90deg);
+  transform: rotate(-90deg);
   margin-bottom: 0;
   pointer-events: visible;
   pointer-events: none;
@@ -46,7 +46,7 @@
     position: absolute;
     width: 70px;
     height: 185px;
-    transform: translate(40px, -100px);
+    transform: translate(50px, -100px);
     z-index: -1;
     overflow-y: hidden;
     border-left: 2px solid #40537E;
