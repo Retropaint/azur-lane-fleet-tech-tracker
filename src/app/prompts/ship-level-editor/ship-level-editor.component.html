@@ -39,7 +39,7 @@
       <!-- 120 text-->
       <p class="prompt text maxed-text" *ngIf="getFinalLevel() >= 120">Marked as Complete and pushed down the list.</p>
       
-      <p class="prompt text maxed-text" *ngIf="getFinalLevel() >= 100 && getFinalLevel() < 120 && getFinalLevel() %5 == 0">Considered awoken. Cognitive chips will not be counted for this level.</p>
+      <p class="prompt text maxed-text" *ngIf="getFinalLevel() >= 100 && getFinalLevel() < 120 && getFinalLevel() %5 == 0">Considered awakened. Cognitive chips will not be counted for this level.</p>
 
       <!-- 100 text-->
       <ng-container *ngIf="isMainFaction && wasSlider && level < 100 || isMainFaction && !wasSlider && textLevel < 100">
