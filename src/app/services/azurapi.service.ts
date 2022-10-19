@@ -149,9 +149,7 @@ export class AzurapiService {
             */
           }
         })
-        setTimeout(() => {
-          this.hasLoaded = true;
-        }, 0);
+        this.hasLoaded = true;
         this.shipsService.save();
       })
   }
