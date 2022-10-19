@@ -26,14 +26,16 @@ export class SortService {
 
   constructor(private shipsService: ShipsService, private misc: MiscService) {}
 
-  sort(type: string, keepState: boolean = false) {
+  sort(type: string, keepState: boolean = false, refreshList: boolean = true) {
     this.lastType = type;
 
     if(!keepState) {
       this.isAscending[type] = !this.isAscending[type];
     }
 
-    this.misc.refreshIconList();
+    if (refreshList) {
+      this.misc.refreshIconList();
+    }
   }
 
   immediateSort(array: Ship[]) {

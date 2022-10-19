@@ -58,9 +58,9 @@ export class AppComponent implements OnInit {
       document.documentElement.style.setProperty('--dead-zone-margin', "200px");
     }
 
-    this.azurapi.init(true).then(() => {
-      this.sort.sort("Name");
-      this.filter.filter();
+    this.azurapi.init().then(() => {
+      this.sort.sort("Name", false, false);
+      this.filter.init();
     })
     
     window.addEventListener('focus', () => {

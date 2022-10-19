@@ -83,15 +83,12 @@ export class FilterService {
   }
 
   filter() {
-    // reset shipsFilterPass
-    Object.keys(this.misc.shipsFilterPass).forEach(id => {
-      this.misc.shipsFilterPass[id] = false;
-    })
-
     // assign shipsFilterPass
     this.shipService.ships.forEach(ship => {
       if(this.passesCriteria(ship)) {
         this.misc.shipsFilterPass[ship.id] = true;
+      } else {
+        this.misc.shipsFilterPass[ship.id] = false;
       }
     })
 

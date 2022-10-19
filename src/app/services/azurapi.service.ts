@@ -5,6 +5,7 @@ import { Ship } from '../interfaces/ship';
 import { ShipsService } from './ships.service';
 import { ShortenedNamesService } from './shortened-names.service';
 import { SortService } from './sort.service';
+import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class AzurapiService {
     private httpClient: HttpClient
   ) {}
 
-  async init(isRetrieving: boolean = false) {
+  async init() {
     // reset ships
     this.shipsService.ships = [];
     
@@ -30,9 +31,10 @@ export class AzurapiService {
     let names = [];
     let ids = [];
 
-    this.httpClient.get("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json", {reportProgress: true})
-      .subscribe((ships: any) => {
-        ships.forEach(async ship => {
+    await fetch("https://raw.githubusercontent.com/AzurAPI/azurapi-js-setup/master/dist/ships.json")
+      .then(value => value.text())
+      .then(ships => {
+        JSON.parse(ships).forEach(async ship => {
         
           // only accept ships with a max level fleet tech bonus
           //if(ship["fleetTech"]["statsBonus"]["collection"]) {

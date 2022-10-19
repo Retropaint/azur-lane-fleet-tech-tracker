@@ -95,6 +95,8 @@ export class ShipsService {
       let level = ship.level;
       
       if(shipsFilterPass[id] && level <= 115 && ship.isObtained) {
+
+        // prepare ship level for calculation
         if(level < 100) {
           level = 100;
         } else {
@@ -104,9 +106,16 @@ export class ShipsService {
           }
         }
         
+        // cog calculation
         for(let i = level; i < 120; i += 5) {
-          this.cogReqs += this.cogReqList.data[ship.rarity + " " + level];
-          level += 5;
+          
+          // don't include cogs of exact level
+          if(i == ship.level) {
+            level += 5;
+          } else {
+            this.cogReqs += this.cogReqList.data[ship.rarity + " " + level];
+            level += 5;
+          }
         }
       }
     })
