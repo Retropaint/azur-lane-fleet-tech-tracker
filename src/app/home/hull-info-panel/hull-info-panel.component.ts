@@ -12,7 +12,9 @@ export class HullInfoPanelComponent implements OnInit {
 
   fold: boolean = true;
 
-  constructor(public shipsService: ShipsService) { }
+  constructor(
+    public shipsService: ShipsService
+  ) { }
 
   ngOnInit() {
     this.fold = this.mode == 'Icon';

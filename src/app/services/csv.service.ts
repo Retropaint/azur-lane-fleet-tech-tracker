@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import * as papa from 'papaparse';
 import { Subject } from 'rxjs';
+import { Ship } from '../interfaces/ship';
+import { FilterService } from './filter.service';
+import { MiscService } from './misc.service';
 import { ShipsService } from './ships.service';
+import { SortService } from './sort.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +17,60 @@ export class CsvService {
   importStatusSubject = new Subject<boolean>();
   importStatus = this.importStatusSubject.asObservable(); 
 
-  constructor(private shipsService: ShipsService) { }
+  constructor(
+    private shipsService: ShipsService,
+    private misc: MiscService,
+    private sort: SortService,
+    private filter: FilterService
+  ) { }
 
   export() {
+
+    let shipArray = this.shipsService.ships;
+    if(this.misc.considerStatusSorting) {
+      shipArray = this.shipsService.setAllProperShipPos(this.sort.immediateSort(shipArray));
+    }
+
     // remove unneeded properties from ships
-    let csvShips = [];
-    for(const ship of this.shipsService.ships) {
+    let csvShips: Ship[] = [];
+    shipArray.forEach(ship => {
+      if(!this.misc.shipsFilterPass[ship.id]) {
+        return;
+      }
+
       // prevent referencing the actual ship object
-      let csvShip = JSON.parse(JSON.stringify(ship));
+      let csvShip: any = JSON.parse(JSON.stringify(ship));
 
       delete csvShip.fallbackThumbnail;
       delete csvShip.hasRetrofit;
       delete csvShip.isBulkSelected;
+      delete csvShip.techPoints;
+
+      // add retrofit properties to approriate ships
+      const finalRarity = this.shipsService.getRetroRarity(ship.id)
+      if(csvShip.rarity != finalRarity) {
+        csvShip.rarity = finalRarity;
+        csvShip.name += ' (Retrofit)';
+        csvShip.id = (parseInt(csvShip.id) + 3000).toString();
+      }
+
+      // apply these fields (no clue why they aren't included in the first place)
+      csvShip.faction = ship.faction;
+      csvShip.techStat = ship.techStat;
+      csvShip.techBonus = ship.techBonus;
+      csvShip.obtainStat = ship.obtainStat;
+      csvShip.obtainBonus = ship.obtainBonus;
+      csvShip.appliedHulls = ship.appliedHulls;
+      csvShip.obtainAppliedHulls = ship.obtainAppliedHulls;
+
+      if(ship.techPoints != null) {
+        csvShip.obtainTechPoints = ship.techPoints.obtain;
+        csvShip.techPoints = ship.techPoints.maxLevel;
+        csvShip.mlbTechPoints = ship.techPoints.maxLimitBreak;
+      }
+      
       csvShips.push(csvShip);
-    }
+    })
 
     var csv = papa.unparse(csvShips);
 

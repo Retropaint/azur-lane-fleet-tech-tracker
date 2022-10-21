@@ -138,7 +138,7 @@ export class ShipsService {
   // called by hull info panel
   getAlphabeticalOrder() {
     return this.ships.sort((a: Ship, b: Ship) => {
-      if(a.name > b.name) { 
+      if(a.name > b.name) {
         return 1;
       } else {
         return -1;
