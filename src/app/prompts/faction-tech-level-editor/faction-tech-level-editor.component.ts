@@ -81,23 +81,10 @@ export class FactionTechLevelEditorComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    if(this.fullFactionName != 'Ironblood') {
-      const requiredPoints = this.factionTechData.requiredFactionTechPoints[level]['all']
-      if(this.techPoints < requiredPoints) {
-        for(let i = 1; i < level+1; i++) {
-          console.log(i)
-          this.missingTechPoints += this.factionTechData.requiredFactionTechPoints[i]['all'];
-        }
-        this.missingTechPoints -= this.techPoints;
-      }
-    } else {
-      const requiredPoints = this.factionTechData.requiredFactionTechPoints[level]['kms']
-      if(this.techPoints < requiredPoints) {
-        for(let i = 1; i < level+1; i++) {
-          this.missingTechPoints += this.factionTechData.requiredFactionTechPoints[i]['kms'];
-        }
-        this.missingTechPoints -= this.techPoints;
-      }
+    const type = (this.fullFactionName == 'Ironblood') ? 'kms' : 'all';
+    const requiredPoints = this.factionTechData.requiredFactionTechPoints[level][type]
+    if(this.techPoints < requiredPoints) {
+      this.missingTechPoints = requiredPoints - this.techPoints;
     }
 
   }
