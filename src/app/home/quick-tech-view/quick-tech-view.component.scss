@@ -32,16 +32,20 @@
 
   p {
     margin: 0px;
+    white-space: nowrap;
   }
 }
 
 .quick-tech {
-  display: inline-block;
-  margin-right: 10px;
+  display: inline-flex;
+  align-items: center;
+  margin-right: 15px;
 
   .quick-tech-text {
     margin-left: 5px;
     margin-bottom: 0px;
+    white-space: pre;
+    transform: translateY(3px);
   }
 }
 
