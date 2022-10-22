@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { Ship } from '../interfaces/ship';
+import { LocalShip, Ship } from '../interfaces/ship';
 import { ShipsService } from './ships.service';
 import { ShortenedNamesService } from './shortened-names.service';
 import { SortService } from './sort.service';
@@ -26,7 +26,7 @@ export class AzurapiService {
     // reset ships
     this.shipsService.ships = [];
     
-    let savedShips: Ship[] = await this.storage.get("ships");
+    let savedShips: LocalShip[] = await this.storage.get("ships");
 
     let names = [];
     let ids = [];
@@ -127,11 +127,7 @@ export class AzurapiService {
               for(const savedShip of savedShips) {
                 if(savedShip.id == ship.id) {
                   newShip.level = savedShip.level;
-  
-                  // isObtained wasn't explicitly assigned before, so it may cause errors for older users without this check
-                  if(newShip.isObtained != null) {
-                    newShip.isObtained = savedShip.isObtained;
-                  }
+                  newShip.isObtained = savedShip.isObtained;
                   break;
                 }
               }

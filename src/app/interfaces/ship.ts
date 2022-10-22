@@ -25,3 +25,9 @@ export interface Ship {
 
   isBulkSelected?: boolean;
 }
+
+export interface LocalShip {
+  id: string;
+  level: number;
+  isObtained: boolean;
+}

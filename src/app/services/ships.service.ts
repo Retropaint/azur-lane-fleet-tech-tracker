@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { Ship } from '../interfaces/ship';
+import { LocalShip, Ship } from '../interfaces/ship';
 import { CogReqsService } from './cog-reqs.service';
 import { FactionTechDataService } from './faction-tech-data.service';
 import { HullHierarchyService } from './hull-hierarchy.service';
@@ -36,7 +36,18 @@ export class ShipsService {
   }
 
   save() {
-    this.storage.set("ships", this.ships);
+    let localShips: LocalShip[] = [];
+    this.ships.forEach(ship => {
+      localShips.push(
+        {
+          id: ship.id,
+          level: ship.level,
+          isObtained: ship.isObtained
+        }
+      )  
+    })
+
+    this.storage.set("ships", localShips);
   }
 
   getById(id: string): Ship {
