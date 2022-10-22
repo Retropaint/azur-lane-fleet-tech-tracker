@@ -1,5 +1,4 @@
 .slider {
-  -webkit-appearance: none;
   width: calc(100% - 20px);
   margin-left: 10px;
   margin-right: 10px;
@@ -11,7 +10,6 @@
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
   width: 20px;
   height: 20px;
   background: white;
