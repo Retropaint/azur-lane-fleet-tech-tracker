@@ -7,11 +7,15 @@
   justify-content: center;
 
   &.mobile {
-    margin-bottom: 50px;
+    padding-right: 5px;
+    justify-content: flex-end;
   }
 }
 
 .grid {
   flex-basis: 60%;
-  padding-left: 50px;
+
+  &.desktop {
+    padding-left: 50px;
+  }
 }

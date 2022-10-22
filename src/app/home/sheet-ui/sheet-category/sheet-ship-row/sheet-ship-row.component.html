@@ -1,27 +1,20 @@
-<div #row (click)="enterLevel()" title="Click to edit level" class="row default {{!ship.isObtained ? 'unobtained' : ''}}">
-  <!-- hull icon and ship name-->
-  <div class="ship-name {{getRarity()}} border">
-    <img [alt]="ship.hull" class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
-    {{ship.name}}
-  </div>
+<!-- hull icon and ship name-->
+<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="ship-name {{getRarity()}} border">
+  <img [alt]="ship.hull" class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
+  {{ship.name}}
+</td>
 
-  <div class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle">
-    <!-- tech stat icon -->
-    <img *ngIf="ship.techStat" [alt]="ship.techStat" class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
-    
-    <!-- tech stat bonus -->
-    <div *ngIf="ship.techStat" class="tech-bonus" >+{{ship.techBonus}}</div>
-    
-    <div *ngIf="!ship.techStat" class="tech-bonus none">-</div>
-  </div>
+<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle">
+  <!-- tech stat icon -->
+  <img *ngIf="ship.techStat" [alt]="ship.techStat" class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+  
+  <!-- tech stat bonus -->
+  <div *ngIf="ship.techStat" class="tech-bonus" >+{{ship.techBonus}}</div>
+  
+  <div *ngIf="!ship.techStat" class="tech-bonus none">-</div>
+</td>
 
-  <!-- level -->
-  <div class="level over119-{{ship.level > 119}} border level">{{ship.level}}</div>
-  
-  <!-- flash (appears after level edit)
-       - this works perfectly fine with no virtual scroll implementation but for consistency since the icon's flash is disabled, this is too
-  <div class="flash {{flashCSS}}"></div>
-  -->
-  
-  <div *ngIf="ship.isBulkSelected" class="bulk-select"></div>
-</div>
+<!-- level -->
+<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="level over119-{{ship.level > 119}} border level">{{ship.level}}</td>
+
+<div *ngIf="ship.isBulkSelected" class="bulk-select"></div>

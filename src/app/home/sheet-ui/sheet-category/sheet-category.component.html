@@ -1,17 +1,20 @@
 <div style="text-align: center; transform: translateY(4px);">
   <app-quick-tech-view></app-quick-tech-view>
 
-  <div class="container" [ngClass]="{'desktop' : !misc.isMobile}">
-    <!-- header row -->
-    <div class="row" [ngClass]="{'mobile' : misc.isMobile}">
-      <div class="category-header ship-name border" style="color: white" title="Click to edit category">Ship</div>
-      <div class="category-header stat header border tech-stat" title="Ships give these corresponding stats and their count at lv. 120">Stat</div>
-      <div class="category-header level header border level" title="Click to change every ship's level in this category">Lv.</div>
-    </div>
+  <cdk-virtual-scroll-viewport class="container" [ngClass]="{'mobile' : misc.isMobile}" [itemSize]="30" *ngIf="shipsService.ships">
+    <table style="width: 100%">
+      <tbody>
+        <!-- header row -->
+        <tr class="row" [ngClass]="{'mobile' : misc.isMobile}">
+          <th class="category-header ship border" title="Click to edit category">Ship</th>
+          <th class="category-header stat border" title="Ships give these corresponding stats and their count at lv. 120">Stat</th>
+          <th class="category-header level border" title="Click to change every ship's level in this category">Lv.</th>
+        </tr>
 
-    <!-- ships -->
-    <ng-container *ngFor="let ship of shipsService.setAllProperShipPos(sort.immediateSort(shipsService.ships)); index as i">
-      <app-sheet-ship-row *ngIf="misc.shipsFilterPass[ship.id] == true" [ship]="ship" [category]="category"></app-sheet-ship-row>
-    </ng-container>
-  </div>
+        <ng-container *cdkVirtualFor="let ship of shipsService.setAllProperShipPos(sort.immediateSort(shipsService.ships)); index as i" >
+          <tr class="row" [ngClass]="{'unobtained' : !ship.isObtained}" app-sheet-ship-row *ngIf="misc.shipsFilterPass[ship.id] == true" [ship]="ship" [category]="category"></tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
 </div>

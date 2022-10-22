@@ -2,69 +2,24 @@
   display: inline-block;
   text-align: left;
   overflow-y: auto;
-  width: max-content;
+  height: 80vh;
+  width: 80%;
 
-  &.desktop {
-    height: 80vh;
+  &.mobile {
+    height: 85vh;
+    width: 90vw;
   }
-}
-
-.dropping-left {
-  width: 15px;
-  height: 100%;
-  background: lime;
-  position: absolute;
-  z-index: 1;
-  transform: translateX(-15px);
-}
-
-.dropping-right {
-  width: 15px;
-  height: 100%;
-  background: lime;
-  position: absolute;
-  right: 0;
-  z-index: 1;
-  transform: translateX(15px);
 }
 
 .row {
-  display: grid;
-  grid-template-columns: 6fr 0fr 0fr 0fr;
-  position: relative;
-  will-change: transform;
-  border-right: 1px solid white;
-  height: 29.5px;
-  cursor: pointer;
+  height: 30px;
+  width: 100%;
+  border: 1.5px solid white;
 
   &.unobtained {
     filter: brightness(0.65);
+    border-color: rgb(165, 165, 165);
   }
-
-  &.mobile {
-    grid-template-columns: 1fr 0fr 0fr 0fr;
-  }
-}
-
-.level {
-  width: 40px;
-  text-align: right;
-  background-color: #ff4d4d;
-  height: 100%;
-  position: relative;
-  cursor: pointer;
-
-  &.over119-true {
-    background-color: #49d049;
-  }
-
-  &.header {
-    color: white;
-  }
-}
-
-.level:focus {
-  outline: 5px solid white;
 }
 
 // remove number spinner
@@ -79,13 +34,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .border {
-  border: 1.5px solid white;
   padding: 2px;
-  padding-right: 35px;
-
-  &.level, &.tech-stat {
-    padding-right: 5px;
-  }
 
   &.highlight-top {
     border-top: 5px solid #00ff0f;
@@ -118,18 +67,23 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .adding-from-bottom {
-  border: 1.4px solid #00ff0f; // the border's only purpose is to size the row to be the same as others, hence the same color
-  background: #00ff0f;
-}
-
 .category-header {
   background: #004299;
+  height: 30px;
+  color: white;
+  border: 1.5px solid white;
   cursor: pointer;
 
+  &.ship {
+    padding-left: 5px;
+  }
+
+  &.level {
+    text-align: right;
+  }
+
   &.stat {
-    color: white;
-    width: 50px;
-    cursor: default;
+    text-align: center;
   }
 }
 

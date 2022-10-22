@@ -56,27 +56,10 @@
 
 .tech-stat {
   width: 50px;
-  text-align: right;
+  text-align: center;
   height: 100%;
   position: relative;
-}
-
-.flash {
-  width: 100%;
-  position: absolute;
-  height: 100%;
-  background-color: limegreen;
-  pointer-events: none;
-
-  &.out {
-    transition: background-color 0.5s;
-    background-color: rgba(0, 255, 0, 0);
-  }
-
-  &.in {
-    transition: background-color 0;
-    background-color: rgba(0, 255, 0, 1);
-  }
+  border: 1px solid white;
 }
 
 .bulk-select {
@@ -86,4 +69,30 @@
   pointer-events: none;
   background-color: rgb(255, 255, 255, var(--selected-ship-glow-opacity));
   transition: background-color 2s;
+}
+
+.level {
+  width: 40px;
+  text-align: right;
+  background-color: #ff4d4d;
+  height: 100%;
+  position: relative;
+  border: 1px solid white;
+  cursor: pointer;
+
+  &.over119-true {
+    background-color: #49d049;
+  }
+
+  &.header {
+    color: white;
+  }
+}
+
+td {
+  cursor: pointer;
+
+  &.unobtained {
+    border: 1px solid rgb(165, 165, 165);
+  }
 }

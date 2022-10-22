@@ -1,4 +1,4 @@
 <div #container class="container" [ngClass]="{'mobile' : misc.isMobile}" *ngIf="misc.shipsFilterPass != []">
   <app-feature-panel *ngIf="!misc.isMobile"></app-feature-panel>
-  <app-sheet-category *ngIf="shipsService.ships.length != 0" class="grid"></app-sheet-category>
+  <app-sheet-category *ngIf="shipsService.ships.length != 0" class="grid" [ngClass]="{'desktop' : !misc.isMobile}"></app-sheet-category>
 </div>

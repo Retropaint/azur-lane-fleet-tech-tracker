@@ -10,7 +10,7 @@ import { SettingsDataService } from 'src/app/services/settings-data.service';
 import { MiscService } from 'src/app/services/misc.service';
 
 @Component({
-  selector: 'app-sheet-ship-row',
+  selector: 'app-sheet-ship-row, [app-sheet-ship-row]',
   templateUrl: './sheet-ship-row.component.html',
   styleUrls: ['./sheet-ship-row.component.scss', '../sheet-category.component.scss'],
 })

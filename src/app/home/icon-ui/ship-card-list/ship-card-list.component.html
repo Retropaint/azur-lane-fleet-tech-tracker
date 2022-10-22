@@ -1,13 +1,11 @@
 <app-quick-tech-view></app-quick-tech-view>
 <cdk-virtual-scroll-viewport class="ship-grid" [ngClass]="{'mobile' : misc.isMobile}" [itemSize]="rowHeight" *ngIf="rows.length != 0">
-  <ng-container>
-    <div *cdkVirtualFor="let r of rows" [style]="'height: ' + rowHeight + 'px'">
-      <div *ngFor="let ship of r" class="ship-card-component-container">
-        <!-- loading delay allows all ships to destroy themselves, and restart their fade-->
-        <app-ship-card *ngIf="!isLoading" #ships [ship]="ship"></app-ship-card>
-      </div>
+  <div *cdkVirtualFor="let r of rows" [style]="'height: ' + rowHeight + 'px'">
+    <div *ngFor="let ship of r" class="ship-card-component-container">
+      <!-- loading delay allows all ships to destroy themselves, and restart their fade-->
+      <app-ship-card *ngIf="!isLoading" #ships [ship]="ship"></app-ship-card>
     </div>
-  </ng-container>
+  </div>
 </cdk-virtual-scroll-viewport>
 
 <div class="ship-grid" [ngClass]="{'mobile' : misc.isMobile}" *ngIf="rows.length == 0">
