@@ -1,7 +1,9 @@
 <!-- hull icon and ship name-->
-<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="ship-name {{getRarity()}} border">
+
+<td (click)="enterLevel()"  class="ship-name {{getRarity()}} border">
   <img [alt]="ship.hull" class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
   {{ship.name}}
+  <div *ngIf="ship.isBulkSelected" class="selected-text" >- SELECTED -</div>
 </td>
 
 <td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle">
@@ -16,5 +18,3 @@
 
 <!-- level -->
 <td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="level over119-{{ship.level > 119}} border level">{{ship.level}}</td>
-
-<div *ngIf="ship.isBulkSelected" class="bulk-select"></div>
