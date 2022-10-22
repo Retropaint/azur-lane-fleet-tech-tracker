@@ -98,3 +98,13 @@
 .Ultra-Rare {
   background: #ff6c4f;
 }
+
+.fading {
+  opacity: 0;
+  transition: opacity 0s;
+
+  &.on {
+    transition: opacity 0.25s;
+    opacity: 1;
+  }
+}

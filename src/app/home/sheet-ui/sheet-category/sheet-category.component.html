@@ -1,7 +1,19 @@
 <div style="text-align: center; transform: translateY(4px);">
-  <app-quick-tech-view></app-quick-tech-view>
+  <app-quick-tech-view class="fading" [ngClass]="{'on' : isFading}"></app-quick-tech-view>
 
-  <cdk-virtual-scroll-viewport class="container" [ngClass]="{'mobile' : misc.isMobile}" [itemSize]="30" *ngIf="shipsService.ships">
+  <!-- temporary loading table to prevent bumping -->
+  <table class="container" style="width: 100%; visibility: hidden;" *ngIf="isLoading">
+    <tbody>
+      <!-- header row -->
+      <tr class="row" [ngClass]="{'mobile' : misc.isMobile}">
+        <th class="category-header ship border" title="Click to edit category">Ship</th>
+        <th class="category-header stat border" title="Ships give these corresponding stats and their count at lv. 120">Stat</th>
+        <th class="category-header level border" title="Click to change every ship's level in this category">Lv.</th>
+      </tr>
+    </tbody>
+  </table>
+
+  <cdk-virtual-scroll-viewport class="container fading" [ngClass]="{'mobile' : misc.isMobile, 'on' : isFading}" [itemSize]="30" *ngIf="!isLoading">
     <table style="width: 100%">
       <tbody>
         <!-- header row -->
@@ -11,8 +23,8 @@
           <th class="category-header level border" title="Click to change every ship's level in this category">Lv.</th>
         </tr>
 
-        <ng-container *cdkVirtualFor="let ship of shipsService.setAllProperShipPos(sort.immediateSort(shipsService.ships)); index as i" >
-          <tr class="row" [ngClass]="{'unobtained' : !ship.isObtained}" app-sheet-ship-row *ngIf="misc.shipsFilterPass[ship.id] == true" [ship]="ship" [category]="category"></tr>
+        <ng-container *cdkVirtualFor="let ship of ships; index as i" >
+          <tr app-sheet-ship-row class="row" [ngClass]="{'unobtained' : !ship.isObtained}" [ship]="ship"></tr>
         </ng-container>
       </tbody>
     </table>
