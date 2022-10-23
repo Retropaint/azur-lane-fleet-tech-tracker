@@ -1,7 +1,7 @@
 {
   "name": "Azur Lane Fleet Tech Tracker",
   "short_name": "AL Fleet Tech Tracker",
-  "theme_color": "#1976d2",
+  "theme_color": "#213052",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
