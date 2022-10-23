@@ -45,16 +45,11 @@
 }
 
 .header-img {
-  width: 60px;
-  height: 60px;
-  transform: translateY(20px);
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  transform: translateY(15px);
   display: inline;
-
-  &.mobile {
-    width: 40px;
-    height: 40px;
-    transform: translateY(15px);
-  }
 }
 
 .generic-text {
@@ -168,8 +163,24 @@
   z-index: 1;
 
   .title-container {
-    transform: translateY(-10px);
-    padding-left: 10px;
+    display: flex;
+    align-items: center;
+
+    .title {
+      padding-left: 0px;
+      text-align: left;
+      margin-top: 5px;
+      margin: 0px;
+    }
+
+    .header-img {
+      width: 30px;
+      height: 30px;
+      margin: 5px;
+      margin-right: 10px;
+      transform: none;
+    }
+
   }
 }
 
