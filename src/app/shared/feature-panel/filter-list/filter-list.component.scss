@@ -4,8 +4,8 @@
 
 .filter-category-name {
   width: fit-content;
+  transform: translateY(5px);
   cursor: pointer;
-  margin-bottom: 2px;
 
   &.mobile {
     transform: translate(0px, 0px);
