@@ -1,8 +1,11 @@
+.container {
+  margin-bottom: 20px;
+}
+
 .filter-category-name {
   width: fit-content;
   cursor: pointer;
   margin-bottom: 2px;
-  transform: translate(0px, -19px);
 
   &.mobile {
     transform: translate(0px, 0px);
@@ -12,31 +15,20 @@
   }
 }
 
-.filter-category-container {
-  width: fit-content;
-  display: inline-block;
-  margin-right: 5px;
-  margin-left: 10px;
-
-  &.desktop {
-    transform: translateY(-20px);
-  }
-}
-
-.filter-column {
-  text-align: center;
-  width: 100px;
-  height: 30px;
-  cursor: pointer;
-}
-
-$test: 50vw;
-
-.filter-row {
-  display: flex;
-  justify-content: center;
-}
-
-.filter-container {
+.mobile-margin {
   margin-bottom: 50px;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+app-filter-button {
+  display: inline-block;
+  height: 55px;
+  display: flex;
+  align-items: flex-end;
+  transform: translateX(20px)
 }

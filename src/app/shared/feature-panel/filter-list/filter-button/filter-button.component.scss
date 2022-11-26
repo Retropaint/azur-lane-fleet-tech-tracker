@@ -1,10 +1,14 @@
 .filter-icon {
   float: left;
-  width: 50px;
-  padding-top: 8px;
-  padding-left: 10px;
   user-select: none;
+  padding: 7px;
+  width: 40px;
+  max-height: 45px;
   filter: drop-shadow(0px 0px 10px rgba(0, 97, 255, 1));
+
+  &.BB, &.FP, &.MOT, &.IJN {
+    padding: 2px;
+  }
 
   &.unselected {
     filter: none;
@@ -19,9 +23,7 @@
 
 .filter-name {
   text-shadow: 0px 0px 10px #0081ff;
-  padding-top: 11px;
   user-select: none;
-  float: right;
   color: white;
   margin: 0px;
 
@@ -38,17 +40,24 @@
 
 .filter-button {
   background:linear-gradient(180deg, rgba(203, 228, 252, 1) 0%, rgba(203, 228, 252, 1) 2%, rgba(107, 121, 148, 1) 4%, rgba(57, 74, 100, 1) 100%);
+  padding: 5px;
   width: 100px;
   height: 50px;
-  transform: translateY(-20px);
   border-left: 1px solid #34487A;
   border-right: 1px solid #34487A;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 
+  &.has-image {
+    justify-content: space-around;
+  }
+
   &.unselected {
-    background:linear-gradient(180deg, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 3%, rgba(66, 89, 115, 1) 6%, rgba(41, 65, 80, 1) 100%);
     height: 40px;
-    transform: translateY(-10px);
+    background:linear-gradient(180deg, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 0%, rgba(82, 101, 132, 1) 3%, rgba(66, 89, 115, 1) 6%, rgba(41, 65, 80, 1) 100%);
     border-left: 1px solid #34487A;
     border-right: 1px solid #34487A;
   }

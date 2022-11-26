@@ -33,7 +33,8 @@ export class HoverTitlesService {
     "AR": "Repair",
     "BBV": "Aviation Battleship",
     "SS": "Submarine",
-    "SSV": "Submarine Carrier"
+    "SSV": "Submarine Carrier",
+    "IX": "Sailing Frigate"
   }
 
   constructor() { }

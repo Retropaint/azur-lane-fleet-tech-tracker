@@ -12,7 +12,6 @@ export class FilterButtonComponent implements OnInit {
   @Input() filterName: string;
   @Input() filterType: any;
   @Input() index: number;
-  @Input() iconWidth: number;
   @Input() textRightMargin: number;
   @Input() fileName: string;
   @Input() hasImage: boolean = true;
@@ -27,6 +26,7 @@ export class FilterButtonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.filterName)
     if(this.filterName == 'No Tech' || this.filterName == 'Has Tech' || this.filterName == 'All') {
       this.hasImage = false;
       this.textRightMargin = 0;
