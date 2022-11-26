@@ -121,10 +121,6 @@ export class AzurapiService {
                 retroHull: this.shortenedNames.hulls[ship['retrofitHullType']],
               }
             }
-
-            if(newShip.name == 'Royal Fortune') {
-              console.log(newShip)
-            }
   
             // retain dynamic data of existing ships
             if(savedShips != null && savedShips.length > 0) {

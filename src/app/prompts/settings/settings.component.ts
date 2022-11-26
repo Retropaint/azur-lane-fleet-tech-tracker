@@ -20,7 +20,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
   modalIndex: number;
-  inputShipCardSize: number;
+  inputShipCardsPerRow: number;
   confirmedChanges: boolean;
   isInvalidImport: boolean;
 
@@ -54,11 +54,11 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   async ngAfterViewInit() {
     this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
-    this.inputShipCardSize = await this.storage.get("ship-card-size") || 100;
+    this.inputShipCardsPerRow = await this.storage.get("ship-cards-per-row") || 5;
 
     this.initialStates = {
       uiMode: await this.storage.get("ui-mode"),
-      shipCardSize: await this.storage.get("ship-card-size"),
+      shipsPerRow: await this.storage.get("ship-cards-per-row"),
       retrofitForms: await this.storage.get("retrofit-forms")
     }
   }
@@ -86,11 +86,10 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   async save() {
     this.confirmedChanges = true;
 
-    await this.storage.set("ship-card-size", this.inputShipCardSize);
+    await this.storage.set("ship-cards-per-row", this.inputShipCardsPerRow);
     
     await this.settingsData.refresh().then(() => {
       this.misc.uiMode = <"Icon" | 'Sheet'>this.settingsData.settings['ui-mode'];
-      this.misc.setCardSize();
     })
 
     this.misc.refreshIconList();
@@ -108,7 +107,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     this.prompt.exit();
     if(!this.confirmedChanges) {
       this.storage.set("ui-mode", this.initialStates["uiMode"]);
-      this.storage.set("ship-card-size", this.initialStates["shipCardSize"]);
+      this.storage.set("ship-cards-per-row", this.initialStates["shipsPerRow"]);
       this.storage.set("retrofit-forms", this.initialStates["retrofitForms"]);
     }
   }

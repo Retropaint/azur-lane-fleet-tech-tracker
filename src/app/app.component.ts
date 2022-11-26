@@ -51,8 +51,6 @@ export class AppComponent implements OnInit {
 
     this.factionTechData.init();
 
-    this.misc.setCardSize();
-    
     this.misc.isMobile = this.platform.width() < 1024;
     if(!this.misc.isMobile) {
       document.documentElement.style.setProperty('--dead-zone-margin', "200px");

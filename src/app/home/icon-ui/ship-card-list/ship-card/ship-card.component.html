@@ -2,7 +2,7 @@
   <div [ngClass]="{'bulk-select' : ship.isBulkSelected}"></div>
   <p *ngIf="ship.isBulkSelected" class="selected-text">- SELECTED -</p>
   
-  <div class="ship-info-overlay hull">
+  <div class="ship-info-overlay hull" [ngClass]="{'scale' : scaleThumbnail}">
     <!-- hull icon -->
     <ion-img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"></ion-img>
     
@@ -18,20 +18,20 @@
   </div>
 
   <!-- name -->
-  <p class="ship-name-text">{{ship.name}}</p>
+  <p class="ship-name-text" [ngClass]="{'scale' : scaleThumbnail}">{{ship.name}}</p>
 
   <!-- invisible image to check if ship image exists locally and gets fallback if required -->
   <img *ngIf="!loadedImage" [src]="imageSrc" (error)="getFallbackThumbnail()" (load)="loadedImage = true" style="display: none"/>
   
   <!-- placeholder image while invis image processes -->
   <ng-container *ngIf="!loadedImage">
-    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" class="ship-thumbnail ship-rarity-{{getRarity()}}" src="assets/noship.png"/>
-    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" class="ship-thumbnail UR-or-decisive" src="assets/noship.png"/>
+    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" class="ship-thumbnail ship-rarity-{{getRarity()}}" [ngClass]="{'scale' : scaleThumbnail}" src="assets/noship.png"/>
+    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" class="ship-thumbnail UR-or-decisive" [ngClass]="{'scale' : scaleThumbnail}" src="assets/noship.png"/>
   </ng-container>
 
   <!-- actual image -->
   <ng-container *ngIf="loadedImage">
-    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="imageSrc" class="ship-thumbnail ship-rarity-{{getRarity()}}"/>
-    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="imageSrc" class="ship-thumbnail UR-or-decisive"/>
+    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="imageSrc" class="ship-thumbnail ship-rarity-{{getRarity()}}" [ngClass]="{'scale' : scaleThumbnail}"/>
+    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="imageSrc" class="ship-thumbnail UR-or-decisive" [ngClass]="{'scale' : scaleThumbnail}"/>
   </ng-container>
 </div>

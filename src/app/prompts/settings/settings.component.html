@@ -4,14 +4,13 @@
   <div #autoResize>
     <app-settings-toggle name="UI mode" [toggles]="['Icon', 'Sheet']" storageName="ui-mode" defaultState="Icon"></app-settings-toggle>
     <app-settings-toggle name="Use Retrofit Forms" [toggles]="['Yes', 'No']" storageName="retrofit-forms" defaultState="No"></app-settings-toggle>
-    
+
     <div class="setting-container ship-card-size">
-      <p class="prompt-text inline-block">Ship Card Size:</p>
-      <input class="prompt-input inline-block centered ship-card-size-input" type="number" [(ngModel)]="inputShipCardSize" style="width: 50px; margin-right: 0px; margin-left: 0px" />
-      <p class="prompt-text inline-block">%</p>
+      <p class="prompt-text inline-block">Ship Cards Per Row:</p>
+      <input class="prompt-input inline-block centered ship-card-size-input" min="5" type="number" [(ngModel)]="inputShipCardsPerRow" style="width: 50px; margin-right: 0px; margin-left: 0px" />
     </div>
-    
     <br> 
+    
     <app-prompt-button (click)="csv.export()" text="Export CSV" extraCSS="no-top inline-block" color="blue"></app-prompt-button>
 
     <!-- hidden file type input attached to import CSV button -->

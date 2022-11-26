@@ -23,6 +23,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   rarity: string;
   hull: string;
   loadedImage: boolean = false;
+  scaleThumbnail: boolean;
 
   @Input() ship: Ship = null;
   @Input() currentCategory: string;
@@ -52,6 +53,8 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.imageSrc = this.getImageSrc();
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
+
+    this.scaleThumbnail = document.documentElement.style.getPropertyValue('--ship-card-zoom') > (1).toString();
   }
 
   getHull() {

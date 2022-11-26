@@ -62,11 +62,6 @@ export class MiscService {
     }
   }
 
-  async setCardSize() {
-    const num = this.settingsData.settings['ship-card-size']/100
-    document.documentElement.style.setProperty('--ship-card-zoom', num.toString());
-  }
-
   scrollUp() {
     this.ionContent.scrollToTop();
   }

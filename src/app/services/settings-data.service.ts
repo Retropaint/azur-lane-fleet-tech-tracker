@@ -9,7 +9,7 @@ export class SettingsDataService {
   settings = {
     'ui-mode': "UI",
     'retrofit-forms': "No",
-    'ship-card-size': 100
+    'ship-cards-per-row': 5
   }
 
   constructor(private storage: Storage) {}

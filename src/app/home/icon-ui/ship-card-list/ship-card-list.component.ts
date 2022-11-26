@@ -51,18 +51,25 @@ export class ShipCardListComponent implements AfterViewInit {
       this.refresh();
     }, 1000)
   }
-
+  
   refresh() {
+    let desiredShipsPerRow = this.settingsData.settings['ship-cards-per-row'];
+
     this.isLoading = true;
     this.rows = [];
 
     // get width of list element to calculate how many ships can fit in a row
     let listWidth = this.list.nativeElement.getBoundingClientRect().width;
 
-    const shipsPerRow = Math.ceil(listWidth / (150 * this.settingsData.settings['ship-card-size']/100 + 16));
+    if(desiredShipsPerRow == null) {
+      desiredShipsPerRow = this.getMaximumShipsPerRow(listWidth);
+    }
 
-    const shipCardSize = this.settingsData.settings['ship-card-size']/100;
-    this.rowHeight = 158 * shipCardSize;
+    const shipCardSize = (listWidth / desiredShipsPerRow) - 10 - 20;
+    const ratio = (shipCardSize / 100);
+
+    document.documentElement.style.setProperty('--ship-card-zoom', ratio.toString());
+    this.rowHeight = 158 * ratio;
     
     // create rows array
     let rowIndex = 0;
@@ -72,14 +79,14 @@ export class ShipCardListComponent implements AfterViewInit {
           this.rows.push([]);
         }
         this.rows[rowIndex].push(ship);
-        if(this.rows[rowIndex].length >= shipsPerRow) {
+        if(this.rows[rowIndex].length >= desiredShipsPerRow) {
           rowIndex++;
         }
       }
     })
 
     // add invisible ship cards for the last row, to anchor visible ships to the left
-    while(this.rows[this.rows.length - 1].length < shipsPerRow) {
+    while(this.rows[this.rows.length - 1].length < desiredShipsPerRow) {
       // quick and dirty way to create a new ship. Parse and stringify used to prevent referencing
       const invisibleShip: Ship = JSON.parse(JSON.stringify(this.shipsService.ships[0]));
       
@@ -91,6 +98,10 @@ export class ShipCardListComponent implements AfterViewInit {
     setTimeout(() => {
       this.isLoading = false;
     })
-    
+  }
+
+  getMaximumShipsPerRow(listWidth: number) {
+    const shipsPerRow = Math.ceil(listWidth / (100 + 30));
+    return shipsPerRow;
   }
 }

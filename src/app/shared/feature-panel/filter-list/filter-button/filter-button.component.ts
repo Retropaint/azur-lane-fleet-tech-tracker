@@ -26,15 +26,10 @@ export class FilterButtonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.filterName)
     if(this.filterName == 'No Tech' || this.filterName == 'Has Tech' || this.filterName == 'All') {
       this.hasImage = false;
       this.textRightMargin = 0;
     }
-  }
-
-  ionViewWillEnter() {
-    console.log('l')
   }
 
   clickedFilterButton() {

@@ -3,8 +3,11 @@
   height: calc(144px * var(--ship-card-zoom));
   border-right: 0;
   border-left: 0;
-  border-radius: calc(5px * var(--ship-card-zoom));
+  border-radius: 5px;
   pointer-events: none;
+  position: relative;
+  z-index: -1;
+  transform-origin: top left;
 
   &.ship-rarity-Common {
     border: calc(5px * var(--ship-card-zoom)) solid #A5AAB5; 
@@ -51,6 +54,11 @@
   &.remove-outline {
     transition: outline 0.5s;
     outline: 7px solid rgba(0, 255, 0, 0);
+  }
+
+  &.scale {
+    transform: scaleX(var(--ship-card-zoom));
+    transform-origin: top;
   }
 }
 
@@ -119,7 +127,12 @@
   width: calc(100% / var(--ship-card-zoom));
   bottom: calc(25px * var(--ship-card-zoom));
   transform: scale(var(--ship-card-zoom));
-  margin: 0
+  margin: 0;
+
+  &.scale {
+    transform-origin: bottom;
+    width: 100%;
+  }
 }
 
 .double-stats-text {
@@ -240,6 +253,11 @@
 
   &.hull {
     transform-origin: top left;
+
+    &.scale {
+      transform-origin: top;
+    }
+    
     top: calc(5px * var(--ship-card-zoom));
   }
 }
