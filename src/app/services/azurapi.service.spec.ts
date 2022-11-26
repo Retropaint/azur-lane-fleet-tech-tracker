@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AzurapiService } from '../azurapi.service';
+import { AzurapiService } from './azurapi.service';
 
 describe('AzurapiService', () => {
   let service: AzurapiService;

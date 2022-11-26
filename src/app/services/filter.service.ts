@@ -126,7 +126,7 @@ export class FilterService {
         checkHullFilter("CV");
       break; case "SS": case "SSV": 
         checkHullFilter("SS");
-      break; case "BM": case "AE": case "AR":
+      break; case "BM": case "AE": case "AR": case "IX":
         checkHullFilter("Others");
     }
     if(!isHullQualified) {

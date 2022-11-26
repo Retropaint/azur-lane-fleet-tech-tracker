@@ -28,12 +28,24 @@ export class SheetShipRowComponent implements OnInit {
     "AA": 17,
     "ASW": 17,
     "TRP": 16,
-    "FP": 17,
-    "EVA": 15,
+    "FP": 22,
+    "EVA": 17,
     "HIT": 16,
     "AVI": 17,
     "RLD": 15,
   };
+
+  fleetTechStatIconHeights = {
+    "HP": 16,
+    "AA": 17,
+    "ASW": 15,
+    "TRP": 16,
+    "FP": 12,
+    "EVA": 17,
+    "HIT": 16,
+    "AVI": 17,
+    "RLD": 15,
+  }
 
   constructor(
     public filter: FilterService,

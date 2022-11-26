@@ -45,7 +45,7 @@ export class AzurapiService {
             if(ship["fleetTech"]["statsBonus"]["collection"]) {
               shipHasTech = true;
             }
-  
+
             const fleetTech = ship["fleetTech"]["statsBonus"]["maxLevel"]
             const obtainFleetTech = ship["fleetTech"]["statsBonus"]["collection"];
   
@@ -120,6 +120,10 @@ export class AzurapiService {
                 hasRetrofit: ship["retrofit"],
                 retroHull: this.shortenedNames.hulls[ship['retrofitHullType']],
               }
+            }
+
+            if(newShip.name == 'Royal Fortune') {
+              console.log(newShip)
             }
   
             // retain dynamic data of existing ships

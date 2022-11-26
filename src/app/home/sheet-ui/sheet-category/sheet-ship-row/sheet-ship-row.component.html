@@ -1,5 +1,3 @@
-<!-- hull icon and ship name-->
-
 <td (click)="enterLevel()"  class="ship-name {{getRarity()}} border">
   <img [alt]="ship.hull" class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
   {{ship.name}}
@@ -7,13 +5,15 @@
 </td>
 
 <td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle">
-  <!-- tech stat icon -->
-  <img *ngIf="ship.techStat" [alt]="ship.techStat" class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
-  
-  <!-- tech stat bonus -->
-  <div *ngIf="ship.techStat" class="tech-bonus" >+{{ship.techBonus}}</div>
-  
-  <div *ngIf="!ship.techStat" class="tech-bonus none">-</div>
+  <div class="tech-stat-container">
+    <!-- tech stat icon -->
+    <img *ngIf="ship.techStat" [alt]="ship.techStat" class="ship-hull-icon {{ship.techStat}}" [style.width]="fleetTechStatIconWidths[ship.techStat] + 'px'" [style.height]="fleetTechStatIconHeights[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    
+    <!-- tech stat bonus -->
+    <div *ngIf="ship.techStat" class="tech-bonus" >+{{ship.techBonus}}</div>
+    
+    <div *ngIf="!ship.techStat" class="tech-bonus none">-</div>
+  </div>
 </td>
 
 <!-- level -->

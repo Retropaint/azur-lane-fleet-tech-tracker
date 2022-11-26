@@ -1,8 +1,8 @@
-<div style="text-align: center; transform: translateY(4px);">
-  <app-quick-tech-view class="fading" [ngClass]="{'on' : isFading}"></app-quick-tech-view>
+<div class="main-container">
+  <app-quick-tech-view class="should-fade" [ngClass]="{'on' : isFading}"></app-quick-tech-view>
 
   <!-- temporary loading table to prevent bumping -->
-  <table class="container" style="width: 100%; visibility: hidden;" *ngIf="isLoading">
+  <table class="table" style="visibility: hidden;" *ngIf="isLoading">
     <tbody>
       <!-- header row -->
       <tr class="row" [ngClass]="{'mobile' : misc.isMobile}">
@@ -13,8 +13,8 @@
     </tbody>
   </table>
 
-  <cdk-virtual-scroll-viewport class="container fading" [ngClass]="{'mobile' : misc.isMobile, 'on' : isFading}" [itemSize]="30" *ngIf="!isLoading">
-    <table style="width: 100%">
+  <cdk-virtual-scroll-viewport class="table should-fade" [ngClass]="{'mobile' : misc.isMobile, 'on' : isFading}" [itemSize]="30" *ngIf="!isLoading">
+    <table class="loaded">
       <tbody>
         <!-- header row -->
         <tr class="row" [ngClass]="{'mobile' : misc.isMobile}">

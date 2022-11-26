@@ -20,7 +20,7 @@ export class FilterListComponent implements OnInit {
   statIconWidths: number[] = [50, 35, 35, 38, 38, 35, 35, 32, 35];
   statTextRightMargins: number[] = [17, 17, 17, 17, 17, 17, 17, 17, 17, 40];
 
-  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "RN", "SN", "FFNF", "MNF", "All"];
+  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "RN", "SN", "FFNF", "MNF", "MOT", "All"];
   factionIconWidths: number[] = [40, 30, 40, 32, 32, 40, 40, 32, 32];
   factionTextRightMargins: number[] = [10, 15, 15, 15, 15, 17, 15, 15, 17, 40];
 

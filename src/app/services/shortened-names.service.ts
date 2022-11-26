@@ -14,7 +14,8 @@ export class ShortenedNamesService {
     "Northern Parliament": "SN", 
     "Iris Libre": "FFNF", 
     "Vichya Dominion": "MNF", 
-    "Sardegna Empire": "RN"
+    "Sardegna Empire": "RN",
+    "Tempesta": "MOT"
   };
 
   hulls = {
@@ -41,6 +42,7 @@ export class ShortenedNamesService {
     "Submarine": "SS",
     "Submarine Carrier": "SSV",
     "Monitor": "BM",
+    "Sailing Frigate": "IX"
   }
   
   stats = {
@@ -55,6 +57,7 @@ export class ShortenedNamesService {
     "health": "HP"
   };
 
+  // applicable hull names are sometimes different
   applicableHulls = {
     "Battleship": "BB",
     "Light aircraft carrier": "CVL",
