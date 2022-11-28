@@ -3,13 +3,15 @@
   <p *ngIf="ship.isBulkSelected" class="selected-text">- SELECTED -</p>
   
   <div class="ship-info-overlay hull" [ngClass]="{'scale' : scaleThumbnail}">
-    <!-- hull icon -->
-    <ion-img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"></ion-img>
-    
-    <!-- tech stat and bonus -->
-    <div [title]="hoverTitle" *ngIf="ship.techStat != null">
-      <ion-img class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"></ion-img>
-      <p class="double-stats-text">+{{ship.techBonus}}</p>
+    <div style="display: flex">
+      <!-- hull icon -->
+      <ion-img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"></ion-img>
+      
+      <!-- tech stat and bonus -->
+      <div [title]="hoverTitle" *ngIf="ship.techStat != null">
+        <ion-img class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"></ion-img>
+        <p class="double-stats-text">+{{ship.techBonus}}</p>
+      </div>
     </div>
 
     <!-- level -->
