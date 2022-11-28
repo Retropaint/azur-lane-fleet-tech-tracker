@@ -1,5 +1,5 @@
 <!-- unselected toggle -->
-<div class="filter-button unselected hasImage-{{hasImage}}" [ngClass]="{'has-image': hasImage}" (click)="clickedFilterButton()" *ngIf="!filterType[filterName]" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
+<div class="filter-button unselected" [ngClass]="{'has-image': hasImage}" (click)="clickedFilterButton()" *ngIf="!filterType[filterName]" title="{{filterName == 'W.I.P' ? 'Work in Progress' : ''}}">
   <img 
     [alt]="filterName" 
     *ngIf="hasImage" 
