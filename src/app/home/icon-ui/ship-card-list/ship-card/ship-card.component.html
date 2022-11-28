@@ -5,13 +5,11 @@
   <div class="ship-info-overlay hull" [ngClass]="{'scale' : scaleThumbnail}">
     <div style="display: flex">
       <!-- hull icon -->
-      <ion-img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"></ion-img>
+      <ion-img class="ship-hull-icon" [title]="hoverTitles.hulls[hull] + ' (' + hull + ')'" [src]="'assets/icons/frame hull icons/' + hull + '.png'"></ion-img>
       
       <!-- tech stat and bonus -->
-      <div [title]="hoverTitle" *ngIf="getStat() != null">
-        <ion-img class="ship-hull-icon {{getStat()}}" [style]="'width: ' + fleetTechStatIconWidths[getStat()] + 'px'" [src]="'assets/icons/stat icons/' + getStat() + '.png'"></ion-img>
-        <p class="double-stats-text">+{{getBonus()}}</p>
-      </div>
+      <ion-img class="ship-hull-icon {{stat}}" *ngIf="stat != null" [src]="'assets/icons/stat icons/' + stat + '.png'"></ion-img>
+      <p class="double-stats-text" *ngIf="stat != null">+{{bonus}}</p>
     </div>
 
     <!-- level -->
@@ -25,15 +23,14 @@
   <!-- invisible image to check if ship image exists locally and gets fallback if required -->
   <img *ngIf="!loadedImage" [src]="imageSrc" (error)="getFallbackThumbnail()" (load)="loadedImage = true" style="display: none"/>
   
-  <!-- placeholder image while invis image processes -->
   <ng-container *ngIf="!loadedImage">
-    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" class="ship-thumbnail ship-rarity-{{getRarity()}}" [ngClass]="{'scale' : scaleThumbnail}" src="assets/noship.png"/>
-    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" class="ship-thumbnail UR-or-decisive" [ngClass]="{'scale' : scaleThumbnail}" src="assets/noship.png"/>
+    <img *ngIf="rarity != 'Ultra-Rare' && rarity != 'Decisive'" class="ship-thumbnail ship-rarity-{{rarity}}" [ngClass]="{'scale' : scaleThumbnail}" src="assets/noship.png"/>
+    <img *ngIf="rarity == 'Ultra-Rare' || rarity == 'Decisive'" class="ship-thumbnail UR-or-decisive" [ngClass]="{'scale' : scaleThumbnail}" src="assets/noship.png"/>
   </ng-container>
 
   <!-- actual image -->
   <ng-container *ngIf="loadedImage">
-    <img *ngIf="getRarity() != 'Ultra-Rare' && getRarity() != 'Decisive'" [src]="imageSrc" class="ship-thumbnail ship-rarity-{{getRarity()}}" [ngClass]="{'scale' : scaleThumbnail}"/>
-    <img *ngIf="getRarity() == 'Ultra-Rare' || getRarity() == 'Decisive'" [src]="imageSrc" class="ship-thumbnail UR-or-decisive" [ngClass]="{'scale' : scaleThumbnail}"/>
+    <img *ngIf="rarity != 'Ultra-Rare' && rarity != 'Decisive'" (load)="imageLoaded()" [src]="imageSrc" class="ship-thumbnail ship-rarity-{{rarity}}" [ngClass]="{'scale' : scaleThumbnail}"/>
+    <img *ngIf="rarity == 'Ultra-Rare' || rarity == 'Decisive'" (load)="imageLoaded()" [src]="imageSrc" class="ship-thumbnail UR-or-decisive" [ngClass]="{'scale' : scaleThumbnail}"/>
   </ng-container>
 </div>
