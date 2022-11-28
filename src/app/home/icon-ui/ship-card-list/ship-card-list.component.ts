@@ -74,10 +74,13 @@ export class ShipCardListComponent implements AfterViewInit {
     document.documentElement.style.setProperty('--ship-card-zoom', ratio.toString());
     this.rowHeight = 158 * ratio;
     
+    console.time('full')
     // create ship list
     let rowIndex = 0;
+    const shipsFilterPassLength = Object.keys(this.misc.shipsFilterPass).length
+
     this.shipsService.setAllProperShipPos(this.sort.immediateSort(this.shipsService.ships)).forEach(ship => {
-      if(this.misc.shipsFilterPass[ship.id] || Object.keys(this.misc.shipsFilterPass).length == 0) {
+      if(shipsFilterPassLength == 0 || this.misc.shipsFilterPass[ship.id]) {
         if(this.rows[rowIndex] == null) {
           this.rows.push([]);
         }
