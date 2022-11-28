@@ -6,7 +6,7 @@
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['hulls']"></ion-icon>
   </p>
   <div class="button-container" *ngIf="unfoldedFilters['hulls']">
-    <app-filter-button *ngFor="let hull of hullNames; let i = index" [hasImage]="true" [filterName]="hull" [filterType]="filter.hulls" [index]="i" fileName="hull"></app-filter-button>
+    <app-filter-button *ngFor="let hull of hullNames; let i = index" [filterName]="hull" [filterType]="filter.hulls" fileName="hull"></app-filter-button>
   </div>
 </div>
 
@@ -18,7 +18,7 @@
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
   </p>
   <div class="button-container" *ngIf="unfoldedFilters['stats']">
-    <app-filter-button *ngFor="let stat of statNames; let i = index" [hasImage]="true" [filterName]="stat" [filterType]="filter.stats" [index]="i" fileName="stat"></app-filter-button>
+    <app-filter-button *ngFor="let stat of statNames; let i = index" [filterName]="stat" [filterType]="filter.stats" fileName="stat"></app-filter-button>
   </div>
 </div>
 
@@ -30,7 +30,7 @@
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['factions']"></ion-icon>
   </p>
   <div class="button-container" *ngIf="unfoldedFilters['factions']">
-    <app-filter-button *ngFor="let faction of factionNames; let i = index" [filterName]="faction" [filterType]="filter.factions" [index]="i" fileName="faction"></app-filter-button>
+    <app-filter-button *ngFor="let faction of factionNames; let i = index" [filterName]="faction" [filterType]="filter.factions" fileName="faction"></app-filter-button>
   </div>
 </div>
 
@@ -42,7 +42,7 @@
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['rarities']"></ion-icon>
   </p>
   <div class="button-container" *ngIf="unfoldedFilters['rarities']">
-    <app-filter-button *ngFor="let rarity of rarityNames; let i = index" [hasImage]="false" [filterName]="rarity" [filterType]="filter.rarities" [index]="i"></app-filter-button>
+    <app-filter-button *ngFor="let rarity of rarityNames; let i = index" [filterName]="rarity" [filterType]="filter.rarities"></app-filter-button>
   </div>
 </div>
 
@@ -54,6 +54,6 @@
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['status']"></ion-icon>
   </p>
   <div class="button-container" *ngIf="unfoldedFilters['status']">
-    <app-filter-button *ngFor="let status of statusNames; let i = index" [hasImage]="false" [filterName]="status" [filterType]="filter.statuses" [index]="i"></app-filter-button>
+    <app-filter-button *ngFor="let status of statusNames; let i = index" [filterName]="status" [filterType]="filter.statuses"></app-filter-button>
   </div>
 </div>

@@ -11,10 +11,8 @@ export class FilterButtonComponent implements OnInit {
 
   @Input() filterName: string;
   @Input() filterType: any;
-  @Input() index: number;
-  @Input() textRightMargin: number;
   @Input() fileName: string;
-  @Input() hasImage: boolean = true;
+  hasImage: boolean = true;
 
   doubleClickTimeout: any;
   clickCount: number = 0;
@@ -26,9 +24,12 @@ export class FilterButtonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.filterName == 'No Tech' || this.filterName == 'Has Tech' || this.filterName == 'All') {
+    if(this.filterName == 'No Tech' || 
+      this.filterName == 'Has Tech' || 
+      this.filterName == 'All' || 
+      this.filterType == this.filter.rarities || 
+      this.filterType == this.filter.statuses) {
       this.hasImage = false;
-      this.textRightMargin = 0;
     }
   }
 
