@@ -63,12 +63,10 @@ export class CsvService {
       csvShip.appliedHulls = ship.appliedHulls;
       csvShip.obtainAppliedHulls = ship.obtainAppliedHulls;
 
-      if(ship.techPoints != null) {
-        csvShip.obtainTechPoints = ship.techPoints.obtain;
-        csvShip.techPoints = ship.techPoints.maxLevel;
-        csvShip.mlbTechPoints = ship.techPoints.maxLimitBreak;
-      }
-      
+      csvShip.obtainTechPoints = (ship.techPoints != null) ? ship.techPoints.obtain : '-';
+      csvShip.techPoints = (ship.techPoints != null) ? ship.techPoints.maxLevel : '-';
+      csvShip.mlbTechPoints = (ship.techPoints != null) ? ship.techPoints.maxLimitBreak : '-';
+
       csvShips.push(csvShip);
     })
 
