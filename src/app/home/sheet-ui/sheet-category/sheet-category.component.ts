@@ -35,6 +35,13 @@ export class SheetCategoryComponent implements OnInit {
   }
 
   refresh() {
+    if(!this.misc.hasFocus) {
+      this.misc.blurOnShipListLoad = true;
+      return;
+    }
+
+    this.misc.blurOnShipListLoad = false;
+
     this.placeholderShips = this.ships.slice();
     this.ships = [];
     this.isLoading = true;

@@ -19,9 +19,9 @@ import { SortService } from './services/sort.service';
 export class AppComponent implements OnInit {
   techMode: string = "ship"
   techModeString = "Tech Summary";
-  iconListRefreshCount: number = 2;
   menuIsOpen: boolean;
   filterIsOpen: boolean;
+  isFocused: boolean;
 
   constructor(private storage: Storage, 
     private azurapi: AzurapiService, 
@@ -64,6 +64,10 @@ export class AppComponent implements OnInit {
     window.addEventListener('focus', () => {
       this.onTabFocus();
     })
+
+    window.addEventListener('blur', () => {
+      this.onTabBlur();
+    })
   }
 
   openSettings() {
@@ -80,15 +84,15 @@ export class AppComponent implements OnInit {
     this.misc.isMobile = event.target.innerWidth < 1024;
   }
   
-  /*
-    the icon list refresh is handled here because focusing on the tab is app-wide rather than in the icon list, 
-    where it can be activated by just focusing on the component itself
-  */
   onTabFocus() {
-    // only one refresh is needed at a time, as it's jarring when it keeps doing it during the site's lifespan
-    if(this.iconListRefreshCount < 3) {
-      this.misc.refreshIconList(true);    
+    this.misc.hasFocus = true;
+    if(this.misc.blurOnShipListLoad) {
+      this.misc.refreshShipList();
     }
-    this.iconListRefreshCount++;
   }
+
+  onTabBlur() {
+    this.misc.hasFocus = false;
+  }
+  
 }

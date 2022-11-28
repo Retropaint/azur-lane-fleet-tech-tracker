@@ -41,6 +41,9 @@ export class MiscService {
 
   filteringMaxTech: boolean = true;
 
+  hasFocus: boolean = false;
+  blurOnShipListLoad: boolean = false;
+
   constructor() { }
 
   async switchTechMode() {
@@ -57,18 +60,10 @@ export class MiscService {
     this.ionContent.scrollToTop();
   }
 
-  refreshIconList(delay: boolean = false) {
+  refreshShipList() {
     if(this.shipCardList != null) {
-      if(delay) {
-        this.shipCardList.rows = [];
-        setTimeout(() => {
-          this.shipCardList.refresh();
-        }, 250)
-      } else {
-        this.shipCardList.refresh();
-      }
+      this.shipCardList.refresh();
     }
-
     if(this.sheetCategory != null) {
       this.sheetCategory.refresh();
     }

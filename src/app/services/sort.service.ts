@@ -34,7 +34,7 @@ export class SortService {
     }
 
     if (refreshList) {
-      this.misc.refreshIconList();
+      this.misc.refreshShipList();
     }
   }
 
