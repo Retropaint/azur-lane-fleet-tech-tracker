@@ -245,12 +245,6 @@
   display: inline-block;
   transform: scale(var(--ship-card-zoom));
 
-  &.name {
-    transform-origin: bottom left;
-    bottom: calc(25px * var(--ship-card-zoom));
-    height: 17px;
-  }
-
   &.hull {
     display: flex;
     justify-content: space-between;
