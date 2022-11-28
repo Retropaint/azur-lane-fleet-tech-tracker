@@ -56,9 +56,9 @@ export class ShipCardListComponent implements AfterViewInit {
     if(!this.misc.hasFocus) {
       this.misc.blurOnShipListLoad = true;
       return;
+    } else {
+      this.misc.blurOnShipListLoad = false;
     }
-
-    this.misc.blurOnShipListLoad = false;
 
     let desiredShipsPerRow = this.settingsData.settings['ship-cards-per-row'];
 
