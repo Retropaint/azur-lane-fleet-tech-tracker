@@ -63,33 +63,35 @@ export class ShipsService {
     if(!this.misc.considerStatusSorting) {
       return shipArray;
     }
+    let lastWIP: number = 0;
+    let lastUnobtained: number = 0;
+    let lastMaxed: number = 0;
     
-    const shipTypes: Ship[][] = [[], [], []];
-    shipArray.forEach(ship => {
-      switch(this.getShipStatus(ship)) {
+    let newArray: Ship[] = [];
+    for(let i = 0; i < shipArray.length; i++) {
+      switch(this.getShipStatus(shipArray[i])) {
         case "obtained":
-          shipTypes[0].push(ship);
+          newArray.splice(lastWIP, 0, shipArray[i]);
+          lastWIP++;
+          lastUnobtained++;
+          lastMaxed++;   
         break; case "maxed":
-          shipTypes[2].push(ship);
+          newArray.splice(lastMaxed, 0, shipArray[i]);
+          lastMaxed++;
         break; default:
-          shipTypes[1].push(ship);
+          newArray.splice(lastUnobtained, 0, shipArray[i]);
+          lastMaxed++; 
+          lastUnobtained++;
         break;
       }
-    })
-
-    // concatenate all types
-    shipArray = [];
-    for(let i = 0; i < 3; i++) {
-      for(let j = 0; j < shipTypes[i].length; j++) {
-        shipArray.push(shipTypes[i][j]);
-      }
     }
-    return shipArray;
+
+    return newArray;
   }
 
   getShipStatus(ship): string {
     if(!ship.isObtained) {
-      return "ignored";
+      return "unobtained";
     } else if(ship.level >= 120) {
       return "maxed";
     } else if(ship.isObtained) {
