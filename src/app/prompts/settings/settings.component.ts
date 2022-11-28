@@ -110,6 +110,8 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     this.prompt.exit();
 
     if(!this.confirmedChanges) {
+      this.settingsData.settings = JSON.parse(JSON.stringify(this.initialSettings))
+
       Object.keys(this.initialSettings).forEach(setting => {
         this.storage.set(setting, this.initialSettings[setting]);
       })
