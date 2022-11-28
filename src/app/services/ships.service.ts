@@ -157,22 +157,6 @@ export class ShipsService {
     })
   }
 
-  quickTechView(stat, hull) {
-    if(stat == null || hull == null) {
-      return;
-    }
-
-    this.lastQuickTechStat = stat;
-    this.lastQuickTechHull = hull;
-
-    this.hullHierarchy.hulls[hull].forEach(hull => {
-      this.quickTechMax[hull] = this.getMaxTechOf(stat, hull);
-    })
-    this.hullHierarchy.hulls[hull].forEach(hull => {
-      this.quickTechTotal[hull] = this.getTotalTechOf(stat, hull);
-    })
-  }
-
   getMaxTechOf(stat, hull) {
     return this.getTech(false, this.factionTechData.maxLevels, stat, hull);
   }
@@ -201,7 +185,6 @@ export class ShipsService {
         return;
       }
       if(ship.isObtained || !checkShipReqs) {
-        
         ship.obtainAppliedHulls.forEach(appliedHull => {
           if(appliedHull == hull) {
             if(ship.obtainStat == stat) {

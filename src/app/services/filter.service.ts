@@ -11,7 +11,7 @@ import { MiscService } from './misc.service';
 export class FilterService {
 
   constructor(
-    private shipService: ShipsService, 
+    private shipsService: ShipsService, 
     private settingsData: SettingsDataService,
     private misc: MiscService,
   ) { }
@@ -75,7 +75,7 @@ export class FilterService {
 
   init() {
     // reset shipsFilterPass
-    this.shipService.ships.forEach(ship => {
+    this.shipsService.ships.forEach(ship => {
       this.misc.shipsFilterPass[ship.id] = false;
     })
 
@@ -84,7 +84,7 @@ export class FilterService {
 
   filter() {
     // assign shipsFilterPass
-    this.shipService.ships.forEach(ship => {
+    this.shipsService.ships.forEach(ship => {
       if(this.passesCriteria(ship)) {
         this.misc.shipsFilterPass[ship.id] = true;
       } else {
@@ -92,7 +92,7 @@ export class FilterService {
       }
     })
 
-    this.shipService.refreshCogChipReq(this.misc.shipsFilterPass);
+    this.shipsService.refreshCogChipReq(this.misc.shipsFilterPass);
 
     this.misc.refreshIconList();
   }
@@ -135,7 +135,7 @@ export class FilterService {
 
     let rarity = null;
     if(this.settingsData.settings['retrofit-forms'] == 'Yes' && ship.hasRetrofit) {
-      rarity = this.shipService.getRetroRarity(ship.id);
+      rarity = this.shipsService.getRetroRarity(ship.id);
     } else {
       rarity = ship.rarity;
     }
@@ -231,10 +231,6 @@ export class FilterService {
 
     this.oneSelectedHull = this.getTheOnlyOne(this.hulls);
     this.oneSelectedStat = this.getTheOnlyOne(this.stats);
-
-    if(this.oneSelectedHull != null && this.oneSelectedStat != null) {
-      this.shipService.quickTechView(this.oneSelectedStat, this.oneSelectedHull);
-    }
 
     if(filterType == this.stats) {
       if(this.stats['Has Tech'] && this.stats['No Tech']) {
