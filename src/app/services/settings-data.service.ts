@@ -6,11 +6,13 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class SettingsDataService {
 
-  settings = {
-    'ui-mode': "UI",
+  defaultSettings = {
+    'ui-mode': "Icon",
     'retrofit-forms': "No",
-    'ship-cards-per-row': 5
+    'ship-cards-per-row': 6
   }
+
+  settings = JSON.parse(JSON.stringify(this.defaultSettings));
 
   constructor(private storage: Storage) {}
 
@@ -21,5 +23,11 @@ export class SettingsDataService {
         this.settings[setting] = storageValue
       }
     }
+  }
+
+  async save() {
+    Object.keys(this.settings).forEach(setting => {
+      this.storage.set(setting, this.settings[setting]);
+    })
   }
 }

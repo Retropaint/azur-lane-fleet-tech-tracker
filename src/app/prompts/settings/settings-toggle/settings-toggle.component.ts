@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { SettingsDataService } from 'src/app/services/settings-data.service';
 
 @Component({
   selector: 'app-settings-toggle',
@@ -15,10 +16,10 @@ export class SettingsToggleComponent implements OnInit {
 
   currentToggle: string;
 
-  constructor(private storage: Storage) {}
+  constructor(private settingsData: SettingsDataService) {}
 
   async ngOnInit() {
-    const storageToggle = await this.storage.get(this.storageName)
+    const storageToggle = this.settingsData.settings[this.storageName];
     if(storageToggle != null) {
       this.currentToggle = storageToggle;
     } else {
@@ -28,6 +29,7 @@ export class SettingsToggleComponent implements OnInit {
 
   setToggle(toggle: string) {
     this.currentToggle = toggle;
-    this.storage.set(this.storageName, toggle);
+    this.settingsData.settings[this.storageName] = toggle;
+    this.settingsData.save();
   }
 }

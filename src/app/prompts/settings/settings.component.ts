@@ -25,7 +25,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   isInvalidImport: boolean;
 
   // store original states of settings in-case of cancelling
-  initialStates = {};
+  initialSettings = {};
 
   importedCsvSubscription = new Subscription();
 
@@ -54,23 +54,28 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   async ngAfterViewInit() {
     this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
-    this.inputShipCardsPerRow = await this.storage.get("ship-cards-per-row") || 5;
-
-    this.initialStates = {
-      uiMode: await this.storage.get("ui-mode"),
-      shipsPerRow: await this.storage.get("ship-cards-per-row"),
-      retrofitForms: await this.storage.get("retrofit-forms")
-    }
+    this.inputShipCardsPerRow = this.settingsData.settings['ship-cards-per-row'];
+    
+    this.initialSettings = JSON.parse(JSON.stringify(this.settingsData.settings))
   }
 
   resetSite() {
     this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All ship data and settings preferences will be deleted. Proceed?")
       .then(isYes => {
         if(isYes) {
-          this.modalController.dismiss();
           this.shipsService.ships = [];
           this.storage.remove("ships");
+          this.storage.remove('USS');
+          this.storage.remove('HMS');
+          this.storage.remove('KMS');
+          this.storage.remove('IJN');
+          this.settingsData.settings = JSON.parse(JSON.stringify(this.settingsData.defaultSettings));
+          this.confirmedChanges = true;
+          this.misc.uiMode = this.settingsData.settings['ui-mode']
+
+          this.settingsData.save();
           this.azurapi.init();
+          this.exit();
         }
       })
   }
@@ -86,8 +91,8 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   async save() {
     this.confirmedChanges = true;
 
-    await this.storage.set("ship-cards-per-row", this.inputShipCardsPerRow);
-    
+    this.settingsData.save();
+
     await this.settingsData.refresh().then(() => {
       this.misc.uiMode = <"Icon" | 'Sheet'>this.settingsData.settings['ui-mode'];
     })
@@ -106,9 +111,9 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     this.importedCsvSubscription.unsubscribe();
     this.prompt.exit();
     if(!this.confirmedChanges) {
-      this.storage.set("ui-mode", this.initialStates["uiMode"]);
-      this.storage.set("ship-cards-per-row", this.initialStates["shipsPerRow"]);
-      this.storage.set("retrofit-forms", this.initialStates["retrofitForms"]);
+      Object.keys(this.initialSettings).forEach(setting => {
+        this.storage.set(setting, this.initialSettings[setting]);
+      })
     }
   }
 }

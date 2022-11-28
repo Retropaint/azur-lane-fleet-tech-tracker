@@ -7,6 +7,7 @@ import { MiscService } from '../services/misc.service';
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
 import { PromptService } from '../services/prompt.service';
 import { AzurapiService } from '../services/azurapi.service';
+import { SettingsDataService } from '../services/settings-data.service';
 
 @Component({
   selector: 'app-home',
@@ -25,12 +26,13 @@ export class HomePage implements AfterViewInit {
     public misc: MiscService,
     private menuController: MenuController,
     private prompt: PromptService,
-    public azurapi: AzurapiService
+    public azurapi: AzurapiService,
+    private settingsData: SettingsDataService
   ) {}
 
   async ngAfterViewInit() {
     // get UI mode if it exists, default to icon if it doesn't
-    this.misc.initUiMode();
+    this.misc.uiMode = this.settingsData.settings['ui-mode']
     this.misc.ionContent = this.ionContent;
 
     setTimeout(() => {

@@ -39,18 +39,7 @@ export class MiscService {
 
   includeNonTechShips: boolean = false;
 
-  constructor(
-    private settingsData: SettingsDataService,
-    private storage: Storage,
-  ) { }
-
-  async initUiMode() {
-    if(await this.storage.get('ui-mode')) {
-      this.uiMode = await this.storage.get("ui-mode");
-    } else {
-      this.storage.set("ui-mode", 'Icon');
-    }
-  }
+  constructor() { }
 
   async switchTechMode() {
     if(this.techMode == "ship") {
