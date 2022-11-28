@@ -1,4 +1,4 @@
-<app-quick-tech-view></app-quick-tech-view>
+<app-quick-tech-view [shouldDisplay]="rows.length != 0"></app-quick-tech-view>
 <cdk-virtual-scroll-viewport class="ship-grid" [ngClass]="{'mobile' : misc.isMobile}" [itemSize]="rowHeight" *ngIf="rows.length != 0">
   <div *cdkVirtualFor="let r of rows" [style]="'height: ' + rowHeight + 'px'">
     <div *ngFor="let ship of r" class="ship-card-component-container">

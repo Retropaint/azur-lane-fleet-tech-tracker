@@ -81,13 +81,15 @@ export class ShipCardListComponent implements AfterViewInit {
       }
     })
 
-    // add invisible ship cards for the last row, to anchor visible ships to the left
-    while(this.rows[this.rows.length - 1].length < desiredShipsPerRow) {
-      // quick and dirty way to create a new ship. Parse and stringify used to prevent referencing
-      const invisibleShip: Ship = JSON.parse(JSON.stringify(this.shipsService.ships[0]));
-      
-      invisibleShip.id = "-1";
-      this.rows[this.rows.length - 1].push(invisibleShip);
+    if(this.rows.length > 0) {
+      // add invisible ship cards for the last row, to anchor visible ships to the left
+      while(this.rows[this.rows.length - 1].length < desiredShipsPerRow) {
+        // quick and dirty way to create a new ship. Parse and stringify used to prevent referencing
+        const invisibleShip: Ship = JSON.parse(JSON.stringify(this.shipsService.ships[0]));
+
+        invisibleShip.id = "-1";
+        this.rows[this.rows.length - 1].push(invisibleShip);
+      }
     }
 
     // delay allows all ship cards to destroy themselves, so they can restart fade

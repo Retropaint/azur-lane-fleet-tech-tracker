@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FilterService } from 'src/app/services/filter.service';
 import { HullHierarchyService } from 'src/app/services/hull-hierarchy.service';
 import { MiscService } from 'src/app/services/misc.service';
@@ -10,6 +10,9 @@ import { ShipsService } from 'src/app/services/ships.service';
   styleUrls: ['./quick-tech-view.component.scss', '../home.page.scss'],
 })
 export class QuickTechViewComponent implements OnInit {
+
+  @Input() shouldDisplay: boolean = false;
+  @Input() removeCogs: boolean = false;
 
   constructor(
     public shipsService: ShipsService, 

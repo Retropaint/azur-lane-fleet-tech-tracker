@@ -1,5 +1,7 @@
 <div class="main-container">
-  <app-quick-tech-view class="should-fade" [ngClass]="{'on' : isFading}"></app-quick-tech-view>
+  <app-quick-tech-view [shouldDisplay]="ships.length > 0" [removeCogs]="true"t class="should-fade" [ngClass]="{'on' : isFading}"></app-quick-tech-view>
+
+  <p *ngIf="!isLoading && ships.length == 0" class="generic-text no-ships-text">No ships fit this criteria.</p>
 
   <!-- temporary loading table to prevent bumping -->
   <table class="table" style="visibility: hidden;" *ngIf="isLoading">
@@ -13,7 +15,7 @@
     </tbody>
   </table>
 
-  <cdk-virtual-scroll-viewport class="table should-fade" [ngClass]="{'mobile' : misc.isMobile, 'on' : isFading}" [itemSize]="30" *ngIf="!isLoading">
+  <cdk-virtual-scroll-viewport class="table should-fade" [ngClass]="{'mobile' : misc.isMobile, 'on' : isFading}" [itemSize]="30" *ngIf="!isLoading && ships.length > 0">
     <table class="loaded">
       <tbody>
         <!-- header row -->
@@ -29,4 +31,6 @@
       </tbody>
     </table>
   </cdk-virtual-scroll-viewport>
+
+
 </div>

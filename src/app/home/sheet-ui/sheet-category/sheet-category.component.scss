@@ -1,6 +1,10 @@
 .main-container {
   text-align: center; 
   transform: translateY(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 85vh;
 }
 
 .table {
@@ -63,4 +67,8 @@
     transition: opacity 0.25s;
     opacity: 1;
   }
+}
+
+.no-ships-text {
+  margin: 0px;
 }
