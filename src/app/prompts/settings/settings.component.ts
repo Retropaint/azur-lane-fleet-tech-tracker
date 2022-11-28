@@ -42,6 +42,8 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.csv.settingsText = "";
+    this.initialSettings = JSON.parse(JSON.stringify(this.settingsData.settings))
+    this.inputShipCardsPerRow = this.initialSettings['ship-cards-per-row'];
 
     this.csv.importStatus.subscribe(wasSuccessful => {
       if(wasSuccessful) {
@@ -54,15 +56,14 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   async ngAfterViewInit() {
     this.modalIndex = this.prompt.init(this.autoResize.nativeElement.getBoundingClientRect().height, true);
-    this.inputShipCardsPerRow = this.settingsData.settings['ship-cards-per-row'];
-    
-    this.initialSettings = JSON.parse(JSON.stringify(this.settingsData.settings))
   }
 
   resetSite() {
     this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All ship data and settings preferences will be deleted. Proceed?")
       .then(isYes => {
         if(isYes) {
+          this.confirmedChanges = true;
+
           this.shipsService.ships = [];
           this.storage.remove("ships");
           this.storage.remove('USS');
@@ -70,7 +71,6 @@ export class SettingsComponent implements AfterViewInit, OnInit {
           this.storage.remove('KMS');
           this.storage.remove('IJN');
           this.settingsData.settings = JSON.parse(JSON.stringify(this.settingsData.defaultSettings));
-          this.confirmedChanges = true;
           this.misc.uiMode = this.settingsData.settings['ui-mode']
 
           this.settingsData.save();
@@ -91,16 +91,14 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   async save() {
     this.confirmedChanges = true;
 
+    this.settingsData.settings['ship-cards-per-row'] = this.inputShipCardsPerRow;
     this.settingsData.save();
 
-    await this.settingsData.refresh().then(() => {
-      this.misc.uiMode = <"Icon" | 'Sheet'>this.settingsData.settings['ui-mode'];
-    })
-
+    this.misc.uiMode = this.settingsData.settings['ui-mode']
     this.misc.refreshIconList();
     this.filter.filter();
     
-    this.modalController.dismiss();
+    this.exit();
   }
 
   exit() {
@@ -110,6 +108,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   ngOnDestroy() {
     this.importedCsvSubscription.unsubscribe();
     this.prompt.exit();
+
     if(!this.confirmedChanges) {
       Object.keys(this.initialSettings).forEach(setting => {
         this.storage.set(setting, this.initialSettings[setting]);
