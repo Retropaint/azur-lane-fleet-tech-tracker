@@ -13,9 +13,9 @@ import { SortService } from 'src/app/services/sort.service';
 })
 export class ShipCardListComponent implements AfterViewInit {
 
-  //@ViewChild('list') list: ElementRef;
-
+  // shisp are divided into rows, so virtual scrolling can work by treating it like a list of items
   rows: Ship[][] = [];
+
   rowHeight: number;
   refreshCount: number;
   isLoading: boolean = true;
@@ -61,17 +61,13 @@ export class ShipCardListComponent implements AfterViewInit {
     // get width of list element to calculate how many ships can fit in a row
     let listWidth = this.list.nativeElement.getBoundingClientRect().width;
 
-    if(desiredShipsPerRow == null) {
-      desiredShipsPerRow = this.getMaximumShipsPerRow(listWidth);
-    }
-
-    const shipCardSize = (listWidth / desiredShipsPerRow) - 10 - 20;
+    const shipCardSize = (listWidth / desiredShipsPerRow) - 30;
     const ratio = (shipCardSize / 100);
 
     document.documentElement.style.setProperty('--ship-card-zoom', ratio.toString());
     this.rowHeight = 158 * ratio;
     
-    // create rows array
+    // create ship list
     let rowIndex = 0;
     this.shipsService.setAllProperShipPos(this.sort.immediateSort(this.shipsService.ships)).forEach(ship => {
       if(this.misc.shipsFilterPass[ship.id] || Object.keys(this.misc.shipsFilterPass).length == 0) {
