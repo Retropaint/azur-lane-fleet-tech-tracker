@@ -41,7 +41,7 @@ export class MiscService {
 
   filteringMaxTech: boolean = true;
 
-  hasFocus: boolean = false;
+  hasFocus: boolean = true;
   blurOnShipListLoad: boolean = false;
 
   constructor() { }
