@@ -93,11 +93,11 @@
 .ship-level {
   font-family: AgencyGothic;
   text-align: right;
-  float: right;
   font-size: 17px;
   margin: 0px;
+  -webkit-user-select: none;
   user-select: none;
-  transform: translate(-6px,-1.5px);
+  transform: translateY(-1.5px);
   color: white;
   cursor: pointer;
 
@@ -252,7 +252,10 @@
   }
 
   &.hull {
+    display: flex;
+    justify-content: space-between;
     transform-origin: top left;
+    padding-right: 5px;
 
     &.scale {
       transform-origin: top;
