@@ -22,24 +22,14 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   flashCSS: 'in' | 'out' = 'out';
   rarity: string;
   hull: string;
+  stat: string;
+  bonus: number;
   loadedImage: boolean = false;
   scaleThumbnail: boolean;
+  imageFirst: boolean;
 
   @Input() ship: Ship = null;
   @Input() currentCategory: string;
-
-  fleetTechStatIconWidths = {
-    "HP": 16,
-    "AA": 17,
-    "ASW": 18,
-    "TRP": 16,
-    "FP": 20,
-    "EVA": 15,
-    "HIT": 16,
-    "AVI": 17,
-    "RLD": 15,
-    null: 0
-  };
 
   constructor(
     private modalController: ModalController,
@@ -53,6 +43,10 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.imageSrc = this.getImageSrc();
     this.hoverTitle = this.hoverTitles.getTechStatTitle(this.ship);
+    this.rarity = this.getRarity();
+    this.hull = this.getHull();
+    this.stat = this.getStat();
+    this.bonus = this.getBonus();
 
     this.scaleThumbnail = document.documentElement.style.getPropertyValue('--ship-card-zoom') > (1).toString();
   }
@@ -81,15 +75,28 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getFallbackThumbnail() {
+    this.imageSrc = this.ship.fallbackThumbnail;
+  }
+
+  getStat() {
+    return (this.misc.filteringMaxTech) ? this.ship.techStat : this.ship.obtainStat
+  }
+
+  getBonus() {
+    return (this.misc.filteringMaxTech) ? this.ship.techBonus : this.ship.obtainBonus
+  }
+
   ngAfterViewInit() {
     // fade in
     setTimeout(() => {
+      console.timeEnd('full')
       this.fadeCSS = "in";
-    }, 100)
+    }, 50)
   }
 
-  getFallbackThumbnail() {
-    this.imageSrc = this.ship.fallbackThumbnail;
+  imageLoaded() {
+    this.fadeCSS = "in";
   }
 
   async enterLevel() {
@@ -119,13 +126,5 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
       }
     })
     modal.present();
-  }
-
-  getStat() {
-    return (this.misc.filteringMaxTech) ? this.ship.techStat : this.ship.obtainStat
-  }
-
-  getBonus() {
-    return (this.misc.filteringMaxTech) ? this.ship.techBonus : this.ship.obtainBonus
   }
 }
