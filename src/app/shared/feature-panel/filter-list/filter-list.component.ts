@@ -36,4 +36,9 @@ export class FilterListComponent implements OnInit {
       this.filter.pressedFilter("All", this.filter[filter]);
     }
   }
+
+  toggleTechType() {
+    this.misc.filteringMaxTech = !this.misc.filteringMaxTech;
+    this.filter.filter();
+  }
 }

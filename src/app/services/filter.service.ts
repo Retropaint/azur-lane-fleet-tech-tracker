@@ -184,7 +184,7 @@ export class FilterService {
       return;
     }
 
-    if(!this.genericFilterCheck(ship, this.stats, 'techStat')) {
+    if(!this.genericFilterCheck(ship, this.stats, (this.misc.filteringMaxTech ? 'techStat' : 'obtainStat'))) {
       return;
     }
 

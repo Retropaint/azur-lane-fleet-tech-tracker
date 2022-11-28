@@ -114,4 +114,12 @@ export class SheetShipRowComponent implements OnInit {
       }
     })
   }
+
+  getStat() {
+    return (this.misc.filteringMaxTech) ? this.ship.techStat : this.ship.obtainStat
+  }
+
+  getBonus() {
+    return (this.misc.filteringMaxTech) ? this.ship.techBonus : this.ship.obtainBonus
+  }
 }

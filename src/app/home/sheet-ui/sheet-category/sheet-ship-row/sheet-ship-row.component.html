@@ -7,12 +7,12 @@
 <td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle">
   <div class="tech-stat-container">
     <!-- tech stat icon -->
-    <img *ngIf="ship.techStat" [alt]="ship.techStat" class="ship-hull-icon {{ship.techStat}}" [style.width]="fleetTechStatIconWidths[ship.techStat] + 'px'" [style.height]="fleetTechStatIconHeights[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"/>
+    <img *ngIf="getStat() != null" [alt]="getStat()" class="ship-hull-icon {{getStat()}}" [style.width]="fleetTechStatIconWidths[getStat()] + 'px'" [style.height]="fleetTechStatIconHeights[getStat()] + 'px'" [src]="'assets/icons/stat icons/' + getStat() + '.png'"/>
     
     <!-- tech stat bonus -->
-    <div *ngIf="ship.techStat" class="tech-bonus" >+{{ship.techBonus}}</div>
+    <div *ngIf="getBonus() != null" class="tech-bonus" >+{{getBonus()}}</div>
     
-    <div *ngIf="!ship.techStat" class="tech-bonus none">-</div>
+    <div *ngIf="getStat() == null" class="tech-bonus none">-</div>
   </div>
 </td>
 

@@ -120,4 +120,12 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     })
     modal.present();
   }
+
+  getStat() {
+    return (this.misc.filteringMaxTech) ? this.ship.techStat : this.ship.obtainStat
+  }
+
+  getBonus() {
+    return (this.misc.filteringMaxTech) ? this.ship.techBonus : this.ship.obtainBonus
+  }
 }

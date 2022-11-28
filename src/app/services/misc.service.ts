@@ -39,6 +39,8 @@ export class MiscService {
 
   includeNonTechShips: boolean = false;
 
+  filteringMaxTech: boolean = true;
+
   constructor() { }
 
   async switchTechMode() {

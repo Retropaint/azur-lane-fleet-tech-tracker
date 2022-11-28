@@ -8,9 +8,9 @@
       <ion-img class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"></ion-img>
       
       <!-- tech stat and bonus -->
-      <div [title]="hoverTitle" *ngIf="ship.techStat != null">
-        <ion-img class="ship-hull-icon {{ship.techStat}}" [style]="'width: ' + fleetTechStatIconWidths[ship.techStat] + 'px'" [src]="'assets/icons/stat icons/' + ship.techStat + '.png'"></ion-img>
-        <p class="double-stats-text">+{{ship.techBonus}}</p>
+      <div [title]="hoverTitle" *ngIf="getStat() != null">
+        <ion-img class="ship-hull-icon {{getStat()}}" [style]="'width: ' + fleetTechStatIconWidths[getStat()] + 'px'" [src]="'assets/icons/stat icons/' + getStat() + '.png'"></ion-img>
+        <p class="double-stats-text">+{{getBonus()}}</p>
       </div>
     </div>
 

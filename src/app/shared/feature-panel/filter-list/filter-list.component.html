@@ -12,11 +12,24 @@
 
 <!-- stat filter -->
 <div class="container">
-  <p class="generic-text filter-category-name" [ngClass]="{'mobile' : misc.isMobile}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['stats']  ? 'fold' : 'unfold'}}">
-    Stat
-    <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['stats']"></ion-icon>
-    <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
-  </p>
+  <div style="display: flex">
+    <p class="generic-text filter-category-name stat" [ngClass]="{'mobile' : misc.isMobile}" (click)="toggleFold('stats')" title="Click to {{unfoldedFilters['stats']  ? 'fold' : 'unfold'}}">
+      Stat
+      <ion-icon name="caret-down-outline" *ngIf="unfoldedFilters['stats']"></ion-icon>
+      <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['stats']"></ion-icon>
+    </p>
+  
+    <div class="toggle-flag max" (click)="toggleTechType()" title="Filter by ships who give the corresponding stat at lv 120.&#013;Affects stat displayed in ship card/row." *ngIf="unfoldedFilters['stats']">
+      <app-toggle-flag [toggle]="misc.filteringMaxTech"></app-toggle-flag>
+      <p class="generic-text inline-block">On Max</p>
+    </div>
+  
+    <div class="toggle-flag" (click)="toggleTechType()" title="Filter by ships who give the corresponding stat upon being obtained.&#013;Affects stat displayed in ship card/row." *ngIf="unfoldedFilters['stats']">
+      <app-toggle-flag [toggle]="!misc.filteringMaxTech"></app-toggle-flag>
+      <p class="generic-text inline-block">On Obtain</p>
+    </div>
+  </div>
+  
   <div class="button-container" *ngIf="unfoldedFilters['stats']">
     <app-filter-button *ngFor="let stat of statNames; let i = index" [filterName]="stat" [filterType]="filter.stats" fileName="stat"></app-filter-button>
   </div>
