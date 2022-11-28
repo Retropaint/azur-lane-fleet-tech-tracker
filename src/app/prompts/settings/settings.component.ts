@@ -20,7 +20,6 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
   modalIndex: number;
-  inputShipCardsPerRow: number;
   confirmedChanges: boolean;
   isInvalidImport: boolean;
 
@@ -43,7 +42,6 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.csv.settingsText = "";
     this.initialSettings = JSON.parse(JSON.stringify(this.settingsData.settings))
-    this.inputShipCardsPerRow = this.initialSettings['ship-cards-per-row'];
 
     this.csv.importStatus.subscribe(wasSuccessful => {
       if(wasSuccessful) {
@@ -90,12 +88,10 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   async save() {
     this.confirmedChanges = true;
-
-    this.settingsData.settings['ship-cards-per-row'] = this.inputShipCardsPerRow;
     this.settingsData.save();
 
     this.misc.uiMode = this.settingsData.settings['ui-mode']
-    this.misc.refreshIconList();
+    this.misc.refreshShipList();
     this.filter.filter();
     
     this.exit();
@@ -111,10 +107,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
     if(!this.confirmedChanges) {
       this.settingsData.settings = JSON.parse(JSON.stringify(this.initialSettings))
-
-      Object.keys(this.initialSettings).forEach(setting => {
-        this.storage.set(setting, this.initialSettings[setting]);
-      })
+      this.settingsData.save();
     }
   }
 }
