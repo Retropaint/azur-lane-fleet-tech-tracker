@@ -63,12 +63,15 @@
 }
 
 .ship-hull-icon {
-  width: 24.5px;
   height: 15.08px;
   z-index: 1;
   float: left;
   user-select: none;
   -webkit-user-drag: none;
+
+  &.FP {
+    width: 20px;
+  }
 }
 
 .ship-hull-icon.applicable {
