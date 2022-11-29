@@ -74,7 +74,6 @@ export class ShipCardListComponent implements AfterViewInit {
     document.documentElement.style.setProperty('--ship-card-zoom', ratio.toString());
     this.rowHeight = 158 * ratio;
     
-    console.time('full')
     // create ship list
     let rowIndex = 0;
     const shipsFilterPassLength = Object.keys(this.misc.shipsFilterPass).length
