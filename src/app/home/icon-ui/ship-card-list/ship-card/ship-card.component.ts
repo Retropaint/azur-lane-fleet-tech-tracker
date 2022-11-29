@@ -26,7 +26,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   bonus: number;
   loadedImage: boolean = false;
   scaleThumbnail: boolean;
-  imageFirst: boolean;
 
   @Input() ship: Ship = null;
   @Input() currentCategory: string;
@@ -37,7 +36,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     public misc: MiscService,
     private shipsService: ShipsService,
     private settingsData: SettingsDataService,
-    private http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -49,6 +47,12 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
     this.bonus = this.getBonus();
 
     this.scaleThumbnail = document.documentElement.style.getPropertyValue('--ship-card-zoom') > (1).toString();
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.fadeCSS = 'in';
+    })
   }
 
   getHull() {
@@ -85,18 +89,6 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
   getBonus() {
     return (this.misc.filteringMaxTech) ? this.ship.techBonus : this.ship.obtainBonus
-  }
-
-  ngAfterViewInit() {
-    // fade in
-    setTimeout(() => {
-      console.timeEnd('full')
-      this.fadeCSS = "in";
-    }, 50)
-  }
-
-  imageLoaded() {
-    this.fadeCSS = "in";
   }
 
   async enterLevel() {
