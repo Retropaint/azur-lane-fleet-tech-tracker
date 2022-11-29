@@ -11,7 +11,7 @@
   <!-- viewing faction tech -->
   <div *ngIf="viewingFaction != null && viewingFactionLevel > 0" class="faction-tech-container">
     <app-generic-big-button text="Change Level" extraCSS="inline-block" class="change-level" [ngClass]="{'mobile' : misc.isMobile}" (click)="changeLevel()"></app-generic-big-button>
-    <p class="generic-text">{{viewingFaction}}</p>
+    <p class="generic-text faction-header">{{viewingFaction}}</p>
     <app-tech-hull-stat-display [statsObject]="viewingFactionStats"></app-tech-hull-stat-display>
   </div>
 
