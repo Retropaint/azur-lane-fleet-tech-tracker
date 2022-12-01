@@ -35,7 +35,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     private shipsService: ShipsService,
     public csv: CsvService,
     private misc: MiscService,
-    private settingsData: SettingsDataService,
+    public settingsData: SettingsDataService,
     private filter: FilterService
   ) { }
 
