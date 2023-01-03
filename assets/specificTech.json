@@ -1,0 +1,21 @@
+{
+  "specifics120": {
+    "Elbe": ["CVL"],
+    "Perseus": ["CVL"],
+    "Hood": ["BC"],
+    "Dunkerque": ["BC"],
+    "Gneisenau": ["BC"],
+    "Haruna": ["BC"],
+    "Hiei": ["BC"],
+    "Kirishima": ["BC"],
+    "Kongou": ["BC"],
+    "Lützow": ["BC"],
+    "Renown": ["BC"],
+    "Repulse": ["BC"],
+    "Scharnhorst": ["BC"],
+    "Seydlitz": ["BC"]
+  },
+
+  "specificsObtain": {
+  }
+}
