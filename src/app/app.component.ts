@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { SettingsComponent } from './prompts/settings/settings.component';
+import { ApplicableHullsService } from './services/applicable-hulls.service';
 import { AzurapiService } from './services/azurapi.service';
 import { FactionTechDataService } from './services/faction-tech-data.service';
 import { FilterService } from './services/filter.service';
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit {
     private menuController: MenuController,
     public misc: MiscService,
     private filter: FilterService,
+    private applicableHulls: ApplicableHullsService
   ) {}
 
   async ngOnInit() {
@@ -48,6 +50,8 @@ export class AppComponent implements OnInit {
     await this.settingsData.refresh();
 
     await this.ships.init();
+
+    this.applicableHulls.init();
 
     this.factionTechData.init();
 
