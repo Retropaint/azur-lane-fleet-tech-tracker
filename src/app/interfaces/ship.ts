@@ -13,6 +13,7 @@ export interface Ship {
   obtainStat?: string;
   obtainBonus?: number;
   retroHull: string;
+  retroThumbnail: string;
   isObtained: boolean;
   obtainAppliedHulls?: string[];
   techPoints?: {
