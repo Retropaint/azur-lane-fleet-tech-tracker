@@ -56,7 +56,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   }
 
   getHull() {
-    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-forms'] == 'Yes') {
+    if(this.ship.hasRetrofit && this.ship.retroHull && this.settingsData.settings['retrofit-forms'] == 'Yes') {
       return this.ship.retroHull;
     } else {
       return this.ship.hull;
@@ -73,7 +73,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
 
   getImageSrc() {
     if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-forms'] == 'Yes') {
-      return 'assets/ship thumbnails/' + (parseInt(this.ship.id) + 3000) + '.webp';
+      return this.ship.retroThumbnail;
     } else {
       return 'assets/ship thumbnails/' + this.ship.id + '.webp';
     }
