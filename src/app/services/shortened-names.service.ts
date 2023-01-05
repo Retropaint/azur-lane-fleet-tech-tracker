@@ -38,7 +38,7 @@ export class ShortenedNamesService {
     "Heavy Cruiser": "CA",
     "Large Cruiser": "CB",
     "Munition Ship": "AE",
-    "Repair": "AR",
+    "Repair Ship": "AR",
     "Submarine": "SS",
     "Submarine Carrier": "SSV",
     "Monitor": "BM",
@@ -46,15 +46,15 @@ export class ShortenedNamesService {
   }
   
   stats = {
-    "firepower": "FP", 
-    "torpedo": "TRP", 
-    "aviation": "AVI", 
-    "antiair": "AA", 
-    "reload": "RLD", 
-    "accuracy": 'HIT', 
-    "antisubmarineWarfare": "ASW", 
-    "evasion": "EVA", 
-    "health": "HP"
+    "Firepower": "FP", 
+    "Torpedo": "TRP", 
+    "Aviation": "AVI", 
+    "AA": "AA", 
+    "Reload": "RLD", 
+    "Accuracy": 'HIT', 
+    "ASW": "ASW", 
+    "Evasion": "EVA", 
+    "Health": "HP"
   };
 
   // applicable hull names are sometimes different
@@ -69,7 +69,7 @@ export class ShortenedNamesService {
     "Submarine carrier": "SSV",
     "Submarine": "SS",
     "Light cruiser": "CL",
-    "Heavy cruiser": "CA",
+    "Heavy Cruiser": "CA",
     "Large cruiser": "CB",
     "Battlecruiser": "BC",
     "Destroyer": "DD",
