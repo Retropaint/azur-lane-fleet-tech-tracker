@@ -15,7 +15,8 @@ export class ShortenedNamesService {
     "Iris Libre": "FFNF", 
     "Vichya Dominion": "MNF", 
     "Sardegna Empire": "RN",
-    "Tempesta": "MOT"
+    "Tempesta": "MOT",
+    "META": "META"
   };
 
   hulls = {
