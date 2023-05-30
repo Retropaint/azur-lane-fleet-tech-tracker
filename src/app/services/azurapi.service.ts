@@ -5,6 +5,8 @@ import { ShipsService } from './ships.service';
 import { ShortenedNamesService } from './shortened-names.service';
 import md5 from 'crypto-js/md5';
 import { ApplicableHullsService } from './applicable-hulls.service';
+import { MiscService } from './misc.service';
+import { FilterService } from './filter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,8 @@ export class AzurapiService {
     private storage: Storage, 
     private shortenedNames: ShortenedNamesService,
     private shipsService: ShipsService,
-    private applicableHulls: ApplicableHullsService
+    private applicableHulls: ApplicableHullsService,
+    private filterService: FilterService
   ) {}
 
   async init() {
@@ -27,19 +30,16 @@ export class AzurapiService {
     
     let savedShips: LocalShip[] = await this.storage.get("ships");
 
-    await this.fetchShips("https://raw.githubusercontent.com/thebombzen/thebombzen.moe/main/azur-lane/data/shiplist_0.json", savedShips);
-    await this.fetchShips("https://raw.githubusercontent.com/thebombzen/thebombzen.moe/main/azur-lane/data/shiplist_1.json", savedShips);
+    await this.fetchShips("https://traneptora.com/azur-lane/data/shiplist_0.json", savedShips);
+    await this.fetchShips("https://traneptora.com/azur-lane/data/shiplist_1.json", savedShips);
 
-    console.log(this.shipsService.ships)
+    this.filterService.filter();
 
     this.hasLoaded = true;
-    this.shipsService.save();
-
-    console.log('what')
   }
 
   async fetchShips(url: string, savedShips: LocalShip[]) {
-    fetch(url)
+    await fetch(url)
     .then(value => value.text())
     .then(ships => {
       JSON.parse(ships).cargoquery.forEach(ship => {
@@ -51,7 +51,6 @@ export class AzurapiService {
   }
 
   async parseShip(ship: any, savedShips: LocalShip[]) {
-    let imageName = ship.Name.replace(' ', '_') + "ShipyardIcon.png";
     let hash = md5(imageName).toString();
     
     let retroImageName = ship.Name.replace(' ', '_') + "KaiShipyardIcon.png";
@@ -72,7 +71,6 @@ export class AzurapiService {
     }
 
     if(ship.StatBonus120) {
-
       newShip = {
         ...newShip,
         techBonus: parseInt(ship.StatBonus120),
@@ -82,9 +80,9 @@ export class AzurapiService {
         obtainBonus: parseInt(ship.StatBonusCollect),
         obtainAppliedHulls: await this.applicableHulls.getHulls("obtain", newShip.name, newShip.hull),
         techPoints: {
-          obtain: ship.TechPointCollect,
-          maxLevel: ship.TechPoint120,
-          maxLimitBreak: ship.TechPointMLB
+          obtain: parseInt(ship.TechPointCollect),
+          maxLevel: parseInt(ship.TechPoint120),
+          maxLimitBreak: parseInt(ship.TechPointMLB)
         }
       }
     }

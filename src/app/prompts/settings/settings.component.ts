@@ -91,7 +91,6 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     this.settingsData.save();
 
     this.misc.uiMode = this.settingsData.settings['ui-mode']
-    this.misc.refreshShipList();
     this.filter.filter();
     
     this.exit();

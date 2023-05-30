@@ -90,7 +90,6 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
       }
     }
 
-    this.shipsService.refreshCogChipReq(this.misc.shipsFilterPass);
     this.shipsService.save();
     this.filter.filter();
     

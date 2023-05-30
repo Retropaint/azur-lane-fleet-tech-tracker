@@ -92,23 +92,23 @@ export class FilterService {
       }
     })
 
-    this.shipsService.refreshCogChipReq(this.misc.shipsFilterPass);
-
     this.misc.refreshShipList();
+
+    this.shipsService.refreshCogChipReq(this.misc.shipsFilterPass);
   }
 
   passesCriteria(ship: Ship) {
     let isHullQualified = false;
 
     const checkHullFilter = (hull: string) => {
-      if(this.hulls[hull] || this.hulls.All == true) {
+      if(this.hulls[hull] || this.hulls.All) {
         isHullQualified = true;
       }
     }
     
     // check hull
     let hull = null;
-    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && ship.hasRetrofit) {
+    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && ship.retroHull) {
       hull = ship.retroHull
     } else {
       hull = ship.hull;
