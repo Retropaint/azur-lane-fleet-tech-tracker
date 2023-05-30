@@ -51,6 +51,7 @@ export class AzurapiService {
   }
 
   async parseShip(ship: any, savedShips: LocalShip[]) {
+    let imageName = ship.Name.replaceAll(' ', '_') + "ShipyardIcon.png";
     let hash = md5(imageName).toString();
     
     let retroImageName = ship.Name.replace(' ', '_') + "KaiShipyardIcon.png";
