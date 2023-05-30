@@ -115,6 +115,9 @@ export class CsvService {
             }
 
             // set properties
+            if(row[nameCol].includes(" (Retrofit)")) {
+              row[nameCol] = <string>row[nameCol].slice(0, row[nameCol].indexOf(" (Retrofit)"))
+            }
             const ship = script.shipsService.getByName(row[nameCol]);
             ship.level = parseInt(row[levelCol]);
             ship.isObtained = row[obtainedCol].toUpperCase() == 'TRUE' ? true : false;
@@ -131,12 +134,7 @@ export class CsvService {
   }
 
   getColumnByName(name: string, row: any): number {
-    for(let c = 0; c < row.length; c++) {
-      // set both to upper case to prevent case sensitivity
-      if(row[c].toUpperCase() == name.toUpperCase()) {
-        return c;
-      }
-    }
-    return null;
+    console.log(row)
+    return row.findIndex(row => row.toUpperCase() == name.toUpperCase());
   }
 }
