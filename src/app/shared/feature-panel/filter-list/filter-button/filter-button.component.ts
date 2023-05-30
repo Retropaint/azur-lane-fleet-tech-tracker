@@ -39,7 +39,4 @@ export class FilterButtonComponent implements OnInit {
     }
     this.filter.pressedFilter(this.filterName, this.filterType);
   }
-
-  test() {
-  }
 }
