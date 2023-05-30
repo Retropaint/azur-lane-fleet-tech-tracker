@@ -232,27 +232,6 @@ export class FilterService {
     this.oneSelectedHull = this.getTheOnlyOne(this.hulls);
     this.oneSelectedStat = this.getTheOnlyOne(this.stats);
 
-    if(filterType == this.stats) {
-      if(this.stats['Has Tech'] && this.stats['No Tech']) {
-        Object.keys(this.stats).forEach(stat => {
-          this.stats[stat] = false;
-        })
-        this.stats['All'] = true;
-        this.filter();
-        return;
-      }
-
-      if(name != 'Has Tech' && name != 'No Tech') {
-        this.stats['Has Tech'] = false;
-      } else if(name == 'Has Tech') {
-        Object.keys(this.stats).forEach(stat => {
-          if(stat != 'Has Tech' && stat != 'No Tech') {
-            this.stats[stat] = false;
-          }
-        })
-      }
-    }
-
     this.filter();
   }
 
