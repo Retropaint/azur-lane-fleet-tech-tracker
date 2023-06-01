@@ -76,7 +76,7 @@ export class FleetTechService {
       let name = ["USS", "HMS", "IJN", "KMS"].find(name => name == ship.faction);
       if(name != null && ship.techPoints) {
         this[`points${name}`] += (ship.isObtained) ? ship.techPoints.obtain : 0;
-        this[`points${name}`] += (ship.level >= 70) ? ship.techPoints.maxLimitBreak : 0;
+        this[`points${name}`] += (ship.level >= 71) ? ship.techPoints.maxLimitBreak : 0;
         this[`points${name}`] += (ship.level >= 120) ? ship.techPoints.maxLevel : 0;
       }
     })
