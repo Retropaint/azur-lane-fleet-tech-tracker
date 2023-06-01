@@ -640,7 +640,7 @@ export class FactionTechDataService {
       DDG: {
         HP: 35,
         FP: 9,
-        TRP: 5
+        TRP: 12
       },
       CA: {
         HP: 35,
@@ -767,9 +767,6 @@ export class FactionTechDataService {
 
       // add or replace hull with its stats
       for(const hull of Object.keys(factionData[i])) {
-        if(hull == 'DDG') {
-          continue;
-        }
         factionStats[hull] = factionData[i][hull];
       }
     }

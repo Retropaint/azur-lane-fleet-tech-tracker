@@ -20,8 +20,7 @@ export class CsvService {
   constructor(
     private shipsService: ShipsService,
     private misc: MiscService,
-    private sort: SortService,
-    private filter: FilterService
+    private sort: SortService
   ) { }
 
   export() {
@@ -134,7 +133,6 @@ export class CsvService {
   }
 
   getColumnByName(name: string, row: any): number {
-    console.log(row)
     return row.findIndex(row => row.toUpperCase() == name.toUpperCase());
   }
 }

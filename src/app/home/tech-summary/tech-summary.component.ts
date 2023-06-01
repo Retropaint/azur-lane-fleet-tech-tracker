@@ -83,9 +83,6 @@ export class TechSummaryComponent implements OnInit {
         }
 
         ship.obtainAppliedHulls.forEach(hull => {
-          if(hull == 'DDG') {
-            return;
-          }
           if(this.obtainStats[hull] == null) {
             this.obtainStats[hull] = {};
           }
@@ -110,9 +107,6 @@ export class TechSummaryComponent implements OnInit {
         }
 
         ship.appliedHulls.forEach(hull => {
-          if(hull == 'DDG') {
-            return;
-          }
           if(this.techStats[hull] == null) {
             this.techStats[hull] = {};
           }
@@ -209,9 +203,6 @@ export class TechSummaryComponent implements OnInit {
         return;
       }
       Object.keys(statSet).forEach(hull => {
-        if(hull == 'DDG') {
-          return;
-        }
         if(this.totalStats[hull] == null) {
           this.totalStats[hull] = {};
         }
