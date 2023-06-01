@@ -33,7 +33,7 @@ export class TechSummaryComponent implements OnInit {
   }
 
   constructor(
-    private factionTechData: FactionTechDataService, 
+    public factionTechData: FactionTechDataService, 
     public hoverTitles: HoverTitlesService, 
     private modalController: ModalController, 
     private storage: Storage,
