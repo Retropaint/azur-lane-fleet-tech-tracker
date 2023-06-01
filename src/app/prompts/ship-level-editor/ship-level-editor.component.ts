@@ -2,6 +2,7 @@ import { AfterContentChecked, AfterViewChecked, AfterViewInit, Component, Elemen
 import { IonInput, ModalController } from '@ionic/angular';
 import { Ship } from 'src/app/interfaces/ship';
 import { FilterService } from 'src/app/services/filter.service';
+import { FleetTechService } from 'src/app/services/fleet-tech.service';
 import { MiscService } from 'src/app/services/misc.service';
 import { PromptService } from 'src/app/services/prompt.service';
 import { ShipsService } from 'src/app/services/ships.service';
@@ -31,7 +32,8 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
     private modalController: ModalController, 
     private shipsService: ShipsService, 
     private filter: FilterService,
-    private misc: MiscService
+    private misc: MiscService,
+    private fleetTech: FleetTechService
   ) { }
 
   ngOnInit() {
@@ -146,6 +148,7 @@ export class ShipLevelEditorComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy() {
+    this.fleetTech.refresh();
     this.prompt.exit();
   }
 }

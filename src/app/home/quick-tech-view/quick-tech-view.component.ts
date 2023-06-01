@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FilterService } from 'src/app/services/filter.service';
+import { FleetTechService } from 'src/app/services/fleet-tech.service';
 import { HullHierarchyService } from 'src/app/services/hull-hierarchy.service';
 import { MiscService } from 'src/app/services/misc.service';
 import { ShipsService } from 'src/app/services/ships.service';
@@ -18,14 +19,11 @@ export class QuickTechViewComponent implements OnInit {
     public shipsService: ShipsService, 
     public filter: FilterService, 
     public hullHierarchy: HullHierarchyService,
-    public misc: MiscService
+    public misc: MiscService,
+    public fleetTech: FleetTechService
   ) { }
 
-  ngOnInit() {}
-
-  toggleNonTechShips() {
-    this.misc.includeNonTechShips = !this.misc.includeNonTechShips;
-    this.filter.filter();
+  ngOnInit() {
   }
 
 }
