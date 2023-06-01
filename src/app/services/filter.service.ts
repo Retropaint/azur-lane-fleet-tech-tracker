@@ -4,6 +4,7 @@ import { Ship } from '../interfaces/ship';
 import { ShipsService } from './ships.service';
 import { SettingsDataService } from './settings-data.service';
 import { MiscService } from './misc.service';
+import { FleetTechService } from './fleet-tech.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class FilterService {
     private shipsService: ShipsService, 
     private settingsData: SettingsDataService,
     private misc: MiscService,
+    private fleetTech: FleetTechService
   ) { }
 
   oneSelectedStat: string;
@@ -248,21 +250,20 @@ export class FilterService {
   }
 
   getTheOnlyOne(type: any) {
-    let filterCount = 0;
+    let gotOne: boolean = false;
     let chosenFilter = "";
     for(const toggle of Object.keys(type)) {
       if(type[toggle]) {
-        filterCount++;
+        if(gotOne) {
+          return;
+        }
+        gotOne = true;
         chosenFilter = toggle;
       }
     }
-    if(filterCount > 1) {
-      return;
-    }
-    if(chosenFilter == 'All') {
-      return null;
-    }
 
-    return chosenFilter;
+    if(chosenFilter != 'All') {
+      return chosenFilter;
+    }
   }
 }
