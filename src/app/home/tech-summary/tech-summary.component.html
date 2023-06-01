@@ -21,7 +21,7 @@
     <ion-icon name="caret-down-outline" *ngIf="!folded['total']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="folded['total']"></ion-icon>
   </p>
-  <app-tech-hull-stat-display *ngIf="!folded['total']" [statsObject]="totalStats"></app-tech-hull-stat-display>
+  <app-tech-hull-stat-display *ngIf="!folded['total']" [statsObject]="fleetTech.total"></app-tech-hull-stat-display>
 
   <!-- 120 tech -->
   <p class="generic-text display-name" (click)="toggleFold('max')">
@@ -29,7 +29,7 @@
     <ion-icon name="caret-down-outline" *ngIf="!folded['max']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="folded['max']"></ion-icon>
   </p>
-  <app-tech-hull-stat-display *ngIf="!folded['max']" [statsObject]="techStats" emptyMsg="No ships at Lv. 120"></app-tech-hull-stat-display>
+  <app-tech-hull-stat-display *ngIf="!folded['max']" [statsObject]="fleetTech.maxed" emptyMsg="No ships at Lv. 120"></app-tech-hull-stat-display>
 
   <!-- obtain tech -->
   <p class="generic-text display-name {{folded['obtain'] ? 'last-folded-margin' : ''}}" (click)="toggleFold('obtain')">
@@ -37,5 +37,5 @@
     <ion-icon name="caret-down-outline" *ngIf="!folded['obtain']"></ion-icon>
     <ion-icon name="caret-up-outline" *ngIf="folded['obtain']"></ion-icon>
   </p>
-  <app-tech-hull-stat-display *ngIf="!folded['obtain']" [statsObject]="obtainStats" [isLastTech]="true" emptyMsg="No ships marked as obtained"></app-tech-hull-stat-display>
+  <app-tech-hull-stat-display *ngIf="!folded['obtain']" [statsObject]="fleetTech.obtain" [isLastTech]="true" emptyMsg="No ships marked as obtained"></app-tech-hull-stat-display>
 </div>
