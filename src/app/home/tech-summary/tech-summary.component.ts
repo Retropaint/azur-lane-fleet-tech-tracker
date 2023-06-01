@@ -60,11 +60,11 @@ export class TechSummaryComponent implements OnInit {
     private storage: Storage,
     private shipsService: ShipsService,
     public misc: MiscService,
-    private fleetTechService: FleetTechService
+    private fleetTech: FleetTechService
   ) { }
 
   async ngOnInit() {
-    this.fleetTechService.refresh();
+    this.fleetTech.refresh();
 
     // load levels and respective faction stats
     const factions = ['USS', 'HMS', 'IJN', 'KMS']
@@ -73,57 +73,6 @@ export class TechSummaryComponent implements OnInit {
       this.factionTechData.getTotalStats(faction, this.levels[faction]);
       this.getFactionTech(faction, this.levels[faction]);
     }
-
-    // get obtain and collection stats
-    this.shipsService.ships.forEach(ship => {
-      if(ship.obtainStat == null) {
-        return;
-      }
-
-      // obtain
-      if(ship.isObtained) {
-        if(this.techPoints[ship.faction] != null) {
-          this.techPoints[ship.faction] += ship.techPoints.obtain;
-        }
-
-        ship.obtainAppliedHulls.forEach(hull => {
-          if(this.obtainStats[hull] == null) {
-            this.obtainStats[hull] = {};
-          }
-          if(this.obtainStats[hull][ship.obtainStat] == null) {
-            this.obtainStats[hull][ship.obtainStat] = ship.obtainBonus
-          } else {
-            this.obtainStats[hull][ship.obtainStat] += ship.obtainBonus
-          }
-        })
-      }
-
-      if(ship.level >= 70) {
-        if(this.techPoints[ship.faction] != null) {
-          this.techPoints[ship.faction] += ship.techPoints.maxLimitBreak;
-        }
-      }
-
-      // max
-      if(ship.isObtained && ship.level >= 120) {
-        if(this.techPoints[ship.faction] != null) {
-          this.techPoints[ship.faction] += ship.techPoints.maxLevel;
-        }
-
-        ship.appliedHulls.forEach(hull => {
-          if(this.techStats[hull] == null) {
-            this.techStats[hull] = {};
-          }
-          if(this.techStats[hull][ship.techStat] == null) {
-            this.techStats[hull][ship.techStat] = ship.techBonus
-          } else {
-            this.techStats[hull][ship.techStat] += ship.techBonus
-          }
-        })
-      }
-    })
-
-    this.getTotalStats();
   }
 
   async openFactionTech(fullFaction: string) {
@@ -164,7 +113,6 @@ export class TechSummaryComponent implements OnInit {
         this.storage.set(shortFaction, value.data);
         this.getFactionTech(shortFaction, this.levels[shortFaction]);
         this.setViewingFactionStats();
-        this.getTotalStats();
       }
     })
   }
@@ -195,30 +143,6 @@ export class TechSummaryComponent implements OnInit {
         this.kmsStats = this.factionTechData.getTotalStats('KMS', level);;
       break;
     }
-  }
-
-  getTotalStats() {
-    // reset
-    this.totalStats = {};
-    
-    const stats = [this.ussStats, this.hmsStats, this.ijnStats, this.kmsStats, this.obtainStats, this.techStats];
-    stats.forEach(statSet => {
-      if(Object.keys(statSet).length == 0) {
-        return;
-      }
-      Object.keys(statSet).forEach(hull => {
-        if(this.totalStats[hull] == null) {
-          this.totalStats[hull] = {};
-        }
-        Object.keys(statSet[hull]).forEach(stat => {
-          if(this.totalStats[hull][stat] == null) {
-            this.totalStats[hull][stat] = statSet[hull][stat]
-          } else {
-            this.totalStats[hull][stat] += statSet[hull][stat]
-          }
-        })
-      })
-    })
   }
 
   toggleFold(type: string) {
