@@ -25,7 +25,7 @@ export class ApplicableHullsService {
   }
 
   generalObtain = {
-    "CV": ["CVL"],
+    "CV": ["CV", "CVL"],
     "CVL": ["CV", "CVL"],
     "BB": ["BB", "BC", "BBV"],
     "BC": ["BB", "BC", "BBV"],
