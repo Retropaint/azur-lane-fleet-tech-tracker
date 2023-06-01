@@ -54,7 +54,6 @@ export class AzurapiService {
     let imageName = ship.Name.replaceAll(' ', '_') + "ShipyardIcon.png";
     let hash = md5(imageName).toString();
 
-    
     let retroImageName = ship.Name.replace(' ', '_') + "KaiShipyardIcon.png";
     let retroHash = md5(retroImageName).toString();
 
