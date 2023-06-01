@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage-angular';
 import { AppComponent } from 'src/app/app.component';
 import { FactionTechLevelEditorComponent } from 'src/app/prompts/faction-tech-level-editor/faction-tech-level-editor.component';
 import { FactionTechDataService } from 'src/app/services/faction-tech-data.service';
+import { FleetTechService } from 'src/app/services/fleet-tech.service';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 import { MiscService } from 'src/app/services/misc.service';
 import { ShipsService } from 'src/app/services/ships.service';
@@ -58,10 +59,13 @@ export class TechSummaryComponent implements OnInit {
     private shortenedNames: ShortenedNamesService,
     private storage: Storage,
     private shipsService: ShipsService,
-    public misc: MiscService
+    public misc: MiscService,
+    private fleetTechService: FleetTechService
   ) { }
 
   async ngOnInit() {
+    this.fleetTechService.refresh();
+
     // load levels and respective faction stats
     const factions = ['USS', 'HMS', 'IJN', 'KMS']
     for(const faction of factions) {
