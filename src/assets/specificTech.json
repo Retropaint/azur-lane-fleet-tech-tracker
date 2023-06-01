@@ -13,7 +13,8 @@
     "Renown": ["BC"],
     "Repulse": ["BC"],
     "Scharnhorst": ["BC"],
-    "Seydlitz": ["BC"]
+    "Seydlitz": ["BC"],
+    "Jade": ["CVL"]
   },
 
   "specificsObtain": {
