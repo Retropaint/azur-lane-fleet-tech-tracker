@@ -53,6 +53,7 @@ export class AzurapiService {
   async parseShip(ship: any, savedShips: LocalShip[]) {
     let imageName = ship.Name.replaceAll(' ', '_') + "ShipyardIcon.png";
     let hash = md5(imageName).toString();
+
     
     let retroImageName = ship.Name.replace(' ', '_') + "KaiShipyardIcon.png";
     let retroHash = md5(retroImageName).toString();
@@ -67,7 +68,7 @@ export class AzurapiService {
       hull: this.shortenedNames.hulls[ship.Type],
       fallbackThumbnail: `https://azurlane.netojuu.com/images/${hash[0]}/${hash[0]}${hash[1]}/${imageName}`,
       hasRetrofit: ship.ReloadKai > 0,
-      retroHull: this.shortenedNames.hulls[ship.SubtypeRetro],
+      retroHull: (this.shortenedNames.hulls[ship.SubtypeRetro]) ? this.shortenedNames.hulls[ship.SubtypeRetro] : this.shortenedNames.hulls[ship.Type],
       retroThumbnail: `https://azurlane.netojuu.com/images/${retroHash[0]}/${retroHash[0]}${retroHash[1]}/${retroImageName}`
     }
 
