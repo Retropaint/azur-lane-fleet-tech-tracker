@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
-import { AppComponent } from 'src/app/app.component';
 import { FactionTechLevelEditorComponent } from 'src/app/prompts/faction-tech-level-editor/faction-tech-level-editor.component';
 import { FactionTechDataService } from 'src/app/services/faction-tech-data.service';
 import { FleetTechService } from 'src/app/services/fleet-tech.service';
 import { HoverTitlesService } from 'src/app/services/hover-titles.service';
 import { MiscService } from 'src/app/services/misc.service';
-import { ShipsService } from 'src/app/services/ships.service';
-import { ShortenedNamesService } from 'src/app/services/shortened-names.service';
 
 @Component({
   selector: 'app-tech-summary',
@@ -22,75 +19,44 @@ export class TechSummaryComponent implements OnInit {
   // full faction name; shorthand is always gotten from shortenedNames
   viewingFaction: string;
 
-  viewingFactionStats: any;
-  viewingFactionLevel: number;
-  ussStats = {};
-  hmsStats = {};
-  ijnStats = {};
-  kmsStats = {};
-
-  obtainStats = {};
-  techStats = {};
-  totalStats = {};
-
-  levels = {
-    "USS": 0,
-    "HMS": 0,
-    "IJN": 0,
-    "KMS": 0
-  }
-
-  techPoints = {
-    "USS": 0,
-    "HMS": 0,
-    "IJN": 0,
-    "KMS": 0
-  }
-
   folded = {
     "total": false,
     "max": false,
     "obtain": false
   }
 
-  constructor(private factionTechData: FactionTechDataService, 
+  fullNames = {
+    "USS": "Eagle Union",
+    "HMS": "Royal Navy",
+    "IJN": "Sakura Empire",
+    "KMS": "Iron Blood"
+  }
+
+  constructor(
+    private factionTechData: FactionTechDataService, 
     public hoverTitles: HoverTitlesService, 
     private modalController: ModalController, 
-    private shortenedNames: ShortenedNamesService,
     private storage: Storage,
-    private shipsService: ShipsService,
     public misc: MiscService,
-    private fleetTech: FleetTechService
+    public fleetTech: FleetTechService
   ) { }
 
   async ngOnInit() {
     this.fleetTech.refresh();
-
-    // load levels and respective faction stats
-    const factions = ['USS', 'HMS', 'IJN', 'KMS']
-    for(const faction of factions) {
-      this.levels[faction] = await this.storage.get(faction) || 0;
-      this.factionTechData.getTotalStats(faction, this.levels[faction]);
-      this.getFactionTech(faction, this.levels[faction]);
-    }
   }
 
-  async openFactionTech(fullFaction: string) {
+  async openFactionTech(name: string) {
     // open level editor if faction level is 0
-    const level = await this.storage.get(this.shortenedNames.factions[fullFaction])
-    this.viewingFactionLevel = level;
-    if(!level || level == 0) {
-      this.viewingFaction = fullFaction;
-      this.setViewingFactionStats();
+    if(!this.factionTechData.levels[name] || this.factionTechData.levels[name] == 0) {
+      this.viewingFaction = name;
       this.changeLevel();
       return;
     }
 
-    if(this.viewingFaction == fullFaction) {
+    if(this.viewingFaction == name) {
       this.viewingFaction = null;
     } else {
-      this.viewingFaction = fullFaction;
-      this.setViewingFactionStats();
+      this.viewingFaction = name;
     }
   }
 
@@ -99,50 +65,19 @@ export class TechSummaryComponent implements OnInit {
       component: FactionTechLevelEditorComponent,
       animated: false,
       componentProps: {
-        "fullFactionName": this.viewingFaction,
-        "techPoints": this.techPoints[this.shortenedNames.factions[this.viewingFaction]]
+        "fullFactionName": this.fullNames[this.viewingFaction],
+        "techPoints": this.fleetTech[`points${this.viewingFaction}`]
       }
     })
     modal.present();
     modal.onDidDismiss().then(value => {
       if(value.data != null) {
-        const shortFaction = this.shortenedNames.factions[this.viewingFaction]
-
-        this.levels[shortFaction] = value.data;
-        this.viewingFactionLevel = value.data;
-        this.storage.set(shortFaction, value.data);
-        this.getFactionTech(shortFaction, this.levels[shortFaction]);
-        this.setViewingFactionStats();
+        this.factionTechData.levels[this.viewingFaction] = value.data;
+        this.storage.set(this.viewingFaction, value.data);
       }
+
+      this.fleetTech.refresh();
     })
-  }
-
-  setViewingFactionStats() {
-    switch(this.shortenedNames.factions[this.viewingFaction]) {
-      case "USS":
-        this.viewingFactionStats = this.ussStats;
-      break;case "HMS":
-        this.viewingFactionStats = this.hmsStats;
-      break;case "IJN":
-        this.viewingFactionStats = this.ijnStats;
-      break;case "KMS":
-        this.viewingFactionStats = this.kmsStats;
-      break;
-    }
-  }
-
-  getFactionTech(shortFaction: string, level: number) {
-    switch(shortFaction) {
-      case "USS":
-        this.ussStats = this.factionTechData.getTotalStats('USS', level);
-      break; case "HMS":
-        this.hmsStats = this.factionTechData.getTotalStats('HMS', level);
-      break; case "IJN":
-        this.ijnStats = this.factionTechData.getTotalStats('IJN', level);
-      break; case "KMS":
-        this.kmsStats = this.factionTechData.getTotalStats('KMS', level);;
-      break;
-    }
   }
 
   toggleFold(type: string) {

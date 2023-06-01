@@ -2,17 +2,17 @@
   <div *ngIf="misc.isMobile" style="height: 10px;"></div>
 
   <div class="faction-box-container">
-    <app-faction-tech-box fullFactionName="Eagle Union" [level]="levels['USS']" [techPoints]="techPoints['USS']" (click)="openFactionTech('Eagle Union')"></app-faction-tech-box>
-    <app-faction-tech-box fullFactionName="Royal Navy" [level]="levels['HMS']" [techPoints]="techPoints['HMS']" (click)="openFactionTech('Royal Navy')"></app-faction-tech-box>
-    <app-faction-tech-box fullFactionName="Sakura Empire" [level]="levels['IJN']" [techPoints]="techPoints['IJN']" (click)="openFactionTech('Sakura Empire')"></app-faction-tech-box>
-    <app-faction-tech-box fullFactionName="Iron Blood" [level]="levels['KMS']" [techPoints]="techPoints['KMS']" (click)="openFactionTech('Iron Blood')"></app-faction-tech-box>
+    <app-faction-tech-box fullFactionName="Eagle Union" [level]="factionTechData.levels['USS']" [techPoints]="fleetTech.pointsUSS" (click)="openFactionTech('USS')"></app-faction-tech-box>
+    <app-faction-tech-box fullFactionName="Royal Navy" [level]="factionTechData.levels['HMS']" [techPoints]="fleetTech.pointsHMS" (click)="openFactionTech('HMS')"></app-faction-tech-box>
+    <app-faction-tech-box fullFactionName="Sakura Empire" [level]="factionTechData.levels['IJN']" [techPoints]="fleetTech.pointsIJN" (click)="openFactionTech('IJN')"></app-faction-tech-box>
+    <app-faction-tech-box fullFactionName="Iron Blood" [level]="factionTechData.levels['KMS']" [techPoints]="fleetTech.pointsKMS" (click)="openFactionTech('KMS')"></app-faction-tech-box>
   </div>
   
   <!-- viewing faction tech -->
-  <div *ngIf="viewingFaction != null && viewingFactionLevel > 0" class="faction-tech-container">
+  <div *ngIf="viewingFaction != null && factionTechData.levels[viewingFaction] > 0" class="faction-tech-container">
     <app-generic-big-button text="Change Level" extraCSS="inline-block" class="change-level" [ngClass]="{'mobile' : misc.isMobile}" (click)="changeLevel()"></app-generic-big-button>
-    <p class="generic-text faction-header">{{viewingFaction}}</p>
-    <app-tech-hull-stat-display [statsObject]="viewingFactionStats"></app-tech-hull-stat-display>
+    <p class="generic-text faction-header">{{fullNames[viewingFaction]}}</p>
+    <app-tech-hull-stat-display [statsObject]="fleetTech[viewingFaction]"></app-tech-hull-stat-display>
   </div>
 
   <!-- total tech -->
