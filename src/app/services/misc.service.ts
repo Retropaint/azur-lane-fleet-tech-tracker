@@ -3,7 +3,7 @@ import { IonContent } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
 import { Subscription } from 'rxjs';
 import { ShipCardListComponent } from '../home/icon-ui/ship-card-list/ship-card-list.component';
-import { SheetCategoryComponent } from '../home/sheet-ui/sheet-category/sheet-category.component';
+import { SheetTableComponent } from '../home/sheet-ui/sheet-table/sheet-table.component';
 import { Ship } from '../interfaces/ship';
 import { SettingsDataService } from './settings-data.service';
 
@@ -26,7 +26,7 @@ export class MiscService {
   // used to call the refresh function
   shipCardList: ShipCardListComponent;
 
-  sheetCategory: SheetCategoryComponent
+  sheetTable: SheetTableComponent
 
   // var stored here to allow other components to use it, but home page handles other logic
   isBulkSelect: boolean;
@@ -64,8 +64,8 @@ export class MiscService {
     if(this.shipCardList != null) {
       this.shipCardList.refresh();
     }
-    if(this.sheetCategory != null) {
-      this.sheetCategory.refresh();
+    if(this.sheetTable != null) {
+      this.sheetTable.refresh();
     }
   }
 }

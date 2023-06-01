@@ -6,11 +6,11 @@ import { ShipsService } from 'src/app/services/ships.service';
 import { SortService } from 'src/app/services/sort.service';
 
 @Component({
-  selector: 'app-sheet-category',
-  templateUrl: './sheet-category.component.html',
-  styleUrls: ['./sheet-category.component.scss'],
+  selector: 'app-sheet-table',
+  templateUrl: './sheet-table.component.html',
+  styleUrls: ['./sheet-table.component.scss'],
 })
-export class SheetCategoryComponent implements OnInit {
+export class SheetTableComponent implements OnInit {
 
   isLoading: boolean = true;
   isFading: boolean = false;
@@ -26,12 +26,12 @@ export class SheetCategoryComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.misc.sheetCategory = this;
+    this.misc.sheetTable = this;
     this.filter.filter();
   }
 
   ngOnDestroy() {
-    this.misc.sheetCategory = null;
+    this.misc.sheetTable = null;
   }
 
   refresh() {

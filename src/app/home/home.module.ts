@@ -10,8 +10,8 @@ import { ShipCardComponent } from './icon-ui/ship-card-list/ship-card/ship-card.
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
 import { IconUIComponent } from './icon-ui/icon-ui.component';
 import { SheetUIComponent } from './sheet-ui/sheet-ui.component';
-import { SheetShipRowComponent } from './sheet-ui/sheet-category/sheet-ship-row/sheet-ship-row.component';
-import { SheetCategoryComponent } from './sheet-ui/sheet-category/sheet-category.component';
+import { SheetShipRowComponent } from './sheet-ui/sheet-table/sheet-ship-row/sheet-ship-row.component';
+import { SheetTableComponent } from './sheet-ui/sheet-table/sheet-table.component';
 import { ConfirmationComponent } from '../prompts/confirmation/confirmation.component';
 import { CreditsComponent } from '../prompts/credits/credits.component';
 import { TechSummaryComponent } from './tech-summary/tech-summary.component';
@@ -42,7 +42,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     IconUIComponent, 
     SheetUIComponent,
     SheetShipRowComponent,
-    SheetCategoryComponent,
+    SheetTableComponent,
     ConfirmationComponent,
     CreditsComponent,
     TechSummaryComponent,
@@ -60,12 +60,12 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     SheetShipRowComponent,
     ConfirmationComponent,
     CreditsComponent,
-    SheetCategoryComponent,
+    SheetTableComponent,
   ],
   providers: [
     IconUIComponent, 
     ConfirmationComponent,
-    SheetCategoryComponent,
+    SheetTableComponent,
   ]
 })
 export class HomePageModule {}
