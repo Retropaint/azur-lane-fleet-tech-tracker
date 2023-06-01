@@ -13,9 +13,7 @@
     "Renown": ["BC"],
     "Repulse": ["BC"],
     "Scharnhorst": ["BC"],
-    "Seydlitz": ["BC"],
-    "Perseus": ["CVL"],
-    "Elbe": ["CVL"]
+    "Seydlitz": ["BC"]
   },
 
   "specificsObtain": {
