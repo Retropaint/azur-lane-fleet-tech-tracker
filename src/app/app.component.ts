@@ -11,6 +11,7 @@ import { PromptService } from './services/prompt.service';
 import { SettingsDataService } from './services/settings-data.service';
 import { ShipsService } from './services/ships.service';
 import { SortService } from './services/sort.service';
+import { FleetTechService } from './services/fleet-tech.service';
 
 @Component({
   selector: 'app-root',
@@ -35,7 +36,8 @@ export class AppComponent implements OnInit {
     private menuController: MenuController,
     public misc: MiscService,
     private filter: FilterService,
-    private applicableHulls: ApplicableHullsService
+    private applicableHulls: ApplicableHullsService,
+    private fleetTech: FleetTechService
   ) {}
 
   async ngOnInit() {
@@ -62,6 +64,7 @@ export class AppComponent implements OnInit {
 
     this.azurapi.init().then(() => {
       this.sort.sort("Name", false, false);
+      this.fleetTech.refresh();
       this.filter.init();
     })
     
