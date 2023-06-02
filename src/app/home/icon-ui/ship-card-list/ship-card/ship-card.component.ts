@@ -56,7 +56,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   }
 
   getHull() {
-    if(this.ship.hasRetrofit && this.ship.retroHull && this.settingsData.settings['retrofit-forms'] == 'Yes') {
+    if(this.ship.hasRetrofit && this.ship.retroHull && this.settingsData.checkBool('retrofit-forms')) {
       return this.ship.retroHull;
     } else {
       return this.ship.hull;
@@ -64,7 +64,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   }
 
   getRarity() {
-    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-forms'] == 'Yes') {
+    if(this.ship.hasRetrofit && this.settingsData.checkBool('retrofit-forms')) {
       return this.shipsService.getRetroRarity(this.ship.id);
     } else {
       return this.ship.rarity;
@@ -72,7 +72,7 @@ export class ShipCardComponent implements OnInit, AfterViewInit {
   }
 
   getImageSrc() {
-    if(this.ship.hasRetrofit && this.settingsData.settings['retrofit-forms'] == 'Yes') {
+    if(this.ship.hasRetrofit && this.settingsData.checkBool('retrofit-forms')) {
       return this.ship.retroThumbnail;
     } else {
       return 'assets/ship thumbnails/' + this.ship.id + '.webp';

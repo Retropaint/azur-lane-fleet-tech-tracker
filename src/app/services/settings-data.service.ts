@@ -20,7 +20,7 @@ export class SettingsDataService {
     for(const setting of Object.keys(this.settings)) {
       const storageValue = await this.storage.get(setting);
       if(storageValue) {
-        this.settings[setting] = storageValue
+        this.settings[setting] = storageValue;
       }
     }
   }
@@ -29,5 +29,9 @@ export class SettingsDataService {
     Object.keys(this.settings).forEach(setting => {
       this.storage.set(setting, this.settings[setting]);
     })
+  }
+
+  checkBool(setting: 'retrofit-forms' | 'show-no-tech-ships') {
+    return this.settings[setting] == "Yes";
   }
 }
