@@ -76,10 +76,10 @@ export class AzurapiService {
         ...newShip,
         techBonus: parseInt(ship.StatBonus120),
         techStat: this.shortenedNames.stats[ship.StatBonus120Type],
-        appliedHulls: await this.applicableHulls.getHulls("120", newShip.name, newShip.hull),
+        appliedHulls: this.applicableHulls.getHulls("120", newShip.name, newShip.hull),
         obtainStat: this.shortenedNames.stats[ship.StatBonusCollectType],
         obtainBonus: parseInt(ship.StatBonusCollect),
-        obtainAppliedHulls: await this.applicableHulls.getHulls("obtain", newShip.name, newShip.hull),
+        obtainAppliedHulls: this.applicableHulls.getHulls("obtain", newShip.name, newShip.hull),
         techPoints: {
           obtain: parseInt(ship.TechPointCollect),
           maxLevel: parseInt(ship.TechPoint120),
