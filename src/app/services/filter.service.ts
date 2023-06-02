@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Ship } from '../interfaces/ship';
 
-import { ShipsService } from './ships.service';
-import { SettingsDataService } from './settings-data.service';
 import { MiscService } from './misc.service';
-import { FleetTechService } from './fleet-tech.service';
+import { SettingsDataService } from './settings-data.service';
+import { ShipsService } from './ships.service';
 
 @Injectable({
   providedIn: 'root'

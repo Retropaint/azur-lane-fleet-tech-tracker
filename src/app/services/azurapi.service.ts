@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
-import { LocalShip, Ship } from '../interfaces/ship';
-import { ShipsService } from './ships.service';
-import { ShortenedNamesService } from './shortened-names.service';
 import md5 from 'crypto-js/md5';
+import { LocalShip, Ship } from '../interfaces/ship';
 import { ApplicableHullsService } from './applicable-hulls.service';
-import { MiscService } from './misc.service';
 import { FilterService } from './filter.service';
 import { SettingsDataService } from './settings-data.service';
+import { ShipsService } from './ships.service';
+import { ShortenedNamesService } from './shortened-names.service';
 
 @Injectable({
   providedIn: 'root'

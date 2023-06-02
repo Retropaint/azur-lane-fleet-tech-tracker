@@ -1,13 +1,12 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { IonContent, MenuController, ModalController, Platform } from '@ionic/angular';
+import { IonContent, MenuController, ModalController } from '@ionic/angular';
 import { SettingsComponent } from '../prompts/settings/settings.component';
-import { ShipsService } from '../services/ships.service';
-import { MobileWarningComponent } from '../prompts/mobile-warning/mobile-warning.component';
-import { MiscService } from '../services/misc.service';
 import { ShipLevelEditorComponent } from '../prompts/ship-level-editor/ship-level-editor.component';
-import { PromptService } from '../services/prompt.service';
 import { AzurapiService } from '../services/azurapi.service';
+import { MiscService } from '../services/misc.service';
+import { PromptService } from '../services/prompt.service';
 import { SettingsDataService } from '../services/settings-data.service';
+import { ShipsService } from '../services/ships.service';
 
 @Component({
   selector: 'app-home',

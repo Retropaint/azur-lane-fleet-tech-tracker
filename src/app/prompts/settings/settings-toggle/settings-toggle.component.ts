@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage-angular';
 import { SettingsDataService } from 'src/app/services/settings-data.service';
 
 @Component({

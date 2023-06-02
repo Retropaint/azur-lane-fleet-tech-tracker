@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { LocalShip, Ship } from '../interfaces/ship';
 import { CogReqsService } from './cog-reqs.service';
-import { FactionTechDataService } from './faction-tech-data.service';
-import { HullHierarchyService } from './hull-hierarchy.service';
 import { MiscService } from './misc.service';
 import { SettingsDataService } from './settings-data.service';
 
@@ -25,8 +23,6 @@ export class ShipsService {
     private storage: Storage, 
     private cogReqList: CogReqsService, 
     private settingsData: SettingsDataService,
-    private factionTechData: FactionTechDataService,
-    private hullHierarchy: HullHierarchyService,
     private misc: MiscService
   ) {}
 

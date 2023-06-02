@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IonInput, ModalController } from '@ionic/angular';
 import { Ship } from 'src/app/interfaces/ship';
