@@ -15,6 +15,8 @@ export class SettingsDataService {
 
   settings = JSON.parse(JSON.stringify(this.defaultSettings));
 
+  initialSettings = {};
+
   constructor(private storage: Storage) {}
 
   async refresh() {

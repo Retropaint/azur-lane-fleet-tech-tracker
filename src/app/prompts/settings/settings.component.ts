@@ -20,11 +20,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   @ViewChild('autoResize') autoResize: ElementRef;
   modalIndex: number;
-  confirmedChanges: boolean;
   isInvalidImport: boolean;
-
-  // store original states of settings in-case of cancelling
-  initialSettings = {};
 
   importedCsvSubscription = new Subscription();
 
@@ -41,7 +37,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.csv.settingsText = "";
-    this.initialSettings = JSON.parse(JSON.stringify(this.settingsData.settings))
+    this.settingsData.initialSettings = JSON.parse(JSON.stringify(this.settingsData.settings))
 
     this.csv.importStatus.subscribe(wasSuccessful => {
       if(wasSuccessful) {
@@ -60,8 +56,6 @@ export class SettingsComponent implements AfterViewInit, OnInit {
     this.prompt.openConfirmation(this.modalIndex, "RESET SITE", "All ship data and settings preferences will be deleted. Proceed?")
       .then(isYes => {
         if(isYes) {
-          this.confirmedChanges = true;
-
           this.shipsService.ships = [];
           this.storage.remove("ships");
           this.storage.remove('USS');
@@ -87,7 +81,7 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   }
 
   async save() {
-    this.confirmedChanges = true;
+    this.settingsData.settings = this.settingsData.initialSettings;
     this.settingsData.save();
 
     this.misc.uiMode = this.settingsData.settings['ui-mode']
@@ -103,10 +97,5 @@ export class SettingsComponent implements AfterViewInit, OnInit {
   ngOnDestroy() {
     this.importedCsvSubscription.unsubscribe();
     this.prompt.exit();
-
-    if(!this.confirmedChanges) {
-      this.settingsData.settings = JSON.parse(JSON.stringify(this.initialSettings))
-      this.settingsData.save();
-    }
   }
 }

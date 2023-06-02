@@ -29,7 +29,6 @@ export class SettingsToggleComponent implements OnInit {
 
   setToggle(toggle: string) {
     this.currentToggle = toggle;
-    this.settingsData.settings[this.storageName] = toggle;
-    this.settingsData.save();
+    this.settingsData.initialSettings[this.storageName] = toggle;
   }
 }
