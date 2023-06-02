@@ -3,15 +3,16 @@
 <div class="prompt-info-background">
   <div #autoResize>
 
-    <p class="prompt-text inline-block">Use the markers, slider, or input field to enter the level. </p>
+    <div class="top-container">
+      <p class="prompt-text inline-block">Use the markers, slider, or input field to enter the level. </p>
     
-    <!-- ignore toggle -->
-    <div class="setting-container" title="Set this if you have the ship. Their collection stat bonus will be included in tech stat calculation">
+      <!-- obtained toggle -->
       <div class="toggle-container" (click)="setObtained(!isObtained)">
         <app-toggle-flag [toggle]="isObtained"></app-toggle-flag>
         <p class="toggle-text">Obtained</p>
       </div>
     </div>
+    
 
     <div>
       <!-- markers-->
