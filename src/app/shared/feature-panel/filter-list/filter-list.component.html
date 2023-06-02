@@ -34,7 +34,9 @@
   </div>
   
   <div class="button-container" *ngIf="unfoldedFilters['stats']">
-    <app-filter-button *ngFor="let stat of statNames; let i = index" [filterName]="stat" [filterType]="filter.stats" fileName="stat"></app-filter-button>
+    <ng-container *ngFor="let stat of statNames; let i = index">
+      <app-filter-button *ngIf="stat != 'No Tech' || stat == 'No Tech' && settingsData.checkBool('show-no-tech-ships')" [filterName]="stat" [filterType]="filter.stats" fileName="stat"></app-filter-button>
+    </ng-container>
   </div>
 </div>
 

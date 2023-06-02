@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AppComponent } from 'src/app/app.component';
 import { FilterService } from 'src/app/services/filter.service';
 import { MiscService } from 'src/app/services/misc.service';
+import { SettingsDataService } from 'src/app/services/settings-data.service';
 
 @Component({
   selector: 'app-filter-list',
@@ -24,7 +25,11 @@ export class FilterListComponent implements OnInit {
     "status": true
   }
 
-  constructor(public filter: FilterService, public misc: MiscService) { }
+  constructor(
+    public filter: FilterService, 
+    public misc: MiscService,
+    public settingsData: SettingsDataService
+  ) { }
 
   ngOnInit() {}
   

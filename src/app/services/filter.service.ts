@@ -15,7 +15,6 @@ export class FilterService {
     private shipsService: ShipsService, 
     private settingsData: SettingsDataService,
     private misc: MiscService,
-    private fleetTech: FleetTechService
   ) { }
 
   oneSelectedStat: string;
@@ -85,6 +84,13 @@ export class FilterService {
   }
 
   filter() {
+    if(!this.settingsData.checkBool('show-no-tech-ships')) {
+      this.stats['No Tech'] = false;
+      if(this.isEverything(false, this.stats)) {
+        this.stats['All'] = true;
+      }
+    }
+
     // assign shipsFilterPass
     this.shipsService.ships.forEach(ship => {
       if(this.passesCriteria(ship)) {
@@ -110,7 +116,7 @@ export class FilterService {
     
     // check hull
     let hull = null;
-    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && ship.retroHull) {
+    if(this.settingsData.checkBool('retrofit-forms') && ship.retroHull) {
       hull = ship.retroHull
     } else {
       hull = ship.hull;
@@ -136,7 +142,7 @@ export class FilterService {
     }
 
     let rarity = null;
-    if(this.settingsData.settings['retrofit-forms'] == 'Yes' && ship.hasRetrofit) {
+    if(this.settingsData.checkBool('retrofit-forms') && ship.hasRetrofit) {
       rarity = this.shipsService.getRetroRarity(ship.id);
     } else {
       rarity = ship.rarity;
@@ -194,8 +200,8 @@ export class FilterService {
   }
 
   genericFilterCheck(ship: Ship, filterType: any, shipProperty: string): boolean {
-    if(shipProperty == 'techStat' && ship.techStat == null) {
-      if(filterType.All || filterType['No Tech']) {
+    if(shipProperty == 'techStat' && ship.techStat == null || shipProperty == 'obtain' && ship.obtainStat == null) {
+      if(filterType.All && this.settingsData.checkBool('show-no-tech-ships') || filterType['No Tech']) {
         return true;
       } else {
         return false;
