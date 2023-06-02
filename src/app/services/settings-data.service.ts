@@ -10,7 +10,7 @@ export class SettingsDataService {
     'ui-mode': "Icon",
     'retrofit-forms': "No",
     'ship-cards-per-row': 6,
-    'show-no-tech-ships': "No"
+    "show-no-tech-ships": null
   }
 
   settings = JSON.parse(JSON.stringify(this.defaultSettings));

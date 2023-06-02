@@ -7,6 +7,7 @@ import md5 from 'crypto-js/md5';
 import { ApplicableHullsService } from './applicable-hulls.service';
 import { MiscService } from './misc.service';
 import { FilterService } from './filter.service';
+import { SettingsDataService } from './settings-data.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class AzurapiService {
     private shortenedNames: ShortenedNamesService,
     private shipsService: ShipsService,
     private applicableHulls: ApplicableHullsService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private settingsData: SettingsDataService
   ) {}
 
   async init() {
@@ -95,6 +97,12 @@ export class AzurapiService {
         newShip.level = savedShip.level;
         newShip.isObtained = savedShip.isObtained;
       }
+    }
+
+    // show no-tech ships if one is obtained and the setting doesn't exist in storage yet
+    if(this.settingsData.settings['show-no-tech-ships'] == null && newShip.techStat == null && newShip.isObtained) {
+      this.settingsData.settings['show-no-tech-ships'] = "Yes";
+      this.settingsData.save();
     }
 
     this.shipsService.ships.push(newShip);
