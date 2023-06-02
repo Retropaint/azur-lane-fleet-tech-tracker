@@ -9,14 +9,15 @@
   <div style="display: inline-block; margin-right: 20px"></div>
 
   <ng-container *ngIf="filter.oneSelectedHull != null && filter.oneSelectedStat != null && shouldDisplay">
-    <div *ngFor="let hull of hullHierarchy.hulls[filter.oneSelectedHull]" class="quick-tech"> 
-      <app-hull-icon [hull]="hull" class="hull-icon" [moveY]="5"></app-hull-icon>
-      <p class="generic-text inline-block quick-tech-text">
-          {{filter.oneSelectedStat}}: 
+    <ng-container *ngFor="let hull of hullHierarchy.hulls[filter.oneSelectedHull]"> 
+      <p class="generic-text inline-block quick-tech" *ngIf="fleetTech.full[hull][filter.oneSelectedStat] != null">
+        <app-hull-icon [hull]="hull" class="hull-icon" [moveY]="5"></app-hull-icon>
+        {{filter.oneSelectedStat}}:
           
-          {{fleetTech.total[hull][filter.oneSelectedStat] ? fleetTech.total[hull][filter.oneSelectedStat] : 0}}
-          /
-          {{fleetTech.full[hull][filter.oneSelectedStat]}}</p>
-    </div>
+        {{fleetTech.total[hull] && fleetTech.total[hull][filter.oneSelectedStat] ? fleetTech.total[hull][filter.oneSelectedStat] : 0}}
+        /
+        {{fleetTech.full[hull][filter.oneSelectedStat]}}
+      </p>
+    </ng-container>
   </ng-container>
 </div>
