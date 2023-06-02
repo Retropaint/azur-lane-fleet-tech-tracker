@@ -60,7 +60,7 @@ export class ApplicableHullsService {
     return;
   }
 
-  async getHulls(type: "120" | "obtain" = "120", shipName, shipHull) {
+  getHulls(type: "120" | "obtain" = "120", shipName, shipHull) {
     // waiting for init() to finish
     while(this.specifics120 == null)
       ;
