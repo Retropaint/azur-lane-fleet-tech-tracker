@@ -39,6 +39,11 @@ export class FleetTechService {
     this.total = {};
     this.full = {};
 
+    this.pointsUSS = 0;
+    this.pointsHMS = 0;
+    this.pointsIJN = 0;
+    this.pointsKMS = 0;
+
     this.getFactionTech();
     this.getStats();
     this.full = this.addFactionToTotal("full");
