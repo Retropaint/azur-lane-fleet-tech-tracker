@@ -3,11 +3,11 @@
 <div class="prompt-info-background">
   <div #autoResize>
     <app-settings-toggle name="UI mode" [toggles]="['Icon', 'Sheet']" storageName="ui-mode" defaultState="Icon"></app-settings-toggle>
-    <app-settings-toggle name="Use Retrofit Forms" [toggles]="['Yes', 'No']" storageName="retrofit-forms" defaultState="No"></app-settings-toggle>
+    <app-settings-toggle name="Use retrofit forms" [toggles]="['Yes', 'No']" storageName="retrofit-forms" defaultState="No"></app-settings-toggle>
     <app-settings-toggle name="Show no-tech ships" [toggles]="['Yes', 'No']" storageName="show-no-tech-ships" defaultState="No"></app-settings-toggle>
 
     <div class="setting-container ship-card-size">
-      <p class="prompt-text inline-block">Ship Cards Per Row:</p>
+      <p class="prompt-text inline-block">Ship cards per row:</p>
       <input class="prompt-input inline-block centered ship-card-size-input" min="5" type="number" [(ngModel)]="settingsData.settings['ship-cards-per-row']" style="width: 50px; margin-right: 0px; margin-left: 0px" />
     </div>
     <br> 
