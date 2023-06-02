@@ -2,10 +2,50 @@ table {
   position: absolute;
   z-index: 99;
 
+  display: block;
+  height: 600px;
+  overflow-y: scroll;
+
+  right: 10px;
+
+  transform: translateY(40px);
+
   th, td {
     background: #213052;
     border: 2px solid #40537E;
     padding: 5px;
     text-align: center;
+  }
+
+  &:not(.open) {
+    visibility: hidden;
+  }
+
+  &.mobile {
+    right: 0px;
+  }
+}
+
+.header {
+  right: 0;
+  background: #213052;
+  border: 2px solid #40537E;
+  padding: 10px;
+  z-index: 99;
+  position: absolute;
+  cursor: pointer;
+
+  transform-origin: bottom left;
+
+  ion-icon {
+    margin-left: 10px;
+  }
+
+  &.open {
+    transform: translate(var(--offset), 240px) rotate(-90deg);
+  }
+
+  &:not(.open) {
+    transform: translate(215px, 240px) rotate(-90deg)
   }
 }

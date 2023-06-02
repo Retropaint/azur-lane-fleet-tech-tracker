@@ -1,8 +1,15 @@
-<table>
+<div *ngIf="hullTable != null" class="header" [ngClass]="{ 'open' : open }" (click)="open = !open; refreshTableWidth();" style="--offset: {{ 204.5 - tableWidth }}px">
+  <p class="generic-text">HULL INFO PANEL
+    <ion-icon class="generic-text" *ngIf="!open" name="caret-down-outline"></ion-icon>
+    <ion-icon class="generic-text" *ngIf="open" name="caret-up-outline"></ion-icon>
+  </p>
+</div>
+
+<table #table [ngClass]="{ 'open' : open, 'mobile' : misc.isMobile }">
   <tbody>
     <tr>
-      <th>HULL</th>
-      <th>APPLIES TO</th>
+      <th class="generic-text">HULL</th>
+      <th class="generic-text">APPLIES TO</th>
     </tr>
     <tr>
       <td> <app-hull-icon hull="AE"></app-hull-icon> </td>
@@ -40,5 +47,37 @@
       <td> <app-hull-icon hull="SSV"></app-hull-icon> </td>
       <td> <app-hull-icon hull="SSV"></app-hull-icon> </td>
     </tr>
+    <tr (click)="open120 = !open120; refreshTableWidth()" style="cursor: pointer">
+      <th colspan="2">
+        <p class="generic-text">120 TECH EXCEPTIONS
+          <ion-icon class="generic-text" *ngIf="!open120" name="caret-up-outline"></ion-icon>
+          <ion-icon class="generic-text" *ngIf="open120" name="caret-down-outline"></ion-icon>
+        </p>
+      </th>
+    </tr>
+    <ng-container *ngIf="open120">
+      <tr *ngFor="let ship of objectKeys(applicableHulls.specifics120)">
+        <td class="generic-text">{{ship}}</td>
+        <td> 
+          <app-hull-icon *ngFor="let hull of applicableHulls.specifics120[ship]" [hull]="hull"></app-hull-icon>
+        </td>
+      </tr>
+    </ng-container>
+    <tr (click)="openObtain = !openObtain; refreshTableWidth()" style="cursor: pointer">
+      <th colspan="2">
+        <p class="generic-text">OBTAIN TECH EXCEPTIONS
+          <ion-icon class="generic-text" *ngIf="!openObtain" name="caret-up-outline"></ion-icon>
+          <ion-icon class="generic-text" *ngIf="openObtain" name="caret-down-outline"></ion-icon>
+        </p>
+      </th>
+    </tr>
+    <ng-container *ngIf="openObtain">
+      <tr *ngFor="let ship of objectKeys(applicableHulls.specificsObtain)">
+        <td class="generic-text">{{ship}}</td>
+        <td> 
+          <app-hull-icon *ngFor="let hull of applicableHulls.specificsObtain[ship]" [hull]="hull"></app-hull-icon>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
 </table>

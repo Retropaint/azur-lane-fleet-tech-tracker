@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { ApplicableHullsService } from 'src/app/services/applicable-hulls.service';
+import { MiscService } from 'src/app/services/misc.service';
 import { ShipsService } from 'src/app/services/ships.service';
 
 @Component({
@@ -6,17 +8,32 @@ import { ShipsService } from 'src/app/services/ships.service';
   templateUrl: './hull-info-panel.component.html',
   styleUrls: ['./hull-info-panel.component.scss', '../home.page.scss'],
 })
-export class HullInfoPanelComponent implements OnInit {
+export class HullInfoPanelComponent implements AfterViewInit {
 
-  @Input() mode: string = "Icon";
+  objectKeys = Object.keys;
 
-  fold: boolean = true;
+  open: boolean = false;
+  open120: boolean = true;
+  openObtain: boolean = true;
+
+  tableWidth: number = 0;
+
+  @ViewChild("table") hullTable: ElementRef;
 
   constructor(
-    public shipsService: ShipsService
+    public shipsService: ShipsService,
+    public applicableHulls: ApplicableHullsService,
+    public misc: MiscService
   ) { }
 
-  ngOnInit() {
-    this.fold = this.mode == 'Icon';
+  ngAfterViewInit() {
+    this.open = this.misc.isMobile;
+    this.refreshTableWidth();
+  }
+
+  refreshTableWidth() {
+    setTimeout(() => {
+      this.tableWidth = this.hullTable.nativeElement.clientWidth;
+    })
   }
 }
