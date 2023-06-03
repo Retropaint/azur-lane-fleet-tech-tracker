@@ -199,13 +199,13 @@ export class FilterService {
   }
 
   genericFilterCheck(ship: Ship, filterType: any, shipProperty: string): boolean {
-    if(shipProperty == 'techStat' && ship.techStat == null || shipProperty == 'obtain' && ship.obtainStat == null) {
-      if(filterType.All && this.settingsData.checkBool('show-no-tech-ships') || filterType['No Tech']) {
+    if(shipProperty.includes('Stat') && ship.techStat == null) {
+      if(this.settingsData.checkBool('show-no-tech-ships') && filterType['All'] || filterType['No Tech']) {
         return true;
       } else {
         return false;
       }
-    } 
+    }
 
     let hasQualified = false;
     Object.keys(filterType).forEach(filter => {
