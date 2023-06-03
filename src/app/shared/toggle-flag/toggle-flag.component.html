@@ -1,5 +1,2 @@
-<div class="toggle-diamond {{toggle || 'false'}}">
-  <div class="trueBox" *ngIf="toggle">
-    <p class="L">L</p>
-  </div>
-</div>
+<img *ngIf="toggle" src="assets/Checkbox_on.png" class="toggle-diamond"/>
+<img *ngIf="!toggle" src="assets/Checkbox_off.png" class="toggle-diamond"/>
