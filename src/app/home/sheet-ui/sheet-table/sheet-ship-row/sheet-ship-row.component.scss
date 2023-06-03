@@ -30,6 +30,10 @@
   &.FP {
     transform: translateY(3px);
   }
+
+  &.unobtained {
+    filter: brightness(0.65);
+  }
 }
 
 .tech-bonus {
@@ -49,7 +53,11 @@
     display: block;
     font-size: 16px;
     text-align: center;
-  } 
+  }
+
+  &.unobtained {
+    filter: brightness(0.65);
+  }
 }
 
 .tech-stat-container {
@@ -62,8 +70,7 @@
   width: 50px;
   text-align: center;
   height: 100%;
-  position: relative;
-  border: 1px solid white;
+  border: 1px solid var(--borderWhite);
 }
 
 .level {
@@ -71,8 +78,7 @@
   text-align: right;
   background-color: #ff4d4d;
   height: 100%;
-  position: relative;
-  border: 1px solid white;
+  border: 1px solid var(--borderWhite);
   cursor: pointer;
 
   &.over119-true {
@@ -82,14 +88,15 @@
   &.header {
     color: white;
   }
+
+  &.unobtained {
+    background: #a63232;
+  }
 }
 
 td {
+  border: 1px solid var(--borderWhite);
   cursor: pointer;
-
-  &.unobtained {
-    border: 1px solid rgb(165, 165, 165);
-  }
 }
 
 .selected-text {
@@ -105,20 +112,40 @@ td {
 
 .Common {
   background: #A5AAB5;
+
+  &.unobtained {
+    background: #6b6e76;
+  }
 }
 
 .Rare {
   background: #6abff7;
+
+  &.unobtained {
+    background: #457ca1;
+  }
 }
 
 .Elite {
   background: #9b8eff;
+
+  &.unobtained {
+    background: #655ca6;
+  }
 }
 
 .Super-Rare {
   background: #ffd100;
+
+  &.unobtained {
+    background: #a68800;
+  }
 }
 
 .Ultra-Rare {
   background: #ff6c4f;
+
+  &.unobtained {
+    background: #a64633;
+  }
 }

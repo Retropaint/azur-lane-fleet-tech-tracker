@@ -1,20 +1,20 @@
-<td (click)="enterLevel()"  class="ship-name {{getRarity()}} border">
-  <img [alt]="ship.hull" class="ship-hull-icon" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
+<td (click)="enterLevel()" class="ship-name {{getRarity()}} border" [ngClass]="{'unobtained' : !ship.isObtained}" style="--borderWhite: {{ship.isObtained ? 'white' : '#A6A6A6'}}">
+  <img [alt]="ship.hull" class="ship-hull-icon" [ngClass]="{'unobtained' : !ship.isObtained}" [title]="hoverTitles.hulls[getHull()] + ' (' + getHull() + ')'" [src]="'assets/icons/frame hull icons/' + getHull() + '.png'"/>
   {{ship.name}}
   <div *ngIf="ship.isBulkSelected" class="selected-text" >- SELECTED -</div>
 </td>
 
-<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle">
+<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="tech-stat border tech-stat {{getRarity()}}" [title]="fleetTechHoverTitle" style="--borderWhite: {{ship.isObtained ? 'white' : '#a6a6a6'}}">
   <div class="tech-stat-container">
     <!-- tech stat icon -->
-    <img *ngIf="getStat() != null" [alt]="getStat()" class="ship-hull-icon {{getStat()}}" [style.width]="fleetTechStatIconWidths[getStat()] + 'px'" [style.height]="fleetTechStatIconHeights[getStat()] + 'px'" [src]="'assets/icons/stat icons/' + getStat() + '.png'"/>
+    <img *ngIf="getStat() != null" [alt]="getStat()" class="ship-hull-icon {{getStat()}}" [ngClass]="{'unobtained' : !ship.isObtained}" [style.width]="fleetTechStatIconWidths[getStat()] + 'px'" [style.height]="fleetTechStatIconHeights[getStat()] + 'px'" [src]="'assets/icons/stat icons/' + getStat() + '.png'"/>
     
     <!-- tech stat bonus -->
-    <div *ngIf="getBonus() != null" class="tech-bonus" >+{{getBonus()}}</div>
+    <div *ngIf="getBonus() != null" class="tech-bonus" [ngClass]="{'unobtained' : !ship.isObtained}">+{{getBonus()}}</div>
     
-    <div *ngIf="getStat() == null" class="tech-bonus none">-</div>
+    <div *ngIf="getStat() == null" class="tech-bonus none" [ngClass]="{'unobtained' : !ship.isObtained}">-</div>
   </div>
 </td>
 
 <!-- level -->
-<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="level over119-{{ship.level > 119}} border level">{{ship.level}}</td>
+<td (click)="enterLevel()" [ngClass]="{'unobtained' : !ship.isObtained}" class="level over119-{{ship.level > 119}} border level" style="--borderWhite: {{ship.isObtained ? 'white' : '#a6a6a6'}}">{{ship.level}}</td>
