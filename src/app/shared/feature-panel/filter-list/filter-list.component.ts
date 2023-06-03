@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AppComponent } from 'src/app/app.component';
+import { Component, OnInit } from '@angular/core';
 import { FilterService } from 'src/app/services/filter.service';
 import { MiscService } from 'src/app/services/misc.service';
 import { SettingsDataService } from 'src/app/services/settings-data.service';
@@ -13,7 +12,7 @@ export class FilterListComponent implements OnInit {
 
   hullNames: string[] = ["DD", "CL", "CA", "CV", "BB", "SS", "Others", "All"]
   statNames: string[] = ["FP", "TRP", "AVI", "AA", "RLD", "HIT", "ASW", "EVA", "HP", "No Tech", "All"];
-  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "RN", "SN", "FFNF", "MNF", "MOT", "META", "All"];
+  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "RN", "SN", "FFNF", "MNF", "META", "All"];
   rarityNames: string[] = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare", "All"];
   statusNames: string[] = ["W.I.P", "Unobtained", "Maxed", "All"];
 
