@@ -21,19 +21,18 @@
     
     <div style="display: flex">
       <div class="toggle-flag max" (click)="toggleTechType()" title="Filter by ships who give the corresponding stat at lv 120.&#013;Affects stat displayed in ship card/row." *ngIf="unfoldedFilters['stats']">
-        <app-toggle-flag [toggle]="misc.filteringMaxTech"></app-toggle-flag>
+        <app-toggle-flag class="checkbox" [toggle]="misc.filteringMaxTech"></app-toggle-flag>
         <p class="generic-text inline-block">On Max</p>
       </div>
     
       <div class="toggle-flag" (click)="toggleTechType()" title="Filter by ships who give the corresponding stat upon being obtained.&#013;Affects stat displayed in ship card/row." *ngIf="unfoldedFilters['stats']">
-        <app-toggle-flag [toggle]="!misc.filteringMaxTech"></app-toggle-flag>
+        <app-toggle-flag class="checkbox" [toggle]="!misc.filteringMaxTech"></app-toggle-flag>
         <p class="generic-text inline-block">On Obtain</p>
       </div>
     </div>
-    
   </div>
   
-  <div class="button-container" *ngIf="unfoldedFilters['stats']">
+  <div class="button-container" style="margin-top: 0px;" *ngIf="unfoldedFilters['stats']">
     <ng-container *ngFor="let stat of statNames; let i = index">
       <app-filter-button *ngIf="stat != 'No Tech' || stat == 'No Tech' && settingsData.checkBool('show-no-tech-ships')" [filterName]="stat" [filterType]="filter.stats" fileName="stat"></app-filter-button>
     </ng-container>

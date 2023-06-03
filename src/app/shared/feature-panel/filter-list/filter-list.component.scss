@@ -41,6 +41,10 @@ app-filter-button {
 
   margin-left: 10px;
   margin-right: 10px;
-  transform: translateY(2px);
   cursor: pointer;
+}
+
+.checkbox {
+  display: inline-block;
+  width: 23px;
 }
