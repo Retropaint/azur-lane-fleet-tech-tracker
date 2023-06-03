@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import * as papa from 'papaparse';
 import { Subject } from 'rxjs';
 import { Ship } from '../interfaces/ship';
-import { FilterService } from './filter.service';
 import { MiscService } from './misc.service';
 import { ShipsService } from './ships.service';
 import { SortService } from './sort.service';
@@ -41,6 +40,7 @@ export class CsvService {
       let csvShip: any = JSON.parse(JSON.stringify(ship));
 
       delete csvShip.fallbackThumbnail;
+      delete csvShip.retroThumbnail;
       delete csvShip.hasRetrofit;
       delete csvShip.isBulkSelected;
       delete csvShip.techPoints;
