@@ -43,6 +43,7 @@ export class FilterService {
     "FFNF": false,
     "MNF": false,
     "RN": false,
+    "META": false,
     "All": true
   }
 
