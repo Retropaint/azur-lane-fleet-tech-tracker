@@ -1,4 +1,9 @@
 .toggle-diamond {
   width: 21px;
+  max-width: none;
   transform: translate(-6px, 5px);
+
+  &.toggleContainer {
+    transform: translateX(-2px);
+  }
 }

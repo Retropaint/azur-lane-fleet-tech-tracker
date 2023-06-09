@@ -1,2 +1,2 @@
-<img *ngIf="toggle" src="assets/Checkbox_on.png" class="toggle-diamond"/>
-<img *ngIf="!toggle" src="assets/Checkbox_off.png" class="toggle-diamond"/>
+<img *ngIf="toggle" src="assets/Checkbox_on.png" class="toggle-diamond" [ngClass]="{'toggleContainer': toggleContainer}"/>
+<img *ngIf="!toggle" src="assets/Checkbox_off.png" class="toggle-diamond" [ngClass]="{'toggleContainer': toggleContainer}"/>

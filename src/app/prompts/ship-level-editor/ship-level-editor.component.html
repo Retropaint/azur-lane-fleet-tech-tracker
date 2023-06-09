@@ -8,12 +8,11 @@
     
       <!-- obtained toggle -->
       <div class="toggle-container" (click)="setObtained(!isObtained)">
-        <app-toggle-flag [toggle]="isObtained"></app-toggle-flag>
+        <app-toggle-flag [toggle]="isObtained" [toggleContainer]="true"></app-toggle-flag>
         <p class="toggle-text">Obtained</p>
       </div>
     </div>
     
-
     <div>
       <!-- markers-->
       <div class="slider-marker l1">

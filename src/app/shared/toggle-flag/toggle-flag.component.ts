@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ToggleFlagComponent implements OnInit {
 
   @Input() toggle: boolean = false;
+  @Input() toggleContainer: boolean = false;
 
   constructor() { }
 
