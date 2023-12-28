@@ -43,7 +43,9 @@ export class ShortenedNamesService {
     "Submarine": "SS",
     "Submarine Carrier": "SSV",
     "Monitor": "BM",
-    "Sailing Frigate": "IX"
+    "Sailing Frigate (Submarine)": "IXs",
+    "Sailing Frigate (Main)": "IXm",
+    "Sailing Frigate (Vanguard)": "IXv"
   }
   
   stats = {

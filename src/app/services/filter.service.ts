@@ -44,6 +44,7 @@ export class FilterService {
     "MNF": false,
     "RN": false,
     "META": false,
+    "MISC": false,
     "All": true
   }
 
@@ -134,7 +135,9 @@ export class FilterService {
         checkHullFilter("CV");
       break; case "SS": case "SSV": 
         checkHullFilter("SS");
-      break; case "BM": case "AE": case "AR": case "IX":
+      break; case "SS": case "SSV": 
+        checkHullFilter("SS");
+      break; case "BM": case "AE": case "AR": case "IXs": case "IXv": case "IXm": 
         checkHullFilter("Others");
     }
     if(!isHullQualified) {
