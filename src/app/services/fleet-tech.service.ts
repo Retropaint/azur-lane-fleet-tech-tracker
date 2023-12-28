@@ -88,11 +88,11 @@ export class FleetTechService {
   }
   
   addStat(ship: Ship, object: any, type: "max" | "obtain") {
-    
+
     const appliedHulls =  type == "max" ? "appliedHulls" : "obtainAppliedHulls";
     const stat =          type == "max" ? "techStat" : "obtainStat";
     const bonus =         type == "max" ? "techBonus" : "obtainBonus";
-    
+
     ship[appliedHulls].forEach(hull => {
       
       // add hull if it doesn't exist

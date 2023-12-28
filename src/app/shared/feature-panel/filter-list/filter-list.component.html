@@ -47,7 +47,9 @@
     <ion-icon name="caret-up-outline" *ngIf="!unfoldedFilters['factions']"></ion-icon>
   </p>
   <div class="button-container" *ngIf="unfoldedFilters['factions']">
-    <app-filter-button *ngFor="let faction of factionNames; let i = index" [filterName]="faction" [filterType]="filter.factions" fileName="faction"></app-filter-button>
+    <ng-container *ngFor="let faction of factionNames; let i = index">
+      <app-filter-button *ngIf="faction != 'MISC' || settingsData.settings['show-no-tech-ships'] == 'Yes'" [filterName]="faction" [filterType]="filter.factions" fileName="faction"></app-filter-button>
+    </ng-container>
   </div>
 </div>
 

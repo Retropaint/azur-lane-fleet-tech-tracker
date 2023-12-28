@@ -52,6 +52,10 @@ export class AzurapiService {
   }
 
   async parseShip(ship: any, savedShips: LocalShip[]) {
+    if(ship.Type == null) {
+      return;
+    }
+
     let imageName = ship.Name.replaceAll(' ', '_') + "ShipyardIcon.png";
     let hash = md5(imageName).toString();
 
@@ -63,7 +67,7 @@ export class AzurapiService {
       id: ship.ShipID,
       level: 1,
       isObtained: false,
-      faction: this.shortenedNames.factions[ship.Nationality],
+      faction: this.shortenedNames.factions[ship.Nationality] || "MISC",
       rarity: this.parseRarity(ship.Rarity),
       hull: this.shortenedNames.hulls[ship.Type],
       fallbackThumbnail: `https://azurlane.netojuu.com/images/${hash[0]}/${hash[0]}${hash[1]}/${imageName}`,

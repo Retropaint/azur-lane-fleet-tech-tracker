@@ -12,7 +12,7 @@ export class FilterListComponent implements OnInit {
 
   hullNames: string[] = ["DD", "CL", "CA", "CV", "BB", "SS", "Others", "All"]
   statNames: string[] = ["FP", "TRP", "AVI", "AA", "RLD", "HIT", "ASW", "EVA", "HP", "No Tech", "All"];
-  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "RN", "SN", "FFNF", "MNF", "META", "All"];
+  factionNames: string[] = ["USS", "HMS", "IJN", "KMS", "ROC", "RN", "SN", "FFNF", "MNF", "META", "MISC", "All"];
   rarityNames: string[] = ["Common", "Rare", "Elite", "Super-Rare", "Ultra-Rare", "All"];
   statusNames: string[] = ["W.I.P", "Unobtained", "Maxed", "All"];
 
